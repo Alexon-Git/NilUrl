@@ -1,0 +1,137 @@
+.main {
+  margin-left: 100px;
+  margin-right: 100px;
+  font-family: "Segoe UI";
+}
+
+.settings__title {
+  padding: 35px 0;
+  margin: 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #4b5563;
+}
+
+.settings__controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.settings__controls__menu {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.settings__controls__menu-item {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000;
+}
+
+.settings__controls__form {
+  flex: 4;
+}
+
+.settings__controls__form-item {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px 8px 0 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #000;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #6b7280;
+}
+
+.settings__controls__form-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 0 40px 0 40px;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background-color: #f9fafb;
+}
+
+.redborder {
+  border: 1px solid #dc2626;
+}
+
+.redborder__footer {
+  border: 1px solid #dc2626;
+  border-top: none;
+}
+
+.button {
+  margin: 1% 0;
+  padding: 10px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s border-color 0.3s;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #6b7280;
+}
+
+.button:hover {
+  background-color: #f3f4f6;
+  border-color: rgb(151, 155, 159);
+}
+
+.button:active {
+  background-color: #d1d5db;
+  border-color: #9ca3af;
+}
+
+.red {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.red:hover {
+  background-color: #c72222;
+}
+
+.red:active {
+  background-color: #991b1b;
+}
+
+.input {
+  height: 30px;
+  width: 50%;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+}

@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 1441px) {
+  .wrapper {
+    width: 75%;
+    max-width: none;
+  }
+}
+
+@font-face {
+  font-family: "Helvetica Neue Cyr";
+  src:
+    local("helveticaneuecyr_black"),
+    url("./fonts/helveticaneuecyr_black.otf") format("opentype");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Helvetica Neue Cyr";
+  src:
+    local("helveticaneuecyr_roman"),
+    url("./fonts/helveticaneuecyr_roman.otf") format("opentype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Helvetica Neue Cyr";
+  src:
+    local("helveticaneuecyr_bold"),
+    url("./fonts/helveticaneuecyr_bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Helvetica Neue Cyr";
+  src:
+    local("helveticaneuecyr_medium"),
+    url("./fonts/helveticaneuecyr_medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src:
+    local("Roboto"),
+    url("./fonts/Roboto.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src:
+    local("Roboto-bold"),
+    url("./fonts/Roboto-bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Segoe UI";
+  src:
+    local("Segoe UI"),
+    url("./fonts/Segoe\ UI.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Segoe UI";
+  src:
+    local("Segoe UI SemiBold"),
+    url("./fonts/Segoe\ UI\ SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}

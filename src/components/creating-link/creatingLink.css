@@ -1,0 +1,257 @@
+.link__input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+.input {
+  height: 35px;
+  width: 100%;
+  border: 1px solid rgba(154, 154, 154, 0.5);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 0 10px;
+  outline: none;
+}
+
+.input__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.left-image {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.right-image {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(154, 154, 154, 0.5);
+  border-radius: 0 6px 6px 0;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.tag-list-container {
+  position: absolute;
+  left: 0;
+  top: -110px;
+  z-index: 1;
+}
+
+.svg__infinity,
+.input__icon {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.link__input-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.link__functional {
+  position: relative;
+  width: calc(100% - 20px);
+  border: 1px solid #000;
+  border-radius: 6px;
+  padding: 0 10px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.link__functional-title {
+  position: absolute;
+  top: -23px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0 6px;
+  background-color: #fff;
+  color: #000;
+}
+
+.link__functional-item {
+  position: relative;
+  border-bottom: 1px solid rgba(154, 154, 154, 0.5);
+}
+
+.functional__item {
+  display: flex;
+  align-items: center;
+}
+
+.functional__item-title {
+  font-size: 14px;
+  font-weight: 400;
+  padding-right: 10px;
+}
+
+.functional__item-faq {
+  padding-top: 5px;
+}
+
+.toggle__switch {
+  margin-left: auto;
+}
+
+.create__link__button {
+  width: 382px;
+  height: 39px;
+  background: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Стили для специфичных элементов */
+.png {
+  padding: 0 35px;
+}
+
+.custom-textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none !important;
+  border-radius: 6px;
+  border: 1px solid rgba(217, 217, 217, 1);
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.utm__input-item {
+  display: flex;
+  height: 35px;
+  width: 100%;
+  border: 1px solid rgba(154, 154, 154, 0.5);
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.utm__input-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(154, 154, 154, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.utm__input-input {
+  flex: 2;
+  width: 100%;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  background-color: rgba(241, 241, 241, 1);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0 10px;
+  outline: none;
+}
+
+.ios__android-input {
+  height: 35px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid rgba(154, 154, 154, 0.5);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(154, 154, 154, 0.5);
+  padding: 0 10px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.creating__link__main::-webkit-scrollbar {
+  width: 8px;
+}
+.creating__link__main::-webkit-scrollbar-thumb {
+  background: rgba(217, 217, 217, 1);
+  border-radius: 6px;
+}
+
+/* Общие стили для компонентов */
+.overlay {
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.creating__link {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 510px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(154, 154, 154, 0.5);
+  border-radius: 16px;
+  background-color: #fff;
+  font-family: "Helvetica Neue Cyr";
+}
+
+.creating__link__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  border-bottom: 1px solid rgba(154, 154, 154, 0.5);
+  gap: 10px;
+  z-index: 1;
+}
+
+.header__title {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.creating__link__main {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  padding-top: 25px;
+  padding-left: 65px;
+  padding-right: 65px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background-image: url(./../../img/background-image.svg);
+  background-repeat: repeat;
+}
+
+.creating__link__footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  background-color: #fff;
+  border-top: 1px solid rgba(154, 154, 154, 0.5);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 1;
+  box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.1);
+}

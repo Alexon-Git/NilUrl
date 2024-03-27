@@ -1,0 +1,31 @@
+.error-page {
+  position: relative;
+  height: 1024px;
+  width: 1440px;
+  font-family: "Helvetica Neue Cyr";
+}
+  
+.error-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+  .error-code {
+    font-size: 234px;
+    font-weight: 700;
+    line-height: 233px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  .error-message {
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 40px;
+    margin-top: 0;
+  }
+
+  

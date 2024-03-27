@@ -1,0 +1,26 @@
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .calendar {
+    background-color: white; /* Белый фон календаря */
+  }
+  
+  /* Стили для кнопок перехода между месяцами */
+  .react-calendar__navigation button {
+    background: none;
+    border: none;
+  }
+  
+  /* Стили для кнопок "Clear" и "Today" */
+  .react-calendar__tile--now,
+  .react-calendar__tile--active {
+    background-color: blue;
+    color: white;
+  }
+  
+  /* Дополнительные стили */
+  /* ... */
+  

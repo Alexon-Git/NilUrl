@@ -1,0 +1,52 @@
+.no-login-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 100px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Helvetica Neue Cyr";
+}
+
+.prices-button {
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.no-login-header-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.login {
+  color: grey;
+}
+
+.registration-button {
+  padding: 5px 15px;
+  background: #000;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 1000px) {
+  .no-login-header-right {
+    gap: 10px;
+  }
+}

@@ -1,0 +1,20 @@
+.svg-button {
+  width: 38px;
+  height: 20px;
+  padding: 1px 9px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.svg-button-container {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 1);
+    border-radius: 6px;
+    display: grid; 
+    grid-template-columns: repeat(6, 1fr); 
+    grid-template-rows: repeat(3, 1fr); 
+    padding: 11px;
+    gap: 11px;
+    box-sizing: border-box;
+  }
