@@ -6,12 +6,12 @@ import PricesPage from "./pages/PricesPage"
 const App = () => {
   return (
      /*
-    <div className="wrapper" >
+    <div>
       <SettingsPage />
     </div> 
     */
      /*
-    <div className="wrapper">
+    <div>
       <ErrorPage />
     </div>
     */
@@ -20,7 +20,7 @@ const App = () => {
       <PricesPage />
     </div> 
     
-  );
+  )
 };
 
 export default App;
