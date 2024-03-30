@@ -35,7 +35,7 @@ const PriceMp = () => {
                             Подробнее
                         </span>
                     </button>
-                    <img className="ThreeCardPicMP" src="/TriCard.png"/>
+                    <img className="ThreeCardPicMP" src={process.env.PUBLIC_URL + '/TriCard.png'}></img>
                 </div>
             </div>
         </div>

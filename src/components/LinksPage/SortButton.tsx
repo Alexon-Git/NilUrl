@@ -5,7 +5,7 @@ const SortButton = () => {
         <div className="dropdown">
             <input type="checkbox" id="dropdown"/>
             <label htmlFor="dropdown" className="dropdown-btn">
-                <img alt="img" src="/TriPalochki.png"/>
+                <img alt="img" src={process.env.PUBLIC_URL + "/TriPalochki.png"}/>
                 <span className="SortWord">Сортировать</span>
                     <svg width="15px" height="15px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" >
 

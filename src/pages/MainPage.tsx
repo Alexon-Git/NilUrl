@@ -1,16 +1,14 @@
 import React from 'react';
-import FirstContainerMainPage from "../Components/MainPage/FirstContainerMainPage";
-import VideoComp from "../Components/MainPage/VideoComp";
-import PriceMp from "../Components/MainPage/PriceMP";
 import "../styles/Global/HeaderMainPage.css"
-import Clients from "../Components/MainPage/Clients";
-import FooterMP from "../Components/MainPage/FooterMP";
-import HeaderMainPage from "../Components/Global/HeaderMainPage";
+import FooterMP from "../components/MainPage/FooterMP";
+import Clients from "../components/MainPage/Clients";
+import PriceMp from "../components/MainPage/PriceMP";
+import VideoComp from "../components/MainPage/VideoComp";
+import FirstContainerMainPage from "../components/MainPage/FirstContainerMainPage";
 
 const MainPage = () => {
     return (
         <div>
-            <HeaderMainPage/>
             <FirstContainerMainPage/>
             <VideoComp/>
             <PriceMp/>
