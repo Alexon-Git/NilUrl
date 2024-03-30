@@ -1,0 +1,87 @@
+.Filter{
+    width: 100%;
+    height: 20%;
+    position: relative;
+}
+
+.name{
+    width: 80%;
+    display: flex;
+    padding-top: 10%;
+    font-size: calc(1vh + 0.8vw);
+    text-align: left;
+    margin: auto;
+    font-weight: bold;
+}
+.SearchStyle{
+    padding-left: 5%;
+    border: none;
+    outline: none;
+    width: 85%;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: calc(0.7vh + 0.5vw);
+}
+.svgLupa{
+    margin: auto;
+    height: 50%;
+}
+
+.searchBlock{
+    text-align: center;
+    height: 50px;
+    font-size: 1.5vh;
+    width: 80%;
+    margin: 1vw auto 2vw;
+    border: solid 2px #d7d7d7;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+
+ }
+.LupaContainer{
+    padding: 0;
+    margin: 0;
+    width: 10%;
+    display: inline-block;
+}
+.hrForFilter{
+    height: 2px;
+    border: 0;
+    background-color: #D1D5DB;
+    width: 80%;
+    margin: auto auto 2vw;
+}
+.TagsDropListMainContainer{
+    display: block;
+    padding-top: 5%;
+}
+.TagsDropContainer{
+    border-radius: 10px;
+    align-items: center;
+    height: 45px;
+    background-color: #F9FAFB;
+    justify-content: space-between;
+    width: 80%;
+    display: flex;
+    margin: auto auto 10px;
+    padding-left: 5%;
+
+}
+.checkboxTag{
+    display: inline-block;
+}
+/*.checkboxAndName{*/
+/*    display: inline-flex;*  ????mb need/
+/*}*/
+.ClickCount{
+    padding-right: 5%;
+}
+.ButtonPlusTextFilterContainer{
+    display: flex;
+    align-items: center;
+}
+
+.TagsMainContainer{
+    padding-bottom: 5%;
+}

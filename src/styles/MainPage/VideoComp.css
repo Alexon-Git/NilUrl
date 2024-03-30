@@ -1,0 +1,165 @@
+.MainVideoCompContainer{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    height: 350px;
+
+}
+
+.StrongFunctionText{
+    width: 875px;
+    height: 180px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 56px;
+}
+.GradintVordMP{
+    display: inline-block;
+    background-image: linear-gradient(#6A11CB,#2575FC);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+@keyframes Anime {
+    from{
+        height: 0;
+    }
+    to{
+        height: 100%;
+    }
+}
+.divForAnimation{
+    animation-name: Anime;
+    animation-duration: 2s;
+
+
+}
+.podAcordion{
+    margin-top: 20px;
+    width: 80%;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: Roboto;
+    color: #6B7280;
+    /*animation-name: Anime;*/
+    /*animation-duration: 2s;*/
+    transition: max-height 1s;
+}
+.MoreButtonMP:hover{
+    background-color: transparent;
+    transition: all 0.3s ease;
+    color: black;
+    cursor: pointer;
+}
+@media (min-width: 700px) and (max-width: 1500px){
+    .videoPlusAccordions{
+    display: flex;
+    margin-left: 0.5%;
+    width: 99%;
+    height: 540px;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    }
+
+    .svgVideoCompAccord{
+        margin-left: 2%;
+    }
+    .PodVieoA{
+        margin-left: 3%;
+    }
+    .podAcordion{
+        margin-left: 3%;
+    }
+    .MoreButtonMP{
+        background-color: black;
+        color: white;
+        margin-top: 15px;
+        margin-left: 3%;
+        width: 112px;
+        height: 34px;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+}
+
+@media (min-width: 1500px) and (max-width: 2500px){
+    .videoPlusAccordions{
+        margin-left: 10%;
+        display: flex;
+        width: 80%;
+        height: 640px;
+
+        border-radius: 12px;
+        background-color: #C7C7C733;
+    }
+    .PodVieoA{
+        margin-left: 3%;
+    }
+    .svgVideoCompAccord{
+        margin-left: 10%;
+    }
+    .podAcordion{
+        width: 60%;
+        margin-left: 10%;
+    }
+    .MoreButtonMP{
+        background-color: black;
+        color: white;
+        margin-top: 15px;
+        margin-left: 10%;
+        width: 112px;
+        height: 34px;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+}
+
+.AccordionsMP{
+    overflow: hidden;
+    height: 80%;
+    width: 60%;
+    display: inline-block;
+    margin-top: 5%;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+.Video{
+
+    border-radius: 50px;
+    margin-top: 70px;
+    width: 60%;
+    height: 80%;
+}
+.AccordionMP{
+    border-bottom: 1px solid #E5E7EB;
+    margin-top: 10%;
+    padding-bottom: 10%;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.PodVieoA{
+
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.podAcordionHide{
+    display: none;
+}
+
+.menu{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
+    overflow: hidden;
+}
+

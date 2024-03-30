@@ -1,0 +1,126 @@
+.mainCLMP{
+    position: relative;
+    align-items: center;
+    display: flex;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+.timerCLMP{
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 8px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    top:0;
+    background-color: #609dff;
+}
+.tegCLMP{
+    overflow: hidden;
+    padding-bottom: 1px;
+    color: #7b00ff;
+    font-weight: 400;
+    font-size: 14px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 8px;
+    max-width: 121px;
+    background-color: #b069ff;
+    position: absolute;
+    right: 0;
+    top:0;
+}
+.SVGLinksLP{
+
+    width: 40px;
+    height: 40px;
+}
+.SVGCOntLP{
+    overflow:hidden;
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    background-color: #EDEDED;
+    border-radius: 100px;
+}
+.LinksDateCopy{
+    width: calc(100% - 250px - 70px);
+    margin-left: 20px;
+    height: 50px;
+
+}
+.LinksDateTop{
+    margin-bottom: 8px;
+    height: 20px;
+}
+.LinksDateBottom{
+    position: relative;
+    display: flex;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    color: black;
+    font-weight: 550;
+    height: 20px;
+    font-size: 14px;
+}
+.ShortLinkLPMP{
+    cursor: pointer;
+    font-weight: 550;
+    font-size: 16px;
+    text-align: left;
+    display: inline-block;
+    cursor: pointer;
+    width: max-content;
+    color: #1E40AF;
+    text-align: left;
+}
+.blockForCopySVG{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: #F3F4F6;
+    border-radius: 9999px;
+}
+.rightmainCLMP{
+    justify-content: flex-end;
+    padding-right: 2px;
+    width: 250px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.TwoIconsContainer{
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+}
+.threeIconsDevices{
+
+}
+.BlurAbsolute{
+    position: absolute;
+    top: 20%;
+    right: -7%;
+    width: 80px; height:16px;
+    /*backdrop-filter: blur(64px);*/
+    /*mask: linear-gradient(*/
+    /*        to right,*/
+    /*        rgba(0, 0, 0, 0) 1%,*/
+    /*        rgba(0, 0, 0, 1) 100%*/
+    /*);*/
+    background: linear-gradient(to right, rgba(255, 255, 255, 0),rgb(255,255,255,99%), rgb(255, 255, 255));
+}

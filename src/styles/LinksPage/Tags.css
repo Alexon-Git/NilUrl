@@ -1,0 +1,34 @@
+.TagsContainer{
+    display: flex;
+    justify-content: space-between;
+}
+.TagsButtonContainer{
+
+    position: relative;
+    width: 40%;
+    border: none;
+    height: auto;
+    background-color: white;
+}
+.TegsSvg{
+    vertical-align: middle;
+    width: 15%;
+    display: inline-block;
+    margin-right: 10%;
+}
+.TegsText{
+    vertical-align: middle;
+    display: inline-block;
+    font-size: calc(0.8vh + 0.5vw);
+}
+.AddTagButton{
+    margin: 0 10% 0 0;
+    font-size: calc(0.8vh + 0.5vw);
+    padding: 7px 13px 7px 13px;
+    border-radius: 6px;
+    background-color: white;
+    color: #6B7280;
+    border: 1px solid #E5E7EB;
+}
+/* Button */
+

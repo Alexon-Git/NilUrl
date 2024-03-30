@@ -1,0 +1,18 @@
+.buttonCheck{
+    width:15px;
+    height:15px;
+    border: 3px solid black;
+    border-radius: 50%;
+    color:#f5f5f5;
+    text-align:center;
+    text-decoration:none;
+    background: white;
+    box-shadow: 0 0 3px gray;
+    font-size:20px;
+    font-weight:bold;
+}
+.FilterTagName{
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 17px;
+}

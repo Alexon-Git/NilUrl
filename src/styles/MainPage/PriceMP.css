@@ -1,0 +1,76 @@
+.Sverdostup{
+    margin-top: 100px;
+    font-weight: 900;
+    font-size: 56px;
+    text-align: center;
+    margin-bottom: 70px;
+}
+.GradientMP{
+    display: inline-block;
+    background-image: linear-gradient(#6A11CB,#2575FC);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.FlexInIMPMP{
+    background: #efefef;
+    border-radius: 16px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin-left: 5%;
+}
+.ThreeCardPicMP{
+    z-index: 1;
+    width: 90%;
+    height: 90%;
+
+}
+.CircleMP{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+}
+.MoreButtonPriceMP{
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    width: 200px;
+    height: 48px;
+}
+
+.MoreWithDots{
+    transition: all 0.3s ease;
+    z-index: 3;
+    display: flex;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background: black;
+    color: white;
+    align-items: center;
+}
+
+.MoreWithDots span{
+    margin-top: 2px;
+    font-size: 18px;
+    font-weight: 400;
+}
+.MoreWithDots:hover{
+    background: white;
+    color: black;
+}
+.MoreWithDots svg{
+    display: inline-block;
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-right: 15%;
+}
+.MoreWithDots:hover svg rect{
+    fill: black;
+}

@@ -1,0 +1,64 @@
+.CreateLinkButton{
+    background-color: #000000;
+    color: white;
+    border: 0.1px;
+}
+
+.LoginButHeader{
+    border: none;
+    margin-right: 30px;
+    background: none;
+    color: #777777;
+}
+
+
+.custom-btn {
+    width: 165px;
+    height: 35px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    /*box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),*/
+    /*7px 7px 20px 0px rgba(0,0,0,.1),*/
+    /*4px 4px 5px 0px rgba(0,0,0,.1);*/
+    outline: none;
+}
+
+.btn-8 {
+    background-color: #000000;
+    line-height: 35px;
+    padding: 0;
+
+    border-radius: 0.5em;
+}
+.btn-8 span {
+    border-radius: 0.5em;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-8:hover{
+    background: transparent;
+    border: solid 1px black;
+
+
+}
+.btn-8 span:hover{
+    color: black;
+}
+
+.btn-8 span:hover:before {
+    height: 100%;
+}
+.btn-8 span:hover:after {
+    width: 100%;
+}

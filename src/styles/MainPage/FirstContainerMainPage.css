@@ -1,0 +1,41 @@
+.MaxWidthContainer{
+
+}
+
+.ShortLink{
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 60px;
+    text-align: center;
+    margin-top: 5%;
+
+}
+
+.GradientMP{
+    margin-top: 10px;
+    background-image: linear-gradient(#6A11CB,#2575FC);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.NilUrlOpisanie{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 60px;
+    text-align: center;
+    margin-top: 3%;
+    line-height: 28px;
+}
+.ButtonsBuyOrTry{
+    text-align: center;
+    margin-top: 5%;
+}
+.LinksMPContainer{
+    margin-top: 20px;
+    text-align: center;
+}
+.LinksMPContainer{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}

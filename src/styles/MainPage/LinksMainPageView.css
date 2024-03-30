@@ -1,0 +1,108 @@
+.InputForLinksMP{
+    display: flex;
+    width: 509px;
+    border: 1px solid #E5E7EB;
+    height: 38px;
+    border-radius: 6px;
+    justify-content: space-between;
+    align-items: center;
+}
+.InputLinksMP{
+    outline:0;
+    height: 85%;
+    width: 80%;
+    border: none;
+}
+.svgLinksMP{
+    padding: 0;
+    margin: 0 0 0 20px;
+    align-items: start;
+
+}
+.VvodMPLinks{
+    display: flex;
+    margin-right: 5px;
+    width: 40px;
+    height: 26px;
+    border-radius: 4px;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #E5E7EB;
+}
+.LinksMapOneContainer{
+    margin-top: 20px;
+    width: 509px;
+    height: max-content;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    border: solid 1px #E5E7EB;
+    border-radius: 6px;
+}
+.LogoAndTextLinksMap{
+    margin-left: 10px;
+}
+.SmallAndLargeLink{
+    width: 150px;
+    display: inline-block;
+    text-align: left;
+    margin-left: 20px;
+    line-height: 25px;
+}
+.VvodMPLinks{
+    cursor: pointer;
+}
+.ButtonsContainerLinksMap{
+    margin-left: 55px;
+    display: inline-block;
+    vertical-align: top;
+}
+.ButtonCircleCopyAndShare{
+    width: 28px;
+    height: 28px;
+    background-color: #F3F4F6;
+    border: none;
+    border-radius: 9999px;
+    margin-left: 10px;
+    text-align: center;
+}
+.countOfViewLinksMap{
+    border: none;
+    background-color: #F3F4F6;
+    border-radius: 6px;
+    width: 92px;
+    height: 24px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.CLicksTextANum{
+    text-align: center;
+    margin-top: 2px;
+    color: #374151;
+    font-weight: 400;
+    font-size: 14px;
+}
+.TriDotMenu{
+    margin-left: 12px;
+}
+.InfoMapLinks{
+    padding-top: 5px;
+    margin-top: 20px;
+    color: #6B7280;
+    width: 509px;
+    height: 66px;
+    font-weight: 400;
+    font-size: 14px;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+}
+.containerNoContentMP{
+    margin-top: 20px;
+    width: 509px;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    border: solid 1px #E5E7EB;
+    border-radius: 6px;
+}

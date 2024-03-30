@@ -1,0 +1,44 @@
+.FooterMPMainContainer{
+    width: 100%;
+    border-top: 1px solid #9F9F9F;
+}
+
+.FooterMPContainer{
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    justify-content: flex-start
+}
+.FirstFooterMP{
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.SecondFooterMP{
+    margin-left: 15%;
+    vertical-align: top;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: inline-block;
+}
+.ThirdFooterMP{
+    margin-left: 10%;
+    vertical-align: top;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: inline-block;
+}
+.TextBoldFooter{
+    line-height: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: Roboto;
+    margin-bottom: 20px;
+}
+.defaultTextFooter{
+    color: #6B7280;
+    margin-bottom: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: Roboto;
+}

@@ -1,0 +1,49 @@
+.LinkPageMainPart{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: calc(100vh - (80px + 150px));
+    background-color: #f1f1f1;
+    text-align: center;
+}
+.TopContainer{
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 10%;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+.Top{
+    float: right;
+    margin-top: 2%;
+}
+.MainContainer{
+    padding-top: 1%;
+    height: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    max-width: 1600px;
+    height: 80%;
+}
+.FilerContainer{
+    border-radius: 10px;
+    float: left;
+    width: 30%;
+    height: auto;
+    background-color: white;
+    display: inline-block;
+}
+.LinksContainer{
+    border-radius: 10px;
+    float: right;
+    display: inline-block;
+    width: 65%;
+
+    height: 100%;
+
+}
