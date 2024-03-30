@@ -7,6 +7,7 @@ body {
     sans-serif;
 }
 
+/*
 .wrapper {
   max-width: 1440px;
   margin: 0 auto;
@@ -18,6 +19,7 @@ body {
     max-width: none;
   }
 }
+*/
 
 @font-face {
   font-family: "Helvetica Neue Cyr";

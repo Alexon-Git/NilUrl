@@ -66,7 +66,7 @@ const ErrorPage = () => {
   const shuffledPositions = shuffleArray(initialPositions);
 
   return (
-    <div className="error-page">
+    <div className="error-page wrapper">
       <div>
         {shuffledPositions.map((position, index) => (
           <div

@@ -1,13 +1,21 @@
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 1441px) {
+  .wrapper {
+    width: 75%;
+    max-width: none;
+  }
+}
+
 .header {
+  padding: 0 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  margin-left: 100px;
-  margin-right: 100px;
-  border-bottom: 1px solid;
-  border-color: #e5e7eb;
-  border-width: 100%;
   font-family: "Segoe UI";
 }
 
@@ -34,9 +42,7 @@
 .profile__name {
   vertical-align: middle;
   margin-left: 20px;
-
   color: #000;
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px; /* 142.857% */
 }

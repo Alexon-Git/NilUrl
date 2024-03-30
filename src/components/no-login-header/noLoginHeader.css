@@ -50,3 +50,15 @@
     gap: 10px;
   }
 }
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 1441px) {
+  .wrapper {
+    width: 75%;
+    max-width: none;
+  }
+}
