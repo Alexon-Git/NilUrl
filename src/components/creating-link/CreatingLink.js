@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
+import CryptoJS from "crypto-js";
 import { FAQ, Toggle, DateCalendar, TagList } from "../../components";
 
 const CreatingLink = () => {
@@ -70,6 +71,24 @@ const CreatingLink = () => {
     setIsHovered(false);
   };
 
+  const [inputText, setInputText] = useState("");
+  const [shortUrl, setShortUrl] = useState("");
+
+  const handleLongUrlChange = (event) => {
+    setInputText(event.target.value);
+  };
+
+  const generateShortUrl = () => {
+    // Хэшируем входную строку с использованием MD5
+    const hash = CryptoJS.MD5(inputText).toString();
+    // Берем первые 10 символов хэша для создания короткой ссылки
+    const shortId = hash.substring(0, 10);
+    // Собираем короткую ссылку с предопределенным префиксом
+    const url = `https://nil-url/${shortId}.ru`;
+    // Обновляем состояние с короткой ссылкой
+    setShortUrl(url);
+  };
+
   return (
     <div className="overlay" onClick={() => {}}>
       <div className="creating__link">
@@ -97,19 +116,19 @@ const CreatingLink = () => {
           <div className="link__input">
             <div className="link__input-title">Ваша ссылка</div>
             <div className="input__container">
-              <input
-                className="input"
-                type="text"
-                placeholder="https://app.dub.co/aleksandr-vysochenko"
-                value={() => {}}
-                onChange={() => {}}
-              />
+            <input
+              className="input"
+              type="text"
+              placeholder="https://app.dub.co/aleksandr-vysochenko"
+              value={inputText}
+              onChange={handleLongUrlChange}
+            />
             </div>
           </div>
           <div className="link__input">
             <div className="link__input-title">Короткая ссылка</div>
             <div className="input__container">
-              <span className="svg__infinity">
+              <span className="svg__infinity" onClick={generateShortUrl}>
                 <svg
                   width="35"
                   height="35"
@@ -134,18 +153,21 @@ const CreatingLink = () => {
                 </svg>
               </span>
               <input
-                className="input"
-                type="text"
-                placeholder="https://nil-url/Ffv3cv.ru"
-                value={() => {}}
-                onChange={() => {}}
-              />
+              className="input"
+              type="text"
+              placeholder="https://nil-url/Ffv3cv.ru"
+              value={shortUrl}
+              readOnly // Делаем инпут только для чтения
+            />
             </div>
           </div>
           <div className="link__input">
             <div className="link__input-title">Тег ссылки</div>
             <div className="input__container">
-              <div className="input__icon left-image" onClick={handleMouseEnter}>
+              <div
+                className="input__icon left-image"
+                onClick={handleMouseEnter}
+              >
                 <svg
                   className="input__svg"
                   width="17"
@@ -164,10 +186,13 @@ const CreatingLink = () => {
                 </svg>
               </div>
               {isHovered && (
-        <div className="tag-list-container" onMouseLeave={handleMouseLeave}>
-          <TagList />
-        </div>
-      )}
+                <div
+                  className="tag-list-container"
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <TagList />
+                </div>
+              )}
               <input
                 className="input png"
                 type="text"
@@ -175,23 +200,23 @@ const CreatingLink = () => {
                 value={() => {}}
                 onChange={() => {}}
               />
-      <div className="input__icon right-image">
-        <svg
-          width="14"
-          height="8"
-          viewBox="0 0 14 8"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M1 1L7 7L13 1"
-            stroke="black"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
+              <div className="input__icon right-image">
+                <svg
+                  width="14"
+                  height="8"
+                  viewBox="0 0 14 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 1L7 7L13 1"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
           <div className="link__functional">
@@ -224,14 +249,14 @@ const CreatingLink = () => {
           </div>
         </form>
         <div className="creating__link__footer">
-            <button
-              className="create__link__button"
-              onClick={handleCreateLink}
-              onKeyDown={handleCreateLinkKeyDown}
-              tabIndex={0}
-            >
-              Создать ссылку
-            </button>
+          <button
+            className="create__link__button"
+            onClick={handleCreateLink}
+            onKeyDown={handleCreateLinkKeyDown}
+            tabIndex={0}
+          >
+            Создать ссылку
+          </button>
         </div>
       </div>
     </div>
