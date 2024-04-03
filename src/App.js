@@ -5,12 +5,14 @@ import PricesPage from "./pages/PricesPage"
 import GraphPage from "./pages/GraphPage";
 import MainPage from "./pages/MainPage";
 import LinksPage from "./pages/LinksPage";
+import {BrowserRouter} from "react-router-dom";
+import AppRouter from "./LogicComp/AppRouter";
 
 const App = () => {
   return (
-    <div>
-      <LinksPage/>
-    </div>
+    <BrowserRouter>
+      <AppRouter/>
+    </BrowserRouter>
   )
 };
 

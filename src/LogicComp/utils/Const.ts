@@ -1,0 +1,6 @@
+export const MAINPAGE_ROUTE = '/main'
+export const LINKSPAGE_ROUTE = '/links'
+export const GRAPHPAGE_ROUTE = '/graph'
+export const PRICEPAGE_ROUTE = '/price'
+export const SETTINGPAGE_ROUTE = '/setting'
+export const ERRORPAGE_ROUTE = '/error'
