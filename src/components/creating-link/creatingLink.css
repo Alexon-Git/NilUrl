@@ -65,7 +65,6 @@
 
 .link__functional {
   position: relative;
-  width: calc(100% - 20px);
   border: 1px solid #000;
   border-radius: 6px;
   padding: 0 10px;
