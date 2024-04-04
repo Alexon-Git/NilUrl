@@ -80,11 +80,6 @@ input[type="checkbox"]:focus + label {
 }
 
 /* base styles */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 .SortWord{
     margin-left: 10px;

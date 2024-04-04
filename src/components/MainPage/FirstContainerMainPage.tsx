@@ -2,10 +2,12 @@ import React from 'react';
 import "../../styles/MainPage/FirstContainerMainPage.css"
 import "../../styles/MainPage/ButtonBuyOrTry.css"
 import LinksMainPageView from "./LinksMainPageView";
+import {PRICEPAGE_ROUTE} from "../../LogicComp/utils/Const";
+import {useNavigate} from "react-router-dom";
 
 
 const FirstContainerMainPage = () => {
-
+    const navigate = useNavigate()
 
     return (
         <div>
@@ -24,7 +26,7 @@ const FirstContainerMainPage = () => {
                     исходным кодом для современных маркетинговых команд
                 </div>
             <div className="ButtonsBuyOrTry">
-                <button className="BuyPodpiska">
+                <button className="BuyPodpiska" onClick={()=>navigate(PRICEPAGE_ROUTE)}>
                     <div className="CircleBuy">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="12" height="12" rx="6" fill="white"/>
