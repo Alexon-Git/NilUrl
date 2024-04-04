@@ -42,17 +42,14 @@ const CreatingLink = () => {
   };
 
   const handleMouseOver = () => {
-    // Ваша логика для показа подсказки при наведении
     console.log("Показать подсказку");
   };
 
   const handleMouseOut = () => {
-    // Ваша логика для скрытия подсказки
     console.log("Скрыть подсказку");
   };
 
   const handleCreateLink = () => {
-    // Ваша логика для создания ссылки
     console.log("Создать ссылку");
   };
 
@@ -79,15 +76,15 @@ const CreatingLink = () => {
   };
 
   const generateShortUrl = () => {
-    // Хэшируем входную строку с использованием MD5
-    const hash = CryptoJS.MD5(inputText).toString();
-    // Берем первые 10 символов хэша для создания короткой ссылки
-    const shortId = hash.substring(0, 10);
-    // Собираем короткую ссылку с предопределенным префиксом
-    const url = `https://nil-url/${shortId}.ru`;
-    // Обновляем состояние с короткой ссылкой
+    const hash = CryptoJS.SHA256(inputText).toString();
+    const shortId = hash.substring(0, 5);
+    const randomShortId = Array.from(shortId).map(char => {
+        const randomCase = Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
+        return randomCase;
+    }).join('');
+    const url = `https://nil-url/${randomShortId}.ru`;
     setShortUrl(url);
-  };
+};
 
   return (
     <div className="overlay" onClick={() => {}}>
@@ -157,7 +154,7 @@ const CreatingLink = () => {
               type="text"
               placeholder="https://nil-url/Ffv3cv.ru"
               value={shortUrl}
-              readOnly // Делаем инпут только для чтения
+              readOnly
             />
             </div>
           </div>
