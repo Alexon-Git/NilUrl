@@ -244,6 +244,7 @@ const CreatingLink = () => {
                       initialChecked={toggle.checked}
                       onToggle={() => handleToggle(toggle.id)}
                       ind={toggle.id}
+                      size="small"
                     />
                   </div>
                 </div>

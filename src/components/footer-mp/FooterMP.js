@@ -4,9 +4,9 @@ import { FooterLogo } from '../../components';
 
 const FooterMp = () => {
     return (
-        <div className="FooterMPMainContainer wrapper">
-            <div className="FooterMPContainer">
-                <div className="FirstFooterMP">
+        <div className="NewFooterMainContainer wrapper">
+            <div className="NewFooterContainer">
+                <div className="NewFirstFooter">
                 <svg width="100" height="28" viewBox="0 0 100 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_1_1012)">
                             <path d="M20.0488 3.47632C15.4626 -1.15877 8.02595 -1.15877 3.43969 3.47632C-1.14656 8.11141 -1.14656 15.6272 3.43969 20.2623L10.6371 27.5363C11.249 28.1548 12.2402 28.1548 12.8522 27.5363L20.0488 20.2623C24.6358 15.6272 24.6358 8.11141 20.0488 3.47632ZM11.8347 22.3145C6.05593 22.3639 1.361 17.6197 1.40987 11.7787C1.45727 6.10788 6.04353 1.47279 11.6545 1.42488C17.4333 1.37549 22.1283 6.11968 22.0794 11.9607C22.0312 17.6315 17.4457 22.2658 11.8347 22.3145Z" fill="#898989"/>
@@ -24,10 +24,10 @@ const FooterMp = () => {
                             </clipPath>
                         </defs>
                     </svg>
-                    <div className="footer-content">
+                    <div className="NewFooterContent">
                         <p>Предоставление современным маркетинговым командам
                         сверхспособностей с помощью коротких ссылок, которые выделяются.</p>
-                        <div className="social-icons">
+                        <div className="NewSocialIcons">
                         <svg style={{marginRight:"30px"}} width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15 28.75C22.5937 28.75 28.75 22.5937 28.75 15C28.75 7.40625 22.5937 1.25 15 1.25C7.40625 1.25 1.25 7.40625 1.25 15C1.25 22.5937 7.40625 28.75 15 28.75ZM5.805 14.3C5.7458 14.3232 5.69489 14.3635 5.6588 14.4159C5.62271 14.4682 5.60311 14.5302 5.6025 14.5937C5.6025 14.7212 5.68625 14.8412 5.805 14.8862L9.53875 16.2487L17.2312 12.2775C17.2719 12.2586 17.3179 12.2545 17.3613 12.266C17.4046 12.2774 17.4426 12.3036 17.4687 12.34C17.4932 12.3775 17.5039 12.4223 17.4988 12.4668C17.4938 12.5113 17.4735 12.5527 17.4412 12.5837L12.2637 17.2275L18.065 21.8987C18.1487 21.9587 18.2612 21.9737 18.3575 21.9387C18.4055 21.9204 18.4483 21.8907 18.4822 21.8521C18.5162 21.8136 18.5403 21.7674 18.5525 21.7175L21.625 8.795C21.6377 8.73971 21.6354 8.68202 21.6182 8.62794C21.6011 8.57387 21.5697 8.52537 21.5275 8.4875C21.4845 8.45042 21.4324 8.42552 21.3766 8.41541C21.3208 8.4053 21.2632 8.41034 21.21 8.43L5.805 14.3Z" fill="#898988" fill-opacity="0.6"/>
                         </svg>
@@ -37,26 +37,26 @@ const FooterMp = () => {
                         </div>
                     </div>
                 </div>
-                <div className="SecondFooterMP">
+                <div className="NewSecondFooter">
                     <div>
-                        <div className="TextBoldFooter">Характеристики</div>
-                        <div className="defaultTextFooter">Расширенная аналитика</div>
-                        <div className="defaultTextFooter">Фирменные ссылки</div>
-                        <div className="defaultTextFooter">QR-коды</div>
+                        <div className="NewTextBoldFooter">Характеристики</div>
+                        <div className="NewDefaultTextFooter">Расширенная аналитика</div>
+                        <div className="NewDefaultTextFooter">Фирменные ссылки</div>
+                        <div className="NewDefaultTextFooter">QR-коды</div>
                     </div>
                 </div>
-                <div className="ThirdFooterMP">
+                <div className="NewThirdFooter">
                     <div>
-                        <div className="TextBoldFooter">Юридическая информация</div>
-                        <div className="defaultTextFooter">Конфиденциальность</div>
-                        <div className="defaultTextFooter">Условия</div>
-                        <div className="defaultTextFooter">Нарушение</div>
+                        <div className="NewTextBoldFooter">Юридическая информация</div>
+                        <div className="NewDefaultTextFooter">Конфиденциальность</div>
+                        <div className="NewDefaultTextFooter">Условия</div>
+                        <div className="NewDefaultTextFooter">Нарушение</div>
                     </div>
                 </div>
             </div>
-            <div className="copyright">
-                <p className="defaultTextFooter">© 2024 NilURL</p>
-                <span className="copyright__logo">
+            <div className="NewCopyright">
+                <p className="NewDefaultTextFooter">© 2024 NilURL</p>
+                <span className="NewCopyright__logo">
                     <img src={FooterLogo} alt="Site developed by Nil"></img>
                 </span>
             </div>

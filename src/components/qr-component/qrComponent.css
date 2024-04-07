@@ -136,9 +136,3 @@
   font-weight: 400;
   gap: 10px;
 }
-
-.toggle-switch input[type="checkbox"] {
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
-}

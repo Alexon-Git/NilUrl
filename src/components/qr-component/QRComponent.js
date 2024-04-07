@@ -72,6 +72,7 @@ function QRComponent() {
                     initialChecked={showLogo}
                     onToggle={() => setShowLogo(!showLogo)}
                     ind={1}
+                    size="big"
                   />
                   <p className="toggle-text">Логотип Nil-URL.ru</p>
                 </div>
