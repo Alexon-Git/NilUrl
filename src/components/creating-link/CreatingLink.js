@@ -6,7 +6,6 @@ import {
   Toggle,
   DateCalendar,
   TagList,
-  QRComponent,
 } from "../../components";
 
 const CreatingLink = () => {
@@ -93,12 +92,6 @@ const CreatingLink = () => {
       .join("");
     const url = `https://nil-url/${randomShortId}.ru`;
     setShortUrl(url);
-  };
-
-  /* ___________ ГЕНЕРАЦИЯ QR КОДА (ПОТОМ УБРАТЬ И ПЕРЕНЕСТИ КУДА НАДО ___________ */
-  const [isQRComponentVisible, setIsQRComponentVisible] = useState(false);
-  const handleSVGClick = () => {
-    setIsQRComponentVisible(!isQRComponentVisible);
   };
 
   return (
@@ -220,8 +213,6 @@ const CreatingLink = () => {
                   viewBox="0 0 14 8"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  onClick={handleSVGClick}
-                  style={{ cursor: "pointer" }}
                 >
                   <path
                     d="M1 1L7 7L13 1"
@@ -231,7 +222,6 @@ const CreatingLink = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                {isQRComponentVisible && <QRComponent /> /* вывод QRкода для теста, потом надо будет убрать и перенести куда надо */}
               </div>
             </div>
           </div>

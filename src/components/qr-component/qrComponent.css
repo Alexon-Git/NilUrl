@@ -1,15 +1,123 @@
-.app {
-    text-align: center;
-  }
-  
-  .qr-code-container {
-    margin: 20px auto;
-  }
-  
-  .toggle-logo {
-    margin-top: 20px;
-  }
-  
-  .toggle-logo input[type='checkbox'] {
-    margin-right: 10px;
-  }
+.overlay {
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.creating__qr {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 446px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(154, 154, 154, 0.5);
+  border-radius: 16px;
+  background-color: #fff;
+  font-family: "Helvetica Neue Cyr";
+}
+
+.qr-code-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 138px;
+  width: 138px;
+  padding: 10px;
+  margin: 0 auto;
+  border: 1px solid rgba(154, 154, 154, 0.5);
+  border-radius: 16px;
+  background-color: #fff;
+}
+
+.qr__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  border-bottom: 1px solid rgba(154, 154, 154, 0.5);
+  gap: 10px;
+  z-index: 1;
+}
+
+.header__svg {
+  height: 22px;
+  width: 22px;
+}
+
+.header__title {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.qr__main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 25px;
+  padding-left: 65px;
+  padding-right: 65px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background-image: url(./../../img/background-image.svg);
+  background-repeat: repeat;
+}
+
+.edit-button {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 8px;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+.editing-content {
+  width: calc(100% + 130px);
+  margin-left: -65px;
+  padding-left: 65px;
+  padding-right: 65px;
+  background-color: #fff;
+  border-top: 1px solid rgba(154, 154, 154, 0.5);
+  border-bottom: 1px solid rgba(154, 154, 154, 0.5);
+  box-sizing: border-box;
+}
+
+.qr__footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  background-color: #fff;
+  border-top: 1px solid rgba(154, 154, 154, 0.5);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 1;
+  box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+}
+
+.footer__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 155px;
+  height: 33px;
+  background: rgba(30, 30, 30, 1);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  cursor: pointer;
+}
+
+.footer__button svg {
+  margin-top: -2px;
+}
