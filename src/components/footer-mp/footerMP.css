@@ -1,4 +1,4 @@
-.FooterMPMainContainer {
+.NewFooterMainContainer {
     width: 100%;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -6,35 +6,35 @@
     font-family: "Roboto";
 }
 
-.FooterMPContainer {
+.NewFooterContainer {
     display: flex;
     justify-content: flex-start;
 }
 
-.FirstFooterMP {
+.NewFirstFooter {
     display: inline-block;
 }
 
-.SecondFooterMP {
+.NewSecondFooter {
     margin-left: 15%;
     vertical-align: top;
     display: inline-block;
 }
 
-.ThirdFooterMP {
+.NewThirdFooter {
     margin-left: 10%;
     vertical-align: top;
     display: inline-block;
 }
 
-.TextBoldFooter {
+.NewTextBoldFooter {
     line-height: 20px;
     font-weight: 700;
     font-size: 14px;
     margin-bottom: 20px;
 }
 
-.defaultTextFooter {
+.NewDefaultTextFooter {
     color: #6B7280;
     margin-bottom: 15px;
     font-weight: 400;
@@ -42,21 +42,21 @@
     line-height: 20px;
 }
 
-.copyright {
+.NewCopyright {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.social-icons {
+.NewSocialIcons {
     display: flex;
 }
 
-.social-icons svg {
+.NewSocialIcons svg {
     margin-right: 30px;
 }
 
-.footer-content {
+.NewFooterContent {
     width: 310px;
     line-height: 20px;
     color: #6B7280;
@@ -68,28 +68,28 @@
 }
 
 @media (max-width: 1000px) {
-    .FooterMPContainer {
+    .NewFooterContainer {
         padding-left: 30px;
         padding-right: 30px;
     }
-    .SecondFooterMP {
+    .NewSecondFooter {
         margin-left: 10%;
     }
-    .ThirdFooterMP {
+    .NewThirdFooter {
         margin-left: 5%;
     }
-    .copyright {
+    .NewCopyright {
         padding-left: 30px;
         padding-right: 30px;
     }
 }
 
 @media (min-width: 1000px) and (max-width: 1440px) {
-    .FooterMPContainer {
+    .NewFooterContainer {
         padding-left: 100px;
         padding-right: 100px;
     }
-    .copyright {
+    .NewCopyright {
         padding-left: 100px;
         padding-right: 100px;
     }
@@ -98,11 +98,11 @@
 .wrapper {
     max-width: 1440px;
     margin: 0 auto;
-  }
-  
-  @media screen and (min-width: 1441px) {
+}
+
+@media screen and (min-width: 1441px) {
     .wrapper {
-      width: 75%;
-      max-width: none;
+        width: 75%;
+        max-width: none;
     }
-  }
+}

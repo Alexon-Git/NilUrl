@@ -34,9 +34,7 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  border: 1px solid rgba(154, 154, 154, 0.5);
-  border-radius: 0 6px 6px 0;
-  background-color: #fff;
+  border-left: 1px solid rgba(154, 154, 154, 0.5);
   cursor: pointer;
 }
 
@@ -65,7 +63,6 @@
 
 .link__functional {
   position: relative;
-  width: calc(100% - 20px);
   border: 1px solid #000;
   border-radius: 6px;
   padding: 0 10px;

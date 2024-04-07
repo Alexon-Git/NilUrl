@@ -9,6 +9,7 @@ import CreatingLink from "./creating-link/CreatingLink";
 import Toggle from "./toggle/Toggle";
 import DateCalendar from "./date-calendar/DateCalendar";
 import TagList from "./tag-list/TagList";
+import QRComponent from "./qr-component/QRComponent";
 
 import Ampersand from "../img/ampersand.svg";
 import Hashtag from "../img/hashtag.svg";
@@ -24,5 +25,6 @@ import SubButtonBlack from "../img/subscription-button-black.svg";
 import SubButtonBlue from "../img/subscription-button-blue.svg";
 import FooterLogo from "../img/footer-logo.svg";
 import FAQ from "../img/faq.svg";
+import QRImage from "../img/qr-image.svg"
 
-export { Header, SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, Toggle, DateCalendar, TagList, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, TryButtonBlack, TryButtonBlue, SubButtonBlack, SubButtonBlue, FooterLogo, FAQ };
+export { Header, SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, Toggle, DateCalendar, TagList, QRComponent, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, TryButtonBlack, TryButtonBlue, SubButtonBlack, SubButtonBlue, FooterLogo, FAQ, QRImage };

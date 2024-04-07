@@ -16,6 +16,7 @@
 
 }
 .CountryGPinAd{
+    z-index: 2;
     text-align: center;
     cursor: pointer;
     justify-content: center;
@@ -23,6 +24,7 @@
     width: 104px;
 }
 .CityGPinAd{
+    z-index: 2;
     text-align: center;
     cursor: pointer;
     justify-content: center;
@@ -33,7 +35,7 @@
     border: 1px solid #BFBFBF;
     background-color: #F4F4F4;
     border-radius: 100px;
-    z-index: -1;
+
     width: 104px;
     height: 34px;
     position: absolute;

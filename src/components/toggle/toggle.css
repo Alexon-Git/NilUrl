@@ -1,43 +1,91 @@
-.toggle-switch {
+.toggle-switch-small {
   display: inline-block;
-  display: flex; /* Добавлено */
-  align-items: center; /* Добавлено */
+  display: flex;
+  align-items: center;
 }
   
-  .toggle-switch input[type="checkbox"] {
-    height: 0;
-    width: 0;
-    visibility: hidden;
-  }
+.toggle-switch-small input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
   
-  .toggle-switch label {
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 19.95px;
-    height: 13px;
-    background: grey;
-    display: block;
-    border-radius: 20px;
-    position: relative;
-  }
+.toggle-switch-small label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 19.95px;
+  height: 13px;
+  background: grey;
+  display: block;
+  border-radius: 20px;
+  position: relative;
+}
+
+.toggle-switch-small label:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 11px;
+  height: 11px;
+  background: #fff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
   
-  .toggle-switch label:after {
-    content: '';
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    width: 11px;
-    height: 11px;
-    background: #fff;
-    border-radius: 50%;
-    transition: 0.3s;
-  }
+.toggle-switch-small input[type="checkbox"]:checked + label {
+  background: rgba(64, 195, 101, 1);
+}
   
-  .toggle-switch input[type="checkbox"]:checked + label {
-    background: rgba(64, 195, 101, 1);
-  }
+.toggle-switch-small input[type="checkbox"]:checked + label:after {
+  left: calc(100% - 1px);
+  transform: translateX(-100%);
+}
+
+/* ---------- */
+
+.toggle-switch-big {
+  display: inline-block;
+  display: flex;
+  align-items: center;
+}
   
-  .toggle-switch input[type="checkbox"]:checked + label:after {
-    left: calc(100% - 1px);
-    transform: translateX(-100%);
-  }
+.toggle-switch-big input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  display: none;
+}
+  
+.toggle-switch-big label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 50px;
+  height: 24px;
+  background: grey;
+  display: block;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: none;
+}
+
+.toggle-switch-big label:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+  
+.toggle-switch-big input[type="checkbox"]:checked + label {
+  background: rgba(64, 195, 101, 1);
+}
+  
+.toggle-switch-big input[type="checkbox"]:checked + label:after {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
