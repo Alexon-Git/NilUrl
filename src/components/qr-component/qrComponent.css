@@ -60,7 +60,6 @@
   padding-right: 65px;
   overflow-y: auto;
   overflow-x: hidden;
-
   background-image: url(./../../img/background-image.svg);
   background-repeat: repeat;
 }
@@ -80,6 +79,8 @@
 .editing-content {
   width: calc(100% + 130px);
   margin-left: -65px;
+  padding-top: 25px;
+  padding-bottom: 25px;
   padding-left: 65px;
   padding-right: 65px;
   background-color: #fff;
@@ -120,4 +121,24 @@
 
 .footer__button svg {
   margin-top: -2px;
+}
+
+.editing-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.editing-toggle {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  gap: 10px;
+}
+
+.toggle-switch input[type="checkbox"] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
 }

@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import QRCodeGenerator from "./QRCodeGenerator";
-import { QRImage } from "../../components";
+import { QRImage, Toggle } from "../../components";
 import "./qrComponent.css";
 
 function QRComponent() {
   const [showLogo, setShowLogo] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  const [rotation, setRotation] = useState(0);
-
-  const rotateSVG = () => {
-    const newRotation = rotation + 90 >= 360 ? 0 : rotation + 90;
-    setRotation(newRotation);
-  };
 
   const toggleEditing = () => {
     setIsEditing(!isEditing);
@@ -72,13 +66,15 @@ function QRComponent() {
           {isEditing && (
             <div className="editing-content">
               <div className="toggle-logo">
-                <input
-                  type="checkbox"
-                  id="toggle"
-                  checked={showLogo}
-                  onChange={() => setShowLogo(!showLogo)}
-                />
-                <label htmlFor="toggle">Логотип посередине</label>
+                <p className="editing-title">Логотип</p>
+                <div className="editing-toggle">
+                  <Toggle
+                    initialChecked={showLogo}
+                    onToggle={() => setShowLogo(!showLogo)}
+                    ind={1}
+                  />
+                  <p className="toggle-text">Логотип Nil-URL.ru</p>
+                </div>
               </div>
             </div>
           )}
