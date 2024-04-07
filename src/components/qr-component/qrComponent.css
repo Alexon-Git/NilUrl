@@ -1,0 +1,15 @@
+.app {
+    text-align: center;
+  }
+  
+  .qr-code-container {
+    margin: 20px auto;
+  }
+  
+  .toggle-logo {
+    margin-top: 20px;
+  }
+  
+  .toggle-logo input[type='checkbox'] {
+    margin-right: 10px;
+  }

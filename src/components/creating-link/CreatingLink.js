@@ -1,7 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
 import CryptoJS from "crypto-js";
-import { FAQ, Toggle, DateCalendar, TagList } from "../../components";
+import {
+  FAQ,
+  Toggle,
+  DateCalendar,
+  TagList,
+  QRComponent,
+} from "../../components";
 
 const CreatingLink = () => {
   const [toggles, setToggles] = useState([
@@ -78,13 +84,22 @@ const CreatingLink = () => {
   const generateShortUrl = () => {
     const hash = CryptoJS.SHA256(inputText).toString();
     const shortId = hash.substring(0, 5);
-    const randomShortId = Array.from(shortId).map(char => {
-        const randomCase = Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
+    const randomShortId = Array.from(shortId)
+      .map((char) => {
+        const randomCase =
+          Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
         return randomCase;
-    }).join('');
+      })
+      .join("");
     const url = `https://nil-url/${randomShortId}.ru`;
     setShortUrl(url);
-};
+  };
+
+  /* ___________ ГЕНЕРАЦИЯ QR КОДА (ПОТОМ УБРАТЬ И ПЕРЕНЕСТИ КУДА НАДО ___________ */
+  const [isQRComponentVisible, setIsQRComponentVisible] = useState(false);
+  const handleSVGClick = () => {
+    setIsQRComponentVisible(!isQRComponentVisible);
+  };
 
   return (
     <div className="overlay" onClick={() => {}}>
@@ -113,13 +128,13 @@ const CreatingLink = () => {
           <div className="link__input">
             <div className="link__input-title">Ваша ссылка</div>
             <div className="input__container">
-            <input
-              className="input"
-              type="text"
-              placeholder="https://app.dub.co/aleksandr-vysochenko"
-              value={inputText}
-              onChange={handleLongUrlChange}
-            />
+              <input
+                className="input"
+                type="text"
+                placeholder="https://app.dub.co/aleksandr-vysochenko"
+                value={inputText}
+                onChange={handleLongUrlChange}
+              />
             </div>
           </div>
           <div className="link__input">
@@ -150,12 +165,12 @@ const CreatingLink = () => {
                 </svg>
               </span>
               <input
-              className="input"
-              type="text"
-              placeholder="https://nil-url/Ffv3cv.ru"
-              value={shortUrl}
-              readOnly
-            />
+                className="input"
+                type="text"
+                placeholder="https://nil-url/Ffv3cv.ru"
+                value={shortUrl}
+                readOnly
+              />
             </div>
           </div>
           <div className="link__input">
@@ -198,12 +213,15 @@ const CreatingLink = () => {
                 onChange={() => {}}
               />
               <div className="input__icon right-image">
+                {" "}
                 <svg
                   width="14"
                   height="8"
                   viewBox="0 0 14 8"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  onClick={handleSVGClick}
+                  style={{ cursor: "pointer" }}
                 >
                   <path
                     d="M1 1L7 7L13 1"
@@ -213,6 +231,7 @@ const CreatingLink = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
+                {isQRComponentVisible && <QRComponent /> /* вывод QRкода для теста, потом надо будет убрать и перенести куда надо */}
               </div>
             </div>
           </div>
