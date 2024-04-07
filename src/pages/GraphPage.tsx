@@ -10,6 +10,13 @@ import TopRefs from "../components/GraphPage/TopRefs";
 
 const GraphPage = () => {
     return (
+        <div
+            style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL + '/BackgroundDots.svg'})
+                    `,zIndex:"-5"
+
+            }}
+        >
         <div>
             <div className="GPMainContainer">
                 <div className="GPCenterContainer">
@@ -82,6 +89,7 @@ const GraphPage = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import "../../styles/MainPage/FirstContainerMainPage.css"
 import "../../styles/MainPage/ButtonBuyOrTry.css"
 import LinksMainPageView from "./LinksMainPageView";
-import {PRICEPAGE_ROUTE} from "../../LogicComp/utils/Const";
+import {LINKSPAGE_ROUTE, PRICEPAGE_ROUTE} from "../../LogicComp/utils/Const";
 import {useNavigate} from "react-router-dom";
 
 
@@ -37,7 +37,7 @@ const FirstContainerMainPage = () => {
                     </span>
                 </button>
 
-                <button className="TryButton">
+                <button className="TryButton" onClick={()=>navigate(LINKSPAGE_ROUTE)}>
                     <span>
                         Попробовать бесплатно
                     </span>

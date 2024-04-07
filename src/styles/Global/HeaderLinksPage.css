@@ -1,0 +1,37 @@
+.HeaderLinksPageC{
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 64px;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+.CircleForLogoLP{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 9999px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.SVGCircleLP{
+    width: 32px;
+    height: 32px;
+}
+.leftUserLogo{
+    height: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+}
+.rightUserLogo{
+    display: flex;
+    height: 100%;
+    float: right;
+    align-items: center;
+}

@@ -19,7 +19,7 @@ const LinkPageMainPart = () => {
             </div>
             <div className="MainContainer">
                 <div className="FilerContainer">
-                    <Filter/>
+
                 </div>
                 <div className="LinksContainer">
                         <LinksMapNew Data={"24/03/24"} clicks={3} pathS={"nil-url.ru/Ffv3cv"} pathL={"https://www.svgrepo.com/collection/dazzle-line-iconsm/collectionqqqqqqqqqqqqqqqqqqqqq"} SvgPath={"/test.svg"} Android={true} IOS={true} UTM={true}/>

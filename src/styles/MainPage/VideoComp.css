@@ -91,7 +91,10 @@
         height: 640px;
 
         border-radius: 12px;
-        background-color: #C7C7C733;
+        background-color: white;
+        box-shadow: 10px -50px 94px 1px #C7C7C733 inset;
+
+
     }
     .PodVieoA{
         margin-left: 3%;

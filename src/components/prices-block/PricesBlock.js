@@ -9,8 +9,11 @@ import {
   SubButtonBlue,
   Slider,
 } from "../../components";
+import {useNavigate} from "react-router-dom";
+import {MAINPAGE_ROUTE} from "../../LogicComp/utils/Const";
 
 const PricesBlock = () => {
+  const navigate = useNavigate()
   const [isHovered, setIsHovered] = useState([false, false, false]);
 
   const handleMouseEnter = index => {
@@ -72,7 +75,7 @@ const PricesBlock = () => {
     <div className="background">
       <main className="prices wrapper">
         <span className="button__back">
-          <img src={BackImage} alt="Назад" />
+          <img src={BackImage} alt="Назад" onClick={()=>{navigate(MAINPAGE_ROUTE)}}/>
         </span>
         <div className="prices__title">
           <span className="gradient__text">Сверхдоступные</span>

@@ -2,7 +2,6 @@
     max-width: 13em;
     z-index: 10;
     position: relative;
-    width: 100%;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -14,7 +13,6 @@
 .dropdown-btn {
     background: #ffffff;
     font-size: 18px;
-    width: 100%;
     border: none;
     color: black;
     display: flex;
@@ -33,6 +31,7 @@
 }
 
 .dropdown-content {
+    padding: 0;
     list-style: none;
     position: absolute;
     top: 3.2em;
@@ -79,12 +78,7 @@ input[type="checkbox"]:focus + label {
     text-decoration: none;
 }
 
-/* base styles */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+
 
 .SortWord{
     margin-left: 10px;

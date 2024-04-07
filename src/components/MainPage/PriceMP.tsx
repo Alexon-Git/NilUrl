@@ -1,7 +1,10 @@
 import React from 'react';
 import "../../styles/MainPage/PriceMP.css"
+import {PRICEPAGE_ROUTE} from "../../LogicComp/utils/Const";
+import {useNavigate} from "react-router-dom";
 
 const PriceMp = () => {
+    const navigate = useNavigate()
     return (
         <div>
             <div className="Sverdostup">
@@ -26,7 +29,7 @@ const PriceMp = () => {
                             </linearGradient>
                         </defs>
                     </svg>
-                    <button className="MoreWithDots">
+                    <button className="MoreWithDots" onClick={()=>navigate(PRICEPAGE_ROUTE)}>
                         <svg  width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="12" height="12" rx="6" fill="white"/>
                         </svg>

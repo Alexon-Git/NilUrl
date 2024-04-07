@@ -52,6 +52,7 @@
     font-size: 20px;
 }
 .Charts{
+    background-color: white;
     margin-top: 50px;
     max-width: 1200px;
     height: 760px;
@@ -65,12 +66,14 @@
 }
 
 .AddressesInGP{
+    background-color: white;
     width: 48%;
     height: 400px;
     box-shadow: 0px 4px 40px 0px #0000001A;
     border-radius: 10px;
 }
 .DevicesInGP{
+    background-color: white;
     margin-left: 0%;
     width: 48%;
     height: 400px;
@@ -78,12 +81,14 @@
     border-radius: 10px;
 }
 .REFSGP{
+    background-color: white;
     width: 48%;
     height: 260px;
     box-shadow: 0px 4px 40px 0px #0000001A;
     border-radius: 10px;
 }
 .TOPREFGP{
+    background-color: white;
     margin-left: 0%;
     width: 48%;
     height: 260px;

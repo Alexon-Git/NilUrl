@@ -3,7 +3,7 @@ import "../../styles/MainPage/Clients.css"
 
 const Clients = () => {
     return (
-        <div style={{marginBottom:"50px"}}>
+        <div style={{paddingBottom:"50px",borderBottom:"1px solid #9F9F9F"}}>
             <div className="Clients">
             Клиенты
             </div>

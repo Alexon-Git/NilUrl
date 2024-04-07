@@ -51,6 +51,6 @@ export const publicRoutes:routerType[] = [
         path: ERRORPAGE_ROUTE,
         element:<ErrorPage/>,
         title:"errorPAGE"
-    }
+    },
 
 ]
