@@ -35,3 +35,22 @@
     float: right;
     align-items: center;
 }
+.UserLogoWord{
+    position: relative;
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    background-color: #D1D5DB;
+    border-radius: 9999px;
+    justify-content: center;
+    align-items: center;
+}
+.AbsoluteDoteUserLogo{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #8787ff;
+    border-radius: 9999px;
+    right: 0px;
+    bottom: 0px;
+}

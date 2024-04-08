@@ -4,6 +4,7 @@ import "../../styles/MainPage/ButtonBuyOrTry.css"
 import LinksMainPageView from "./LinksMainPageView";
 import {LINKSPAGE_ROUTE, PRICEPAGE_ROUTE} from "../../LogicComp/utils/Const";
 import {useNavigate} from "react-router-dom";
+import ButtonNil from "../Global/ButtonNil";
 
 
 const FirstContainerMainPage = () => {
@@ -42,6 +43,7 @@ const FirstContainerMainPage = () => {
                         Попробовать бесплатно
                     </span>
                 </button>
+
             </div>
 
             <div className="LinksMPContainer">
