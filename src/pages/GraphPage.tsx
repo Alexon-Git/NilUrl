@@ -7,8 +7,10 @@ import AddresGp from "../components/GraphPage/AddresGp";
 import DevicesGp from "../components/GraphPage/DevicesGp";
 import RefsGp from "../components/GraphPage/RefsGp";
 import TopRefs from "../components/GraphPage/TopRefs";
+import {useNavigate} from "react-router-dom";
 
 const GraphPage = () => {
+    const navigate = useNavigate()
     return (
         <div
             style={{
@@ -21,7 +23,7 @@ const GraphPage = () => {
             <div className="GPMainContainer">
                 <div className="GPCenterContainer">
                     <div className="LinkAndPeriod">
-                        <div className="GPLink">
+                        <div className="GPLink" onClick={()=>navigate('/main')}>
                             <div className="NILURLTRYOPT">
                                NirUrl.com/try
                             </div>

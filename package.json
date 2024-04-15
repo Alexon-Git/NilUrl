@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^13.5.0",
     "chart.js": "^4.4.2",
     "crypto-js": "^4.2.0",
-    "gh-pages": "^6.1.1",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",
@@ -20,6 +19,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build",
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
