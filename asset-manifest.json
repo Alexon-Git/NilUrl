@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/NilUrl/static/css/main.73b12974.css",
-    "main.js": "/NilUrl/static/js/main.01d31757.js",
+    "main.css": "/NilUrl/static/css/main.f1a76221.css",
+    "main.js": "/NilUrl/static/js/main.32df799e.js",
     "static/media/Roboto.ttf": "/NilUrl/static/media/Roboto.33c6cdbc694881567da1.ttf",
     "static/media/Segoe UI SemiBold.ttf": "/NilUrl/static/media/Segoe UI SemiBold.a23f926d5b61c10b9cd6.ttf",
     "static/media/Roboto-bold.ttf": "/NilUrl/static/media/Roboto-bold.b843dfa713e8c8653ff6.ttf",
@@ -27,11 +27,11 @@
     "index.html": "/NilUrl/index.html",
     "static/media/underscore.svg": "/NilUrl/static/media/underscore.15085efb8c5a0ccbb0977adf7bc450d4.svg",
     "static/media/triangle.svg": "/NilUrl/static/media/triangle.2ce651f273e0067730563a0442012c30.svg",
-    "main.73b12974.css.map": "/NilUrl/static/css/main.73b12974.css.map",
-    "main.01d31757.js.map": "/NilUrl/static/js/main.01d31757.js.map"
+    "main.f1a76221.css.map": "/NilUrl/static/css/main.f1a76221.css.map",
+    "main.32df799e.js.map": "/NilUrl/static/js/main.32df799e.js.map"
   },
   "entrypoints": [
-    "static/css/main.73b12974.css",
-    "static/js/main.01d31757.js"
+    "static/css/main.f1a76221.css",
+    "static/js/main.32df799e.js"
   ]
 }
