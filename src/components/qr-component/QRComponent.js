@@ -7,7 +7,7 @@ function QRComponent() {
   const [showLogo, setShowLogo] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
-  const [borderColor, setBorderColor] = useState('#000000'); // Изначальный цвет границы
+  const [borderColor, setBorderColor] = useState("#000000"); // Изначальный цвет границы
 
   const toggleEditing = () => {
     setIsEditing(!isEditing);
@@ -90,9 +90,21 @@ function QRComponent() {
               </div>
               <div className="toggle-logo">
                 <p className="editing-title">Цвет</p>
-                <div className="color-picker" style={{ borderColor: borderColor }} onClick={handleColorPickerToggle}>
-      </div>
-      {isColorPickerOpen && <ColorPicker onChange={handleColorChange} />}
+                <button
+                  className="color-picker" 
+                  style={{ borderColor: borderColor }}
+                  onClick={handleColorPickerToggle}
+                  aria-expanded={isColorPickerOpen} 
+                  aria-controls="color-picker-menu"
+                >
+                  {borderColor}
+                </button>
+                {isColorPickerOpen && (
+                  <ColorPicker
+                    id="color-picker-menu"
+                    onChange={handleColorChange}
+                  />
+                )}
               </div>
             </div>
           )}

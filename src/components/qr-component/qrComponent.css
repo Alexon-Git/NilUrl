@@ -55,6 +55,7 @@
 .qr__main {
   display: flex;
   flex-direction: column;
+  max-height: 500px;
   padding-top: 25px;
   padding-left: 65px;
   padding-right: 65px;
@@ -127,26 +128,41 @@
   margin: 0;
   font-size: 14px;
   font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .editing-toggle {
   display: flex;
   align-items: center;
+  height: 24px;
   font-size: 14px;
   font-weight: 400;
   gap: 10px;
 }
 
 .toggle-logo {
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .color-picker {
   height: 36px;
   width: 154px;
   border-radius: 6px;
-  border-left: 36px solid; /* border-left имеет ширину 36px */
-  border-top: 1px solid; /* border-top имеет толщину 1px */
-  border-right: 1px solid; /* border-right имеет толщину 1px */
-  border-bottom: 1px solid; /* border-bottom имеет толщину 1px */
+  border-left: 36px solid; 
+  border-top: 1px solid;
+  border-right: 1px solid; 
+  border-bottom: 1px solid; 
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  background-color: #fff;
+}
+
+.qr__main::-webkit-scrollbar {
+  width: 8px;
+}
+.qr__main::-webkit-scrollbar-thumb {
+  background: rgba(217, 217, 217, 1);
+  border-radius: 6px;
 }

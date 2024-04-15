@@ -1,13 +1,13 @@
-import { ColorPicker, useColor } from "react-color-palette";
-// import "react-color-palette/lib/css/styles.css";
+import React from 'react';
+import { ColorPicker, useColor } from 'react-color-palette';
+import "react-color-palette/css";
  
 export default function ColorPickerGfg() {
     const [color, setColor] = 
-        useColor("hex", "#121212");
+        useColor("hex", "#000000");
  
     return (
         <div>
-            <h1>Выбор цвета</h1>
             <ColorPicker width={456} height={228}
                 color={color}
                 onChange={setColor} hideHSV dark />;
