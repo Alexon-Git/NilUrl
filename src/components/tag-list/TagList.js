@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./tagList.css";
 
-const SvgButton = ({ background, svgColor}) => {
+const SvgButton = ({ background, svgColor, onClick }) => {
   return (
-    <button className="svg-button" style={{ background }}>
+    <button
+      className="svg-button"
+      style={{ backgroundColor: background }}
+      onClick={onClick}
+    >
       <svg
         width="17"
         height="18"
@@ -23,67 +27,72 @@ const SvgButton = ({ background, svgColor}) => {
   );
 };
 
-const SvgButtonContainer = ({ onBackgroundClick }) => {
-  const [isOpen, setIsOpen] = useState(false);
-    const backgrounds = [
-        "rgba(213, 240, 219, 1)",
-        "rgba(213, 235, 240, 1)",
-        "rgba(255, 255, 143, 1)",
-        "rgba(217, 213, 240, 1)",
-        "rgba(250, 198, 198, 1)",
-        "rgba(240, 213, 234, 1)",
-        "rgba(92, 255, 92, 1)",
-        "rgba(97, 97, 255, 1)",
-        "rgba(252, 252, 0, 1)",
-        "rgba(213, 158, 255, 1)",
-        "rgba(255, 61, 61, 0.82)",
-        "rgba(255, 105, 180, 1)",
-        "rgba(0, 158, 0, 1)",
-        "rgba(25, 25, 112, 1)",
-        "rgba(255, 165, 0, 1)",
-        "rgba(148, 0, 211, 1)",
-        "rgba(179, 27, 27, 1)",
-        "rgba(228, 0, 120, 1)"
-    ];
-    
-    const svgColors = [
-        "#63BD43",
-        "#43A0BD",
-        "#C2A500",
-        "#7143BD",
-        "#F53E3E",
-        "#BD43AA",
-        "#009E00",
-        "#000075",
-        "#666600",
-        "#7400CC",
-        "#650101",
-        "#77125D",
-        "#C6FFC6",
-        "#D4E1F1",
-        "#FFF5AD",
-        "#E6E6FA",
-        "#FFD2D2",
-        "#FFE4E1"
-    ];
+const SvgButtonContainer = ({ onTagClick }) => {
+  const backgrounds = [
+    "rgba(213, 240, 219, 1)",
+    "rgba(213, 235, 240, 1)",
+    "rgba(255, 255, 143, 1)",
+    "rgba(217, 213, 240, 1)",
+    "rgba(250, 198, 198, 1)",
+    "rgba(240, 213, 234, 1)",
+    "rgba(92, 255, 92, 1)",
+    "rgba(97, 97, 255, 1)",
+    "rgba(252, 252, 0, 1)",
+    "rgba(213, 158, 255, 1)",
+    "rgba(255, 61, 61, 0.82)",
+    "rgba(255, 105, 180, 1)",
+    "rgba(0, 158, 0, 1)",
+    "rgba(25, 25, 112, 1)",
+    "rgba(255, 165, 0, 1)",
+    "rgba(148, 0, 211, 1)",
+    "rgba(179, 27, 27, 1)",
+    "rgba(228, 0, 120, 1)"
+  ];
 
-    const handleButtonClick = (background, svgColor) => {
-        onBackgroundClick(background, svgColor);
-        setIsOpen(false);
-      };
-    
-      return (
-        <div className={`svg-button-container ${isOpen ? "open" : ""}`}>
-          {backgrounds.map((background, index) => (
-            <SvgButton
-              key={index}
-              onClick={() => handleButtonClick(background, svgColors[index])}
-              background={background}
-              svgColor={svgColors[index]}
-            />
-          ))}
+  const svgColors = [
+    "#63BD43",
+    "#43A0BD",
+    "#C2A500",
+    "#7143BD",
+    "#F53E3E",
+    "#BD43AA",
+    "#009E00",
+    "#000075",
+    "#666600",
+    "#7400CC",
+    "#650101",
+    "#77125D",
+    "#C6FFC6",
+    "#D4E1F1",
+    "#FFF5AD",
+    "#E6E6FA",
+    "#FFD2D2",
+    "#FFE4E1"
+  ];
+
+  const handleButtonClick = (index, event) => {
+    event.preventDefault();
+    const background = backgrounds[index];
+    const svgColor = svgColors[index];
+    onTagClick({ color: background, svgColor: svgColor });
+  };
+
+  return (
+    <div className={`svg-button-container`}>
+      {backgrounds.map((background, index) => (
+        <div
+          key={index}
+          onClick={(event) => handleButtonClick(index, event)}
+        >
+          <SvgButton
+            background={background}
+            svgColor={svgColors[index]}
+            onClick={(event) => handleButtonClick(index, event)}
+          />
         </div>
-      );
-    };
-    
-    export default SvgButtonContainer;
+      ))}
+    </div>
+  );
+};
+
+export default SvgButtonContainer;
