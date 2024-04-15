@@ -140,3 +140,13 @@
 .toggle-logo {
   margin-bottom: 20px;
 }
+
+.color-picker {
+  height: 36px;
+  width: 154px;
+  border-radius: 6px;
+  border-left: 36px solid; /* border-left имеет ширину 36px */
+  border-top: 1px solid; /* border-top имеет толщину 1px */
+  border-right: 1px solid; /* border-right имеет толщину 1px */
+  border-bottom: 1px solid; /* border-bottom имеет толщину 1px */
+}

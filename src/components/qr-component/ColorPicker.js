@@ -1,5 +1,5 @@
 import { ColorPicker, useColor } from "react-color-palette";
-import "react-color-palette/lib/css/styles.css";
+// import "react-color-palette/lib/css/styles.css";
  
 export default function ColorPickerGfg() {
     const [color, setColor] = 
@@ -7,7 +7,7 @@ export default function ColorPickerGfg() {
  
     return (
         <div>
-            <h1>Color Picker - GeeksforGeeks</h1>
+            <h1>Выбор цвета</h1>
             <ColorPicker width={456} height={228}
                 color={color}
                 onChange={setColor} hideHSV dark />;

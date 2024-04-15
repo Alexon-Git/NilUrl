@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import QRCodeGenerator from "./QRCodeGenerator";
-import { QRImage, Toggle } from "../../components";
+import { QRImage, Toggle, ColorPicker } from "../../components";
 import "./qrComponent.css";
 
 function QRComponent() {
   const [showLogo, setShowLogo] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
+  const [borderColor, setBorderColor] = useState('#000000'); // Изначальный цвет границы
 
   const toggleEditing = () => {
     setIsEditing(!isEditing);
@@ -13,6 +15,15 @@ function QRComponent() {
 
   const onClose = () => {
     // Логика для закрытия компонента
+  };
+
+  const handleColorPickerToggle = () => {
+    setIsColorPickerOpen(!isColorPickerOpen);
+  };
+
+  const handleColorChange = (color) => {
+    setBorderColor(color); // Обновляем цвет границы при выборе цвета из ColorPicker.js
+    setIsColorPickerOpen(false); // Закрываем ColorPicker.js после выбора цвета
   };
 
   return (
@@ -79,9 +90,11 @@ function QRComponent() {
               </div>
               <div className="toggle-logo">
                 <p className="editing-title">Цвет</p>
+                <div className="color-picker" style={{ borderColor: borderColor }} onClick={handleColorPickerToggle}>
+      </div>
+      {isColorPickerOpen && <ColorPicker onChange={handleColorChange} />}
               </div>
             </div>
-
           )}
         </div>
         <div className="qr__footer">
