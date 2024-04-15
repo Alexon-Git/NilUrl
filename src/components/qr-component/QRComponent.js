@@ -77,7 +77,11 @@ function QRComponent() {
                   <p className="toggle-text">Логотип Nil-URL.ru</p>
                 </div>
               </div>
+              <div className="toggle-logo">
+                <p className="editing-title">Цвет</p>
+              </div>
             </div>
+
           )}
         </div>
         <div className="qr__footer">
