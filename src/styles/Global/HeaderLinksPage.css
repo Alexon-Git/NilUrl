@@ -19,6 +19,16 @@
     align-items: center;
     justify-content: center;
 }
+.CentreHeaderLinksPageC{
+    margin-left: 70px;
+    display: inline-flex;
+    align-items: center;
+}
+.CentreHeaderLinksPageT{
+    margin-right: 15px;
+    font-weight: 400;
+    font-size: 14px;
+}
 .SVGCircleLP{
     width: 32px;
     height: 32px;
