@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 import QRLogo from "../../img/qr-logo.png";
 
-function QRCodeGenerator({ showLogo }) {
+function QRCodeGenerator({ showLogo, borderColor }) {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
@@ -10,7 +10,7 @@ function QRCodeGenerator({ showLogo }) {
   }, []);
 
   return (
-    <div className="qr-code-container">
+    <div className="qr-code-container" style={{ borderColor: borderColor }}>
       <QRCode
         value={url}
         size={141}
@@ -18,7 +18,7 @@ function QRCodeGenerator({ showLogo }) {
         includeMargin={false}
         imageSettings={
           showLogo
-            ? { src: QRLogo, height: 40, width: 40, excavate: true }
+            ? { src: QRLogo, height: 40, width: 30, excavate: true }
             : null
         }
       />
@@ -27,14 +27,3 @@ function QRCodeGenerator({ showLogo }) {
 }
 
 export default QRCodeGenerator;
-
-/* 
-<div>
-  <input
-    type="text"
-    placeholder="Введите URL"
-    value={url}
-    onChange={(e) => setUrl(e.target.value)}
-  />
-</div>
-*/

@@ -41,7 +41,7 @@
 .tag-list-container {
   position: absolute;
   left: 0;
-  top: -110px;
+  top: -120px;
   z-index: 1;
 }
 
@@ -181,14 +181,6 @@
   outline: none;
 }
 
-.creating__link__main::-webkit-scrollbar {
-  width: 8px;
-}
-.creating__link__main::-webkit-scrollbar-thumb {
-  background: rgba(217, 217, 217, 1);
-  border-radius: 6px;
-}
-
 /* Общие стили для компонентов */
 .overlay {
   backdrop-filter: blur(10px);
@@ -238,6 +230,10 @@
 
   background-image: url(./../../img/background-image.svg);
   background-repeat: repeat;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .creating__link__footer {

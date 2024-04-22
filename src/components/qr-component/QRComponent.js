@@ -1,33 +1,23 @@
 import React, { useState } from "react";
 import QRCodeGenerator from "./QRCodeGenerator";
-import { QRImage, Toggle, ColorPicker } from "../../components";
+import { QRImage, Toggle, ColorPickerGfg } from "../../components";
 import "./qrComponent.css";
 
 function QRComponent() {
   const [showLogo, setShowLogo] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
-  const [borderColor, setBorderColor] = useState("#000000"); // Изначальный цвет границы
+  const [borderColor, setBorderColor] = useState("#000000");
 
   const toggleEditing = () => {
     setIsEditing(!isEditing);
   };
 
-  const onClose = () => {
-    // Логика для закрытия компонента
-  };
-
-  const handleColorPickerToggle = () => {
-    setIsColorPickerOpen(!isColorPickerOpen);
-  };
-
-  const handleColorChange = (color) => {
-    setBorderColor(color); // Обновляем цвет границы при выборе цвета из ColorPicker.js
-    setIsColorPickerOpen(false); // Закрываем ColorPicker.js после выбора цвета
+  const handleColorChange = (newColor) => {
+    setBorderColor(newColor.hex); // Обновляем цвет рамки
   };
 
   return (
-    <div className="overlay" onClick={onClose}>
+    <div className="overlay">
       <div className="creating__qr">
         <div className="qr__header">
           <span className="header__svg">
@@ -36,7 +26,7 @@ function QRComponent() {
           <p className="header__title">Скачать QR code</p>
         </div>
         <div className="qr__main">
-          <QRCodeGenerator showLogo={showLogo} />
+          <QRCodeGenerator showLogo={showLogo} borderColor={borderColor} />
           <div className="edit-button" onClick={toggleEditing}>
             {isEditing ? (
               <svg
@@ -90,21 +80,10 @@ function QRComponent() {
               </div>
               <div className="toggle-logo">
                 <p className="editing-title">Цвет</p>
-                <button
-                  className="color-picker" 
-                  style={{ borderColor: borderColor }}
-                  onClick={handleColorPickerToggle}
-                  aria-expanded={isColorPickerOpen} 
-                  aria-controls="color-picker-menu"
-                >
-                  {borderColor}
-                </button>
-                {isColorPickerOpen && (
-                  <ColorPicker
-                    id="color-picker-menu"
-                    onChange={handleColorChange}
-                  />
-                )}
+                <ColorPickerGfg
+                  initialColor={borderColor}
+                  onColorChange={handleColorChange}
+                />
               </div>
             </div>
           )}
