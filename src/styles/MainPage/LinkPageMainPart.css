@@ -15,9 +15,16 @@
     margin-right: auto;
     position: relative;
 }
-.Top{
+.FakeDivLP{
+    width: 30%;
+    display: inline-block;
+}
+.RightTopCont{
+    margin-top: 25px;
+    display: inline-flex;
     float: right;
-    margin-top: 2%;
+    width: 65%;
+    justify-content: space-between
 }
 .MainContainer{
     padding-top: 1%;

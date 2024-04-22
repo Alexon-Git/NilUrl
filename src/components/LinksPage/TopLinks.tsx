@@ -6,12 +6,7 @@ const TopLinks = () => {
     return (
         <div className="mainContainer">
             <div className="contentContainer">
-                <div className="left">
-                    Мои ссылки
-                </div>
-                <div className="right">
-                    <CreateLinkButton/>
-                </div>
+                    Ссылки
             </div>
         </div>
     );
