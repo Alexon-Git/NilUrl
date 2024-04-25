@@ -34,7 +34,7 @@ function QRComponent() {
 
   return (
     <div className="overlay">
-      <div className="creating__qr" ref={qrRef}>>
+      <div className="creating__qr" ref={qrRef}>
         <div className="qr__header">
           <span className="header__svg">
             <img src={QRImage} alt=""></img>
