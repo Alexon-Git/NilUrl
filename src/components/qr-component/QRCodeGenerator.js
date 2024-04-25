@@ -22,6 +22,9 @@ function QRCodeGenerator({ showLogo, borderColor }) {
             : null
         }
       />
+      <style>
+        {`.qr-code-container svg path:nth-of-type(2) { fill: ${borderColor}; }`}
+      </style>
     </div>
   );
 }
