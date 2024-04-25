@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import QRCodeGenerator from "./QRCodeGenerator";
 import { QRImage, Toggle, ColorPickerGfg } from "../../components";
 import "./qrComponent.css";
@@ -7,6 +7,7 @@ function QRComponent() {
   const [showLogo, setShowLogo] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [borderColor, setBorderColor] = useState("#000000");
+  const qrRef = useRef(null);
 
   const toggleEditing = () => {
     setIsEditing(!isEditing);
@@ -16,9 +17,24 @@ function QRComponent() {
     setBorderColor(newColor.hex); // Обновляем цвет рамки
   };
 
+  const copyToClipboard = () => {
+    const qrCodeText = qrRef.current.querySelector("img").src;
+    navigator.clipboard.writeText(qrCodeText);
+  };
+
+  const downloadQRCode = () => {
+    const qrCodeImage = qrRef.current.querySelector("img").src;
+    const link = document.createElement("a");
+    link.href = qrCodeImage;
+    link.download = "qrcode.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="overlay">
-      <div className="creating__qr">
+      <div className="creating__qr" ref={qrRef}>>
         <div className="qr__header">
           <span className="header__svg">
             <img src={QRImage} alt=""></img>
@@ -89,12 +105,7 @@ function QRComponent() {
           )}
         </div>
         <div className="qr__footer">
-          <button
-            className="footer__button"
-            onClick={() => {}}
-            onKeyDown={() => {}}
-            tabIndex={0}
-          >
+        <button className="footer__button" onClick={copyToClipboard}>
             <svg
               width="19"
               height="18"
@@ -125,12 +136,7 @@ function QRComponent() {
             </svg>
             Скопировать
           </button>
-          <button
-            className="footer__button"
-            onClick={() => {}}
-            onKeyDown={() => {}}
-            tabIndex={0}
-          >
+          <button className="footer__button" onClick={downloadQRCode}>
             <svg
               width="18"
               height="18"
