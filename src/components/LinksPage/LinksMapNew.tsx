@@ -3,6 +3,8 @@ import "../../styles/LinksPage/LinksMapNew.css"
 import TwoIcons from "./TwoIcons";
 import ThreeIcons from "./ThreeIcons";
 import OneIcon from "./OneIcon";
+import RedactingLink from "../creating-link/RedactingLink";
+import QRComponent from "../qr-component/QRComponent";
 
 interface LinksMapInt{
     Data:string,
@@ -18,15 +20,28 @@ interface LinksMapInt{
 
 
 const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android,IOS,clicks}:LinksMapInt) => {
+    const [linkChangeFlag,setLinkChangeFlag] = useState(false)
+    const [qrFlag,setQrFlag] = useState(false)
     const ref = useRef<HTMLDivElement>(null);
     let count = 0;
     if(UTM) count++;
     if(Android) count++;
     if(IOS) count++;
+    const closeCreatingLink = () => {
+        setLinkChangeFlag(false);
+    };
     const [flagTimer,setFlagTimer] = useState(true)
     const [flagTag,setFlagTag] = useState(true)
     return (
+
         <div className="mainCLMP">
+            {linkChangeFlag &&
+                <RedactingLink />
+            }
+            {
+                qrFlag &&
+                <QRComponent />
+            }
             {flagTimer &&
             <div className="timerCLMP">
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +74,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
                                         <path d="M4.69974 8.9645H3.69974C3.14724 8.9645 2.69974 8.5085 2.69974 7.9465V2.518C2.69974 1.955 3.14724 1.5 3.69974 1.5H7.69974C8.25224 1.5 8.69974 1.9555 8.69974 2.518V3.451M5.69974 3.536H9.69974C10.2522 3.536 10.6997 3.991 10.6997 4.5535V9.982C10.6997 10.545 10.2522 11 9.69974 11H5.69974C5.14724 11 4.69974 10.5445 4.69974 9.982V4.5535C4.69974 3.9915 5.14724 3.536 5.69974 3.536Z" stroke="#374151" stroke-width="0.875" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
-                                <div className="blockForCopySVG" style={{display:"flex",marginLeft:"5px"}}>
+                                <div onClick={()=>{setQrFlag(true)}} className="blockForCopySVG" style={{display:"flex",marginLeft:"5px"}}>
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect x="0.700012" width="24" height="24" rx="12" fill="#F3F4F6"/>
                                         <path d="M9.78335 6.75H8.03335C7.71118 6.75 7.45001 7.01117 7.45001 7.33333V9.08333C7.45001 9.4055 7.71118 9.66667 8.03335 9.66667H9.78335C10.1055 9.66667 10.3667 9.4055 10.3667 9.08333V7.33333C10.3667 7.01117 10.1055 6.75 9.78335 6.75Z" stroke="#374151" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
@@ -114,7 +129,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
                         </a>
                         <div className="CLicksTextANum">{clicks} clicks</div>
                     </div>
-                    <div style={{height:"max-content",marginLeft:"10px",marginRight:"20px"}}>
+                    <div onClick={()=>{setLinkChangeFlag(true)}} style={{height:"max-content",marginLeft:"10px",marginRight:"20px"}}>
                         <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.3667 11.25C11.3667 12.2625 10.5459 13.0833 9.53335 13.0833C8.5208 13.0833 7.70001 12.2625 7.70001 11.25C7.70001 10.2374 8.5208 9.41666 9.53335 9.41666C10.5459 9.41666 11.3667 10.2374 11.3667 11.25Z" stroke="black" stroke-width="1.28" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M11.3667 17.6667C11.3667 18.6792 10.5459 19.5 9.53335 19.5C8.5208 19.5 7.70001 18.6792 7.70001 17.6667C7.70001 16.6541 8.5208 15.8333 9.53335 15.8333C10.5459 15.8333 11.3667 16.6541 11.3667 17.6667Z" stroke="black" stroke-width="1.28" stroke-linecap="round" stroke-linejoin="round"/>

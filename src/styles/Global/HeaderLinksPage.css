@@ -25,7 +25,8 @@
     align-items: center;
 }
 .CentreHeaderLinksPageT{
-    margin-right: 15px;
+    cursor: pointer;
+    margin-right: 25px;
     font-weight: 400;
     font-size: 14px;
 }

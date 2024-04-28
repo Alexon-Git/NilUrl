@@ -1,6 +1,8 @@
 import React from 'react';
 import "../../styles/Global/HeaderLinksPage.css"
+import {useNavigate} from "react-router-dom";
 const HeaderLinksPage = () => {
+    const navigator = useNavigate()
     return (
         <div style={{borderBottom:"1px solid #E5E7EB"}}>
             <div className="HeaderLinksPageC">
@@ -18,11 +20,11 @@ const HeaderLinksPage = () => {
                     <div style={{fontWeight:"700"}} className="CentreHeaderLinksPageT">
                         Ссылки
                     </div>
-                    <div className="CentreHeaderLinksPageT">
+                    <div onClick={()=>{navigator("/Graph")}} className="CentreHeaderLinksPageT">
                         Аналитика
                     </div>
                 </div>
-                <div style={{display:"inline-flex",alignItems:"center"}}>
+                <div onClick={()=>{navigator("/price")}} style={{display:"inline-flex",alignItems:"center",cursor:"pointer"}}>
                     <svg width="86" height="31" viewBox="0 0 86 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_552_765"  maskUnits="userSpaceOnUse" x="0" y="0" width="86" height="31">
                             <rect x="0.5" y="0.5" width="85" height="30" rx="15" fill="#D9D9D9"/>

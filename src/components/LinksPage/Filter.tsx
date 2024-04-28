@@ -14,7 +14,6 @@ const Filter = () => {
     const [arrayOfTags,setArrayOfTegs] = useState(
         FilterProps
     )
-    console.log("qweewq = " + arrayOfTags[0].isEnable)
     const [hide,setHide] = useState(false)
     const revertState = (ind:number) => {
         let obj = checkedState;
@@ -87,7 +86,6 @@ const Filter = () => {
                             </div>
                             <div className="checkboxName"></div>
                         </div>
-                        <button ></button>
                         <div className="ClickCount">1</div>
                     </div>
                 )}

@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    height: calc(100vh - (80px + 150px));
+    height: calc(100vh - (65px + 65px));
     background-color: #f1f1f1;
     text-align: center;
 }
