@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./noLoginHeader.css";
 import LogoImage from "../../img/logo-icon.svg";
-import CreatingLink from "../creating-link/CreatingLink";
+// import CreatingLink from "../creating-link/CreatingLink";
+import RedactingLink from "../creating-link/RedactingLink";
 import {useNavigate} from "react-router-dom";
 import {MAINPAGE_ROUTE, PRICEPAGE_ROUTE} from "../../LogicComp/utils/Const";
 import QRComponent from "../qr-component/QRComponent";
@@ -25,7 +26,7 @@ const NoLoginHeader = () => {
 
   return (
     <header className="no-login-header wrapper">
-      {isCreatingLinkOpen && <CreatingLink onClose={closeCreatingLink} />}
+      {isCreatingLinkOpen && <RedactingLink onClose={closeCreatingLink} />}
       {isQRComponentOpen && <QRComponent />}
       <p className="prices-button" onClick={()=>navigate(PRICEPAGE_ROUTE)}>Цены</p>
       <span className="logo">

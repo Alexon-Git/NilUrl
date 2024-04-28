@@ -3,7 +3,6 @@
   margin-bottom: 20px;
 }
 
-
 .input {
   height: 35px;
   width: 100%;
@@ -247,4 +246,20 @@
   border-bottom-right-radius: 16px;
   z-index: 1;
   box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.delete__link {
+  display: flex;
+  align-items: center; /* Выравниваем элементы по вертикали */
+  width: 100%;
+  border: 1px solid rgba(191, 0, 0, 1);
+  border-radius: 6px;
+  background: rgba(251, 228, 228, 1);
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  color: rgba(191, 0, 0, 1);
+  padding: 8px;
+  cursor: pointer;
 }
