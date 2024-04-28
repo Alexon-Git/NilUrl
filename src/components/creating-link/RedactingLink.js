@@ -288,7 +288,7 @@ const RedactingLink = () => {
             onKeyDown={handleCreateLinkKeyDown}
             tabIndex={0}
           >
-            Создать ссылку
+            Редактировать ссылку
           </button>
         </div>
       </div>
