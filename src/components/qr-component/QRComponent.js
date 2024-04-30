@@ -3,7 +3,7 @@ import QRCodeGenerator from "./QRCodeGenerator";
 import { QRImage, Toggle, ColorPickerGfg } from "../../components";
 import "./qrComponent.css";
 
-function QRComponent = ({ onClose }) => {
+function QRComponent  ({ onClose })  {
   const [showLogo, setShowLogo] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [borderColor, setBorderColor] = useState("#000000");
