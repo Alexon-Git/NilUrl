@@ -8,7 +8,7 @@ import {
   TagList,
 } from "../../components";
 
-const CreatingLink = () => {
+const CreatingLink  = ({ onClose }) => {
   const [toggles, setToggles] = useState([
     {
       id: "comment",
@@ -104,7 +104,7 @@ const CreatingLink = () => {
 
 
   return (
-    <div className="overlay" onClick={() => {}}>
+    <div className="overlay" onClick={onClose}>
       <div className="creating__link">
         <div className="creating__link__header">
           <span className="header__svg">

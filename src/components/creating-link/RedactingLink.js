@@ -3,7 +3,7 @@ import "./creatingLink.css";
 import CryptoJS from "crypto-js";
 import { FAQ, Toggle, DateCalendar, TagList } from "../../components";
 
-const RedactingLink = () => {
+const RedactingLink = ({ onClose }) => {
   const [toggles, setToggles] = useState([
     {
       id: "comment",
@@ -95,7 +95,7 @@ const RedactingLink = () => {
   });
 
   return (
-    <div className="overlay" onClick={() => {}}>
+    <div className="overlay" onClick={onClose}>
       <div className="creating__link">
         <div className="creating__link__header">
           <span className="header__svg">
