@@ -18,10 +18,10 @@ const SortButton = () => {
             </label>
 
             <ul className="dropdown-content" role="menu">
-                <li><a href="1">Дата ↓</a></li>
-                <li><a href="2">Дата ↑</a></li>
-                <li><a href="3">По алфавиту ↓</a></li>
-                <li><a href="4">По алфавиту ↑</a></li>
+                <li><a>Дата ↓</a></li>
+                <li><a>Дата ↑</a></li>
+                <li><a>По алфавиту ↓</a></li>
+                <li><a>По алфавиту ↑</a></li>
             </ul>
         </div>
     );

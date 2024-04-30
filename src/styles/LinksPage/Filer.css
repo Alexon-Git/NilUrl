@@ -20,7 +20,7 @@
     width: 85%;
     display: inline-block;
     vertical-align: middle;
-    font-size: calc(0.7vh + 0.5vw);
+    font-size: 16px;
 }
 .svgLupa{
     margin: auto;
