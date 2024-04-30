@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
 import CryptoJS from "crypto-js";
-import { FAQ, Toggle, DateCalendar, TagList } from "../../components";
+import { FAQ, Toggle, DateCalendar, TagList, UpgradeToProPopup } from "../../components";
 
 const RedactingLink = ({ onClose }) => {
   const [toggles, setToggles] = useState([

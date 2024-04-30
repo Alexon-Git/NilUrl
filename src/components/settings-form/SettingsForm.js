@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./settings-form.css";
-import DeleteAccountModal from "../delete/DeleteAccountModal";
+import DeleteAccountModal from "../popups/DeleteAccountModal";
 
 const SettingsForm = () => {
   const [formData, setFormData] = useState({

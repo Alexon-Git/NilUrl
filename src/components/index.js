@@ -13,6 +13,7 @@ import TagList from "./tag-list/TagList";
 import QRComponent from "./qr-component/QRComponent";
 import ColorPickerGfg from "./qr-component/ColorPicker"
 import BuyButton from "./buttons/buy-button";
+import UpgradeToProPopup from "./popups/UpgradeToProPopup"
 
 import Ampersand from "../img/ampersand.svg";
 import Hashtag from "../img/hashtag.svg";
@@ -28,4 +29,4 @@ import FooterLogo from "../img/footer-logo.svg";
 import FAQ from "../img/faq.svg";
 import QRImage from "../img/qr-image.svg"
 
-export { Header, SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, RedactingLink, Toggle, DateCalendar, TagList, QRComponent, ColorPickerGfg, BuyButton, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, SubButtonBlack, SubButtonBlue, FooterLogo, FAQ, QRImage };
+export { Header, SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, RedactingLink, Toggle, DateCalendar, TagList, QRComponent, ColorPickerGfg, BuyButton, UpgradeToProPopup, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, SubButtonBlack, SubButtonBlue, FooterLogo, FAQ, QRImage };
