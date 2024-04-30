@@ -5,7 +5,7 @@ import { FAQ, Toggle, DateCalendar, TagList, UpgradeToProPopup } from "../../com
 
 const RedactingLink = () => {
   // const [isPro, setIsPro] = useState(false);
-  const isPro = false;
+  const isPro = true;
   const [toggles, setToggles] = useState([
     {
       id: "comment",
@@ -34,9 +34,9 @@ const RedactingLink = () => {
     },
   ]);
 
-const handleToggle = (id) => {
+  const handleToggle = (id) => {
     // Check if user is pro before toggling
-    if (!isPro) return;
+    if (id !== "comment" && !isPro) return;
     
     setToggles((prevToggles) => {
       const newToggles = prevToggles.map((toggle) =>
@@ -114,9 +114,9 @@ const handleToggle = (id) => {
               <path
                 d="M15.4998 5.50067L18.3282 8.3291M13 21H21M3 21.0004L3.04745 20.6683C3.21536 19.4929 3.29932 18.9052 3.49029 18.3565C3.65975 17.8697 3.89124 17.4067 4.17906 16.979C4.50341 16.497 4.92319 16.0772 5.76274 15.2377L17.4107 3.58969C18.1918 2.80865 19.4581 2.80864 20.2392 3.58969C21.0202 4.37074 21.0202 5.63707 20.2392 6.41812L8.37744 18.2798C7.61579 19.0415 7.23497 19.4223 6.8012 19.7252C6.41618 19.994 6.00093 20.2167 5.56398 20.3887C5.07171 20.5824 4.54375 20.6889 3.48793 20.902L3 21.0004Z"
                 stroke="black"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </span>
@@ -152,13 +152,13 @@ const handleToggle = (id) => {
                     cy="17.5"
                     r="17"
                     stroke="#9A9A9A"
-                    stroke-opacity="0.5"
+                    strokeOpacity="0.5"
                   />
                   <path
                     d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
                     stroke="black"
-                    stroke-width="1.28"
-                    stroke-linecap="round"
+                    strokeWidth="1.28"
+                    strokeLinecap="round"
                   />
                 </svg>
               </span>
@@ -266,7 +266,7 @@ const handleToggle = (id) => {
               </div>
             ))}
           </div>
-          {!isPro && <UpgradeToProPopup />}
+          {isPro || <UpgradeToProPopup />}
           <button className="delete__link">
             Удалить
             <svg
@@ -280,9 +280,9 @@ const handleToggle = (id) => {
               <path
                 d="M15 4L14.1991 16.0129C14.129 17.065 14.0939 17.5911 13.8667 17.99C13.6666 18.3412 13.3648 18.6235 13.0011 18.7998C12.588 19 12.0607 19 11.0062 19H6.99377C5.93927 19 5.41202 19 4.99889 18.7998C4.63517 18.6235 4.33339 18.3412 4.13332 17.99C3.90607 17.5911 3.871 17.065 3.80086 16.0129L3 4M1 4H17M13 4L12.7294 3.18807C12.4671 2.40125 12.3359 2.00784 12.0927 1.71698C11.8779 1.46013 11.6021 1.26132 11.2905 1.13878C10.9376 1 10.523 1 9.6936 1H8.3064C7.477 1 7.0624 1 6.70951 1.13878C6.39792 1.26132 6.12208 1.46013 5.90729 1.71698C5.66405 2.00784 5.53292 2.40125 5.27064 3.18807L5 4M11 8V15M7 8V15"
                 stroke="#BF0000"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
