@@ -10,7 +10,7 @@ function Log() {
             <div className="d2_2">
                 <div className="d3_1">
                     <a href="https://nil-agency.ru" className="a3_1">
-                        <img src="/img/reg/nil logo icon.svg" width={40} />
+                        <img src={process.env.PUBLIC_URL +"/NilLogo.svg"} width={40} />
                     </a>
                     <h3 className="h3">Вход в NILUrl</h3>
                     <p className="p1">Войди и начни творить.</p>

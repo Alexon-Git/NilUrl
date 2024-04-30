@@ -9,7 +9,7 @@ function Reg() {
             <div className="d2_2">
                 <div className="d3_1">
                     <a href="https://nil-agency.ru" className="a3_1">
-                        <img src="/img/reg/nil logo icon.svg" width={40} />
+                        <img src={process.env.PUBLIC_URL +"/NilLogo.svg"} width={40} />
                     </a>
                     <h3 className="h3">Регистрация в NILUrl</h3>
                     <p className="p1">Начните создавать короткие ссылки.</p>
