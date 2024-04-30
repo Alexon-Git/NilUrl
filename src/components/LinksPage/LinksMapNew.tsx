@@ -44,11 +44,11 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
     return (
         <div className="mainCLMP">
             {linkChangeFlag &&
-                <RedactingLink />
+                <RedactingLink onClose={()=>{setLinkChangeFlag(false)}}/>
             }
             {
                 qrFlag &&
-                <QRComponent />
+                <QRComponent/>
             }
             {flagTimer &&
             <div className="timerCLMP">
