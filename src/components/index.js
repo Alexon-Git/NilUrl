@@ -1,6 +1,6 @@
 import Header from "./header/Header";
 import SettingsForm from "./settings-form/SettingsForm";
-import DeleteAccountModal from "./delete/DeleteAccountModal";
+import DeleteAccountModal from "./popups/DeleteAccountModal";
 import FooterMP from "./footer-mp/FooterMP";
 import NoLoginHeader from "./no-login-header/NoLoginHeader";
 import PricesBlock from "./prices-block/PricesBlock";
