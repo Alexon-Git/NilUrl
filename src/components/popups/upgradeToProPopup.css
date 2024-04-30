@@ -11,21 +11,20 @@
   }
   
   .popup-container {
-    width: 318px;
-    height: 173px;
-    border-top-left-radius: 22px;
+    border-radius: 22px;
     background-color: #ffffff; /* white */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* black shadow */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 20px 30px;
   }
   
   .popup-message {
+    font-family: "Helvetica Neue Cyr";
     font-size: 12px;
-    font-weight: normal;
+    font-weight: 400;
     margin-bottom: 20px;
     text-align: center;
   }

@@ -5,66 +5,64 @@ import { FAQ, Toggle, DateCalendar, TagList, UpgradeToProPopup } from "../../com
 
 const RedactingLink = () => {
   // const [isPro, setIsPro] = useState(false);
-  const isPro = true;
+  const isPro = false; // true - подписка активна, false - не активна
+
   const [toggles, setToggles] = useState([
-    {
-      id: "comment",
-      title: "Комментарий",
-      checked: false,
-      info: <CommentComponent />,
-    },
+    { id: "comment", title: "Комментарий", checked: false, info: <CommentComponent /> },
     { id: "utm", title: "UTM-метка", checked: false, info: <UTMInputs /> },
-    {
-      id: "date",
-      title: "Дата окончания",
-      checked: false,
-      info: <DateCalendar />,
-    },
-    {
-      id: "ios",
-      title: "iOS Targeting",
-      checked: false,
-      info: <IOSComponent />,
-    },
-    {
-      id: "android",
-      title: "Android Targeting",
-      checked: false,
-      info: <AndroidComponent />,
-    },
+    { id: "date", title: "Дата окончания", checked: false, info: <DateCalendar /> },
+    { id: "ios", title: "iOS Targeting", checked: false, info: <IOSComponent /> },
+    { id: "android", title: "Android Targeting", checked: false, info: <AndroidComponent /> },
   ]);
 
+  const [showPopups, setShowPopups] = useState({
+    utm: false,
+    date: false,
+    ios: false,
+    android: false
+  });
+
   const handleToggle = (id) => {
-    // Check if user is pro before toggling
-    if (id !== "comment" && !isPro) return;
-    
+    const toggle = toggles.find(toggle => toggle.id === id);
+    if (!toggle) return;
+
+    // Если переключатель - это комментарий, не блокировать его
+  if (id === "comment") {
     setToggles((prevToggles) => {
       const newToggles = prevToggles.map((toggle) =>
         toggle.id === id ? { ...toggle, checked: !toggle.checked } : toggle
       );
       return newToggles;
     });
-  };
-
-  const handleMouseOver = () => {
-    console.log("Показать подсказку");
-  };
-
-  const handleMouseOut = () => {
-    console.log("Скрыть подсказку");
-  };
-
-  const handleCreateLink = () => {
-    console.log("Создать ссылку");
-  };
-
-  const handleCreateLinkKeyDown = (event) => {
-    if (event.key === "Enter") {
-      handleCreateLink();
+    return;
+  }
+  
+    if ((id === "comment" && !isPro) || (id !== "utm" && id !== "date" && id !== "ios" && id !== "android")) return;
+    
+    if (!toggle.checked && !isPro && id !== "comment") {
+      setShowPopups((prevState) => ({
+        ...prevState,
+        [id]: true
+      }));
+    } else {
+      setToggles((prevToggles) => {
+        const newToggles = prevToggles.map((toggle) =>
+          toggle.id === id ? { ...toggle, checked: !toggle.checked } : toggle
+        );
+        return newToggles;
+      });
     }
   };
 
+  const closePopup = (id) => {
+    setShowPopups((prevState) => ({
+      ...prevState,
+      [id]: false
+    }));
+  };
+
   const [isHovered, setIsHovered] = useState(false);
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -85,8 +83,7 @@ const RedactingLink = () => {
     const shortId = hash.substring(0, 5);
     const randomShortId = Array.from(shortId)
       .map((char) => {
-        const randomCase =
-          Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
+        const randomCase = Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
         return randomCase;
       })
       .join("");
@@ -98,6 +95,24 @@ const RedactingLink = () => {
     svgColor: "black",
     color: "transparent",
   });
+
+  const handleCreateLink = () => {
+    console.log("Создать ссылку");
+  };
+
+  const handleCreateLinkKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleCreateLink();
+    }
+  };
+
+  const handleMouseOver = () => {
+    console.log("Показать подсказку");
+  };
+
+  const handleMouseOut = () => {
+    console.log("Скрыть подсказку");
+  };
 
   return (
     <div className="overlay">
@@ -237,7 +252,7 @@ const RedactingLink = () => {
               </div>
             </div>
           </div>
-          <div className="link__functional">
+            <div className="link__functional">
             <p className="link__functional-title">Функционал</p>
             {toggles.map((toggle) => (
               <div className="link__functional-item" key={toggle.id}>
@@ -261,12 +276,16 @@ const RedactingLink = () => {
                   </div>
                 </div>
                 {toggle.checked !== undefined && toggle.checked && (
-                <div className="functional__item-info">{toggle.info}</div>
-              )}
+                  <div className="functional__item-info">{toggle.info}</div>
+                )}
+                {showPopups[toggle.id] && !isPro && toggle.id !== "comment" && (
+                  <div className="functional__item-info">
+                    <UpgradeToProPopup onClose={() => closePopup(toggle.id)} />
+                  </div>
+                )}
               </div>
             ))}
-          </div>
-          {isPro || <UpgradeToProPopup />}
+            </div>
           <button className="delete__link">
             Удалить
             <svg
