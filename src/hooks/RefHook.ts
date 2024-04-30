@@ -5,7 +5,6 @@ export const useCustomRefHook = <T extends any>(dependencies:any|null): React.Mu
     const ref = useRef<T | null>(null);
 
     useEffect(() => {
-        // ... do stuff
     }, dependencies);
 
     return ref;
