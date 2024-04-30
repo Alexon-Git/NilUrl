@@ -3,7 +3,7 @@ import QRCodeGenerator from "./QRCodeGenerator";
 import { QRImage, Toggle, ColorPickerGfg } from "../../components";
 import "./qrComponent.css";
 
-function QRComponent() {
+function QRComponent = ({ onClose }) => {
   const [showLogo, setShowLogo] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [borderColor, setBorderColor] = useState("#000000");
@@ -33,7 +33,7 @@ function QRComponent() {
   };
 
   return (
-    <div className="overlay">
+    <div className="overlay" onClick={onClose}>
       <div className="creating__qr" ref={qrRef}>
         <div className="qr__header">
           <span className="header__svg">
