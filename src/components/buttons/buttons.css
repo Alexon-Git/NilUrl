@@ -9,8 +9,9 @@
     font-weight: 550;
     color: #fff;
     border: none;
-    overflow: hidden; /* Чтобы текст не выходил за пределы кнопки */
-    transition: padding-right 0.5s; /* Плавное изменение отступа справа */
+    overflow: hidden;
+    transition: padding-right 0.5s; 
+    cursor: pointer;
   }
   
   .loader:after {
