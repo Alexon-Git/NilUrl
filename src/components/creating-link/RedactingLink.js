@@ -6,6 +6,7 @@ import { FAQ, Toggle, DateCalendar, TagList, UpgradeToProPopup } from "../../com
 const RedactingLink = () => {
   // const [isPro, setIsPro] = useState(false);
   const isPro = false; // true - подписка активна, false - не активна
+  const [activePopupId, setActivePopupId] = useState(null);
 
   const [toggles, setToggles] = useState([
     { id: "comment", title: "Комментарий", checked: false, info: <CommentComponent /> },
@@ -23,27 +24,36 @@ const RedactingLink = () => {
   });
 
   const handleToggle = (id) => {
-    const toggle = toggles.find(toggle => toggle.id === id);
+    const toggle = toggles.find((toggle) => toggle.id === id);
     if (!toggle) return;
-
-    // Если переключатель - это комментарий, не блокировать его
-  if (id === "comment") {
-    setToggles((prevToggles) => {
-      const newToggles = prevToggles.map((toggle) =>
-        toggle.id === id ? { ...toggle, checked: !toggle.checked } : toggle
-      );
-      return newToggles;
+  
+    // Закрыть все открытые попапы
+    Object.keys(showPopups).forEach((popupId) => {
+      setShowPopups((prevState) => ({
+        ...prevState,
+        [popupId]: false
+      }));
     });
-    return;
-  }
+  
+    // Если переключатель - это комментарий, не блокировать его
+    if (id === "comment") {
+      setToggles((prevToggles) => {
+        const newToggles = prevToggles.map((toggle) =>
+          toggle.id === id ? { ...toggle, checked: !toggle.checked } : toggle
+        );
+        return newToggles;
+      });
+      return;
+    }
   
     if ((id === "comment" && !isPro) || (id !== "utm" && id !== "date" && id !== "ios" && id !== "android")) return;
-    
+  
     if (!toggle.checked && !isPro && id !== "comment") {
       setShowPopups((prevState) => ({
         ...prevState,
         [id]: true
       }));
+      setActivePopupId(id);
     } else {
       setToggles((prevToggles) => {
         const newToggles = prevToggles.map((toggle) =>
@@ -51,6 +61,7 @@ const RedactingLink = () => {
         );
         return newToggles;
       });
+      setActivePopupId(null);
     }
   };
 
@@ -59,6 +70,7 @@ const RedactingLink = () => {
       ...prevState,
       [id]: false
     }));
+    setActivePopupId(null);
   };
 
   const [isHovered, setIsHovered] = useState(false);
