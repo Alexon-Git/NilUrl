@@ -2,9 +2,9 @@ import MainPage from "../pages/MainPage";
 import {
     ERRORPAGE_ROUTE,
     GRAPHPAGE_ROUTE,
-    LINKSPAGE_ROUTE,
+    LINKSPAGE_ROUTE, LOGINPAGE_ROUTE,
     MAINPAGE_ROUTE,
-    PRICEPAGE_ROUTE,
+    PRICEPAGE_ROUTE, REGPAGE_ROUTE,
     SETTINGPAGE_ROUTE
 } from "./utils/Const";
 import LinksPage from "../pages/LinksPage";
@@ -13,6 +13,8 @@ import PricesPage from "../pages/PricesPage";
 import SettingsPage from "../pages/SettingsPage";
 import React, {JSX} from "react";
 import ErrorPage from "../pages/ErrorPage";
+import Reg from "../pages/Regest";
+import Log from "../pages/Login";
 
 export interface routerType {
     title: string;
@@ -52,5 +54,14 @@ export const publicRoutes:routerType[] = [
         element:<ErrorPage/>,
         title:"errorPAGE"
     },
-
+    {
+      path:LOGINPAGE_ROUTE,
+      element:<Log/>,
+      title:"loginPage",
+    },
+    {
+        path:REGPAGE_ROUTE,
+        element:<Reg/>,
+        title:"registration"
+    }
 ]

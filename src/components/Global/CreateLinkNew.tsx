@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "../../styles/Global/CreateLinkNew.css"
+import CreatingLink from "../creating-link/CreatingLink";
 const CreateLinkNew = () => {
+    const [flag,setFlag] = useState(false)
     return (
         <div className="CrLinkNewButtonM">
+            {flag &&
+                <CreatingLink onClose={()=>setFlag(false)}/>
+            }
+
             <div>
-                <div className="CrLinkNewButtonText">
+                <div onClick={()=>{setFlag(true)}} className="CrLinkNewButtonText">
                     Создать ссылку
                 </div>
             </div>

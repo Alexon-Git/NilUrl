@@ -20,8 +20,8 @@ const NoLoginHeader = () => {
         <img src={LogoImage} alt="Логотип" style={{cursor:"Pointer"}} onClick={()=>navigate(MAINPAGE_ROUTE)}/>
       </span>
       <div className="no-login-header-right">
-        <p className="prices-button login">Войти</p>
-        <button className="registration-button">Зарегистрироваться</button>
+        <p className="prices-button login" onClick={()=>{navigate("/login")}}>Войти</p>
+        <button className="registration-button" onClick={()=>{navigate("/registration")}}>Зарегистрироваться</button>
       </div>
     </header>
   );

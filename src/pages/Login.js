@@ -1,11 +1,11 @@
-import "../../../NILRAR/nilurl/src/regest/Regest.css";
+import "./Regest.css";
 
 
 function Log() {
     return (
         <div className="d1">
             <div className="d2_1" style={{background: "linear-gradient(225deg, #e25186, #6059ff)"}}>
-            <div className="slider-thumb"></div>
+            <div class="slider-thumb"></div>
             </div>
             <div className="d2_2">
                 <div className="d3_1">
@@ -17,10 +17,10 @@ function Log() {
                 </div>
                 <div className="d3_2">
                                         <form className="f3_1">
-                    <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username" className="in3_1" id="passp-field-login" name="login" placeholder="email" value=""/>
+                    <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autocorrect="off" autocapitalize="off" autocomplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="email" value=""/>
                     </form>
                     <form className="f3_2">
-                    <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username" className="in3_1" id="passp-field-login" name="login" placeholder="password" value=""/>
+                    <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autocorrect="off" autocapitalize="off" autocomplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="password" value=""/>
                     </form>
                     <div style={{display:"flex"}}>
                         <button type="button" className="b3">

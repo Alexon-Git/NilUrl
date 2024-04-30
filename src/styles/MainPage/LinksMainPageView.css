@@ -30,6 +30,7 @@
     border: 1px solid #E5E7EB;
 }
 .LinksMapOneContainer{
+    background-color: white;
     margin-top: 20px;
     width: 509px;
     height: max-content;
@@ -98,6 +99,7 @@
     border-radius: 6px;
 }
 .containerNoContentMP{
+    background-color: white;
     margin-top: 20px;
     width: 509px;
     height: 74px;

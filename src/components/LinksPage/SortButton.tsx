@@ -8,7 +8,6 @@ const SortButton = () => {
                 <img alt="img" src={process.env.PUBLIC_URL + "/TriPalochki.png"}/>
                 <span className="SortWord">Сортировать</span>
                     <svg width="15px" height="15px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" >
-
                         <path d="M0 0h48v48H0z" fill="none"/>
                         <g id="Shopicon">
                             <g>
@@ -19,10 +18,10 @@ const SortButton = () => {
             </label>
 
             <ul className="dropdown-content" role="menu">
-                <li><a href="1">Дата ↓</a></li>
-                <li><a href="2">Дата ↑</a></li>
-                <li><a href="3">По алфавиту ↓</a></li>
-                <li><a href="4">По алфавиту ↑</a></li>
+                <li><a>Дата ↓</a></li>
+                <li><a>Дата ↑</a></li>
+                <li><a>По алфавиту ↓</a></li>
+                <li><a>По алфавиту ↑</a></li>
             </ul>
         </div>
     );
