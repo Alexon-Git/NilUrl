@@ -3,7 +3,9 @@ import "./creatingLink.css";
 import CryptoJS from "crypto-js";
 import { FAQ, Toggle, DateCalendar, TagList, UpgradeToProPopup } from "../../components";
 
-const RedactingLink = ({ onClose }) => {
+const RedactingLink = () => {
+  // const [isPro, setIsPro] = useState(false);
+  const isPro = false;
   const [toggles, setToggles] = useState([
     {
       id: "comment",
@@ -32,7 +34,10 @@ const RedactingLink = ({ onClose }) => {
     },
   ]);
 
-  const handleToggle = (id) => {
+const handleToggle = (id) => {
+    // Check if user is pro before toggling
+    if (!isPro) return;
+    
     setToggles((prevToggles) => {
       const newToggles = prevToggles.map((toggle) =>
         toggle.id === id ? { ...toggle, checked: !toggle.checked } : toggle
@@ -95,7 +100,7 @@ const RedactingLink = ({ onClose }) => {
   });
 
   return (
-    <div className="overlay" onClick={onClose}>
+    <div className="overlay">
       <div className="creating__link">
         <div className="creating__link__header">
           <span className="header__svg">
@@ -256,11 +261,12 @@ const RedactingLink = ({ onClose }) => {
                   </div>
                 </div>
                 {toggle.checked !== undefined && toggle.checked && (
-                  <div className="functional__item-info">{toggle.info}</div>
-                )}
+                <div className="functional__item-info">{toggle.info}</div>
+              )}
               </div>
             ))}
           </div>
+          {!isPro && <UpgradeToProPopup />}
           <button className="delete__link">
             Удалить
             <svg

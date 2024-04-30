@@ -44,7 +44,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
     return (
         <div className="mainCLMP">
             {linkChangeFlag &&
-                <RedactingLink onClose={()=>{setLinkChangeFlag(false)}}/>
+                <RedactingLink />
             }
             {
                 qrFlag &&
