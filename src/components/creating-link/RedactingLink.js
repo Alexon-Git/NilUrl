@@ -5,9 +5,18 @@ import { FAQ, Toggle, DateCalendar, TagList, UpgradeToProPopup } from "../../com
 
 const RedactingLink = () => {
   // const [isPro, setIsPro] = useState(false);
-  const isPro = false; // true - подписка активна, false - не активна
+  const isPro = false;
   const [activePopupId, setActivePopupId] = useState(null);
-
+  const [showPopups, setShowPopups] = useState({
+    utm: false,
+    date: false,
+    ios: false,
+    android: false
+  });
+  const [isHovered, setIsHovered] = useState(false);
+  const [inputText, setInputText] = useState("");
+  const [shortUrl, setShortUrl] = useState("");
+  const [tagColors, setTagColors] = useState({ svgColor: "black", color: "transparent" });
   const [toggles, setToggles] = useState([
     { id: "comment", title: "Комментарий", checked: false, info: <CommentComponent /> },
     { id: "utm", title: "UTM-метка", checked: false, info: <UTMInputs /> },
@@ -16,26 +25,14 @@ const RedactingLink = () => {
     { id: "android", title: "Android Targeting", checked: false, info: <AndroidComponent /> },
   ]);
 
-  const [showPopups, setShowPopups] = useState({
-    utm: false,
-    date: false,
-    ios: false,
-    android: false
-  });
-
   const handleToggle = (id) => {
     const toggle = toggles.find((toggle) => toggle.id === id);
     if (!toggle) return;
-  
-    // Закрыть все открытые попапы
+
     Object.keys(showPopups).forEach((popupId) => {
-      setShowPopups((prevState) => ({
-        ...prevState,
-        [popupId]: false
-      }));
+      setShowPopups((prevState) => ({ ...prevState, [popupId]: false }));
     });
-  
-    // Если переключатель - это комментарий, не блокировать его
+
     if (id === "comment") {
       setToggles((prevToggles) => {
         const newToggles = prevToggles.map((toggle) =>
@@ -45,14 +42,11 @@ const RedactingLink = () => {
       });
       return;
     }
-  
+
     if ((id === "comment" && !isPro) || (id !== "utm" && id !== "date" && id !== "ios" && id !== "android")) return;
-  
+
     if (!toggle.checked && !isPro && id !== "comment") {
-      setShowPopups((prevState) => ({
-        ...prevState,
-        [id]: true
-      }));
+      setShowPopups((prevState) => ({ ...prevState, [id]: true }));
       setActivePopupId(id);
     } else {
       setToggles((prevToggles) => {
@@ -66,14 +60,9 @@ const RedactingLink = () => {
   };
 
   const closePopup = (id) => {
-    setShowPopups((prevState) => ({
-      ...prevState,
-      [id]: false
-    }));
+    setShowPopups((prevState) => ({ ...prevState, [id]: false }));
     setActivePopupId(null);
   };
-
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -83,9 +72,6 @@ const RedactingLink = () => {
     setIsHovered(false);
   };
 
-  const [inputText, setInputText] = useState("");
-  const [shortUrl, setShortUrl] = useState("");
-
   const handleLongUrlChange = (event) => {
     setInputText(event.target.value);
   };
@@ -93,20 +79,13 @@ const RedactingLink = () => {
   const generateShortUrl = () => {
     const hash = CryptoJS.SHA256(inputText).toString();
     const shortId = hash.substring(0, 5);
-    const randomShortId = Array.from(shortId)
-      .map((char) => {
-        const randomCase = Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
-        return randomCase;
-      })
-      .join("");
+    const randomShortId = Array.from(shortId).map((char) => {
+      const randomCase = Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
+      return randomCase;
+    }).join("");
     const url = `https://nil-url/${randomShortId}.ru`;
     setShortUrl(url);
   };
-
-  const [tagColors, setTagColors] = useState({
-    svgColor: "black",
-    color: "transparent",
-  });
 
   const handleCreateLink = () => {
     console.log("Создать ссылку");
