@@ -1,28 +1,58 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
 import CryptoJS from "crypto-js";
-import { FAQ, Toggle, DateCalendar, TagList, UpgradeToProPopup } from "../../components";
+import {
+  FAQ,
+  Toggle,
+  DateCalendar,
+  TagList,
+  UpgradeToProPopup,
+} from "../../components";
 
 const RedactingLink = () => {
   // const [isPro, setIsPro] = useState(false);
-  const isPro = false;
+  const isPro = true;
   const [activePopupId, setActivePopupId] = useState(null);
   const [showPopups, setShowPopups] = useState({
     utm: false,
     date: false,
     ios: false,
-    android: false
+    android: false,
   });
   const [isHovered, setIsHovered] = useState(false);
   const [inputText, setInputText] = useState("");
   const [shortUrl, setShortUrl] = useState("");
-  const [tagColors, setTagColors] = useState({ svgColor: "black", color: "transparent" });
+  const [tagValue, setTagValue] = useState("");
+  const [tagColors, setTagColors] = useState({
+    svgColor: "black",
+    color: "transparent",
+  });
   const [toggles, setToggles] = useState([
-    { id: "comment", title: "Комментарий", checked: false, info: <CommentComponent /> },
+    {
+      id: "comment",
+      title: "Комментарий",
+      checked: false,
+      info: <CommentComponent />,
+    },
     { id: "utm", title: "UTM-метка", checked: false, info: <UTMInputs /> },
-    { id: "date", title: "Дата окончания", checked: false, info: <DateCalendar /> },
-    { id: "ios", title: "iOS Targeting", checked: false, info: <IOSComponent /> },
-    { id: "android", title: "Android Targeting", checked: false, info: <AndroidComponent /> },
+    {
+      id: "date",
+      title: "Дата окончания",
+      checked: false,
+      info: <DateCalendar />,
+    },
+    {
+      id: "ios",
+      title: "iOS Targeting",
+      checked: false,
+      info: <IOSComponent />,
+    },
+    {
+      id: "android",
+      title: "Android Targeting",
+      checked: false,
+      info: <AndroidComponent />,
+    },
   ]);
 
   const handleToggle = (id) => {
@@ -43,7 +73,11 @@ const RedactingLink = () => {
       return;
     }
 
-    if ((id === "comment" && !isPro) || (id !== "utm" && id !== "date" && id !== "ios" && id !== "android")) return;
+    if (
+      (id === "comment" && !isPro) ||
+      (id !== "utm" && id !== "date" && id !== "ios" && id !== "android")
+    )
+      return;
 
     if (!toggle.checked && !isPro && id !== "comment") {
       setShowPopups((prevState) => ({ ...prevState, [id]: true }));
@@ -79,10 +113,13 @@ const RedactingLink = () => {
   const generateShortUrl = () => {
     const hash = CryptoJS.SHA256(inputText).toString();
     const shortId = hash.substring(0, 5);
-    const randomShortId = Array.from(shortId).map((char) => {
-      const randomCase = Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
-      return randomCase;
-    }).join("");
+    const randomShortId = Array.from(shortId)
+      .map((char) => {
+        const randomCase =
+          Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
+        return randomCase;
+      })
+      .join("");
     const url = `https://nil-url/${randomShortId}.ru`;
     setShortUrl(url);
   };
@@ -95,6 +132,10 @@ const RedactingLink = () => {
     if (event.key === "Enter") {
       handleCreateLink();
     }
+  };
+
+  const handleTagChange = (event) => {
+    setTagValue(event.target.value);
   };
 
   const handleMouseOver = () => {
@@ -220,8 +261,8 @@ const RedactingLink = () => {
                 className="input png"
                 type="text"
                 placeholder="Название тега"
-                value={() => {}}
-                onChange={() => {}}
+                value={tagValue}
+                onChange={handleTagChange}
               />
               <div className="input__icon right-image">
                 {" "}
@@ -243,7 +284,7 @@ const RedactingLink = () => {
               </div>
             </div>
           </div>
-            <div className="link__functional">
+          <div className="link__functional">
             <p className="link__functional-title">Функционал</p>
             {toggles.map((toggle) => (
               <div className="link__functional-item" key={toggle.id}>
@@ -276,7 +317,7 @@ const RedactingLink = () => {
                 )}
               </div>
             ))}
-            </div>
+          </div>
           <button className="delete__link">
             Удалить
             <svg
@@ -401,25 +442,37 @@ const UTMInputs = () => {
 };
 
 const IOSComponent = () => {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <input
       className="ios__android-input"
       type="text"
       placeholder="https://apps.apple.com/app/18362974"
-      value=""
-      onChange={() => {}}
+      value={inputValue}
+      onChange={handleInputChange}
     />
   );
 };
 
 const AndroidComponent = () => {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <input
       className="ios__android-input"
       type="text"
       placeholder="https://play.google.com/store/apps/details?id=18362974"
-      value=""
-      onChange={() => {}}
+      value={inputValue}
+      onChange={handleInputChange}
     />
   );
 };
