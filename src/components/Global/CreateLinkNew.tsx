@@ -7,7 +7,7 @@ const CreateLinkNew = () => {
     return (
         <div className="CrLinkNewButtonM">
             {flag &&
-            <Overlay>
+            <Overlay onClose={setFlag(false)}>
                 <CreatingLink />
             </Overlay>
             }

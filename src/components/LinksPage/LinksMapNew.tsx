@@ -31,6 +31,9 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
     const closeCreatingLink = () => {
         setLinkChangeFlag(false);
     };
+    const closeQrLink = () =>{
+        setQrFlag(false)
+    }
     const [flagTimer,setFlagTimer] = useState(true)
     const [flagTag,setFlagTag] = useState(true)
     const [copied,setCopied] = useState(false)
@@ -51,7 +54,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
             }
             {
                 qrFlag &&
-                <Overlay onClose={closeCreatingLink}>
+                <Overlay onClose={closeQrLink}>
                 <QRComponent />
                 </Overlay>
             }
