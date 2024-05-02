@@ -33,7 +33,6 @@ function QRComponent() {
   };
 
   return (
-    <div className="overlay">
       <div className="creating__qr">
         <div className="qr__header">
           <span className="header__svg">
@@ -164,7 +163,6 @@ function QRComponent() {
           </button>
         </div>
       </div>
-    </div>
   );
 }
 
