@@ -1,4 +1,3 @@
-import Header from "./header/Header";
 import SettingsForm from "./settings-form/SettingsForm";
 import DeleteAccountModal from "./popups/DeleteAccountModal";
 import FooterMP from "./footer-mp/FooterMP";
@@ -15,6 +14,7 @@ import QRComponent from "./qr-component/QRComponent";
 import ColorPickerGfg from "./qr-component/ColorPicker"
 import BuyButton from "./buttons/buy-button";
 import UpgradeToProPopup from "./popups/UpgradeToProPopup"
+import HeaderLinksPage from "./Global/HeaderLinksPage"
 
 import Ampersand from "../img/ampersand.svg";
 import Hashtag from "../img/hashtag.svg";
@@ -24,10 +24,8 @@ import Underscore from "../img/underscore.svg";
 
 import BackImage from "../img/back.svg";
 import Privilege from "../img/privilege.svg";
-import SubButtonBlack from "../img/subscription-button-black.svg";
-import SubButtonBlue from "../img/subscription-button-blue.svg";
 import FooterLogo from "../img/footer-logo.svg";
 import FAQ from "../img/faq.svg";
 import QRImage from "../img/qr-image.svg"
 
-export { Header, SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, RedactingLink, Toggle, DateCalendar, TagList, QRComponent, ColorPickerGfg, BuyButton, UpgradeToProPopup, Overlay, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, SubButtonBlack, SubButtonBlue, FooterLogo, FAQ, QRImage };
+export { Header, SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, RedactingLink, Toggle, DateCalendar, TagList, QRComponent, ColorPickerGfg, BuyButton, UpgradeToProPopup, Overlay, HeaderLinksPage, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, FooterLogo, FAQ, QRImage };
