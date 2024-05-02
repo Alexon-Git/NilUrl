@@ -147,7 +147,6 @@ const RedactingLink = () => {
   };
 
   return (
-    <div className="overlay">
       <div className="creating__link">
         <div className="creating__link__header">
           <span className="header__svg">
@@ -349,7 +348,6 @@ const RedactingLink = () => {
           </button>
         </div>
       </div>
-    </div>
   );
 };
 

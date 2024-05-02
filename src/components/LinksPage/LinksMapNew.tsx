@@ -5,6 +5,7 @@ import ThreeIcons from "./ThreeIcons";
 import OneIcon from "./OneIcon";
 import RedactingLink from "../creating-link/RedactingLink";
 import QRComponent from "../qr-component/QRComponent";
+import { Overlay } from "../../components"
 
 interface LinksMapInt{
     Data:string,
@@ -44,11 +45,15 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
     return (
         <div className="mainCLMP">
             {linkChangeFlag &&
-                <RedactingLink />
+                 <Overlay onClose={closeCreatingLink}>
+                 <RedactingLink />
+               </Overlay>
             }
             {
                 qrFlag &&
-                <QRComponent onClose={()=>{setQrFlag(false)}}/>
+                <Overlay onClose={closeCreatingLink}>
+                <QRComponent />
+                </Overlay>
             }
             {flagTimer &&
             <div className="timerCLMP">

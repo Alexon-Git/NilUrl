@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import "../../styles/Global/CreateLinkNew.css"
 import CreatingLink from "../creating-link/CreatingLink";
+import Overlay from '../creating-link/Overlay';
 const CreateLinkNew = () => {
     const [flag,setFlag] = useState(false)
     return (
         <div className="CrLinkNewButtonM">
             {flag &&
-                <CreatingLink onClose={()=>setFlag(false)}/>
+            <Overlay>
+                <CreatingLink />
+            </Overlay>
             }
 
             <div>
