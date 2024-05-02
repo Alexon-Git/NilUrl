@@ -3,7 +3,6 @@ import "./settings-form.css";
 import { DeleteAccountModal, Overlay } from "../../components";
 
 const SettingsForm = () => {
-  const [DAMChangeFlag,setDAMChangeFlag] = useState(false)
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -18,9 +17,9 @@ const SettingsForm = () => {
     }));
   };
 
-  const closeDAM = () => {
-    setDAMChangeFlag(false);
-};
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
 
   const handleDeleteModalOpen = () => {
     setIsDeleteModalOpen(true);
@@ -102,8 +101,8 @@ const SettingsForm = () => {
           </form>
         </div>
         {isDeleteModalOpen && (
-          <Overlay onClose={closeDAM}>
-            <DeleteAccountModal />
+          <Overlay onClose={handleDeleteModalClose}>
+            <DeleteAccountModal onClose={handleDeleteModalClose} />
           </Overlay>
         )}
       </div>

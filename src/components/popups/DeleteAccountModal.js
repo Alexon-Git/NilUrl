@@ -2,6 +2,10 @@ import React from "react";
 import "./deleteAccountModal.css";
 
 const DeleteAccountModal = ({ onClose }) => {
+  const handleDelete = () => {
+    // Place your delete logic here
+  };
+
   return (
     <div className="modal">
       <div className="modal-content">
@@ -26,12 +30,11 @@ const DeleteAccountModal = ({ onClose }) => {
           Вы действительно хотите удалить ваш аккаунт?
         </p>
         <div className="modal-buttons">
-          <button className="button red" onClick={onClose}>
+          <button className="button red" onClick={handleDelete}>
             Удалить
           </button>
         </div>
       </div>
-    </div>
     </div>
   );
 };
