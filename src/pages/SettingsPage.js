@@ -1,12 +1,12 @@
 import React from "react";
-import { FooterMP, Header, SettingsForm } from "../components";
+import { SettingsForm, HeaderLinksPage } from "../components";
 
 const SettingsPage = () => {
   return (
     <>
-      <Header />
+      <HeaderLinksPage />
       <SettingsForm />
-      <FooterMP />
+
     </>
   );
 

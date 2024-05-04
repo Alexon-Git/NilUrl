@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./settings-form.css";
-import DeleteAccountModal from "../popups/DeleteAccountModal";
+import { DeleteAccountModal, Overlay } from "../../components";
 
 const SettingsForm = () => {
+  const [DAMChangeFlag,setDAMChangeFlag] = useState(false)
   const [formData, setFormData] = useState({
     username: "",
-    email: ""
+    email: "",
   });
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -13,16 +14,16 @@ const SettingsForm = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
+  const closeDAM = () => {
+    setDAMChangeFlag(false);
+};
+
   const handleDeleteModalOpen = () => {
     setIsDeleteModalOpen(true);
-  };
-
-  const handleDeleteModalClose = () => {
-    setIsDeleteModalOpen(false);
   };
 
   const handleSubmit = (e) => {
@@ -37,7 +38,7 @@ const SettingsForm = () => {
       placeholder: "username",
       name: "username",
       value: formData.username,
-      maxLength: 32
+      maxLength: 32,
     },
     {
       title: "Ваш email",
@@ -45,65 +46,67 @@ const SettingsForm = () => {
       placeholder: "email",
       name: "email",
       value: formData.email,
-      maxLength: undefined
-    }
+      maxLength: undefined,
+    },
   ];
 
   return (
     <div className="background">
-    <div className="main">
-      <div className="title__container">
-      <h4 className="settings__title wrapper-title">Настройки</h4>
-      </div>
-      <div className="settings__controls wrapper">
-        <div className="settings__controls__menu">
-          <div className="settings__controls__menu-item">Основные</div>
+      <div className="main">
+        <div className="title__container">
+          <h4 className="settings__title wrapper-title">Настройки</h4>
         </div>
-        <form className="settings__controls__form" onSubmit={handleSubmit}>
-          {formItems.map((item, index) => (
-            <div className="settings__controls__form-item" key={index}>
-              <p className="title">{item.title}</p>
-              <p className="description">{item.description}</p>
-              <input
-                className="input"
-                type="text"
-                placeholder={item.placeholder}
-                name={item.name}
-                value={item.value}
-                maxLength={item.maxLength}
-                onChange={handleChange}
-              />
-              <div className="settings__controls__form-footer">
-                <p className="description">
-                  {item.name === "username"
-                    ? "Не более 32 символов"
-                    : "Email должен быть действительным"}
-                </p>
-                <button className="button" type="submit">
-                  Сохранить
+        <div className="settings__controls wrapper">
+          <div className="settings__controls__menu">
+            <div className="settings__controls__menu-item">Основные</div>
+          </div>
+          <form className="settings__controls__form" onSubmit={handleSubmit}>
+            {formItems.map((item, index) => (
+              <div className="settings__controls__form-item" key={index}>
+                <p className="title">{item.title}</p>
+                <p className="description">{item.description}</p>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder={item.placeholder}
+                  name={item.name}
+                  value={item.value}
+                  maxLength={item.maxLength}
+                  onChange={handleChange}
+                />
+                <div className="settings__controls__form-footer">
+                  <p className="description">
+                    {item.name === "username"
+                      ? "Не более 32 символов"
+                      : "Email должен быть действительным"}
+                  </p>
+                  <button className="button" type="submit">
+                    Сохранить
+                  </button>
+                </div>
+              </div>
+            ))}
+            <div className="settings__controls__form-item redborder">
+              <p className="title">Удалить аккаунт</p>
+              <p className="description">
+                Учетная запись и все связанные с ней ссылки будут полностью
+                удалены
+              </p>
+              <div className="settings__controls__form-footer redborder__footer">
+                <p className="description"></p>
+                <button className="button red" onClick={handleDeleteModalOpen}>
+                  Удалить аккаунт
                 </button>
               </div>
             </div>
-          ))}
-          <div className="settings__controls__form-item redborder">
-            <p className="title">Удалить аккаунт</p>
-            <p className="description">
-              Учетная запись и все связанные с ней ссылки будут полностью
-              удалены
-            </p>
-            <div className="settings__controls__form-footer redborder__footer">
-              <p className="description"></p>
-              <button className="button red" onClick={handleDeleteModalOpen}>
-                Удалить аккаунт
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
+        {isDeleteModalOpen && (
+          <Overlay onClose={closeDAM}>
+            <DeleteAccountModal />
+          </Overlay>
+        )}
       </div>
-      {isDeleteModalOpen && (
-        <DeleteAccountModal onClose={handleDeleteModalClose} />
-      )}
-    </div>
     </div>
   );
 };
