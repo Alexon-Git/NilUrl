@@ -1,7 +1,10 @@
 import "./Regest.css";
+import {useNavigate} from "react-router-dom";
+import {REGPAGE_ROUTE} from "../LogicComp/utils/Const";
 
 
 function Log() {
+    const navigate = useNavigate();
     return (
         <div className="d1">
             <div className="d2_1" style={{background: "linear-gradient(225deg, #e25186, #6059ff)"}}>
@@ -32,7 +35,7 @@ function Log() {
                     </div>
 
                     <p className="p3_1">Не имеете аккаунта?
-                        <a className="a3_2" href="/register">Регестрация</a>
+                        <a className="a3_2" style={{cursor:"pointer"}} onClick={()=>{navigate(REGPAGE_ROUTE)}}>Регестрация</a>
                         .</p>
                 </div>
             </div>

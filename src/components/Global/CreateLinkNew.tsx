@@ -4,10 +4,13 @@ import CreatingLink from "../creating-link/CreatingLink";
 import Overlay from '../creating-link/Overlay';
 const CreateLinkNew = () => {
     const [flag,setFlag] = useState(false)
+    const click = () =>{
+        setFlag(false);
+    }
     return (
         <div className="CrLinkNewButtonM">
             {flag &&
-            <Overlay onClose={setFlag(false)}>
+            <Overlay onClose={()=>click()}>
                 <CreatingLink />
             </Overlay>
             }

@@ -25,11 +25,6 @@ export interface routerType {
 
 export const publicRoutes:routerType[] = [
     {
-        path: MAINPAGE_ROUTE,
-        element:<MainPage />,
-        title:"MainPage"
-    },
-    {
         path: LINKSPAGE_ROUTE,
         element:<LinksPage/>,
         title:"LinksPage"
