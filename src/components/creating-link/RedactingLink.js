@@ -106,12 +106,15 @@ const RedactingLink = () => {
     setIsHovered(false);
   };
 
-  const handleLongUrlChange = (event) => {
-    setInputText(event.target.value);
+  const handleLongUrlChange = async (event) => {
+    const newText = event.target.value;
+    setInputText(newText);
+    const newShortUrl = generateShortUrl(newText);
+    setShortUrl(newShortUrl);
   };
 
-  const generateShortUrl = () => {
-    const hash = CryptoJS.SHA256(inputText).toString();
+  const generateShortUrl = (input) => {
+    const hash = CryptoJS.SHA256(input).toString();
     const shortId = hash.substring(0, 5);
     const randomShortId = Array.from(shortId)
       .map((char) => {
@@ -121,7 +124,7 @@ const RedactingLink = () => {
       })
       .join("");
     const url = `https://nil-url/${randomShortId}.ru`;
-    setShortUrl(url);
+    return url;
   };
 
   const handleCreateLink = () => {
@@ -184,7 +187,7 @@ const RedactingLink = () => {
           <div className="link__input">
             <div className="link__input-title">Короткая ссылка</div>
             <div className="input__container">
-              <span className="svg__infinity" onClick={generateShortUrl}>
+              <span className="svg__infinity">
                 <svg
                   width="35"
                   height="35"

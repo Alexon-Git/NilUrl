@@ -123,6 +123,8 @@
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 10px;
+  display: flex; /* Use flexbox */
+  align-items: flex-start; /* Align items to the start of the cross axis */
 }
 
 .editing-toggle {
@@ -139,6 +141,9 @@
 }
 
 .color-picker {
+  display: flex; 
+  align-items: center; /* Align items vertically */
+  justify-content: space-between; /* Distribute items evenly along the main axis */
   height: 36px;
   width: 154px;
   border-radius: 6px;
