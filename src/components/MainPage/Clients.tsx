@@ -5,7 +5,7 @@ const Clients = () => {
     return (
         <div style={{paddingBottom:"50px",borderBottom:"1px solid #9F9F9F"}}>
             <div className="Clients">
-            Клиенты
+                НАС ВЫБИРАЮТ
             </div>
             <div className="RowsPicsMP">
                 <img src={process.env.PUBLIC_URL + '/ClientsRow.png'} className="PicsMPClients"/>
