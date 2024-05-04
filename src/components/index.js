@@ -28,4 +28,4 @@ import FooterLogo from "../img/footer-logo.svg";
 import FAQ from "../img/faq.svg";
 import QRImage from "../img/qr-image.svg"
 
-export { Header, SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, RedactingLink, Toggle, DateCalendar, TagList, QRComponent, ColorPickerGfg, BuyButton, UpgradeToProPopup, Overlay, HeaderLinksPage, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, FooterLogo, FAQ, QRImage };
+export { SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, RedactingLink, Toggle, DateCalendar, TagList, QRComponent, ColorPickerGfg, BuyButton, UpgradeToProPopup, Overlay, HeaderLinksPage, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, FooterLogo, FAQ, QRImage };

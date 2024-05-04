@@ -11,7 +11,7 @@ const AddresGp = () => {
 
     const clickCountry = () =>{
         if(refToBack.current!=null && flag){
-            refToBack.current.style.transition = "0.5s ease-in"
+            refToBack.current.style.transition = "0.2s ease-in"
             refToBack.current.style.left = "-1px"
             setFlag(false)
         }
@@ -19,7 +19,7 @@ const AddresGp = () => {
 
     const clickCity = (event:React.MouseEvent<HTMLDivElement>) =>{
         if(refToBack.current!=null && !flag){
-            refToBack.current.style.transition = "0.5s ease-in"
+            refToBack.current.style.transition = "0.2s ease-in"
             refToBack.current.style.left = "103px"
             setFlag(true)
         }

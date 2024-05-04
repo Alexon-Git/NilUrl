@@ -7,4 +7,5 @@
     border-left: 2px solid black;
     transition: transform 1s;
     transform: rotate(45deg);
+    cursor: pointer;
 }

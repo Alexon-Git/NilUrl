@@ -46,8 +46,9 @@
 }
 .LIDP:hover{
     border-radius: 0.5em;
-    transition: background-color 1s ease-in;
-    background-color: #6B7280;
+    transition: background-color 0.1s ease-in;
+    background-color: #e1e1e1;
+    cursor: pointer;
 }
 .ULDP{
     width: 240px;

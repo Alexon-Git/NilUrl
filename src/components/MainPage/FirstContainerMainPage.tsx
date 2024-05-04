@@ -1,15 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "../../styles/MainPage/FirstContainerMainPage.css"
 import "../../styles/MainPage/ButtonBuyOrTry.css"
 import LinksMainPageView from "./LinksMainPageView";
 import {LINKSPAGE_ROUTE, PRICEPAGE_ROUTE} from "../../LogicComp/utils/Const";
 import {useNavigate} from "react-router-dom";
 import ButtonNil from "../Global/ButtonNil";
+import BuyButtonBedarev from "../Global/BuyButtonBedarev";
+import {BuyButton} from "../index";
 
 
 const FirstContainerMainPage = () => {
     const navigate = useNavigate()
+    const [isHovered, setIsHovered] = useState([false, false, false]);
 
+    const handleMouseEnter = (index:any) => {
+        const updatedHovered = [...isHovered];
+        updatedHovered[index] = true;
+        setIsHovered(updatedHovered);
+    };
+
+    const handleMouseLeave = (index:any) => {
+        const updatedHovered = [...isHovered];
+        updatedHovered[index] = false;
+        setIsHovered(updatedHovered);
+    };
     return (
         <div>
             <div className="MaxWidthContainer">
@@ -27,17 +41,14 @@ const FirstContainerMainPage = () => {
                     исходным кодом для современных маркетинговых команд
                 </div>
             <div className="ButtonsBuyOrTry">
-                <button className="BuyPodpiska" onClick={()=>navigate(PRICEPAGE_ROUTE)}>
-                    <div className="CircleBuy">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="12" height="12" rx="6" fill="white"/>
-                        </svg>
-                    </div>
-                    <span>
-                        Купить подписку
-                    </span>
-                </button>
-
+                <div onClick={()=>{navigate(PRICEPAGE_ROUTE)}} style={{display:"inline-flex"}}>
+                <BuyButton
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    Купить подписку
+                </BuyButton>
+                </div>
                 <button className="TryButton" onClick={()=>navigate(LINKSPAGE_ROUTE)}>
                     <span>
                         Попробовать бесплатно

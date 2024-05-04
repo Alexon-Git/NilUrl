@@ -1,0 +1,71 @@
+.loader {
+    width: 227px; /* Ширина большого круга */
+    height: 48px; /* Высота большого круга */
+    border-radius: 14px;
+    background-color: rgba(0, 0, 0, 1); /* Цвет большого круга */
+    position: relative;
+    font-family: HelveticaNeueCyr;
+    font-size: 20px;
+    font-weight: 550;
+    color: #fff;
+    border: none;
+    overflow: hidden;
+    transition: padding-right 0.5s;
+    cursor: pointer;
+}
+
+.loader:after {
+    content: "";
+    position: absolute;
+}
+
+.loader:after {
+    width: 12px; /* Ширина маленького круга */
+    height: 12px; /* Высота маленького круга */
+    background-color: #fff; /* Изначальный цвет маленького круга */
+    top: 50%; /* Располагаем посередине по вертикали */
+    transform: translateY(-50%);
+    left: 14px; /* Помещаем маленький круг в левую часть большого */
+    border-radius: 50%;
+    transition: all 0.5s; /* Плавные переходы для всех изменений */
+}
+
+.loader:hover:after {
+    background-color: rgba(5, 0, 249, 1); /* Цвет маленького круга при наведении */
+    width: 227px; /* Ширина маленького круга становится такой же как у большого круга */
+    height: 48px; /* Высота маленького круга становится такой же как у большого круга */
+    inset: 50% 0 0 0; /* Положение маленького круга охватывает весь большой круг */
+    border-radius: 14px;
+}
+
+.loader:not(:hover):after {
+    width: 12px; /* Ширина маленького круга становится 0 */
+    height: 12px; /* Высота маленького круга становится 0 */
+    inset: -14px 110 110 -14px; /* Возвращаем начальное положение маленького круга */
+    border-radius: 14px;
+}
+
+.loader span {
+    position: relative;
+    z-index: 2; /* Чтобы текст был поверх всего */
+    transition: margin-right 0.5s; /* Плавное изменение отступа справа */
+}
+
+.loader:hover span {
+    margin-right: 20px; /* Сдвигаем текст влево на 30 пикселей */
+}
+
+.loader svg {
+    position: absolute;
+    right: 10px; /* Помещаем svg справа */
+    top: 50%; /* Располагаем посередине по вертикали */
+    transform: translateY(-50%);
+    fill: #fff; /* Цвет svg */
+    z-index: 3; /* Устанавливаем svg поверх синего цвета кнопки */
+    opacity: 0; /* Начальная прозрачность */
+    transition: opacity 0.5s; /* Плавное появление svg */
+}
+
+.loader:hover svg {
+    opacity: 1; /* Показываем svg при наведении */
+}

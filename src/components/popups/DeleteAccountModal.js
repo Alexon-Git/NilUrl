@@ -32,7 +32,6 @@ const DeleteAccountModal = ({ onClose }) => {
         </div>
       </div>
     </div>
-    </div>
   );
 };
 

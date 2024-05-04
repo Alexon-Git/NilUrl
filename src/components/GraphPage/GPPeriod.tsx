@@ -26,22 +26,22 @@ const GpPeriod = () => {
     const clickShowUL = () =>{
         if(!isDrop){
             if(refToUL.current !=null) {
-                refToUL.current.style.transition = "max-height 0.5s ease-in"
+                refToUL.current.style.transition = "max-height 0.3s ease-in"
                 refToUL.current.style.maxHeight = "347px"
             }
             if(refToStrelochka.current!=null){
-                refToStrelochka.current.style.transition = "rotate 0.5s ease-in";
+                refToStrelochka.current.style.transition = "rotate 0.3s ease-in";
                 refToStrelochka.current.style.rotate = "270deg";
             }
             setIsDrop(true);
         }
         if(isDrop){
             if(refToUL.current !=null) {
-                refToUL.current.style.transition = "max-height 0.5s ease-in"
+                refToUL.current.style.transition = "max-height 0.3s ease-in"
                 refToUL.current.style.maxHeight = "0px"
             }
             if(refToStrelochka.current!=null){
-                refToStrelochka.current.style.transition = "rotate 0.5s ease-in";
+                refToStrelochka.current.style.transition = "rotate 0.3s ease-in";
                 refToStrelochka.current.style.rotate = "90deg";
             }
             setIsDrop(false)

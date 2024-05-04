@@ -1,9 +1,18 @@
 import "./Regest.css"
 import {useNavigate} from "react-router-dom";
 import {LOGINPAGE_ROUTE} from "../LogicComp/utils/Const";
+import {useState} from "react";
 
 function Reg() {
     const navigate = useNavigate()
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('')
+    const onEmailChange = (event) =>{
+        setEmail(event.target.value)
+    }
+    const onPassChange = (event) =>{
+        setPassword(event.target.value)
+    }
     return (
         <div className="d1">
             <div className="d2_1" style={{background: "linear-gradient(225deg, #e25186, #6059ff)"}}>
@@ -19,10 +28,10 @@ function Reg() {
                 </div>
                 <div className="d3_2">
                     <form className="f3_1">
-                        <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autocorrect="off" autocapitalize="off" autocomplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="Имя пользователя" value="" />
+                        <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="Имя пользователя" value={email} onChange={(event)=>{onEmailChange(event)}}/>
                     </form>
                     <form className="f3_2">
-                        <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autocorrect="off" autocapitalize="off" autocomplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="Пароль" value="" />
+                        <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="Пароль" value={password} onChange={(event)=>{onPassChange(event)}} />
                     </form>
                     <button type="button" className="b3">
                         <p className="p2">Зарегистрироваться</p>
