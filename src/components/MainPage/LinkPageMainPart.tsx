@@ -5,6 +5,7 @@ import Filter from "../LinksPage/Filter";
 import LinksMapNew from "../LinksPage/LinksMapNew";
 import SortButton from "../LinksPage/SortButton";
 import CreateLinkNew from "../Global/CreateLinkNew";
+import SortNew from "../LinksPage/SortNew";
 
 const LinkPageMainPart = () => {
     const [flag, setFlag] = useState(true);
@@ -18,7 +19,7 @@ const LinkPageMainPart = () => {
                 <div className="FakeDivLP">
                 </div>
                 <div className="RightTopCont">
-                    <SortButton/>
+                    <SortNew/>
                     <CreateLinkNew/>
                 </div>
             </div>
