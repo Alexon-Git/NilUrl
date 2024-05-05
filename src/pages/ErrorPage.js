@@ -45,12 +45,10 @@ const ErrorPage = () => {
     },
   ];
 
-  // Функция для получения случайного угла поворота
   function getRandomRotation() {
     return Math.floor(Math.random() * 360);
   }
 
-  // Функция для перемешивания массива в случайном порядке
   function shuffleArray(array) {
     const shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i--) {

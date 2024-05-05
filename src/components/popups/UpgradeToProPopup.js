@@ -6,7 +6,7 @@ const UpgradeToProPopup = ({ onClose }) => {
 
   const handleClickOutside = (event) => {
     if (popupRef.current && !popupRef.current.contains(event.target)) {
-      onClose(); // Закрыть попап
+      onClose();
     }
   };
 

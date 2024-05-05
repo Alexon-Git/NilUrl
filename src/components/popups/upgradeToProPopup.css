@@ -13,17 +13,17 @@
   width: 258px;
   height: 133px;
   border-radius: 22px;
-  background-color: #ffffff; /* white */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* black shadow */
+  background-color: #ffffff; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px 30px;
-  position: absolute; /* Absolute positioning */
-  top: 50%; /* Position at the center vertically */
-  left: 50%; /* Position at the center horizontally */
-  transform: translate(-50%, -50%); /* Center the element */
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
   z-index: 1001;
 }
 
