@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import "../../styles/GraphPage/GPPeriod.css"
-const GpPeriod = () => {
+import "../../styles/LinksPage/SortNew.css"
+const SortNew = () => {
     useEffect(()=>{
         clickToGalki(1);
     },[])
@@ -11,10 +11,7 @@ const GpPeriod = () => {
     )
     const [isDrop,setIsDrop] = useState(false)
     const [rule,setRule] = useState(false)
-    const [period,setPeriod] = useState("Последние 24 часа")
-    const click = () =>{
-        setPeriod("Последний час")
-    }
+    const [period,setPeriod] = useState("Не отсортированный")
     const clickToGalki = (prop:number) =>{
         let arr = new Array(6).fill(null);
         arr.map((value,index)=>{
@@ -48,7 +45,7 @@ const GpPeriod = () => {
         }
     }
     return (
-        <div className="dropdownGraph">
+        <div className="dropdownGraphLinks">
             <button className="ButtonToDrop" onClick={(e)=>{clickShowUL();}}>
                 <div className="buttonGPPDrop">
                     <svg style={{marginRight:"20px"}} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,8 +65,8 @@ const GpPeriod = () => {
                 </div>
             </button>
             <ul className="ULDP" ref={refToUL}>
-                <li className="LIDP" onClick={(e)=>{setPeriod("Последний час");clickToGalki(0);}}>
-                    <div>Последний час</div>
+                <li className="LIDP" onClick={(e)=>{setPeriod("Дата ↓");clickToGalki(0);}}>
+                    <div>Дата ↓</div>
                     {
                         flagsToGalka[0] &&
                         <div style={{marginLeft:"auto",marginRight:"5px"}}>
@@ -79,8 +76,8 @@ const GpPeriod = () => {
                         </div>
                     }
                 </li>
-                <li className="LIDP" onClick={(e)=>{setPeriod("Последние 24 часа");clickToGalki(1);}}>
-                    <div>Последние 24 часа</div>
+                <li className="LIDP" onClick={(e)=>{setPeriod("Дата ↑");clickToGalki(1);}}>
+                    <div>Дата ↑</div>
                     {
                         flagsToGalka[1] &&
                         <div style={{marginLeft:"auto",marginRight:"5px"}}>
@@ -90,8 +87,8 @@ const GpPeriod = () => {
                         </div>
                     }
                 </li>
-                <li className="LIDP" onClick={(e)=>{setPeriod("Последние 7 дней");clickToGalki(2);}}>
-                    <div>Последние 7 дней</div>
+                <li className="LIDP" onClick={(e)=>{setPeriod("По алфавиту ↓");clickToGalki(2);}}>
+                    <div>По алфавиту ↓</div>
                     {
                         flagsToGalka[2] &&
                         <div style={{marginLeft:"auto",marginRight:"5px"}}>
@@ -101,8 +98,8 @@ const GpPeriod = () => {
                         </div>
                     }
                 </li>
-                <li className="LIDP" onClick={(e)=>{setPeriod("Последние 30 дней");clickToGalki(3);}}>
-                    <div>Последние 30 дней</div>
+                <li className="LIDP" onClick={(e)=>{setPeriod("По алфавиту ↑");clickToGalki(3);}}>
+                    <div>По алфавиту ↑</div>
                     {
                         flagsToGalka[3] &&
                         <div style={{marginLeft:"auto",marginRight:"5px"}}>
@@ -112,35 +109,9 @@ const GpPeriod = () => {
                         </div>
                     }
                 </li>
-                {
-                    rule &&
-                    <li className="LIDP">
-                        <div>Последние 3 месяца</div>
-                    </li>
-                }
-                {
-                    !rule &&
-                    <li className="LIDPBlocked">
-                        <div>Последние 3 месяца</div>
-                    </li>
-                }
-                {
-                    rule &&
-                    <li className="LIDP">
-                        <div>Последний год</div>
-                    </li>
-                }
-                {
-                    !rule &&
-                    <li className="LIDPBlocked">
-                        <div>Последний год</div>
-                    </li>
-                }
-
-
             </ul>
         </div>
     );
 };
 
-export default GpPeriod;
+export default SortNew;

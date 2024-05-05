@@ -16,7 +16,7 @@ const DevicesGp = () => {
 
     const clickDevice = () =>{
         if(refToBack.current!=null && !state[0]){
-            refToBack.current.style.transition = "0.5s ease-in"
+            refToBack.current.style.transition = "0.2s ease-in"
             refToBack.current.style.left = "-1px"
             const arr = [true,false,false]
             setState(arr)
@@ -25,7 +25,7 @@ const DevicesGp = () => {
 
     const clickGoogle = () =>{
         if(refToBack.current!=null && !state[1]){
-            refToBack.current.style.transition = "0.5s ease-in"
+            refToBack.current.style.transition = "0.2s ease-in"
             refToBack.current.style.left = "102px"
             const arr = [false,true,false]
             setState(arr)
@@ -34,7 +34,7 @@ const DevicesGp = () => {
 
     const clickOC = () =>{
         if(refToBack.current!=null && !state[2]){
-            refToBack.current.style.transition = "0.5s ease-in"
+            refToBack.current.style.transition = "0.2s ease-in"
             refToBack.current.style.left = "206px"
             const arr = [false,false,true]
             setState(arr)

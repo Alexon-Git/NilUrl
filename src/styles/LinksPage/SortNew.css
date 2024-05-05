@@ -1,6 +1,5 @@
-.dropdownGraph{
+.dropdownGraphLinks{
     width:240px;
-    height: 357px;
     border-radius:0.5em;
 }
 .SVGinPeriodTop{
@@ -51,8 +50,9 @@
     cursor: pointer;
 }
 .ULDP{
+    z-index: 2;
     width: 240px;
-    position: relative;
+    position: absolute;
     background-color: white;
     border-radius: 0.5em;
     box-shadow: 5px 4px 8px 0px rgba(34, 60, 80, 0.2);
