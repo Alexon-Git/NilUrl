@@ -17,12 +17,14 @@ const SettingsForm = () => {
     }));
   };
 
-  const handleDeleteModalClose = () => {
-    setIsDeleteModalOpen(false);
-  };
-
   const handleDeleteModalOpen = () => {
     setIsDeleteModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+  
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+    document.body.style.overflow = 'auto';
   };
 
   const handleSubmit = (e) => {

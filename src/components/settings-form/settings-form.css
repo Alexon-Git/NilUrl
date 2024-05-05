@@ -5,6 +5,8 @@
   height: 100%;
   border-top: 1px solid rgba(229, 231, 235, 1);
   border-bottom: 1px solid rgba(221, 221, 221, 1);
+  position: fixed;
+  overflow-y: scroll;
 }
 
 .main {
