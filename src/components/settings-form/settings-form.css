@@ -1,5 +1,6 @@
 .sf-background {
-  background-image: url(./../../img/background-image.svg) , linear-gradient(rgba(166, 165, 255, 0.1), rgba(166, 165, 255, 0.1));
+  background-image: url(./../../img/background-image.svg),
+    linear-gradient(rgba(166, 165, 255, 0.1), rgba(166, 165, 255, 0.1));
   background-repeat: repeat;
   width: 100%;
   height: 100%;
@@ -15,7 +16,7 @@
 
 .title__container {
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   height: 100px;
   width: 100vw;
@@ -24,7 +25,7 @@
 }
 
 .settings__title {
-  margin-left: 100px;
+  text-align: center;
   width: 100%;
   font-size: 24px;
   font-weight: 400;
@@ -166,7 +167,6 @@
 .wrapper-title {
   max-width: 1440px;
 }
-
 
 @media screen and (min-width: 1441px) {
   .wrapper {
