@@ -52,7 +52,7 @@ const SettingsForm = () => {
   ];
 
   return (
-    <div className="background">
+    <div className="sf-background">
       <div className="main">
         <div className="title__container">
           <h4 className="settings__title wrapper-title">Настройки</h4>

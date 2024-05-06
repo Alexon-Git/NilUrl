@@ -1,4 +1,4 @@
-.background {
+.sf-background {
   background-image: url(./../../img/background-image.svg) , linear-gradient(rgba(166, 165, 255, 0.1), rgba(166, 165, 255, 0.1));
   background-repeat: repeat;
   width: 100%;
