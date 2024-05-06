@@ -314,7 +314,14 @@ const RedactingLink = () => {
               )}
               {showPopups[toggle.id] && !isPro && toggle.id !== "comment" && (
                 <div className="functional__item-info">
-                  <UpgradeToProPopup onClose={() => closePopup(toggle.id)} />
+                  <UpgradeToProPopup onClose={() => closePopup(toggle.id)}>
+          <p className="popup-message">
+            Статистику за последние 3 месяца можно просмотреть в проекте с тарифным планом Pro. Создайте проект или перейдите к существующему проекту для обновления.
+          </p>
+          <button className="popup-button">
+            Обновиться до Pro
+          </button>
+        </UpgradeToProPopup>
                 </div>
               )}
             </div>
