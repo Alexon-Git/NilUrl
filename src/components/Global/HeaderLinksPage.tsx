@@ -1,9 +1,10 @@
 import React from 'react';
 import "../../styles/Global/HeaderLinksPage.css"
 import {useNavigate} from "react-router-dom";
-import {SETTINGPAGE_ROUTE} from "../../LogicComp/utils/Const";
+import {LINKSPAGE_ROUTE, SETTINGPAGE_ROUTE} from "../../LogicComp/utils/Const";
 const HeaderLinksPage = () => {
     const navigator = useNavigate()
+
     return (
         <div style={{borderBottom:"1px solid #E5E7EB"}}>
             <div className="HeaderLinksPageC">
@@ -18,7 +19,7 @@ const HeaderLinksPage = () => {
                     <div onClick={()=>{navigator(SETTINGPAGE_ROUTE)}} className="CentreHeaderLinksPageT">
                         Настройки
                     </div>
-                    <div style={{fontWeight:"700"}} className="CentreHeaderLinksPageT">
+                    <div onClick={()=>{navigator(LINKSPAGE_ROUTE)}} className="CentreHeaderLinksPageT">
                         Ссылки
                     </div>
                     <div onClick={()=>{navigator("/Graph")}} className="CentreHeaderLinksPageT">

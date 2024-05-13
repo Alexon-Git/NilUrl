@@ -10,7 +10,7 @@ const PricesPage = () => {
     </>
   );
 
-  
+
 };
 
 export default PricesPage;

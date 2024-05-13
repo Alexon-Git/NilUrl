@@ -9,12 +9,14 @@ import RefsGp from "../components/GraphPage/RefsGp";
 import TopRefs from "../components/GraphPage/TopRefs";
 import {useNavigate} from "react-router-dom";
 import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
+import HeaderLinksPage from "../components/Global/HeaderLinksPage";
+import transition from "../LogicComp/Transition";
 
 const GraphPage = () => {
     const navigate = useNavigate()
     return (
         <div>
-            <NoLoginHeader/>
+            <HeaderLinksPage/>
 
             <div
                 style={{
@@ -102,4 +104,4 @@ const GraphPage = () => {
     );
 };
 
-export default GraphPage;
+export default transition(GraphPage);

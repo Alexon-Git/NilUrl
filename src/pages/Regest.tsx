@@ -43,11 +43,11 @@ function Reg() {
                                className="in3_1" id="passp-field-login" name="login" placeholder="Имя пользователя" value={email} onChange={(event)=>{onEmailChange(event)}}/>
                     </form>
                     <form className="f3_2">
-                        <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username"
+                        <input type="password" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username"
                                className="in3_1" id="passp-field-login" name="login" placeholder="Пароль" value={password} onChange={(event)=>{onPassChange(event)}} />
                     </form>
                     <form className="f3_2">
-                        <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username"
+                        <input type="password" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username"
                                className="in3_1" id="passp-field-login" name="login" placeholder="Подтверждение пароля" value={passwordSec} onChange={(event)=>{onPassSecChange(event)}} />
                     </form>
                     <button onClick={onButtonClick} type="button" className="b3" ref={ref}>

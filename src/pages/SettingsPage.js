@@ -1,5 +1,6 @@
 import React from "react";
 import { SettingsForm, HeaderLinksPage } from "../components";
+import transition from "../LogicComp/Transition";
 
 const SettingsPage = () => {
   return (
@@ -10,7 +11,7 @@ const SettingsPage = () => {
     </>
   );
 
-  
+
 };
 
-export default SettingsPage;
+export default transition(SettingsPage);

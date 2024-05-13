@@ -32,7 +32,7 @@ function Log() {
                     <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="email" value={email} onChange={(event)=>onEmailChange(event)}/>
                     </form>
                     <form className="f3_2">
-                    <input type="text" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="password" value={password} onChange={(event)=>onPassChange(event)}/>
+                    <input type="password" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="password" value={password} onChange={(event)=>onPassChange(event)}/>
                     </form>
                     <div style={{display:"flex"}}>
                         <button type="button" className="b3">

@@ -36,7 +36,7 @@ const FirstContainerMainPage = () => {
                 </div>
             </div>
                 <div className="NilUrlOpisanie">
-                    NillUrl - это инфраструктура управления ссылками с открытым
+                    NilUrl - это инфраструктура управления ссылками с открытым
                     <br></br>
                     исходным кодом для современных маркетинговых команд
                 </div>
