@@ -1,206 +1,212 @@
-import React from 'react';
+import React from "react";
 import "./dateCalendar.css";
 
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-
 const arrMonth = {
-  January: 30,
-  February: 27,
-  March: 30,
-  April: 29,
-  May: 30,
-  June: 29,
-  July: 30,
-  August: 30,
-  September: 29,
-  October: 30,
-  November: 29,
-  December: 30
+  Январь: 31,
+  Февраль: 28,
+  Март: 31,
+  Апрель: 30,
+  Май: 31,
+  Июнь: 30,
+  Июль: 31,
+  Август: 31,
+  Сентябрь: 30,
+  Октябрь: 31,
+  Ноябрь: 30,
+  Декабрь: 31,
 };
 
-const arrDays = [
-  "Понедельник",
-  "Вторник",
-  "Среда",
-  "Четверг",
-  "Пятница",
-  "Суббота",
-  "Воскресенье"
-];
+const arrDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 
 class Calendar extends React.Component {
   constructor() {
     super();
-    _defineProperty(this, "pushTable",
-      (table, children) => {
-        table.push(
-          <tbody key={table}>
-            <tr key={children}>{children}</tr>
-          </tbody>
-        );
-        return [];
-      });
-    _defineProperty(this, "createTable", () => {
-      let table = [];
-      let count = 1 - this.state.firstDay;
-      let children = [];
-      for (let i = 0; i < 7; i++) {
-        children.push(<td key={i}>{arrDays[i].substring(0, 3)}</td>);
-      }
-      children = this.pushTable(table, children);
-      while (count <= this.state.strMonthValue + 1) {
-        for (let j = 0; j < 7; j++) {
-          count <= this.state.strMonthValue + 1 && count > 0 ?
-            children.push(
+    this.state = this.getInitialState();
+  }
+
+  getInitialState() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    const daysInMonth = arrMonth[Object.keys(arrMonth)[month]];
+
+    return {
+      year: year,
+      month: month,
+      day: today.getDate(),
+      today: today.getDate(), // Сохраняем сегодняшнее число
+      firstDay: firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1,
+      strMonth: Object.keys(arrMonth)[month],
+      strMonthValue: daysInMonth,
+    };
+  }
+
+  onItemClick = (event) => {
+    this.setState({ day: parseInt(event.currentTarget.dataset.id) });
+  };
+
+  previousMonth = () => {
+    let newMonth = this.state.month - 1;
+    let newYear = this.state.year;
+    if (newMonth < 0) {
+      newMonth = 11;
+      newYear--;
+    }
+    this.updateCalendar(newMonth, newYear);
+  };
+
+  nextMonth = () => {
+    let newMonth = this.state.month + 1;
+    let newYear = this.state.year;
+    if (newMonth > 11) {
+      newMonth = 0;
+      newYear++;
+    }
+    this.updateCalendar(newMonth, newYear);
+  };
+
+  updateCalendar = (newMonth, newYear) => {
+    const firstDayOfMonth = new Date(newYear, newMonth, 1).getDay();
+    const daysInMonth = arrMonth[Object.keys(arrMonth)[newMonth]];
+
+    this.setState({
+      year: newYear,
+      month: newMonth,
+      day: this.state.today, // Возвращаем сегодняшнее число
+      firstDay: firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1,
+      strMonth: Object.keys(arrMonth)[newMonth],
+      strMonthValue: daysInMonth,
+    });
+  };
+
+  render() {
+    return (
+      <div className="date-picker">
+        <div className="date-left">
+          <h2>Сегодня</h2>
+          <h1>{this.state.today}</h1>
+        </div>
+        <div className="date-right" id="col-right">
+          <div className="date-right-top" id="title">
+            <button
+              className="btn"
+              onClick={(e) => {
+                e.preventDefault();
+                this.previousMonth();
+              }}
+            >
+              {"<"}
+            </button>
+          <div className="month-year">{`${this.state.strMonth} ${this.state.year}`}</div>
+            <button
+              className="btn"
+              onClick={(e) => {
+                e.preventDefault();
+                this.nextMonth();
+              }}
+            >
+              {">"}
+            </button>
+          </div>
+          <table className="date-table">
+          {this.createTable()}
+          </table>
+        </div>
+      </div>
+
+
+      /*  <div className="date-picker">
+        <div className="row">
+          <div className="col-4" id="col-left">
+            <div className="row left-center" id="part-1">
+              <div className="col">
+                <h2>Сегодня</h2>
+                <h1>{this.state.today}</h1>
+              </div>
+            </div>
+          </div>
+          <div className="col-8" id="col-right">
+            <div className="row on-top" id="title">
+              <div className="col-3 my-auto" id="l-arrow">
+                <button
+                  className="btn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    this.previousMonth();
+                  }}
+                >
+                  {"<"}
+                </button>
+              </div>
+              <div
+                className="col-6"
+                id="title-date"
+              >{`${this.state.strMonth} ${this.state.year}`}</div>
+              <div className="col-3 my-auto" id="r-arrow">
+                <button
+                  className="btn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    this.nextMonth();
+                  }}
+                >
+                  {">"}
+                </button>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col date-picker">
+                <table className="table date-picker">
+                  {this.createTable()}
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> */
+    );
+  }
+
+  createTable = () => {
+    let table = [];
+    let count = 1 - this.state.firstDay;
+    let children = [];
+    for (let i = 0; i < 7; i++) {
+      children.push(<td key={i}>{arrDays[i].substring(0, 3)}</td>);
+    }
+    children = this.pushTable(table, children);
+    while (count <= this.state.strMonthValue) {
+      for (let j = 0; j < 7; j++) {
+        count <= this.state.strMonthValue && count > 0
+          ? children.push(
               <td
                 key={count}
-                onClick={this.onItemClick.bind(this)}
+                onClick={this.onItemClick}
                 className={`item-block ${
                   this.state.day === count ? "active" : "inactive"
-                  }`}
+                }`}
                 data-id={count}
               >
                 {count}
               </td>
-            ) :
-            children.push(<td key={count}></td>);
-          count += 1;
-        }
-        children = this.pushTable(table, children);
+            )
+          : children.push(<td key={count}></td>);
+        count++;
       }
-      return table;
-    });
-    _defineProperty(this, "previousMonth", () => {
-      let lastDay = this.state.firstDay - 1 < 0 ? 6 : this.state.firstDay - 1;
-      if (this.state.month - 1 < 0) {
-        this.setState({ year: this.state.year - 1, month: 11 }, () => {
-          let newMonth = this.state.month;
-          let newYear = this.state.year;
-          this.calcPrevMonth(lastDay, newMonth, newYear);
-        });
-      } else {
-        this.setState({ month: this.state.month - 1 }, () => {
-          let newMonth = this.state.month;
-          this.calcPrevMonth(lastDay, newMonth, this.state.year);
-        });
-      }
-      return this.createTable();
-    });
-    _defineProperty(this, "nextMonth", () => {
-      let lastDay = this.state.firstDay + this.state.strMonthValue % 7;
-      let firstDay = lastDay + 1 > 6 ? lastDay - 6 : lastDay + 1;
-      if (this.state.month + 1 > 11) {
-        this.setState(
-          { year: this.state.year + 1, month: 0, firstDay: firstDay },
-          () => {
-            let newMonth = this.state.month;
-            let newYear = this.state.year;
-            this.calcNextMonth(newMonth, newYear);
-          }
-        );
-      } else {
-        this.setState({ month: this.state.month + 1, firstDay: firstDay }, () => {
-          let newMonth = this.state.month;
-          this.calcNextMonth(newMonth, this.state.year);
-        });
-      }
-      return this.createTable();
-    });
-    this.today = new Date();
-    let year = parseInt(this.today.toJSON().slice(0, 4));
-    let month = parseInt(this.today.toJSON().slice(5, 7)) - 1;
-    this.dayToday = parseInt(this.today.toJSON().slice(8, 10)) - 1;
-    this.weekdayToday = this.today.getDay() === 0 ? 6 : this.today.getDay() - 1;
-    let _firstDay = this.weekdayToday - this.dayToday % 7;
-    _firstDay = _firstDay < 0 ? 6 - _firstDay : _firstDay;
-    let strMonth = Object.keys(arrMonth)[month];
-    let strMonthValue = Object.values(arrMonth)[month];
-    if (month === 1 && year % 4 === 0) {
-      strMonthValue = 28;
+      children = this.pushTable(table, children);
     }
-    this.state = {
-      year: year,
-      month: month,
-      day: this.dayToday + 1,
-      firstDay: _firstDay,
-      strMonth: strMonth,
-      strMonthValue: strMonthValue
-    };
-  }
-  onItemClick(event) {
-    this.setState({ day: parseInt(event.currentTarget.dataset.id) });
-  }
-  calcPrevMonth(lastDay, newMonth, newYear) {
-    let newMonthValue = Object.values(arrMonth)[newMonth];
-    if (this.state.month === 1 && newYear % 4 === 0) {
-      newMonthValue = 28;
-    }
-    let first = lastDay - newMonthValue % 7;
-    first = first < 0 ? 7 + first : first;
-    this.setState({
-      strMonth: Object.keys(arrMonth)[newMonth],
-      strMonthValue: newMonthValue,
-      firstDay: first,
-      day: newMonthValue + 1
-    });
-  }
-  calcNextMonth(newMonth, newYear) {
-    let newMonthValue = Object.values(arrMonth)[newMonth];
-    if (this.state.month === 1 && newYear % 4 === 0) {
-      newMonthValue = 28;
-    }
-    this.setState({
-      strMonth: Object.keys(arrMonth)[newMonth],
-      strMonthValue: newMonthValue,
-      day: 1
-    });
-  }
-  render() {
-    return (
-      <div className="row">
-        <div className="col-4" id="col-left">
-          <div className="row" id="part-1">
-            <div className="col">
-              <h2>Today</h2>
-              <h1>{this.dayToday + 1}</h1>
-              <h5>{arrDays[this.weekdayToday]}</h5>
-            </div>
-          </div>
-        </div>
-        <div className="col-8" id="col-right">
-          <div className="row on-top" id="title">
-            <div className="col-3 my-auto" id="l-arrow">
-              <button className="btn" onClick={this.previousMonth}>{"<"}</button>
-            </div>
-            <div className="col-6" id="title-date">{`${this.state.strMonth} ${this.state.year}`}</div>
-            <div className="col-3 my-auto" id="r-arrow">
-              <button className="btn" onClick={this.nextMonth}>{">"}</button>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col date-picker">
-              <table className="table date-picker">
-                {this.createTable()}
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+    return table;
+  };
+
+  pushTable = (table, children) => {
+    table.push(
+      <tbody key={table}>
+        <tr key={children}>{children}</tr>
+      </tbody>
     );
-  }
+    return [];
+  };
 }
 
 export default Calendar;
