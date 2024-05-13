@@ -8,7 +8,7 @@ import CreatingLink from "./creating-link/CreatingLink";
 import RedactingLink from "./creating-link/RedactingLink";
 import Overlay from "./creating-link/Overlay";
 import Toggle from "./toggle/Toggle";
-import DateCalendar from "./date-calendar/DateCalendar";
+import Calendar from "./date-calendar/DateCalendar";
 import TagList from "./tag-list/TagList";
 import QRComponent from "./qr-component/QRComponent";
 import ColorPickerGfg from "./qr-component/ColorPicker"
@@ -28,4 +28,4 @@ import FooterLogo from "../img/footer-logo.svg";
 import FAQ from "../img/faq.svg";
 import QRImage from "../img/qr-image.svg"
 
-export { SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, RedactingLink, Toggle, DateCalendar, TagList, QRComponent, ColorPickerGfg, BuyButton, UpgradeToProPopup, Overlay, HeaderLinksPage, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, FooterLogo, FAQ, QRImage };
+export { SettingsForm, DeleteAccountModal, FooterMP, NoLoginHeader, PricesBlock, Slider, CreatingLink, RedactingLink, Toggle, Calendar, TagList, QRComponent, ColorPickerGfg, BuyButton, UpgradeToProPopup, Overlay, HeaderLinksPage, Ampersand, Hashtag, Tilde, Triangle, Underscore, BackImage, Privilege, FooterLogo, FAQ, QRImage };

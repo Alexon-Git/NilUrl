@@ -4,7 +4,7 @@ import CryptoJS from "crypto-js";
 import {
   FAQ,
   Toggle,
-  DateCalendar,
+  Calendar,
   TagList,
   UpgradeToProPopup,
 } from "../../components";
@@ -39,7 +39,7 @@ const CreatingLink = () => {
       id: "date",
       title: "Дата окончания",
       checked: false,
-      info: <DateCalendar />,
+      info: <Calendar />,
     },
     {
       id: "ios",
@@ -177,7 +177,7 @@ const CreatingLink = () => {
           <div className="link__input-title">Ваша ссылка</div>
           <div className="input__container">
             <input
-              className="input"
+              className="link-input"
               type="text"
               placeholder="https://app.dub.co/aleksandr-vysochenko"
               value={inputText}
@@ -213,7 +213,7 @@ const CreatingLink = () => {
               </svg>
             </span>
             <input
-              className="input"
+              className="link-input"
               type="text"
               placeholder="https://nil-url/Ffv3cv.ru"
               value={shortUrl}
@@ -261,7 +261,7 @@ const CreatingLink = () => {
               </div>
             )}
             <input
-              className="input png"
+              className="link-input png"
               type="text"
               placeholder="Название тега"
               value={tagValue}

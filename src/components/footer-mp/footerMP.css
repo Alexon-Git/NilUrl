@@ -32,6 +32,7 @@
     font-weight: 700;
     font-size: 14px;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .NewDefaultTextFooter {
@@ -40,6 +41,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
+    cursor: pointer;
 }
 
 .NewCopyright {
