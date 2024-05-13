@@ -8,7 +8,7 @@ export default function ColorPickerGfg({ initialColor, onColorChange }) {
 
     const handleColorChange = (newColor) => {
         setColor(newColor);
-        onColorChange(newColor); // Вызываем колбэк с новым цветом
+        onColorChange(newColor);
     };
 
     const handleColorPickerToggle = () => {

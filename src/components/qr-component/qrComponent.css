@@ -123,8 +123,8 @@
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 10px;
-  display: flex; /* Use flexbox */
-  align-items: flex-start; /* Align items to the start of the cross axis */
+  display: flex; 
+  align-items: flex-start;
 }
 
 .editing-toggle {

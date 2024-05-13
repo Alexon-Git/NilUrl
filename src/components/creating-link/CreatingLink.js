@@ -189,28 +189,28 @@ const CreatingLink = () => {
           <div className="link__input-title">Короткая ссылка</div>
           <div className="input__container">
             <span className="svg__infinity">
-                <svg
-                  width="35"
-                  height="35"
-                  viewBox="0 0 35 35"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
-                  <circle
-                    cx="17.5"
-                    cy="17.5"
-                    r="17"
-                    stroke="#9A9A9A"
-                    strokeOpacity="0.5"
-                  />
-                  <path
-                    d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
-                    stroke="black"
-                    strokeWidth="1.28"
-                    strokeLinecap="round"
-                  />
-                </svg>
+              <svg
+                width="35"
+                height="35"
+                viewBox="0 0 35 35"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
+                <circle
+                  cx="17.5"
+                  cy="17.5"
+                  r="17"
+                  stroke="#9A9A9A"
+                  strokeOpacity="0.5"
+                />
+                <path
+                  d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
+                  stroke="black"
+                  strokeWidth="1.28"
+                  strokeLinecap="round"
+                />
+              </svg>
             </span>
             <input
               className="input"
@@ -315,31 +315,19 @@ const CreatingLink = () => {
               )}
               {showPopups[toggle.id] && !isPro && toggle.id !== "comment" && (
                 <div className="functional__item-info">
-                  <UpgradeToProPopup onClose={() => closePopup(toggle.id)} />
+                  <UpgradeToProPopup onClose={() => closePopup(toggle.id)}>
+                    <p className="popup-message">
+                      Статистику за последние 3 месяца можно просмотреть в
+                      проекте с тарифным планом Pro. Создайте проект или
+                      перейдите к существующему проекту для обновления.
+                    </p>
+                    <button className="popup-button">Обновиться до Pro</button>
+                  </UpgradeToProPopup>
                 </div>
               )}
             </div>
           ))}
         </div>
-        <button className="delete__link">
-          Удалить
-          <svg
-            width="18"
-            height="20"
-            viewBox="0 0 18 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ display: "block", marginLeft: "auto" }}
-          >
-            <path
-              d="M15 4L14.1991 16.0129C14.129 17.065 14.0939 17.5911 13.8667 17.99C13.6666 18.3412 13.3648 18.6235 13.0011 18.7998C12.588 19 12.0607 19 11.0062 19H6.99377C5.93927 19 5.41202 19 4.99889 18.7998C4.63517 18.6235 4.33339 18.3412 4.13332 17.99C3.90607 17.5911 3.871 17.065 3.80086 16.0129L3 4M1 4H17M13 4L12.7294 3.18807C12.4671 2.40125 12.3359 2.00784 12.0927 1.71698C11.8779 1.46013 11.6021 1.26132 11.2905 1.13878C10.9376 1 10.523 1 9.6936 1H8.3064C7.477 1 7.0624 1 6.70951 1.13878C6.39792 1.26132 6.12208 1.46013 5.90729 1.71698C5.66405 2.00784 5.53292 2.40125 5.27064 3.18807L5 4M11 8V15M7 8V15"
-              stroke="#BF0000"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
       </form>
       <div className="creating__link__footer">
         <button

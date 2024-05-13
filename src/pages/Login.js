@@ -44,7 +44,7 @@ function Log() {
                     </div>
 
                     <p className="p3_1">Не имеете аккаунта?
-                        <a className="a3_2" style={{cursor:"pointer"}} onClick={()=>{navigate(REGPAGE_ROUTE)}}>Регестрация</a>
+                        <a className="a3_2" style={{cursor:"pointer"}} onClick={()=>{navigate(REGPAGE_ROUTE)}}>Регистрация</a>
                         .</p>
                 </div>
             </div>

@@ -17,12 +17,14 @@ const SettingsForm = () => {
     }));
   };
 
-  const handleDeleteModalClose = () => {
-    setIsDeleteModalOpen(false);
-  };
-
   const handleDeleteModalOpen = () => {
     setIsDeleteModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+  
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+    document.body.style.overflow = 'auto';
   };
 
   const handleSubmit = (e) => {
@@ -50,7 +52,7 @@ const SettingsForm = () => {
   ];
 
   return (
-    <div className="background">
+    <div className="sf-background">
       <div className="main">
         <div className="title__container">
           <h4 className="settings__title wrapper-title">Настройки</h4>
