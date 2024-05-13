@@ -6,14 +6,36 @@ import {useState} from "react";
 
 function Log() {
     const navigate = useNavigate();
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('')
-    const onEmailChange = (event) =>{
-        setEmail(event.target.value)
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const onEmailChange = (event) => {
+        setEmail(event.target.value);
     }
-    const onPassChange = (event) =>{
-        setPassword(event.target.value)
+
+    const onPassChange = (event) => {
+        setPassword(event.target.value);
     }
+    const handleLogin = () => {
+        fetch('check_loginData.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+        .then(response => response.json())
+        .then(response => {
+            if (response.success) {
+                navigate('/links');
+            } else {
+
+                alert('Неправильный email или пароль');
+            }
+        })
+        .catch(error => {
+            alert('Ошибка');
+        });}
     return (
         <div className="d1">
             <div className="d2_1" style={{background: "linear-gradient(225deg, #e25186, #6059ff)"}}>
@@ -35,7 +57,7 @@ function Log() {
                     <input type="password" data-t="field:input-login" dir="ltr" aria-invalid="false" autoCorrect="off" autoCapitalize="off" autoComplete="username" class="in3_1" id="passp-field-login" name="login" placeholder="password" value={password} onChange={(event)=>onPassChange(event)}/>
                     </form>
                     <div style={{display:"flex"}}>
-                        <button type="button" className="b3">
+                        <button type="button" className="b3" onClick={handleLogin}>
                             <p className="p2">Войти</p>
                         </button>
                         <button type="button" className="b3_2">
