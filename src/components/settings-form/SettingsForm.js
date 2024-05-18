@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import "./settings-form.css";
 import { DeleteAccountModal, Overlay } from "../../components";
+import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode';
+
 
 const SettingsForm = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +11,19 @@ const SettingsForm = () => {
     email: "",
   });
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    const accessToken = Cookies.get('access_token');
+    if (accessToken) {
+      const decodedToken = jwtDecode(accessToken);
+      setFormData({
+        username: decodedToken.username,
+        email: decodedToken.email,
+      });
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

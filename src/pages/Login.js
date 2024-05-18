@@ -1,21 +1,46 @@
 import "./Regest.css";
-import {useNavigate} from "react-router-dom";
-import {REGPAGE_ROUTE} from "../LogicComp/utils/Const";
-import {useState} from "react";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { REGPAGE_ROUTE } from "../LogicComp/utils/Const";
+import { useState } from "react";
 
 function Log() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    useEffect(() => {
+        const access_token = getCookie('access_token');
+        if (access_token) {
+            navigate('/links');
+        }
+    }, []);
+
+    const setCookie = (name, value, days) => {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    };
+
+    const getCookie = (name) => {
+        const cookieArray = document.cookie.split(';');
+        for (let i = 0; i < cookieArray.length; i++) {
+            const cookiePair = cookieArray[i].split('=');
+            if (name === cookiePair[0].trim()) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
+    };
+
     const onEmailChange = (event) => {
         setEmail(event.target.value);
-    }
+    };
 
     const onPassChange = (event) => {
         setPassword(event.target.value);
-    }
+    };
+
     const handleLogin = () => {
         fetch('check_loginData.php', {
             method: 'POST',
@@ -27,15 +52,17 @@ function Log() {
         .then(response => response.json())
         .then(response => {
             if (response.success) {
+                localStorage.setItem('refresh_token', response.refresh_token);
+                setCookie('access_token', response.access_token, 1); // Устанавливаем access токен на 1 день
                 navigate('/links');
             } else {
-
                 alert('Неправильный email или пароль');
             }
         })
         .catch(error => {
             alert('Ошибка');
-        });}
+        });
+    };
     return (
         <div className="d1">
             <div className="d2_1" style={{background: "linear-gradient(225deg, #e25186, #6059ff)"}}>

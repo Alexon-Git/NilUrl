@@ -12,6 +12,8 @@
  * Released under the MIT License
  */
 
+/*! js-cookie v3.0.5 | MIT */
+
 /**
  * @license React
  * react-dom.production.min.js
