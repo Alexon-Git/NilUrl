@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {jwtDecode} from 'jwt-decode'; // Используем jwtDecode
+import {jwtDecode} from 'jwt-decode'; 
 import Cookies from 'js-cookie';
 
 const useAuth = () => {
@@ -19,11 +19,11 @@ const useAuth = () => {
       }
 
       try {
-        const decodedAccessToken = jwtDecode(accessToken); // Используем jwtDecode
+        const decodedAccessToken = jwtDecode(accessToken); 
         const currentTime = Date.now() / 1000;
 
         if (decodedAccessToken.exp < currentTime) {
-          const decodedRefreshToken = jwtDecode(refreshToken); // Используем jwtDecode
+          const decodedRefreshToken = jwtDecode(refreshToken); 
 
           if (decodedRefreshToken.exp < currentTime) {
             setIsLoggedIn(false);
