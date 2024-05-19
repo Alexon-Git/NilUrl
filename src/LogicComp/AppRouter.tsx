@@ -5,10 +5,6 @@ import {MAINPAGE_ROUTE} from "./utils/Const";
 import MainPage from "../pages/MainPage";
 import {AnimatePresence} from "framer-motion";
 const AppRouter = () => {
-    const navigate = useNavigate()
-    // useEffect(()=>{
-    //     navigate('Main')
-    // },[])
     return (
         <AnimatePresence mode="wait">
             <Routes>
