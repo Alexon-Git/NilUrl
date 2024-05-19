@@ -1,26 +1,77 @@
-.calendar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .calendar {
-    background-color: white; /* Белый фон календаря */
-  }
-  
-  /* Стили для кнопок перехода между месяцами */
-  .react-calendar__navigation button {
-    background: none;
-    border: none;
-  }
-  
-  /* Стили для кнопок "Clear" и "Today" */
-  .react-calendar__tile--now,
-  .react-calendar__tile--active {
-    background-color: blue;
-    color: white;
-  }
-  
-  /* Дополнительные стили */
-  /* ... */
-  
+.date-picker {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  border: 1px solid #000;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.date-left {
+  background-image: linear-gradient(#6a11cb, #2575fc);
+  color: white;
+  padding: 10px; /* Добавлено для отступов */
+  max-width: 100px;
+  border-radius: 8px 0 0 8px;
+}
+
+.date-right {
+  flex-grow: 1; /* Растягивает элемент на всю оставшуюся ширину */
+}
+
+.date-right-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 10px; /* Добавлено для отступов */
+}
+
+.month-year {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.date-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+#col-right #title button {
+  background-color: white;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+}
+
+#col-right #title button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#col-right #title button:focus {
+  box-shadow: none;
+}
+
+#col-right .inactive {
+  cursor: pointer;
+  min-height: 190px;
+  max-height: 190px;
+  overflow: hidden;
+}
+
+#col-right .inactive:hover {
+  border-radius: 10%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#col-right .active {
+  cursor: pointer;
+  border-radius: 10%;
+  background-image: linear-gradient(#6a11cb, #2575fc);
+  color: #ffffff;
+}

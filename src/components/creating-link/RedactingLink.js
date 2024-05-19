@@ -4,14 +4,14 @@ import CryptoJS from "crypto-js";
 import {
   FAQ,
   Toggle,
-  DateCalendar,
+  Calendar,
   TagList,
   UpgradeToProPopup,
 } from "../../components";
 
 const RedactingLink = () => {
   // const [isPro, setIsPro] = useState(false);
-  const isPro = false;
+  const isPro = true;
   const [activePopupId, setActivePopupId] = useState(null);
   const [showPopups, setShowPopups] = useState({
     utm: false,
@@ -39,7 +39,7 @@ const RedactingLink = () => {
       id: "date",
       title: "Дата окончания",
       checked: false,
-      info: <DateCalendar />,
+      info: <Calendar />,
     },
     {
       id: "ios",
@@ -176,7 +176,7 @@ const RedactingLink = () => {
           <div className="link__input-title">Ваша ссылка</div>
           <div className="input__container">
             <input
-              className="input"
+              className="link-input"
               type="text"
               placeholder="https://app.dub.co/aleksandr-vysochenko"
               value={inputText}
@@ -212,7 +212,7 @@ const RedactingLink = () => {
               </svg>
             </span>
             <input
-              className="input"
+              className="link-input"
               type="text"
               placeholder="https://nil-url/Ffv3cv.ru"
               value={shortUrl}
@@ -260,7 +260,7 @@ const RedactingLink = () => {
               </div>
             )}
             <input
-              className="input png"
+              className="link-input png"
               type="text"
               placeholder="Название тега"
               value={tagValue}
@@ -315,13 +315,13 @@ const RedactingLink = () => {
               {showPopups[toggle.id] && !isPro && toggle.id !== "comment" && (
                 <div className="functional__item-info">
                   <UpgradeToProPopup onClose={() => closePopup(toggle.id)}>
-          <p className="popup-message">
-            Статистику за последние 3 месяца можно просмотреть в проекте с тарифным планом Pro. Создайте проект или перейдите к существующему проекту для обновления.
-          </p>
-          <button className="popup-button">
-            Обновиться до Pro
-          </button>
-        </UpgradeToProPopup>
+                    <p className="popup-message">
+                      Статистику за последние 3 месяца можно просмотреть в
+                      проекте с тарифным планом Pro. Создайте проект или
+                      перейдите к существующему проекту для обновления.
+                    </p>
+                    <button className="popup-button">Обновиться до Pro</button>
+                  </UpgradeToProPopup>
                 </div>
               )}
             </div>

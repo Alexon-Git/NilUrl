@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from "react";
 
 import "../styles/GraphPage/GraphPage.css"
 import GPPeriod from "../components/GraphPage/GPPeriod";
@@ -11,9 +11,22 @@ import {useNavigate} from "react-router-dom";
 import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
 import transition from "../LogicComp/Transition";
+import useAuth from "../pages/useAuth";
 
 const GraphPage = () => {
-    const navigate = useNavigate()
+    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && !isLoggedIn && !isRedirected) { 
+      setIsRedirected(true); 
+      navigate('/login');
+    }
+  }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]); 
+
+  if (isLoading) {
+    return <div>Загрузка...</div>;
+  }
     return (
         <div>
             <HeaderLinksPage/>

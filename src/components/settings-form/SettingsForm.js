@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import "./settings-form.css";
 import { DeleteAccountModal, Overlay } from "../../components";
+import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode';
 
 const SettingsForm = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,20 @@ const SettingsForm = () => {
     email: "",
   });
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  
+  
+  
+  useEffect(() => {
+    const accessToken = Cookies.get('access_token');
+    if (accessToken) {
+      const decodedToken = jwtDecode(accessToken);
+      setFormData({
+        username: decodedToken.username,
+        email: decodedToken.email,
+      });
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,14 +45,35 @@ const SettingsForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logic to save user data
+    fetch('update_user_data.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert('Изменения сохранены успешно.');
+        // Обновляем токены в куках и localStorage
+        Cookies.set('access_token', data.access_token, { expires: 1 });
+        localStorage.setItem('refresh_token', data.refresh_token);
+      } else {
+        const text = data.message;
+        alert(text);
+      }
+    })
+    .catch(error => {
+      alert('Ошибка при выполнении запроса.');
+      console.error('Error:', error);
+    });
   };
 
   const formItems = [
     {
       title: "Ваше имя пользователя",
       description: "Оно будет отображаться в 'Nil'",
-      placeholder: "username",
       name: "username",
       value: formData.username,
       maxLength: 32,
@@ -44,12 +81,12 @@ const SettingsForm = () => {
     {
       title: "Ваш email",
       description: "Введите вашу электронную почту",
-      placeholder: "email",
       name: "email",
       value: formData.email,
       maxLength: undefined,
     },
   ];
+
 
   return (
     <div className="sf-background">
@@ -69,7 +106,7 @@ const SettingsForm = () => {
                 <input
                   className="input"
                   type="text"
-                  placeholder={item.placeholder}
+                  placeholder={item.value} 
                   name={item.name}
                   value={item.value}
                   maxLength={item.maxLength}
@@ -101,6 +138,7 @@ const SettingsForm = () => {
               </div>
             </div>
           </form>
+          {message && <div className="message">{message}</div>}
         </div>
         {isDeleteModalOpen && (
           <Overlay onClose={handleDeleteModalClose}>

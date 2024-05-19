@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "../../styles/Global/HeaderLinksPage.css"
 import {useNavigate} from "react-router-dom";
+import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode'
 import {LINKSPAGE_ROUTE, SETTINGPAGE_ROUTE} from "../../LogicComp/utils/Const";
 const HeaderLinksPage = () => {
+    const [username, setUsername] = useState('');
     const navigator = useNavigate()
-
+    useEffect(() => {
+        const accessToken = Cookies.get('access_token');
+        if (accessToken) {
+            const decodedToken = jwtDecode(accessToken);
+            setUsername(decodedToken.username);
+        }
+    }, []);
     return (
         <div style={{borderBottom:"1px solid #E5E7EB"}}>
             <div className="HeaderLinksPageC">
                 <div className="leftUserLogo">
                     <div className="UserLogoWord">
                         <div style={{paddingBottom:"2px"}}>
-                            A
+                            {username}
                         </div>
                     </div>
                 </div>

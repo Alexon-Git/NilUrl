@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0232ece5.css",
+    "main.js": "/static/js/main.9f4c36d2.js",
+    "static/media/Roboto.ttf": "/static/media/Roboto.33c6cdbc694881567da1.ttf",
+    "static/media/Segoe UI SemiBold.ttf": "/static/media/Segoe UI SemiBold.a23f926d5b61c10b9cd6.ttf",
+    "static/media/Roboto-bold.ttf": "/static/media/Roboto-bold.b843dfa713e8c8653ff6.ttf",
+    "static/media/Segoe UI.ttf": "/static/media/Segoe UI.45472284dc36b2486ce2.ttf",
+    "static/media/helveticaneuecyr_black.otf": "/static/media/helveticaneuecyr_black.be72df95ffe32d24ff56.otf",
+    "static/media/helveticaneuecyr_roman.otf": "/static/media/helveticaneuecyr_roman.84fb498ef9ef3d096f71.otf",
+    "static/media/helveticaneuecyr_medium.ttf": "/static/media/helveticaneuecyr_medium.e7b6c004d2e5e75830e4.ttf",
+    "static/media/helveticaneuecyr_bold.ttf": "/static/media/helveticaneuecyr_bold.969916e0b93742c484ae.ttf",
+    "static/media/footer-logo.svg": "/static/media/footer-logo.69fdb75202d9d8220b098f5cb7044aef.svg",
+    "static/media/qr-image.svg": "/static/media/qr-image.1e3739ca55a1d7935bc13ded92bdc581.svg",
+    "static/media/back.svg": "/static/media/back.b6d3e78d1eccd6334ecf69d86d04166f.svg",
+    "static/media/logo-icon.svg": "/static/media/logo-icon.013cf8c9e7f81faa04178f84436df46c.svg",
+    "static/media/ampersand.svg": "/static/media/ampersand.06faa80813ecea7725a81410a9e9a67e.svg",
+    "static/media/faq.svg": "/static/media/faq.78c13f91486566bf56ffde7b75c0beb7.svg",
+    "static/media/background-image.svg": "/static/media/background-image.d1d168262e771d1ade9a.svg",
+    "static/media/hashtag.svg": "/static/media/hashtag.9e7212797e87a6b82827bd8ca069b623.svg",
+    "static/media/privilege.svg": "/static/media/privilege.e0d877af3a527203344957db5054ddb2.svg",
+    "static/media/tilde.svg": "/static/media/tilde.52eff1e2727ebe115ad52562b7c5eb00.svg",
+    "index.html": "/index.html",
+    "static/media/underscore.svg": "/static/media/underscore.15085efb8c5a0ccbb0977adf7bc450d4.svg",
+    "static/media/triangle.svg": "/static/media/triangle.2ce651f273e0067730563a0442012c30.svg",
+    "main.0232ece5.css.map": "/static/css/main.0232ece5.css.map",
+    "main.9f4c36d2.js.map": "/static/js/main.9f4c36d2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0232ece5.css",
+    "static/js/main.9f4c36d2.js"
+  ]
+}
