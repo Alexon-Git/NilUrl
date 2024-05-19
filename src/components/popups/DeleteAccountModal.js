@@ -1,11 +1,38 @@
 import React from "react";
 import "./deleteAccountModal.css";
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
+
 
 const DeleteAccountModal = ({ onClose }) => {
-  const handleDelete = () => {
-    // Place your delete logic here
+  const navigate = useNavigate();
+  const handleDeleteAccount = () => {
+    fetch('delete_account.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({}),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert('Ваш аккаунт успешно удален.');
+        // Очищаем куки и localStorage
+        Cookies.remove('access_token');
+        localStorage.removeItem('refresh_token');
+        
+        navigate('/login');
+      } else {
+        alert('Ошибка при удалении аккаунта.');
+      }
+    })
+    .catch(error => {
+      alert('Ошибка при выполнении запроса.');
+      console.error('Error:', error);
+    });
   };
-
+  
   return (
     <div className="modal">
       <div className="modal-content">
@@ -30,7 +57,7 @@ const DeleteAccountModal = ({ onClose }) => {
           Вы действительно хотите удалить ваш аккаунт?
         </p>
         <div className="modal-buttons">
-          <button className="button red" onClick={handleDelete}>
+          <button className="button red" onClick={handleDeleteAccount}>
             Удалить
           </button>
         </div>
