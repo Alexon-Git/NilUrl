@@ -2,8 +2,18 @@ import React, {createRef, MouseEvent, useCallback, useEffect, useRef, useState} 
 import "../../styles/MainPage/VideoComp.css"
 import Arrow from "./arrow";
 import {useCustomRefHook} from "../../hooks/RefHook";
+import YouTube from "react-youtube";
 
 const VideoComp = () => {
+    const opts = {
+        height: '390',
+        width: '640',
+        playerVars: {
+            // https://developers.google.com/youtube/player_parameters
+            autoplay: 1,
+        },
+    };
+
     const videoRef = useCustomRefHook<HTMLIFrameElement>(null)
     const firstAcc = useCustomRefHook<HTMLUListElement>(null)
     const secondAcc = useCustomRefHook<HTMLUListElement>(null)
@@ -209,9 +219,10 @@ const VideoComp = () => {
                             title='Youtube player'
                             sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
                             src={`https://youtube.com/embed/${youtubeID}?autoplay=0`}
-                    ref={videoRef}
+                            ref={videoRef}
                     >
-                            </iframe>
+                    </iframe>
+
                 </div>
             </div>
 
