@@ -31,6 +31,7 @@
 }
 
 .dropdown-content {
+    max-width: 13em;
     padding: 0;
     list-style: none;
     position: absolute;

@@ -6,6 +6,8 @@ import OneIcon from "./OneIcon";
 import RedactingLink from "../creating-link/RedactingLink";
 import QRComponent from "../qr-component/QRComponent";
 import { Overlay } from "../../components"
+import {GRAPHPAGE_ROUTE} from "../../LogicComp/utils/Const";
+import {useNavigate} from "react-router-dom";
 
 interface LinksMapInt{
     Data:string,
@@ -21,6 +23,7 @@ interface LinksMapInt{
 
 
 const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android,IOS,clicks}:LinksMapInt) => {
+    const navigate = useNavigate();
     const [linkChangeFlag,setLinkChangeFlag] = useState(false)
     const [qrFlag,setQrFlag] = useState(false)
     const ref = useRef<HTMLDivElement>(null);
@@ -150,7 +153,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
                                 <path d="M4 13.3334V10.6667" stroke="#374151" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
-                        <div className="CLicksTextANum">{clicks} clicks</div>
+                        <div className="CLicksTextANum" onClick={()=>{navigate(GRAPHPAGE_ROUTE)}}>{clicks} clicks</div>
                     </div>
                     <div onClick={()=>{setLinkChangeFlag(true)}} style={{height:"max-content",marginLeft:"10px",marginRight:"20px"}}>
                         <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">

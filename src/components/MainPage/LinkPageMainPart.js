@@ -49,7 +49,6 @@ const LinkPageMainPart = () => {
         </div>
       </div>
       <div className="MainContainer">
-
         <div className="LinksContainer">
           {links.map((link, index) => (
             <LinksMapNew
