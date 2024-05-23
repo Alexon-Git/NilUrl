@@ -9,7 +9,7 @@ import {
   UpgradeToProPopup,
 } from "../../components";
 
-const RedactingLink = () => {
+const RedactingLink = ({ pathS }) => {
   // const [isPro, setIsPro] = useState(false);
   const isPro = true;
   const [activePopupId, setActivePopupId] = useState(null);
@@ -19,37 +19,70 @@ const RedactingLink = () => {
     ios: false,
     android: false,
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('get_link_for_update.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ pathS }) 
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setLinkData(data); 
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [pathS]);
+
+  const [linkData, setLinkData] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [inputText, setInputText] = useState("");
-  const [shortUrl, setShortUrl] = useState("");
-  const [tagValue, setTagValue] = useState("");
+  const [inputText, setInputText] = useState("111");
+  const [shortUrl, setShortUrl] = useState("222");
+  const [tagValue, setTagValue] = useState("333");
   const [tagColors, setTagColors] = useState({
-    svgColor: "black",
+    svgColor: "black",  
     color: "transparent",
   });
   const [toggles, setToggles] = useState([
     {
       id: "comment",
       title: "Комментарий",
+      value: "444", 
       checked: false,
       info: <CommentComponent />,
     },
-    { id: "utm", title: "UTM-метка", checked: false, info: <UTMInputs /> },
+    { id: "utm", 
+      title: "UTM-метка",
+      value: "555",
+      checked: false,
+      info: <UTMInputs /> },
     {
       id: "date",
       title: "Дата окончания",
+      value: "666", 
       checked: false,
       info: <Calendar />,
     },
     {
       id: "ios",
       title: "iOS Targeting",
+      value: "777", 
       checked: false,
       info: <IOSComponent />,
     },
     {
       id: "android",
       title: "Android Targeting",
+      value: "888", 
       checked: false,
       info: <AndroidComponent />,
     },
@@ -123,7 +156,7 @@ const RedactingLink = () => {
         return randomCase;
       })
       .join("");
-    const url = `https://nil-url/${randomShortId}.ru`;
+    const url = `https://nilurl/${randomShortId}.ru`;
     return url;
   };
 

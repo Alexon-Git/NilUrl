@@ -42,7 +42,7 @@ const LinkPageMainPart = () => {
     <div className="LinkPageMainPart">
       <div className="TopContainer">
         <div className="FakeDivLP"></div>
-        <div className="RightTopCont">
+        <div className="RightTopCont">  
           <SortNew />
           <TagsColumn/>
           <CreateLinkNew />
