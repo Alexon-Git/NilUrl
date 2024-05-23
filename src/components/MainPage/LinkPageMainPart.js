@@ -23,8 +23,8 @@ const LinkPageMainPart = () => {
           .then(data => {
             if (data && data.length > 0) {
               setLinks(data.map(link => ({
-                Data: new Date().toLocaleDateString(), // Замените на фактическое значение даты
-                SvgPath: "/test.svg", // Замените на фактический путь к SVG
+                Data: link.date_now, 
+                SvgPath: "/test.svg", 
                 pathS: `nilurl.ru/${link.code_url}`,
                 pathL: link.base_url,
                 UTM: link.utm,
@@ -57,7 +57,7 @@ const LinkPageMainPart = () => {
               SvgPath={link.SvgPath}
               pathS={link.pathS}
               pathL={link.pathL}
-              UTM={false}
+              UTM={link.UTM}
               Android={link.Android}
               IOS={link.IOS}
               clicks={link.clicks}

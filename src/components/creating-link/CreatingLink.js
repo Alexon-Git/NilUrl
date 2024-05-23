@@ -19,6 +19,7 @@ const CreatingLink = () => {
     ios: false,
     android: false,
   });
+  const [selectedDate, setSelectedDate] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [inputText, setInputText] = useState("");
   const [shortUrl, setShortUrl] = useState("");
@@ -34,12 +35,15 @@ const CreatingLink = () => {
       checked: false,
       info: <CommentComponent />,
     },
-    { id: "utm", title: "UTM-метка", checked: false, info: <UTMInputs /> },
+    { id: "utm",
+     title: "UTM-метка",
+      checked: false,
+       info: <UTMInputs /> },
     {
       id: "date",
       title: "Дата окончания",
       checked: false,
-      info: <Calendar />,
+      info: <Calendar onDateChange={setSelectedDate}/>,
     },
     {
       id: "ios",
@@ -54,6 +58,82 @@ const CreatingLink = () => {
       info: <AndroidComponent />,
     },
   ]);
+
+  const sendLinkDataToServer = async (data) => {
+    try {
+      const response = await fetch('post_link.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      const result = await response.json();
+  
+      if (result.status === 'success') {
+        alert('Link created successfully!');
+        window.location.reload(); 
+      } else {
+        const message = result.message;
+        alert(message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+  const collectLinkData = () => {
+    const linkData = {
+      inputText: inputText,
+      shortUrl: shortUrl,
+      tagValue: tagValue,
+      toggles: {
+        utm: toggles.find(toggle => toggle.id === 'utm').checked ? getUTMData() : false,
+        date: selectedDate ? getDateData(selectedDate) : false,
+        ios: toggles.find(toggle => toggle.id === 'ios').checked ? getIOSData() : false,
+        android: toggles.find(toggle => toggle.id === 'android').checked ? getAndroidData() : false,
+      },
+      comment: toggles.find(toggle => toggle.id === 'comment').checked ? getCommentData() : false,
+    };
+  
+    return linkData;
+  };
+  
+  const getUTMData = () => {
+    const utmInputs = document.querySelectorAll('.utm__input-item input[type="text"]');
+    const utmData = {};
+  
+    utmInputs.forEach(input => {
+      const id = input.id;
+      const value = input.value;
+      utmData[id] = value ? value : false;
+    });
+  
+    return utmData;
+  };
+  
+  const getDateData = (selectedDate) => {
+    const day = selectedDate.getDate().toString().padStart(2, "0");
+    const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
+    const year = selectedDate.getFullYear();
+    const formattedDate = `${day}.${month}.${year}`;
+    console.log("Выбранная дата:", formattedDate);
+    return formattedDate;
+  };
+
+  const getIOSData = () => {
+    return document.querySelector('.ios__android-input').value;
+  };
+  
+  const getAndroidData = () => {
+    return document.querySelector('.ios__android-input').value;
+  };
+  
+  const getCommentData = () => {
+    const commentInput = document.querySelector('.custom-textarea');
+    return commentInput ? commentInput.value : false;
+  };
 
   const handleToggle = (id) => {
     const toggle = toggles.find((toggle) => toggle.id === id);
@@ -106,7 +186,6 @@ const CreatingLink = () => {
     setIsHovered(false);
   };
 
-  // Функция для получения доменного имени из URL
   const handleLongUrlChange = async (event) => {
     const newText = event.target.value;
     setInputText(newText);
@@ -124,11 +203,13 @@ const CreatingLink = () => {
         return randomCase;
       })
       .join("");
-    const url = `https://nil-url/${randomShortId}.ru`;
+    const url = `https://nilurl.ru/${randomShortId}`;
     return url;
   };
 
   const handleCreateLink = () => {
+    const linkData = collectLinkData();
+    sendLinkDataToServer(linkData);
     console.log("Создать ссылку");
   };
 
@@ -215,7 +296,7 @@ const CreatingLink = () => {
             <input
               className="link-input"
               type="text"
-              placeholder="https://nil-url/Ffv3cv.ru"
+              placeholder="https://nilurl/Ffv3cv.ru"
               value={shortUrl}
               readOnly
             />
@@ -373,31 +454,39 @@ const CommentComponent = () => {
 
 const UTMInputs = () => {
   const [inputs, setInputs] = useState([
-    { id: "Referral", title: "Referral", checked: false, inputType: "text" },
+    { id: "Referral",
+      title: "Referral",
+      checked: false,
+      inputType: "text" 
+    },
     {
       id: "UTM Source",
       title: "UTM Source",
       checked: false,
-      inputType: "text",
+      inputType: "text"
     },
     {
       id: "UTM Medium",
       title: "UTM Medium",
       checked: false,
-      inputType: "text",
+      inputType: "text"
     },
     {
       id: "UTM Campaign",
       title: "UTM Campaign",
       checked: false,
-      inputType: "text",
+      inputType: "text"
     },
-    { id: "UTM Term", title: "UTM Term", checked: false, inputType: "text" },
+    { id: "UTM Term",
+      title: "UTM Term",
+      checked: false,
+      inputType: "text" 
+    },
     {
       id: "UTM Content",
       title: "UTM Content",
       checked: false,
-      inputType: "text",
+      inputType: "text"
     },
   ]);
 
@@ -423,7 +512,7 @@ const UTMInputs = () => {
             id={input.id}
             checked={input.checked}
             onChange={() => handleInputChange(input.id)}
-            placeholder="https://nil-url/Ffv3cv.ru"
+            placeholder="https://nilurl/Ffv3cv.ru"
           />
         </div>
       ))}

@@ -43,7 +43,7 @@ try {
     }
 
 } catch (Exception $e) {
-    echo json_encode(array("success" => false, "message" => "Неверный refresh токен"));
+    echo json_encode(array("success" => false, "message" => "Неверный refresh токен: " . $e->getMessage()));
 }
 
 pg_close($conn);

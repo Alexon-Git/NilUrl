@@ -23,7 +23,12 @@ class Calendar extends React.Component {
     super();
     this.state = this.getInitialState();
   }
-
+  getSelectedDate = () => {
+    const { year, month, day } = this.state;
+    const formattedMonth = (month + 1).toString().padStart(2, '0'); // Добавляем ноль в начало, если месяц однозначный
+    const formattedDay = day.toString().padStart(2, '0'); // Аналогично с днем
+    return `${year}-${formattedMonth}-${formattedDay}`;
+  };
   getInitialState() {
     const today = new Date();
     const year = today.getFullYear();
@@ -43,7 +48,20 @@ class Calendar extends React.Component {
   }
 
   onItemClick = (event) => {
+    const selectedDate = new Date(this.state.year, this.state.month, parseInt(event.currentTarget.dataset.id));
+    this.props.onDateChange(selectedDate); 
     this.setState({ day: parseInt(event.currentTarget.dataset.id) });
+    
+    // Вызываем функцию getDateData и передаем в нее выбранную дату
+    const formattedDate = this.getDateData(selectedDate);
+  };
+  getDateData = (selectedDate) => {
+    const day = selectedDate.getDate().toString().padStart(2, '0');
+    const month = (selectedDate.getMonth() + 1).toString().padStart(2, '0');
+    const year = selectedDate.getFullYear();
+    const formattedDate = `${day}.${month}.${year}`;
+    console.log('Выбранная дата:', formattedDate);
+    return formattedDate;
   };
 
   previousMonth = () => {
