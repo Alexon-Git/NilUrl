@@ -23,8 +23,8 @@ const LinkPageMainPart = () => {
           .then(data => {
             if (data && data.length > 0) {
               setLinks(data.map(link => ({
-                Data: link.date_now, 
-                SvgPath: "/test.svg", 
+                Data: link.date_now,
+                SvgPath: "/test.svg",
                 pathS: `nilurl.ru/${link.code_url}`,
                 pathL: link.base_url,
                 UTM: link.utm,
@@ -42,7 +42,7 @@ const LinkPageMainPart = () => {
     <div className="LinkPageMainPart">
       <div className="TopContainer">
         <div className="FakeDivLP"></div>
-        <div className="RightTopCont">  
+        <div className="RightTopCont">
           <SortNew />
           <TagsColumn/>
           <CreateLinkNew />
