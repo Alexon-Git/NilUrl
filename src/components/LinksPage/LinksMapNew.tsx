@@ -78,7 +78,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
             }
                 <div style={{display:"inline-block"}}>
                     <div className="SVGCOntLP">
-                        <img className="SVGLinksLP" src={"https://vk.com/favicon.ico"}/>
+                        <img className="SVGLinksLP" src={SvgPath}/>
                     </div>
                 </div>
                 <div className="LinksDateCopy">

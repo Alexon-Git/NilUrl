@@ -187,7 +187,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -240,7 +240,7 @@
 }
 
 ::-webkit-scrollbar {
-  display: none;
+
 }
 
 .creating__link__footer {
@@ -258,7 +258,7 @@
 
 .delete__link {
   display: flex;
-  align-items: center; 
+  align-items: center;
   width: 100%;
   border: 1px solid rgba(191, 0, 0, 1);
   border-radius: 6px;

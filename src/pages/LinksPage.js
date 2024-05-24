@@ -18,4 +18,4 @@ const LinksPage = () => {
     );
 };
 
-export default transition(LinksPage);
+export default LinksPage;
