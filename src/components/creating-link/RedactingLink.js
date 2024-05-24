@@ -156,7 +156,7 @@ const RedactingLink = ({ pathS }) => {
         return randomCase;
       })
       .join("");
-    const url = `https://nilurl/${randomShortId}.ru`;
+    const url = `https://nilurl.ru/${randomShortId}`;
     return url;
   };
 
@@ -247,7 +247,7 @@ const RedactingLink = ({ pathS }) => {
             <input
               className="link-input"
               type="text"
-              placeholder="https://nil-url/Ffv3cv.ru"
+              placeholder="https://nilurl.ru/Ffv3cv"
               value={shortUrl}
               readOnly
             />
@@ -474,7 +474,7 @@ const UTMInputs = () => {
             id={input.id}
             checked={input.checked}
             onChange={() => handleInputChange(input.id)}
-            placeholder="https://nil-url/Ffv3cv.ru"
+            placeholder="https://nilurl.ru/Ffv3cv"
           />
         </div>
       ))}

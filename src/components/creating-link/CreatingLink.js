@@ -296,7 +296,7 @@ const CreatingLink = () => {
             <input
               className="link-input"
               type="text"
-              placeholder="https://nilurl/Ffv3cv.ru"
+              placeholder="https://nilurl.ru/Ffv3cv"
               value={shortUrl}
               readOnly
             />
