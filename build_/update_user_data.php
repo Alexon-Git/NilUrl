@@ -1,7 +1,9 @@
 <?php
 require_once 'db.php';
 require_once 'vendor/autoload.php';
+
 use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 
 $data = json_decode(file_get_contents('php://input'), true);
 $username = $data['username'];
@@ -11,9 +13,14 @@ $accessToken = $_COOKIE['access_token'];
 $secretKey_refresh = "0aXbUZ2YySOZOJGZnXMHNA6PFqj5C3DbNlug0R9W";
 $secretKey_access = "l0pTUf8Hc7BrywJ";
 $algorithm = 'HS256';
-$decoded = JWT::decode($accessToken, new Key($secretKey_access, 'HS256'));
-$user_id = $decoded->user_id;
 
+try {
+    $decoded = JWT::decode($accessToken, new Key($secretKey_access, 'HS256'));
+    $user_id = $decoded->user_id;
+} catch (Exception $e) {
+    echo json_encode(array('success' => false, 'message' => 'Ошибка декодирования токена: ' . $e->getMessage()));
+    exit;
+}
 
 $query = "SELECT * FROM users WHERE username = $1 AND user_id != $2";
 $result = pg_query_params($conn, $query, array($username, $user_id));
@@ -29,15 +36,13 @@ if (pg_num_rows($result) > 0) {
     exit;
 }
 
-
 $query = "UPDATE users SET username = $1, email = $2 WHERE user_id = $3";
 $result = pg_query_params($conn, $query, array($username, $email, $user_id));
 
 if ($result) {
-
     $issuedAt = time();
-    $expirationTime = $issuedAt + 3600;  
-    $refreshExpirationTime = $issuedAt + 604800;  
+    $expirationTime = $issuedAt + 3600;  // access_token срок действия 1 час
+    $refreshExpirationTime = $issuedAt + 604800;  // refresh_token срок действия 1 неделя
 
     $payload = array(
         'user_id' => $user_id,

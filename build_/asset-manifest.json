@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.0232ece5.css",
-    "main.js": "/static/js/main.9f4c36d2.js",
+    "main.css": "/static/css/main.f85bfd23.css",
+    "main.js": "/static/js/main.fb57f394.js",
     "static/media/Roboto.ttf": "/static/media/Roboto.33c6cdbc694881567da1.ttf",
     "static/media/Segoe UI SemiBold.ttf": "/static/media/Segoe UI SemiBold.a23f926d5b61c10b9cd6.ttf",
     "static/media/Roboto-bold.ttf": "/static/media/Roboto-bold.b843dfa713e8c8653ff6.ttf",
@@ -23,11 +23,11 @@
     "index.html": "/index.html",
     "static/media/underscore.svg": "/static/media/underscore.15085efb8c5a0ccbb0977adf7bc450d4.svg",
     "static/media/triangle.svg": "/static/media/triangle.2ce651f273e0067730563a0442012c30.svg",
-    "main.0232ece5.css.map": "/static/css/main.0232ece5.css.map",
-    "main.9f4c36d2.js.map": "/static/js/main.9f4c36d2.js.map"
+    "main.f85bfd23.css.map": "/static/css/main.f85bfd23.css.map",
+    "main.fb57f394.js.map": "/static/js/main.fb57f394.js.map"
   },
   "entrypoints": [
-    "static/css/main.0232ece5.css",
-    "static/js/main.9f4c36d2.js"
+    "static/css/main.f85bfd23.css",
+    "static/js/main.fb57f394.js"
   ]
 }

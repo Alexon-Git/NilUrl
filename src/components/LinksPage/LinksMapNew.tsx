@@ -52,7 +52,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
         <div className="mainCLMP">
             {linkChangeFlag &&
                  <Overlay onClose={closeCreatingLink}>
-                 <RedactingLink />
+                 <RedactingLink pathS={pathS} />
                </Overlay>
             }
             {
