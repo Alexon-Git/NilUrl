@@ -30,4 +30,4 @@ const LinksPage = () => {
     );
 };
 
-export default LinksPage;
+export default transition(LinksPage);
