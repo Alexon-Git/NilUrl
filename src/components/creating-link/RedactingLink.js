@@ -13,6 +13,7 @@ const RedactingLink = ({ pathS }) => {
   // const [isPro, setIsPro] = useState(false);
   const isPro = true;
   const [activePopupId, setActivePopupId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [showPopups, setShowPopups] = useState({
     utm: false,
     date: false,
@@ -20,34 +21,13 @@ const RedactingLink = ({ pathS }) => {
     android: false,
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('get_link_for_update.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ pathS }) 
-        });
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setLinkData(data); 
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  
 
-    fetchData();
-  }, [pathS]);
-
-  const [linkData, setLinkData] = useState(null);
+  
   const [isHovered, setIsHovered] = useState(false);
-  const [inputText, setInputText] = useState("111");
-  const [shortUrl, setShortUrl] = useState("222");
-  const [tagValue, setTagValue] = useState("333");
+  const [inputText, setInputText] = useState("");
+  const [shortUrl, setShortUrl] = useState("");
+  const [tagValue, setTagValue] = useState("");
   const [tagColors, setTagColors] = useState({
     svgColor: "black",  
     color: "transparent",
@@ -56,34 +36,29 @@ const RedactingLink = ({ pathS }) => {
     {
       id: "comment",
       title: "Комментарий",
-      value: "444", 
-      checked: false,
+      checked: true,
       info: <CommentComponent />,
     },
     { id: "utm", 
       title: "UTM-метка",
-      value: "555",
-      checked: false,
+      checked: true,
       info: <UTMInputs /> },
     {
       id: "date",
-      title: "Дата окончания",
-      value: "666", 
-      checked: false,
+      title: "Дата окончания", 
+      checked: true,
       info: <Calendar />,
     },
     {
       id: "ios",
       title: "iOS Targeting",
-      value: "777", 
-      checked: false,
+      checked: true,
       info: <IOSComponent />,
     },
     {
       id: "android",
       title: "Android Targeting",
-      value: "888", 
-      checked: false,
+      checked: true,
       info: <AndroidComponent />,
     },
   ]);
@@ -181,6 +156,55 @@ const RedactingLink = ({ pathS }) => {
   const handleMouseOut = () => {
     console.log("Скрыть подсказку");
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("get_link_for_update.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ pathS }),
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        if (data.status === "success") {
+          const { base_url, code_url, tag, commentary, android, ios, utm, date_last } = data.data;
+          setInputText(base_url);
+          setShortUrl(`https://nilurl.ru/${code_url}`);
+          setTagValue(tag);
+          setToggles((prevToggles) => prevToggles.map((toggle) => {
+            switch (toggle.id) {
+              case "comment":
+                return { ...toggle, info: <CommentComponent initialComment={commentary} />, checked: !!commentary };
+              case "utm":
+                return { ...toggle, info: <UTMInputs initialUTM={utm} />, checked: utm === "t" };
+              case "date":
+                return { ...toggle, value: date_last, checked: !!date_last };
+              case "ios":
+                return {...toggle, info: <IOSComponent initialURL={ios !== "false" ? ios : ""} />, checked: ios !== "false", value: ios !== "false" ? ios : "", };
+              case "android":
+                return {...toggle, info: <AndroidComponent initialURL={android !== "false" ? android : ""} />, checked: android !== "false", value: android !== "false" ? android : "", };
+              default:
+                return toggle;
+            }
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false); 
+      }
+    };
+
+    fetchData();
+  }, [pathS]);
+
+  if (isLoading) {
+    return <div>Загрузка...</div>; }
 
   return (
     <div className="creating__link">
@@ -394,9 +418,9 @@ const RedactingLink = ({ pathS }) => {
   );
 };
 
-const CommentComponent = () => {
+const CommentComponent = ( { initialComment }) => {
   const textAreaRef = useRef(null);
-  const [val, setVal] = useState("");
+  const [val, setVal] = useState(initialComment);
   const handleChange = (e) => {
     setVal(e.target.value);
   };
@@ -422,40 +446,52 @@ const CommentComponent = () => {
   );
 };
 
-const UTMInputs = () => {
+const UTMInputs = ({ initialUTM }) => {
   const [inputs, setInputs] = useState([
-    { id: "Referral", title: "Referral", checked: false, inputType: "text" },
+    { id: "Referral",
+      title: "Referral",
+      value: initialUTM.referral || "",
+      checked: false,
+      inputType: "text" },
     {
       id: "UTM Source",
       title: "UTM Source",
+      value: initialUTM.utm_source || "",
       checked: false,
       inputType: "text",
     },
     {
       id: "UTM Medium",
       title: "UTM Medium",
+      value: initialUTM.utm_medium || "",
       checked: false,
       inputType: "text",
     },
     {
       id: "UTM Campaign",
       title: "UTM Campaign",
+      value: initialUTM.utm_campaign || "",
       checked: false,
       inputType: "text",
     },
-    { id: "UTM Term", title: "UTM Term", checked: false, inputType: "text" },
+    { id: "UTM Term",
+      title: "UTM Term",
+      value: initialUTM.utm_term || "",
+      checked: false,
+      inputType: "text" },
     {
       id: "UTM Content",
       title: "UTM Content",
+      value: initialUTM.utm_content || "",
       checked: false,
       inputType: "text",
     },
   ]);
 
-  const handleInputChange = (id) => {
+   const handleInputChange = (id, value) => {
     setInputs((prevInputs) => {
       const newInputs = prevInputs.map((input) =>
-        input.id === id ? { ...input, checked: !input.checked } : input
+        input.id === id ? { ...input, value } : input
       );
       return newInputs;
     });
@@ -472,9 +508,9 @@ const UTMInputs = () => {
             className="utm__input-input"
             type={input.inputType}
             id={input.id}
-            checked={input.checked}
-            onChange={() => handleInputChange(input.id)}
-            placeholder="https://nilurl.ru/Ffv3cv"
+            value={input.value}
+            onChange={(e) => handleInputChange(input.id, e.target.value)}
+            placeholder={`Введите ${input.title}`}
           />
         </div>
       ))}
@@ -482,8 +518,8 @@ const UTMInputs = () => {
   );
 };
 
-const IOSComponent = () => {
-  const [inputValue, setInputValue] = useState("");
+const IOSComponent = ({ initialURL }) => {
+  const [inputValue, setInputValue] = useState(initialURL);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -500,8 +536,8 @@ const IOSComponent = () => {
   );
 };
 
-const AndroidComponent = () => {
-  const [inputValue, setInputValue] = useState("");
+const AndroidComponent = ({ initialURL }) => {
+  const [inputValue, setInputValue] = useState(initialURL);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
