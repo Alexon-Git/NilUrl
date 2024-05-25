@@ -14,6 +14,7 @@ const RedactingLink = ({ pathS }) => {
   const isPro = true;
   const [activePopupId, setActivePopupId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [showPopups, setShowPopups] = useState({
     utm: false,
     date: false,
@@ -191,10 +192,20 @@ const RedactingLink = ({ pathS }) => {
               default:
                 return toggle;
             }
-          }));
+          }  ));
+        } else {
+          const text = data.message;
+          alert(text);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } finally {
         setIsLoading(false); 
       }
@@ -205,7 +216,9 @@ const RedactingLink = ({ pathS }) => {
 
   if (isLoading) {
     return <div>Загрузка...</div>; }
-
+  if (error) {
+      return <div>Страница обновляется до актуальных данных...</div>;
+  }
   return (
     <div className="creating__link">
       <div className="creating__link__header">
