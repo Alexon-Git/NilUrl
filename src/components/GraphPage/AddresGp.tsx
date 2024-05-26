@@ -2,10 +2,13 @@ import React, {useRef, useState} from 'react';
 import "../../styles/GraphPage/AddresGp.css"
 
 import MapGP from "./MapGP";
+import {GPFakeDataCity, GPFakeDataCountry} from "../../LogicComp/GPFakeData";
 const AddresGp = () => {
 
     const [flag,setFlag] = useState(false)
-
+    const Cities = [...GPFakeDataCity]
+    const Countries = [...GPFakeDataCountry]
+    const [data,setData] = useState(Cities)
     const refToBack = useRef<HTMLDivElement>(null)
 
 
@@ -14,6 +17,7 @@ const AddresGp = () => {
             refToBack.current.style.transition = "0.2s ease-in"
             refToBack.current.style.left = "-1px"
             setFlag(false)
+            setData(Countries)
         }
     }
 
@@ -22,6 +26,7 @@ const AddresGp = () => {
             refToBack.current.style.transition = "0.2s ease-in"
             refToBack.current.style.left = "103px"
             setFlag(true)
+            setData(Cities)
         }
     }
 
@@ -41,9 +46,11 @@ const AddresGp = () => {
                     <div ref={refToBack} className="BackForAddress"></div>
                 </div>
             </div>
-            <MapGP/>
-            <MapGP/>
-            <MapGP/>
+            {
+                data.map((value, index, array)=>
+                    <MapGP name={value.name} clickCount={value.clicks} key={index} SVG={"qwe"}/>
+                )
+            }
         </div>
     );
 };

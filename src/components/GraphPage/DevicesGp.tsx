@@ -61,9 +61,8 @@ const DevicesGp = () => {
                     <div ref={refToBack} className="BackForAddress"></div>
                 </div>
             </div>
-            <MapGP/>
-            <MapGP/>
-            <MapGP/>
+            <MapGP SVG={"qwe"} name={"OPERA"} clickCount={5}/>
+            <MapGP SVG={"qwe"} name={"OPERA"} clickCount={5}/>
         </div>
     );
 };

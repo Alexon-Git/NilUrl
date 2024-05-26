@@ -10,9 +10,11 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
+interface ChartInterface {
+    labels:number[];
+}
 
-
-const Chart = () => {
+const Chart = ({labels}:ChartInterface) => {
     ChartJS.register(
         CategoryScale,
         LinearScale,
@@ -21,7 +23,7 @@ const Chart = () => {
         Tooltip,
         Legend
     );
-    const labels = [0, 4, 8, 12, 16, 20, 24];
+
     const options = {
         responsive: true,
         maintainAspectRatio:false,
@@ -42,7 +44,7 @@ const Chart = () => {
         datasets: [
             {
                 label: 'Clicks',
-                data: labels.map((value, index) => index*2),
+                data: labels.map((value, index) => value),
                 backgroundColor: 'rgba(142,255,69,0.5)',
             },
         ],

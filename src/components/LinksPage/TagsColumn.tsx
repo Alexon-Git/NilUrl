@@ -31,7 +31,7 @@ const TagsColumn = () => {
         }
     }
     const clickLi = (ind:number) =>{
-        let arr = selectedTags;
+        let arr = [...selectedTags];
         arr[ind] == true ? arr[ind]=false : arr[ind]= true
         setSelectegTags(arr)
     }

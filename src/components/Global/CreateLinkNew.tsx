@@ -8,18 +8,20 @@ const CreateLinkNew = () => {
         setFlag(false);
     }
     return (
-        <div className="CrLinkNewButtonM">
+        <div>
             {flag &&
-            <Overlay onClose={()=>click()}>
-                <CreatingLink />
-            </Overlay>
+                <Overlay onClose={()=>click()}>
+                    <CreatingLink />
+                </Overlay>
             }
 
-            <div>
-                <div onClick={()=>{setFlag(true)}} className="CrLinkNewButtonText">
+        <div className="CrLinkNewButtonM" onClick={()=>{setFlag(true)}}>
+            <div >
+                <div  className="CrLinkNewButtonText">
                     Создать ссылку
                 </div>
             </div>
+        </div>
         </div>
     );
 };
