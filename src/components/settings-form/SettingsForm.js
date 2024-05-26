@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./settings-form.css";
 import { DeleteAccountModal, Overlay } from "../../components";
 import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const SettingsForm = () => {
   const [formData, setFormData] = useState({
@@ -11,9 +11,7 @@ const SettingsForm = () => {
   });
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [message, setMessage] = useState('');
-  
-  
-  
+
   useEffect(() => {
     const accessToken = Cookies.get('access_token');
     if (accessToken) {
@@ -37,14 +35,23 @@ const SettingsForm = () => {
     setIsDeleteModalOpen(true);
     document.body.style.overflow = 'hidden';
   };
-  
+
   const handleDeleteModalClose = () => {
     setIsDeleteModalOpen(false);
     document.body.style.overflow = 'auto';
   };
 
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateEmail(formData.email)) {
+      return;
+    }
+
     fetch('update_user_data.php', {
       method: 'POST',
       headers: {
@@ -52,22 +59,22 @@ const SettingsForm = () => {
       },
       body: JSON.stringify(formData),
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        alert('Изменения сохранены успешно.');
-        // Обновляем токены в куках и localStorage
-        Cookies.set('access_token', data.access_token, { expires: 1 });
-        localStorage.setItem('refresh_token', data.refresh_token);
-      } else {
-        const text = data.message;
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Изменения сохранены успешно.');
+          // Обновляем токены в куках и localStorage
+          Cookies.set('access_token', data.access_token, { expires: 1 });
+          localStorage.setItem('refresh_token', data.refresh_token);
+        } else {
+          const text = data.message;
         alert(text);
-      }
-    })
-    .catch(error => {
-      alert('Ошибка при выполнении запроса.');
-      console.error('Error:', error);
-    });
+        }
+      })
+      .catch(error => {
+        alert('Ошибка при выполнении запроса.');
+        console.error('Error:', error);
+      });
   };
 
   const formItems = [
@@ -87,7 +94,6 @@ const SettingsForm = () => {
     },
   ];
 
-
   return (
     <div className="sf-background">
       <div className="main">
@@ -106,7 +112,7 @@ const SettingsForm = () => {
                 <input
                   className="input"
                   type="text"
-                  placeholder={item.value} 
+                  placeholder={item.value}
                   name={item.name}
                   value={item.value}
                   maxLength={item.maxLength}
