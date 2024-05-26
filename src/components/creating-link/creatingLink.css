@@ -193,6 +193,7 @@
   align-items: center;
   z-index: 999;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Для поддержки Safari */
 }
 
 .creating__link {
