@@ -30,7 +30,10 @@ const LinkPageMainPart = () => {
                 UTM: link.utm,
                 Android: !!link.android,
                 IOS: !!link.ios,
-                clicks: link.clicks
+                clicks: link.clicks,
+                svgColor: link.tag_color,
+                color: link.tag_back,
+                tagValue: link.tag,
               })));
             }
           })
@@ -61,6 +64,9 @@ const LinkPageMainPart = () => {
               Android={link.Android}
               IOS={link.IOS}
               clicks={link.clicks}
+              svgColor ={link.svgColor}
+              color = {link.color}
+              tagValue = {link.tagValue}
             />
           ))}
         </div>
