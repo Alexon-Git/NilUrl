@@ -171,20 +171,30 @@ const RedactingLink = ({ pathS }) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
+       
         const data = await response.json();
         if (data.status === "success") {
-          const { base_url, code_url, tag, commentary, android, ios, utm, date_last } = data.data;
+          const { base_url, code_url, tag, commentary, android, ios, utm, utm_data, date_last } = data.data;
           setInputText(base_url);
           setShortUrl(`https://nilurl.ru/${code_url}`);
           setTagValue(tag);
+          const defaultUtmData = {
+            utm_source: "",
+            utm_medium: "",
+            utm_campaign: "",
+            utm_term: "",
+            utm_content: "",
+            utm_referral: ""
+          };
+          const finalUtmData = utm !== "false" ? utm_data : defaultUtmData;
           setToggles((prevToggles) => prevToggles.map((toggle) => {
             switch (toggle.id) {
               case "comment":
                 return { ...toggle, info: <CommentComponent initialComment={commentary} />, checked: !!commentary };
               case "utm":
-                return { ...toggle, info: <UTMInputs initialUTM={utm} />, checked: utm === "t" };
-              case "date":
-                return { ...toggle, value: date_last, checked: !!date_last };
+                return { ...toggle, info: <UTMInputs initialUTM={finalUtmData} />, checked: utm  };
+              case "date":  
+                return { ...toggle, value: <Calendar initialDate={date_last}/> , checked: !!date_last };
               case "ios":
                 return {...toggle, info: <IOSComponent initialURL={ios !== "false" ? ios : ""} />, checked: ios !== "false", value: ios !== "false" ? ios : "", };
               case "android":
@@ -461,47 +471,24 @@ const CommentComponent = ( { initialComment }) => {
 
 const UTMInputs = ({ initialUTM }) => {
   const [inputs, setInputs] = useState([
-    { id: "Referral",
-      title: "Referral",
-      value: initialUTM.referral || "",
-      checked: false,
-      inputType: "text" },
-    {
-      id: "UTM Source",
-      title: "UTM Source",
-      value: initialUTM.utm_source || "",
-      checked: false,
-      inputType: "text",
-    },
-    {
-      id: "UTM Medium",
-      title: "UTM Medium",
-      value: initialUTM.utm_medium || "",
-      checked: false,
-      inputType: "text",
-    },
-    {
-      id: "UTM Campaign",
-      title: "UTM Campaign",
-      value: initialUTM.utm_campaign || "",
-      checked: false,
-      inputType: "text",
-    },
-    { id: "UTM Term",
-      title: "UTM Term",
-      value: initialUTM.utm_term || "",
-      checked: false,
-      inputType: "text" },
-    {
-      id: "UTM Content",
-      title: "UTM Content",
-      value: initialUTM.utm_content || "",
-      checked: false,
-      inputType: "text",
-    },
+    { id: "UTM Referral", title: "UTM Referral", value: "", checked: false, inputType: "text" },
+    { id: "UTM Source", title: "UTM Source", value: "", checked: false, inputType: "text" },
+    { id: "UTM Medium", title: "UTM Medium", value: "", checked: false, inputType: "text" },
+    { id: "UTM Campaign", title: "UTM Campaign", value: "", checked: false, inputType: "text" },
+    { id: "UTM Term", title: "UTM Term", value: "", checked: false, inputType: "text" },
+    { id: "UTM Content", title: "UTM Content", value: "", checked: false, inputType: "text" },
   ]);
 
-   const handleInputChange = (id, value) => {
+  useEffect(() => {
+    if (initialUTM) {
+      setInputs((prevInputs) => prevInputs.map((input) => ({
+        ...input,
+        value: initialUTM[input.id.toLowerCase().replace(" ", "_")] || "",
+      })));
+    }
+  }, [initialUTM]);
+
+  const handleInputChange = (id, value) => {
     setInputs((prevInputs) => {
       const newInputs = prevInputs.map((input) =>
         input.id === id ? { ...input, value } : input
@@ -530,6 +517,8 @@ const UTMInputs = ({ initialUTM }) => {
     </div>
   );
 };
+
+
 
 const IOSComponent = ({ initialURL }) => {
   const [inputValue, setInputValue] = useState(initialURL);
