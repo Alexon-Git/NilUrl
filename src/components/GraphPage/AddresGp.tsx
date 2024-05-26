@@ -8,7 +8,7 @@ const AddresGp = () => {
     const [flag,setFlag] = useState(false)
     const Cities = [...GPFakeDataCity]
     const Countries = [...GPFakeDataCountry]
-    const [data,setData] = useState(Cities)
+    const [data,setData] = useState(Countries)
     const refToBack = useRef<HTMLDivElement>(null)
 
 
