@@ -14,23 +14,22 @@ import transition from "../LogicComp/Transition";
 import useAuth from "../pages/useAuth";
 
 const GraphPage = () => {
-    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!isLoading && !isLoggedIn && !isRedirected) { 
-      setIsRedirected(true); 
-      navigate('/login');
-    }
-  }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]); 
-
-  if (isLoading) {
-    return <div>Загрузка...</div>;
-  }
+  //   const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+  // useEffect(() => {
+  //   if (!isLoading && !isLoggedIn && !isRedirected) {
+  //     setIsRedirected(true);
+  //     navigate('/login');
+  //   }
+  // }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
+  //
+  // if (isLoading) {
+  //   return <div>Загрузка...</div>;
+  // }
     return (
         <div>
             <HeaderLinksPage/>
-
             <div
                 style={{
                     backgroundImage: `url(${process.env.PUBLIC_URL + '/BackgroundDots.svg'})
@@ -89,7 +88,7 @@ const GraphPage = () => {
                         <div className="Charts">
                             <div className="countOfViewsPeriod">66</div>
                             <div className="GlobalCountOfViewText">Общее количество кликов</div>
-                            <Chart/>
+                            <Chart labels={[1,2,3,4,5,6]}/>
                         </div>
                         <div className="OptionsInGP">
                             <div style={{display:"flex",justifyContent:"space-between"}}>
