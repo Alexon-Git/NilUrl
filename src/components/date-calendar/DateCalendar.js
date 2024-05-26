@@ -23,12 +23,14 @@ class Calendar extends React.Component {
     super();
     this.state = this.getInitialState();
   }
+
   getSelectedDate = () => {
     const { year, month, day } = this.state;
     const formattedMonth = (month + 1).toString().padStart(2, '0'); // Добавляем ноль в начало, если месяц однозначный
     const formattedDay = day.toString().padStart(2, '0'); // Аналогично с днем
     return `${year}-${formattedMonth}-${formattedDay}`;
   };
+
   getInitialState() {
     const today = new Date();
     const year = today.getFullYear();
@@ -48,13 +50,15 @@ class Calendar extends React.Component {
   }
 
   onItemClick = (event) => {
+    event.preventDefault(); // Предотвращаем любое дефолтное действие
     const selectedDate = new Date(this.state.year, this.state.month, parseInt(event.currentTarget.dataset.id));
-    this.props.onDateChange(selectedDate); 
+    this.props.onDateChange(selectedDate);
     this.setState({ day: parseInt(event.currentTarget.dataset.id) });
-    
+
     // Вызываем функцию getDateData и передаем в нее выбранную дату
     const formattedDate = this.getDateData(selectedDate);
   };
+
   getDateData = (selectedDate) => {
     const day = selectedDate.getDate().toString().padStart(2, '0');
     const month = (selectedDate.getMonth() + 1).toString().padStart(2, '0');
@@ -98,6 +102,42 @@ class Calendar extends React.Component {
     });
   };
 
+  handleWeekClick = (e) => {
+    e.preventDefault(); // Предотвращаем дефолтное действие
+    const today = new Date(this.state.year, this.state.month, this.state.today);
+    const nextWeek = new Date(today);
+    nextWeek.setDate(today.getDate() + 7);
+    this.props.onDateChange(nextWeek);
+    this.setState({
+      year: nextWeek.getFullYear(),
+      month: nextWeek.getMonth(),
+      day: nextWeek.getDate(),
+      firstDay: new Date(nextWeek.getFullYear(), nextWeek.getMonth(), 1).getDay() === 0 ? 6 : new Date(nextWeek.getFullYear(), nextWeek.getMonth(), 1).getDay() - 1,
+      strMonth: Object.keys(arrMonth)[nextWeek.getMonth()],
+      strMonthValue: arrMonth[Object.keys(arrMonth)[nextWeek.getMonth()]],
+    });
+  };
+
+  handleMonthClick = (e) => {
+    e.preventDefault(); // Предотвращаем дефолтное действие
+    const today = new Date(this.state.year, this.state.month, this.state.today);
+    const nextMonth = new Date(today);
+    nextMonth.setMonth(today.getMonth() + 1);
+    // Если в следующем месяце меньше дней, чем текущая дата, ставим последний день месяца
+    if (nextMonth.getDate() !== this.state.today) {
+      nextMonth.setDate(0); // Устанавливаем последний день предыдущего месяца, если текущая дата превышает количество дней в следующем месяце
+    }
+    this.props.onDateChange(nextMonth);
+    this.setState({
+      year: nextMonth.getFullYear(),
+      month: nextMonth.getMonth(),
+      day: nextMonth.getDate(),
+      firstDay: new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1).getDay() === 0 ? 6 : new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1).getDay() - 1,
+      strMonth: Object.keys(arrMonth)[nextMonth.getMonth()],
+      strMonthValue: arrMonth[Object.keys(arrMonth)[nextMonth.getMonth()]],
+    });
+  };
+
   render() {
     return (
       <div className="date-picker">
@@ -108,6 +148,7 @@ class Calendar extends React.Component {
         <div className="date-right" id="col-right">
           <div className="date-right-top" id="title">
             <button
+              type="button" // Задаем тип button
               className="btn"
               onClick={(e) => {
                 e.preventDefault();
@@ -118,6 +159,7 @@ class Calendar extends React.Component {
             </button>
           <div className="month-year">{`${this.state.strMonth} ${this.state.year}`}</div>
             <button
+              type="button" // Задаем тип button
               className="btn"
               onClick={(e) => {
                 e.preventDefault();
@@ -130,59 +172,24 @@ class Calendar extends React.Component {
           <table className="date-table">
           {this.createTable()}
           </table>
+          <div className="date-right-footer">
+            <button
+              type="button" // Задаем тип button
+              className="date-right-footer-button"
+              onClick={this.handleWeekClick}
+            >
+              На неделю
+            </button>
+            <button
+              type="button" // Задаем тип button
+              className="date-right-footer-button"
+              onClick={this.handleMonthClick}
+            >
+              На месяц
+            </button>
+          </div>
         </div>
       </div>
-
-
-      /*  <div className="date-picker">
-        <div className="row">
-          <div className="col-4" id="col-left">
-            <div className="row left-center" id="part-1">
-              <div className="col">
-                <h2>Сегодня</h2>
-                <h1>{this.state.today}</h1>
-              </div>
-            </div>
-          </div>
-          <div className="col-8" id="col-right">
-            <div className="row on-top" id="title">
-              <div className="col-3 my-auto" id="l-arrow">
-                <button
-                  className="btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.previousMonth();
-                  }}
-                >
-                  {"<"}
-                </button>
-              </div>
-              <div
-                className="col-6"
-                id="title-date"
-              >{`${this.state.strMonth} ${this.state.year}`}</div>
-              <div className="col-3 my-auto" id="r-arrow">
-                <button
-                  className="btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.nextMonth();
-                  }}
-                >
-                  {">"}
-                </button>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col date-picker">
-                <table className="table date-picker">
-                  {this.createTable()}
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */
     );
   }
 

@@ -1,6 +1,6 @@
 .date-picker {
   width: 100%;
-  height: 200px;
+  height: 225px;
   display: flex;
   border: 1px solid #000;
   border-radius: 8px;
@@ -10,13 +10,26 @@
 .date-left {
   background-image: linear-gradient(#6a11cb, #2575fc);
   color: white;
-  padding: 10px; /* Добавлено для отступов */
+  padding: 0 10px; /* Добавлено для отступов */
   max-width: 100px;
   border-radius: 8px 0 0 8px;
+  display: flex; /* Добавлено для использования Flexbox */
+  flex-direction: column; /* Центрирование по вертикали */
+  justify-content: center; /* Центрирование по вертикали */
+  align-items: center; /* Центрирование по горизонтали */
+  height: 100%; /* Обеспечивает полную высоту родительского элемента */
 }
 
 .date-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Добавлено для раздвигания элементов */
   flex-grow: 1; /* Растягивает элемент на всю оставшуюся ширину */
+  height: 100%;
+}
+
+.date-right-content {
+  flex-grow: 1; /* Заполняет оставшееся пространство между header и footer */
 }
 
 .date-right-top {
@@ -28,7 +41,7 @@
 
 .month-year {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .btn {
@@ -74,4 +87,25 @@
   border-radius: 10%;
   background-image: linear-gradient(#6a11cb, #2575fc);
   color: #ffffff;
+}
+
+.date-right-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px; /* Можно изменить значение, если нужно больше отступов */
+}
+.date-right-footer-button {
+  cursor: pointer;
+  border-radius: 5px;
+  background-image: linear-gradient(#6a11cb, #2575fc);
+  color: #ffffff;
+  padding: 5px 10px; /* Общепринятые паддинги, можно изменить по необходимости */
+  border: none; /* Убираем стандартную рамку у кнопки */
+  outline: none; /* Убираем стандартный outline у кнопки */
+  transition: background-color 0.3s; /* Добавляем плавный переход для эффекта наведения */
+}
+
+.date-right-footer-button:hover {
+  background-image: linear-gradient(#2575fc, #6a11cb); /* Меняем направление градиента при наведении */
 }
