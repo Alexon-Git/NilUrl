@@ -18,11 +18,14 @@ interface LinksMapInt{
     Android:boolean,
     IOS:boolean,
     clicks:number;
+    svgColor: string; // Цвет иконки тега
+    color: string; // Цвет фона тега
+    tagValue: string; // текст тега из инпута
 }
 
 
 
-const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android,IOS,clicks}:LinksMapInt) => {
+const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android,IOS,clicks, svgColor, color, tagValue}:LinksMapInt) => {
     const navigate = useNavigate();
     const [linkChangeFlag,setLinkChangeFlag] = useState(false)
     const [qrFlag,setQrFlag] = useState(false)
