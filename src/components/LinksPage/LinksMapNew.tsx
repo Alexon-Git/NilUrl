@@ -18,14 +18,17 @@ interface LinksMapInt{
     Android:boolean,
     IOS:boolean,
     clicks:number;
-    svgColor: string; // Цвет иконки тега
-    color: string; // Цвет фона тега
-    tagValue: string; // текст тега из инпута
+    svgColor: string; 
+    backgrounds: string; 
+    tagValue: string;
+    timer_flag:boolean;
+    tag_flag:boolean;
+     
 }
 
 
 
-const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android,IOS,clicks, svgColor, color, tagValue}:LinksMapInt) => {
+const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android,IOS,clicks, svgColor, backgrounds, tagValue,timer_flag,tag_flag}:LinksMapInt) => {
     const navigate = useNavigate();
     const [linkChangeFlag,setLinkChangeFlag] = useState(false)
     const [qrFlag,setQrFlag] = useState(false)
@@ -40,8 +43,8 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
     const closeQrLink = () =>{
         setQrFlag(false)
     }
-    const [flagTimer,setFlagTimer] = useState(true)
-    const [flagTag,setFlagTag] = useState(true)
+    const [flagTimer,setFlagTimer] = useState(timer_flag)
+    const [flagTag,setFlagTag] = useState(tag_flag)
     const [copied,setCopied] = useState(false)
     function delayedFunc() {
          setCopied(false)

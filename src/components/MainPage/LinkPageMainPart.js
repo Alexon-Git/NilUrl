@@ -31,9 +31,11 @@ const LinkPageMainPart = () => {
                 Android: !!link.android,
                 IOS: !!link.ios,
                 clicks: link.clicks,
-                svgColor: link.tag_color,
-                color: link.tag_back,
+                svgColor: link.tag_svgсolor,
+                backgrounds: link.tag_backgrounds,
                 tagValue: link.tag,
+                timer_flag: link.timer_flag,
+                tag_flag: link.tag_flag,
               })));
             }
           })
@@ -65,8 +67,10 @@ const LinkPageMainPart = () => {
               IOS={link.IOS}
               clicks={link.clicks}
               svgColor ={link.svgColor}
-              color = {link.color}
+              backgrounds = {link.backgrounds}
               tagValue = {link.tagValue}
+              timer_flag = {link.timer_flag}
+              tag_flag = {link.tag_flag}
             />
           ))}
         </div>
