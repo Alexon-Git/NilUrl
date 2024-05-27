@@ -40,7 +40,7 @@
 .tag-list-container {
   position: absolute;
   left: 0;
-  top: -120px;
+  top: -140px;
   z-index: 1;
 }
 
@@ -235,13 +235,19 @@
   padding-right: 65px;
   overflow-y: auto;
   overflow-x: hidden;
-
+  scrollbar-gutter: stable both-edges;
   background-image: url(./../../img/background-image.svg);
   background-repeat: repeat;
 }
 
-::-webkit-scrollbar {
+.creating__link__main::-webkit-scrollbar {
+  width: 8px;
+  position: absolute; /* Ensures scrollbar is overlay */
+}
 
+.creating__link__main::-webkit-scrollbar-thumb {
+  background: rgba(217, 217, 217, 1);
+  border-radius: 6px;
 }
 
 .creating__link__footer {

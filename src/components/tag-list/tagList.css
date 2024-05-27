@@ -8,13 +8,28 @@
 }
 
 .svg-button-container {
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 1);
-    border-radius: 6px;
-    display: grid; 
-    grid-template-columns: repeat(6, 1fr); 
-    grid-template-rows: repeat(3, 1fr); 
-    padding: 11px;
-    gap: 11px;
-    box-sizing: border-box;
-  }
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 1);
+  border-radius: 6px;
+  display: grid; 
+  grid-template-columns: repeat(6, 1fr); 
+  grid-template-rows: repeat(3, 1fr); 
+  padding: 11px 11px 33px 11px;
+  gap: 11px;
+  box-sizing: border-box;
+}
+
+.svg-button-cancel {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.svg-button-cancel span {
+  display: none;
+}
