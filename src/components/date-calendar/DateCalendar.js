@@ -19,30 +19,47 @@ const arrMonth = {
 const arrDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 
 class Calendar extends React.Component {
-  constructor() {
-    super();
-    this.state = this.getInitialState();
+  constructor(props) {
+    super(props);
+    this.state = this.getInitialState(props.initialDate);
   }
 
   getSelectedDate = () => {
     const { year, month, day } = this.state;
-    const formattedMonth = (month + 1).toString().padStart(2, '0');
-    const formattedDay = day.toString().padStart(2, '0');
+    const formattedMonth = (month + 1).toString().padStart(2, '0'); 
+    const formattedDay = day.toString().padStart(2, '0'); 
     return `${year}-${formattedMonth}-${formattedDay}`;
   };
 
-  getInitialState() {
+  getInitialState(initialDate) {
     const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
+    let year, month, day, day_today;
+
+    if (initialDate) {
+      const dateParts = initialDate.split('-');
+      year = parseInt(dateParts[0], 10);
+      month = parseInt(dateParts[1], 10) - 1; 
+      day = parseInt(dateParts[2], 10);
+      day_today = today.getDate();
+      console.log("Добытый");
+      console.log(year,month,day);
+    } else {
+      year = today.getFullYear();
+      month = today.getMonth();
+      day = today.getDate();
+      day_today = day;
+      console.log("Изначальный");
+      console.log(year,month,day);
+    }
+    
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const daysInMonth = arrMonth[Object.keys(arrMonth)[month]];
 
     return {
       year: year,
       month: month,
-      day: today.getDate(),
-      today: today.getDate(),
+      day: day,
+      today: day_today,
       firstDay: firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1,
       strMonth: Object.keys(arrMonth)[month],
       strMonthValue: daysInMonth,
