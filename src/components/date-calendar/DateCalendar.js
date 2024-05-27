@@ -71,7 +71,7 @@ class Calendar extends React.Component {
     const selectedDate = new Date(this.state.year, this.state.month, parseInt(event.currentTarget.dataset.id));
     const today = new Date();
     if (selectedDate < today) {
-        return; // Do nothing if clicked date is before today
+        return;
     }
     this.props.onDateChange(selectedDate);
     this.setState({ day: parseInt(event.currentTarget.dataset.id) }, () => {
@@ -89,84 +89,94 @@ class Calendar extends React.Component {
   };
 
   previousMonth = () => {
-    const today = new Date();
     let newMonth = this.state.month - 1;
     let newYear = this.state.year;
-    if (newMonth < today.getMonth() || newYear < today.getFullYear()) {
-        return; // Do nothing if trying to go to past months
-    }
+    const today = new Date();
     if (newMonth < 0) {
       newMonth = 11;
       newYear--;
     }
+    if (newYear < today.getFullYear() || (newYear === today.getFullYear() && newMonth < today.getMonth())) {
+        return;
+    }
     this.updateCalendar(newMonth, newYear);
 };
 
-  nextMonth = () => {
-    let newMonth = this.state.month + 1;
-    let newYear = this.state.year;
-    if (newMonth > 11) {
-      newMonth = 0;
-      newYear++;
-    }
-    this.updateCalendar(newMonth, newYear);
-  };
+nextMonth = () => {
+  let newMonth = this.state.month + 1;
+  let newYear = this.state.year;
+  if (newMonth > 11) {
+    newMonth = 0;
+    newYear++;
+  }
+  this.updateCalendar(newMonth, newYear);
+};
 
-  updateCalendar = (newMonth, newYear) => {
-    const firstDayOfMonth = new Date(newYear, newMonth, 1).getDay();
-    const daysInMonth = arrMonth[Object.keys(arrMonth)[newMonth]];
+updateCalendar = (newMonth, newYear) => {
+  const firstDayOfMonth = new Date(newYear, newMonth, 1).getDay();
+  const daysInMonth = arrMonth[Object.keys(arrMonth)[newMonth]];
 
-    this.setState({
-      year: newYear,
-      month: newMonth,
-      day: this.state.today,
-      firstDay: firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1,
-      strMonth: Object.keys(arrMonth)[newMonth],
-      strMonthValue: daysInMonth,
-    });
-  };
+  const selectedDate = new Date(newYear, newMonth, this.state.day);
+  this.props.onDateChange(selectedDate); // Передача данных о выбранной дате
 
-  handleWeekClick = (e) => {
-    e.preventDefault();
-    const selectedDate = new Date(this.state.year, this.state.month, this.state.day);
-    const today = new Date();
-    const nextWeek = new Date(selectedDate);
-    nextWeek.setDate(selectedDate.getDate() + 7);
-    if (nextWeek < today) {
-        return; // Do nothing if the resulting week is before today
-    }
-    this.props.onDateChange(nextWeek);
-    this.setState({
-      year: nextWeek.getFullYear(),
-      month: nextWeek.getMonth(),
-      day: nextWeek.getDate(),
-      firstDay: new Date(nextWeek.getFullYear(), nextWeek.getMonth(), 1).getDay() === 0 ? 6 : new Date(nextWeek.getFullYear(), nextWeek.getMonth(), 1).getDay() - 1,
-      strMonth: Object.keys(arrMonth)[nextWeek.getMonth()],
-      strMonthValue: arrMonth[Object.keys(arrMonth)[nextWeek.getMonth()]],
-    });
+  this.getDateData(selectedDate); // Обновление значения выбранной даты
+
+  this.setState({
+    year: newYear,
+    month: newMonth,
+    firstDay: firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1,
+    strMonth: Object.keys(arrMonth)[newMonth],
+    strMonthValue: daysInMonth,
+  });
+};
+
+handleWeekClick = (e) => {
+  e.preventDefault();
+  const selectedDate = new Date(this.state.year, this.state.month, this.state.day);
+  const today = new Date();
+  const nextWeek = new Date(selectedDate);
+  nextWeek.setDate(selectedDate.getDate() + 7);
+  if (nextWeek < today) {
+      return; 
+  }
+  this.props.onDateChange(nextWeek); // Передача данных о выбранной дате
+
+  this.getDateData(nextWeek); // Обновление значения выбранной даты
+
+  this.setState({
+    year: nextWeek.getFullYear(),
+    month: nextWeek.getMonth(),
+    day: nextWeek.getDate(),
+    firstDay: new Date(nextWeek.getFullYear(), nextWeek.getMonth(), 1).getDay() === 0 ? 6 : new Date(nextWeek.getFullYear(), nextWeek.getMonth(), 1).getDay() - 1,
+    strMonth: Object.keys(arrMonth)[nextWeek.getMonth()],
+    strMonthValue: arrMonth[Object.keys(arrMonth)[nextWeek.getMonth()]],
+  });
 };
 
 handleMonthClick = (e) => {
-    e.preventDefault();
-    const selectedDate = new Date(this.state.year, this.state.month, this.state.day);
-    const today = new Date();
-    const nextMonth = new Date(selectedDate);
-    nextMonth.setMonth(selectedDate.getMonth() + 1);
-    if (nextMonth.getDate() !== this.state.day) {
-      nextMonth.setDate(0);
-    }
-    if (nextMonth < today) {
-        return; // Do nothing if the resulting month is before today
-    }
-    this.props.onDateChange(nextMonth);
-    this.setState({
-      year: nextMonth.getFullYear(),
-      month: nextMonth.getMonth(),
-      day: nextMonth.getDate(),
-      firstDay: new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1).getDay() === 0 ? 6 : new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1).getDay() - 1,
-      strMonth: Object.keys(arrMonth)[nextMonth.getMonth()],
-      strMonthValue: arrMonth[Object.keys(arrMonth)[nextMonth.getMonth()]],
-    });
+  e.preventDefault();
+  const selectedDate = new Date(this.state.year, this.state.month, this.state.day);
+  const today = new Date();
+  const nextMonth = new Date(selectedDate);
+  nextMonth.setMonth(selectedDate.getMonth() + 1);
+  if (nextMonth.getDate() !== this.state.day) {
+    nextMonth.setDate(0);
+  }
+  if (nextMonth.getFullYear() < today.getFullYear() || (nextMonth.getFullYear() === today.getFullYear() && nextMonth.getMonth() < today.getMonth())) {
+      return; 
+  }
+  this.props.onDateChange(nextMonth); // Передача данных о выбранной дате
+
+  this.getDateData(nextMonth); // Обновление значения выбранной даты
+
+  this.setState({
+    year: nextMonth.getFullYear(),
+    month: nextMonth.getMonth(),
+    day: nextMonth.getDate(),
+    firstDay: new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1).getDay() === 0 ? 6 : new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1).getDay() - 1,
+    strMonth: Object.keys(arrMonth)[nextMonth.getMonth()],
+    strMonthValue: arrMonth[Object.keys(arrMonth)[nextMonth.getMonth()]],
+  });
 };
 
   render() {
