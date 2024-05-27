@@ -24,7 +24,7 @@ const RedactingLink = ({ pathS }) => {
 
   
 
-  
+  const [selectedDate, setSelectedDate] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [inputText, setInputText] = useState("");
   const [shortUrl, setShortUrl] = useState("");
@@ -48,7 +48,7 @@ const RedactingLink = ({ pathS }) => {
       id: "date",
       title: "Дата окончания", 
       checked: true,
-      info: <Calendar />,
+      info: <Calendar onDateChange={setSelectedDate} />,
     },
     {
       id: "ios",
@@ -194,7 +194,7 @@ const RedactingLink = ({ pathS }) => {
               case "utm":
                 return { ...toggle, info: <UTMInputs initialUTM={finalUtmData} />, checked: utm  };
               case "date":  
-                return { ...toggle, value: <Calendar initialDate={date_last}/> , checked: !!date_last };
+                return { ...toggle, info: <Calendar initialDate={date_last} onDateChange={setSelectedDate}/> , checked: !!date_last };
               case "ios":
                 return {...toggle, info: <IOSComponent initialURL={ios !== "false" ? ios : ""} />, checked: ios !== "false", value: ios !== "false" ? ios : "", };
               case "android":
