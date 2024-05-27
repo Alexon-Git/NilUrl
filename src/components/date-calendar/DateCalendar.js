@@ -26,8 +26,8 @@ class Calendar extends React.Component {
 
   getSelectedDate = () => {
     const { year, month, day } = this.state;
-    const formattedMonth = (month + 1).toString().padStart(2, '0'); // Добавляем ноль в начало, если месяц однозначный
-    const formattedDay = day.toString().padStart(2, '0'); // Аналогично с днем
+    const formattedMonth = (month + 1).toString().padStart(2, '0');
+    const formattedDay = day.toString().padStart(2, '0');
     return `${year}-${formattedMonth}-${formattedDay}`;
   };
 
@@ -42,7 +42,7 @@ class Calendar extends React.Component {
       year: year,
       month: month,
       day: today.getDate(),
-      today: today.getDate(), // Сохраняем сегодняшнее число
+      today: today.getDate(),
       firstDay: firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1,
       strMonth: Object.keys(arrMonth)[month],
       strMonthValue: daysInMonth,
@@ -50,33 +50,40 @@ class Calendar extends React.Component {
   }
 
   onItemClick = (event) => {
-    event.preventDefault(); // Предотвращаем любое дефолтное действие
+    event.preventDefault();
     const selectedDate = new Date(this.state.year, this.state.month, parseInt(event.currentTarget.dataset.id));
+    const today = new Date();
+    if (selectedDate < today) {
+        return; // Do nothing if clicked date is before today
+    }
     this.props.onDateChange(selectedDate);
-    this.setState({ day: parseInt(event.currentTarget.dataset.id) });
-
-    // Вызываем функцию getDateData и передаем в нее выбранную дату
-    const formattedDate = this.getDateData(selectedDate);
-  };
+    this.setState({ day: parseInt(event.currentTarget.dataset.id) }, () => {
+      this.getDateData(selectedDate);
+    });
+};
 
   getDateData = (selectedDate) => {
     const day = selectedDate.getDate().toString().padStart(2, '0');
     const month = (selectedDate.getMonth() + 1).toString().padStart(2, '0');
     const year = selectedDate.getFullYear();
     const formattedDate = `${day}.${month}.${year}`;
-    console.log('Выбранная дата:', formattedDate);
+    console.log('Selected date:', formattedDate);
     return formattedDate;
   };
 
   previousMonth = () => {
+    const today = new Date();
     let newMonth = this.state.month - 1;
     let newYear = this.state.year;
+    if (newMonth < today.getMonth() || newYear < today.getFullYear()) {
+        return; // Do nothing if trying to go to past months
+    }
     if (newMonth < 0) {
       newMonth = 11;
       newYear--;
     }
     this.updateCalendar(newMonth, newYear);
-  };
+};
 
   nextMonth = () => {
     let newMonth = this.state.month + 1;
@@ -95,7 +102,7 @@ class Calendar extends React.Component {
     this.setState({
       year: newYear,
       month: newMonth,
-      day: this.state.today, // Возвращаем сегодняшнее число
+      day: this.state.today,
       firstDay: firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1,
       strMonth: Object.keys(arrMonth)[newMonth],
       strMonthValue: daysInMonth,
@@ -103,10 +110,14 @@ class Calendar extends React.Component {
   };
 
   handleWeekClick = (e) => {
-    e.preventDefault(); // Предотвращаем дефолтное действие
-    const today = new Date(this.state.year, this.state.month, this.state.today);
-    const nextWeek = new Date(today);
-    nextWeek.setDate(today.getDate() + 7);
+    e.preventDefault();
+    const selectedDate = new Date(this.state.year, this.state.month, this.state.day);
+    const today = new Date();
+    const nextWeek = new Date(selectedDate);
+    nextWeek.setDate(selectedDate.getDate() + 7);
+    if (nextWeek < today) {
+        return; // Do nothing if the resulting week is before today
+    }
     this.props.onDateChange(nextWeek);
     this.setState({
       year: nextWeek.getFullYear(),
@@ -116,16 +127,19 @@ class Calendar extends React.Component {
       strMonth: Object.keys(arrMonth)[nextWeek.getMonth()],
       strMonthValue: arrMonth[Object.keys(arrMonth)[nextWeek.getMonth()]],
     });
-  };
+};
 
-  handleMonthClick = (e) => {
-    e.preventDefault(); // Предотвращаем дефолтное действие
-    const today = new Date(this.state.year, this.state.month, this.state.today);
-    const nextMonth = new Date(today);
-    nextMonth.setMonth(today.getMonth() + 1);
-    // Если в следующем месяце меньше дней, чем текущая дата, ставим последний день месяца
-    if (nextMonth.getDate() !== this.state.today) {
-      nextMonth.setDate(0); // Устанавливаем последний день предыдущего месяца, если текущая дата превышает количество дней в следующем месяце
+handleMonthClick = (e) => {
+    e.preventDefault();
+    const selectedDate = new Date(this.state.year, this.state.month, this.state.day);
+    const today = new Date();
+    const nextMonth = new Date(selectedDate);
+    nextMonth.setMonth(selectedDate.getMonth() + 1);
+    if (nextMonth.getDate() !== this.state.day) {
+      nextMonth.setDate(0);
+    }
+    if (nextMonth < today) {
+        return; // Do nothing if the resulting month is before today
     }
     this.props.onDateChange(nextMonth);
     this.setState({
@@ -136,19 +150,19 @@ class Calendar extends React.Component {
       strMonth: Object.keys(arrMonth)[nextMonth.getMonth()],
       strMonthValue: arrMonth[Object.keys(arrMonth)[nextMonth.getMonth()]],
     });
-  };
+};
 
   render() {
     return (
       <div className="date-picker">
         <div className="date-left">
-          <h2>Сегодня</h2>
+          <h2>Today</h2>
           <h1>{this.state.today}</h1>
         </div>
         <div className="date-right" id="col-right">
           <div className="date-right-top" id="title">
             <button
-              type="button" // Задаем тип button
+              type="button"
               className="btn"
               onClick={(e) => {
                 e.preventDefault();
@@ -157,9 +171,9 @@ class Calendar extends React.Component {
             >
               {"<"}
             </button>
-          <div className="month-year">{`${this.state.strMonth} ${this.state.year}`}</div>
+            <div className="month-year">{`${this.state.strMonth} ${this.state.year}`}</div>
             <button
-              type="button" // Задаем тип button
+              type="button"
               className="btn"
               onClick={(e) => {
                 e.preventDefault();
@@ -174,14 +188,14 @@ class Calendar extends React.Component {
           </table>
           <div className="date-right-footer">
             <button
-              type="button" // Задаем тип button
+              type="button"
               className="date-right-footer-button"
               onClick={this.handleWeekClick}
             >
               На неделю
             </button>
             <button
-              type="button" // Задаем тип button
+              type="button"
               className="date-right-footer-button"
               onClick={this.handleMonthClick}
             >
