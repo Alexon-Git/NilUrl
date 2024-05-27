@@ -83,7 +83,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
             }
             {
                 flagTag &&
-                <div className="tegCLMP">
+                <div className="tegCLMP" style={{backgroundColor:`${backgrounds}`, color:`${svgColor}`}}>
                     <div style={{overflow:"hidden"}}>
                     {tagValue}
                     </div>
