@@ -18,12 +18,12 @@ interface LinksMapInt{
     Android:boolean,
     IOS:boolean,
     clicks:number;
-    svgColor: string; 
-    backgrounds: string; 
+    svgColor: string;
+    backgrounds: string;
     tagValue: string;
-    timer_flag:boolean;
+    timer_flag:number;
     tag_flag:boolean;
-     
+
 }
 
 
@@ -67,12 +67,19 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
                 <QRComponent />
                 </Overlay>
             }
-            {flagTimer &&
+            {flagTimer == 1 &&
             <div className="timerCLMP">
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.8453 8C5.11869 5.80761 6.98891 4.11111 9.25535 4.11111C11.71 4.11111 13.6998 6.10096 13.6998 8.55556C13.6998 11.0102 11.71 13 9.25535 13H6.47779M9.25557 8.55556V6.33333M8.14446 3H10.3667M3.70001 9.66667H6.47779M4.81112 11.3333H7.5889" stroke="black" stroke-width="1.06667" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
+            }
+            {flagTimer == 2 &&
+                <div className="timerCLMPRed">
+                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.8453 8C5.11869 5.80761 6.98891 4.11111 9.25535 4.11111C11.71 4.11111 13.6998 6.10096 13.6998 8.55556C13.6998 11.0102 11.71 13 9.25535 13H6.47779M9.25557 8.55556V6.33333M8.14446 3H10.3667M3.70001 9.66667H6.47779M4.81112 11.3333H7.5889" stroke="black" stroke-width="1.06667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
             }
             {
                 flagTag &&
