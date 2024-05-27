@@ -31,7 +31,7 @@ const LinkPageMainPart = () => {
                 Android: !!link.android,
                 IOS: !!link.ios,
                 clicks: link.clicks,
-                svgColor: link.tag_svgсolor,
+                svgColor: link.tag_svgcolor,
                 backgrounds: link.tag_backgrounds,
                 tagValue: link.tag,
                 timer_flag: link.timer_flag,
