@@ -13,6 +13,7 @@ const RedactingLink = ({ pathS }) => {
   // const [isPro, setIsPro] = useState(false);
   const isPro = true;
   const [activePopupId, setActivePopupId] = useState(null);
+  const [date_last, setDate_last] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [showPopups, setShowPopups] = useState({
@@ -96,7 +97,7 @@ const RedactingLink = ({ pathS }) => {
       tagColors: tagColors,
       toggles: {
         utm: toggles.find(toggle => toggle.id === 'utm').checked ? getUTMData() : false,
-        date: selectedDate ? getDateData(selectedDate) : false,
+        date: selectedDate ? getDateData(selectedDate) : (date_last ? date_last : false),
         ios: toggles.find(toggle => toggle.id === 'ios').checked ? getIOSData() : false,
         android: toggles.find(toggle => toggle.id === 'android').checked ? getAndroidData() : false,
       },
@@ -257,6 +258,7 @@ const RedactingLink = ({ pathS }) => {
             utm_referral: ""
           };
           const finalUtmData = utm !== "false" ? utm_data : defaultUtmData;
+          setDate_last(date_last);
           setToggles((prevToggles) => prevToggles.map((toggle) => {
             switch (toggle.id) {
               case "comment":
