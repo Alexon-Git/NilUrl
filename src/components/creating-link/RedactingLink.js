@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
-import CryptoJS from "crypto-js";
 import {
   FAQ,
   Toggle,
@@ -16,6 +15,36 @@ const RedactingLink = ({ pathS }) => {
   const [date_last, setDate_last] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  const handleDeleteClick = async (event) => {
+    event.preventDefault();
+    const data = {
+      pathS: pathS, 
+  };
+
+  try {
+      const response = await fetch('delete_link.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+          alert('Ссылка удалена успешно!');
+          window.location.reload();
+      } else {
+          alert(result.message);
+      }
+  } catch (error) {
+      console.error('Ошибка:', error);
+      alert('Возникла ошибка при удалении ссылки.');
+  }
+    
+
+  };
   const [showPopups, setShowPopups] = useState({
     utm: false,
     date: false,
@@ -479,7 +508,7 @@ const RedactingLink = ({ pathS }) => {
             </div>
           ))}
         </div>
-        <button className="delete__link">
+        <button className="delete__link" onClick={handleDeleteClick}>
           Удалить
           <svg
             width="18"

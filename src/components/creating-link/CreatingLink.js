@@ -72,7 +72,7 @@ const CreatingLink = () => {
       const result = await response.json();
   
       if (result.status === 'success') {
-        alert('Link created successfully!');
+        alert('Ссылка успешно создана!');
         window.location.reload(); 
       } else {
         const message = result.message;
