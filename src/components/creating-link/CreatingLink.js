@@ -25,8 +25,8 @@ const CreatingLink = () => {
   const [shortUrl, setShortUrl] = useState("");
   const [tagValue, setTagValue] = useState("");
   const [tagColors, setTagColors] = useState({
-    svgColor: "black",
-    color: "transparent",
+    svgColor: "#000000",
+    color: "rgba(255, 255, 255, 1)",
   });
   const [toggles, setToggles] = useState([
     {
@@ -88,6 +88,7 @@ const CreatingLink = () => {
       inputText: inputText,
       shortUrl: shortUrl,
       tagValue: tagValue,
+      tagColors: tagColors,
       toggles: {
         utm: toggles.find(toggle => toggle.id === 'utm').checked ? getUTMData() : false,
         date: selectedDate ? getDateData(selectedDate) : false,

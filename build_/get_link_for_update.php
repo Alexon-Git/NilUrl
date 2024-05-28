@@ -6,7 +6,6 @@ use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     $accessToken = $_COOKIE['access_token'];
     $secretKey_access = "l0pTUf8Hc7BrywJ";
 
@@ -24,6 +23,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($result && pg_num_rows($result) > 0) {
                 $linkData = pg_fetch_assoc($result);
+
+                // Запрос к базе данных для получения данных из таблицы utm
+                $utmQuery = "SELECT * FROM utm WHERE code_url = $1";
+                $utmResult = pg_query_params($conn, $utmQuery, array($shortUrl));
+
+                if ($utmResult && pg_num_rows($utmResult) > 0) {
+                    $utmData = pg_fetch_assoc($utmResult);
+                    $linkData['utm_data'] = $utmData;
+                    $linkData['utm'] = true;
+                } else {
+                    $linkData['utm'] = false;
+                }
+
                 $response = array('status' => 'success', 'data' => $linkData);
                 echo json_encode($response);
             } else {

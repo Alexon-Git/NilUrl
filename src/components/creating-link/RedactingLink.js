@@ -64,6 +64,83 @@ const RedactingLink = ({ pathS }) => {
     },
   ]);
 
+  const sendLinkDataToServer = async (data) => {
+    try {
+      const response = await fetch('update_link.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...data, pathS }),
+      });
+  
+      const result = await response.json();
+  
+      if (result.status === 'success') {
+        alert('Данные успешно изменены!');
+        window.location.reload(); 
+      } else {
+        const message = result.message;
+        alert(message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+  const collectLinkData = () => {
+    const linkData = {
+      inputText: inputText,
+      shortUrl: shortUrl,
+      tagValue: tagValue,
+      tagColors: tagColors,
+      toggles: {
+        utm: toggles.find(toggle => toggle.id === 'utm').checked ? getUTMData() : false,
+        date: selectedDate ? getDateData(selectedDate) : false,
+        ios: toggles.find(toggle => toggle.id === 'ios').checked ? getIOSData() : false,
+        android: toggles.find(toggle => toggle.id === 'android').checked ? getAndroidData() : false,
+      },
+      comment: toggles.find(toggle => toggle.id === 'comment').checked ? getCommentData() : false,
+    };
+  
+    return linkData;
+  };
+  
+  const getUTMData = () => {
+    const utmInputs = document.querySelectorAll('.utm__input-item input[type="text"]');
+    const utmData = {};
+  
+    utmInputs.forEach(input => {
+      const id = input.id;
+      const value = input.value;
+      utmData[id] = value ? value : false;
+    });
+  
+    return utmData;
+  };
+  
+  const getDateData = (selectedDate) => {
+    const day = selectedDate.getDate().toString().padStart(2, "0");
+    const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
+    const year = selectedDate.getFullYear();
+    const formattedDate = `${day}.${month}.${year}`;
+    console.log("Выбранная дата:", formattedDate);
+    return formattedDate;
+  };
+
+  const getIOSData = () => {
+    return document.querySelector('.ios__android-input').value;
+  };
+  
+  const getAndroidData = () => {
+    return document.querySelector('.ios__android-input').value;
+  };
+  
+  const getCommentData = () => {
+    const commentInput = document.querySelector('.custom-textarea');
+    return commentInput ? commentInput.value : false;
+  };
+
   const handleToggle = (id) => {
     const toggle = toggles.find((toggle) => toggle.id === id);
     if (!toggle) return;
@@ -118,25 +195,14 @@ const RedactingLink = ({ pathS }) => {
   const handleLongUrlChange = async (event) => {
     const newText = event.target.value;
     setInputText(newText);
-    const newShortUrl = generateShortUrl(newText);
-    setShortUrl(newShortUrl);
+    
   };
 
-  const generateShortUrl = (input) => {
-    const hash = CryptoJS.SHA256(input).toString();
-    const shortId = hash.substring(0, 5);
-    const randomShortId = Array.from(shortId)
-      .map((char) => {
-        const randomCase =
-          Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase();
-        return randomCase;
-      })
-      .join("");
-    const url = `https://nilurl.ru/${randomShortId}`;
-    return url;
-  };
+  
 
   const handleCreateLink = () => {
+    const linkData = collectLinkData();
+    sendLinkDataToServer(linkData);
     console.log("Создать ссылку");
   };
 
@@ -174,10 +240,14 @@ const RedactingLink = ({ pathS }) => {
        
         const data = await response.json();
         if (data.status === "success") {
-          const { base_url, code_url, tag, commentary, android, ios, utm, utm_data, date_last } = data.data;
+          const { base_url, code_url, tag, commentary, android, ios, utm, utm_data, date_last, tag_svgcolor, tag_backgrounds} = data.data;
           setInputText(base_url);
           setShortUrl(`https://nilurl.ru/${code_url}`);
           setTagValue(tag);
+          setTagColors({
+            svgColor: tag_svgcolor,
+            color: tag_backgrounds
+          });
           const defaultUtmData = {
             utm_source: "",
             utm_medium: "",
