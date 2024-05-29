@@ -11,7 +11,6 @@ const AddresGp = () => {
     const [data,setData] = useState(Countries)
     const refToBack = useRef<HTMLDivElement>(null)
 
-
     const clickCountry = () =>{
         if(refToBack.current!=null && flag){
             refToBack.current.style.transition = "0.2s ease-in"

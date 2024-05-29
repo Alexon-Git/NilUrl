@@ -1,8 +1,19 @@
 import React, {useEffect, useRef, useState} from 'react';
 import MapGP from "./MapGP";
 import "../../styles/GraphPage/AddresGp.css"
+import {
+    GPFakeDataBrowser,
+    GPFakeDataCity,
+    GPFakeDataCountry,
+    GPFakeDataDevice,
+    GPFakeDataOC
+} from "../../LogicComp/GPFakeData";
 const DevicesGp = () => {
 
+    const Device = [...GPFakeDataDevice]
+    const Browser = [...GPFakeDataBrowser]
+    const OC = [...GPFakeDataOC]
+    const [data,setData] = useState(Device)
     const [state,setState] = useState(
         new Array(3).fill(false)
     )
@@ -20,6 +31,7 @@ const DevicesGp = () => {
             refToBack.current.style.left = "-1px"
             const arr = [true,false,false]
             setState(arr)
+            setData(Device)
         }
     }
 
@@ -29,6 +41,7 @@ const DevicesGp = () => {
             refToBack.current.style.left = "102px"
             const arr = [false,true,false]
             setState(arr)
+            setData(Browser)
         }
     }
 
@@ -38,6 +51,7 @@ const DevicesGp = () => {
             refToBack.current.style.left = "206px"
             const arr = [false,false,true]
             setState(arr)
+            setData(OC)
         }
     }
 
@@ -61,8 +75,11 @@ const DevicesGp = () => {
                     <div ref={refToBack} className="BackForAddress"></div>
                 </div>
             </div>
-            <MapGP SVG={"qwe"} name={"OPERA"} clickCount={5}/>
-            <MapGP SVG={"qwe"} name={"OPERA"} clickCount={5}/>
+            {
+                data.map((value, index, array)=>
+                    <MapGP name={value.name} clickCount={value.clicks} key={index} SVG={"qwe"}/>
+                )
+            }
         </div>
     );
 };

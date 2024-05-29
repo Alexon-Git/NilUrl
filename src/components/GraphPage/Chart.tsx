@@ -11,10 +11,11 @@ import {
 import { Bar } from 'react-chartjs-2';
 
 interface ChartInterface {
-    labels:number[];
+    labels:string[];
+    Clicks:number[];
 }
 
-const Chart = ({labels}:ChartInterface) => {
+const Chart = ({labels,Clicks}:ChartInterface) => {
     ChartJS.register(
         CategoryScale,
         LinearScale,
@@ -44,7 +45,7 @@ const Chart = ({labels}:ChartInterface) => {
         datasets: [
             {
                 label: 'Clicks',
-                data: labels.map((value, index) => value),
+                data: labels.map((value, index, array) => Clicks[index]),
                 backgroundColor: 'rgba(142,255,69,0.5)',
             },
         ],
