@@ -29,16 +29,16 @@ const GraphPage = () => {
 
         fetchData();
     }, []);
+    console.log(ssilki)
 
 
-
-    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
-    useEffect(() => {
-        if (!isLoading && !isLoggedIn && !isRedirected) {
-            setIsRedirected(true);
-            navigate('/login');
-        }
-    }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
+    // const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+    // useEffect(() => {
+    //     if (!isLoading && !isLoggedIn && !isRedirected) {
+    //         setIsRedirected(true);
+    //         navigate('/login');
+    //     }
+    // }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
 
 
 
@@ -83,9 +83,9 @@ const GraphPage = () => {
 
         }
     },[period])
-    if (isLoading) {
-        return <div>Загрузка...</div>;
-    }
+    // if (isLoading) {
+    //     return <div>Загрузка...</div>;
+    // }
     return (
         <div>
             <HeaderLinksPage/>

@@ -45,4 +45,7 @@ export const SortData = (Data:Date[],period:number) =>{
             }
         })
     }
+    if(period === 1){
+
+    }
 }
