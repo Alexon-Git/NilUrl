@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 
 import "../styles/GraphPage/GraphPage.css"
 import GPPeriod from "../components/GraphPage/GPPeriod";
@@ -16,17 +16,27 @@ import useAuth from "../pages/useAuth";
 const GraphPage = () => {
 
   const navigate = useNavigate();
-    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
-  useEffect(() => {
-    if (!isLoading && !isLoggedIn && !isRedirected) {
-      setIsRedirected(true);
-      navigate('/login');
+    // const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+    // useEffect(() => {
+    //     if (!isLoading && !isLoggedIn && !isRedirected) {
+    //         setIsRedirected(true);
+    //         navigate('/login');
+    //     }
+    // }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
+    //
+    // if (isLoading) {
+    //     return <div>Загрузка...</div>;
+    // }
+    const [period,setPeriod] = useState(0)
+    const ChangePeriod = (prop:number) =>{
+        setPeriod(prop)
     }
-  }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
-
-  if (isLoading) {
-    return <div>Загрузка...</div>;
-  }
+    console.log(period)
+    const [data,setData] = useState(new Array(4).fill(2))
+    let summ = 0
+    data.map((value, index, array)=>{
+        summ+=value;
+    })
     return (
         <div>
             <HeaderLinksPage/>
@@ -82,13 +92,13 @@ const GraphPage = () => {
                                 </div>
                             </div>
                             <div className="GPPeriod">
-                                <GPPeriod/>
+                                <GPPeriod ChangePeriodFunc={ChangePeriod}/>
                             </div>
                         </div>
                         <div className="Charts">
-                            <div className="countOfViewsPeriod">66</div>
+                            <div className="countOfViewsPeriod">{summ}</div>
                             <div className="GlobalCountOfViewText">Общее количество кликов</div>
-                            <Chart labels={[1,2,3,4,5,6]}/>
+                            <Chart labels={data}/>
                         </div>
                         <div className="OptionsInGP">
                             <div style={{display:"flex",justifyContent:"space-between"}}>

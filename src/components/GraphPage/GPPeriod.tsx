@@ -1,6 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import "../../styles/GraphPage/GPPeriod.css"
-const GpPeriod = () => {
+
+interface GpPeriodInterface {
+    ChangePeriodFunc(prop: number): void;
+}
+
+const GpPeriod = ({ChangePeriodFunc}:GpPeriodInterface) => {
+
     useEffect(()=>{
         clickToGalki(1);
     },[])
@@ -12,15 +18,12 @@ const GpPeriod = () => {
     const [isDrop,setIsDrop] = useState(false)
     const [rule,setRule] = useState(false)
     const [period,setPeriod] = useState("Последние 24 часа")
-    const click = () =>{
-        setPeriod("Последний час")
-    }
     const clickToGalki = (prop:number) =>{
         let arr = new Array(6).fill(null);
         arr.map((value,index)=>{
             if(index == prop) arr[index] = true;
         })
-        console.log(arr);
+        ChangePeriodFunc(prop)
         setFlagToGalka(arr);
     }
     const clickShowUL = () =>{

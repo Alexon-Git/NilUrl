@@ -73,22 +73,22 @@ const LinkPageMainPart = () => {
               tag_flag = {link.tag_flag}
             />
           ))}
-          {/*<LinksMapNew*/}
-          {/*    key={0}*/}
-          {/*    Data={"1"}*/}
-          {/*    SvgPath={"link.SvgPath"}*/}
-          {/*    pathS={"link.pathS"}*/}
-          {/*    pathL={"gfdgfdgfdgfdgfd"}*/}
-          {/*    UTM={true}*/}
-          {/*    Android={true}*/}
-          {/*    IOS={true}*/}
-          {/*    clicks={5}*/}
-          {/*    svgColor ={"#63BD43"}*/}
-          {/*    backgrounds = {"rgba(100, 235, 240, 1)"}*/}
-          {/*    tagValue = {"qwe"}*/}
-          {/*    timer_flag = {1}*/}
-          {/*    tag_flag = {1}*/}
-          {/*/>*/}
+          <LinksMapNew
+              key={0}
+              Data={"1"}
+              SvgPath={"link.SvgPath"}
+              pathS={"link.pathS"}
+              pathL={"gfdgfdgfdgfdgfd"}
+              UTM={true}
+              Android={true}
+              IOS={true}
+              clicks={5}
+              svgColor ={"#63BD43"}
+              backgrounds = {"rgba(100, 235, 240, 1)"}
+              tagValue = {"qwe"}
+              timer_flag = {1}
+              tag_flag = {1}
+          />
         </div>
       </div>
     </div>
