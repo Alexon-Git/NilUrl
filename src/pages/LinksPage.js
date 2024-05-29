@@ -9,18 +9,18 @@ import { useNavigate } from "react-router-dom";
 
 const LinksPage = () => {
     const navigate = useNavigate();
-    // const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
-    //
-    // useEffect(() => {
-    //   if (!isLoading && !isLoggedIn && !isRedirected) {
-    //     setIsRedirected(true);
-    //     navigate('/login');
-    //   }
-    // }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
-    //
-    // if (isLoading) {
-    //   return <div>Загрузка...</div>;
-    // }
+    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+    
+    useEffect(() => {
+      if (!isLoading && !isLoggedIn && !isRedirected) {
+        setIsRedirected(true);
+        navigate('/login');
+      }
+    }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
+    
+    if (isLoading) {
+      return <div>Загрузка...</div>;
+    }
     return (
         <div>
             <HeaderLinksPage/>
