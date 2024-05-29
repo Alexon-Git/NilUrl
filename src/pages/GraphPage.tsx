@@ -14,19 +14,39 @@ import transition from "../LogicComp/Transition";
 import useAuth from "../pages/useAuth";
 
 const GraphPage = () => {
+//     const [ssilki,setSsilki] = useState() 
 
-  const navigate = useNavigate();
-    // const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
-    // useEffect(() => {
-    //     if (!isLoading && !isLoggedIn && !isRedirected) {
-    //         setIsRedirected(true);
-    //         navigate('/login');
-    //     }
-    // }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
-    //
-    // if (isLoading) {
-    //     return <div>Загрузка...</div>;
-    // }
+//     useEffect(() => {
+//         const fetchData = async () => {
+//             const response = await fetch('data_clicks_user_all.php', {
+//                 method: 'GET',
+//                 credentials: 'include' 
+//             });
+
+//             const result = await response.json();
+//             setSsilki(result);
+//         };
+
+//         fetchData();
+//     }, []);
+  
+
+
+//     const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+//     useEffect(() => {
+//         if (!isLoading && !isLoggedIn && !isRedirected) {
+//             setIsRedirected(true);
+//             navigate('/login');
+//         }
+//     }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
+    
+//     if (isLoading) {
+//         return <div>Загрузка...</div>;
+//     }
+
+
+
+    const navigate = useNavigate();
     const [period,setPeriod] = useState(1)
     const ChangePeriod = (prop:number) =>{
         setPeriod(prop)
@@ -34,7 +54,10 @@ const GraphPage = () => {
     console.log(period)
     const [clicks,setClicks] = useState([1,2,3,4])
     const [niz,setNiz] = useState(["qwe","qwe","asd","asd"])
-    const [ssilki,setSsilki] = useState() // Вот сюда
+    
+    
+    
+
     let summ = 0
     clicks.map((value, index, array)=>{
         summ+=value;
