@@ -35,9 +35,14 @@ export const GPFakeDate = [
     new Date(2011, 0, 1, 0, 0, 0, 0),
 ]
 
-export const SortData = (Data:Date,period:number) =>{
+export const SortData = (Data:Date[],period:number) =>{
+    let today = new Date(Date.now()+14400000)
     let DateReturn;
     if(period === 0){
-
+        Data.map((value, index, array)=>{
+            if(value.getMonth() === today.getMonth() && value.getFullYear() === today.getFullYear() && value.getDay() === today.getDay() && today.getHours() === value.getHours()){
+                DateReturn.push(value)
+            }
+        })
     }
 }
