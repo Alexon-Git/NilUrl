@@ -34,10 +34,12 @@ const GraphPage = () => {
     console.log(period)
     const [clicks,setClicks] = useState([1,2,3,4])
     const [niz,setNiz] = useState(["qwe","qwe","asd","asd"])
+    const [ssilki,setSsilki] = useState() // Вот сюда
     let summ = 0
     clicks.map((value, index, array)=>{
         summ+=value;
     })
+    let now = new Date()
     useEffect(()=>{
         if(period === 0){
             setClicks([6,2,4,4,5,6])
@@ -48,8 +50,7 @@ const GraphPage = () => {
             setNiz(["0-4","4-8","8-12","12-16","16-20","20-24"])
         }
         if(period === 2){
-            setClicks([1,2,3,4,5,6])
-            setNiz(["0-4","4-8","8-12","12-16","16-20","20-24"])
+
         }
         if(period === 3){
 
