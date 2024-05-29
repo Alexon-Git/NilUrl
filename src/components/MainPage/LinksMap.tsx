@@ -24,7 +24,7 @@ const LinksMap:React.FC<LinksMapInt>= ({clicks,path,imageURL}:LinksMapInt) => {
                     </defs>
                 </svg>
                 <div className="SmallAndLargeLink">
-                    <a href="url" style={{color:"#1E40AF",fontWeight:"600",fontSize:"16px"}}>NilUrl.sh/try</a><br></br>
+                    <a href={path} style={{color:"#1E40AF",fontWeight:"600",fontSize:"16px"}}>{path}</a><br></br>
                     <a style={{fontWeight:"400",fontSize:"13.56px",color:"#6B7280"}}>{path}</a>
                 </div>
                 <div className="ButtonsContainerLinksMap">
