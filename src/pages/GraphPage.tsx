@@ -27,16 +27,40 @@ const GraphPage = () => {
     // if (isLoading) {
     //     return <div>Загрузка...</div>;
     // }
-    const [period,setPeriod] = useState(0)
+    const [period,setPeriod] = useState(1)
     const ChangePeriod = (prop:number) =>{
         setPeriod(prop)
     }
     console.log(period)
-    const [data,setData] = useState(new Array(4).fill(2))
+    const [clicks,setClicks] = useState([1,2,3,4])
+    const [niz,setNiz] = useState(["qwe","qwe","asd","asd"])
     let summ = 0
-    data.map((value, index, array)=>{
+    clicks.map((value, index, array)=>{
         summ+=value;
     })
+    useEffect(()=>{
+        if(period === 0){
+            setClicks([6,2,4,4,5,6])
+            setNiz(["0-10","10-20","20-30","30-40","40-50","50-60"])
+        }
+        if(period === 1){
+            setClicks([1,2,3,4,5,6])
+            setNiz(["0-4","4-8","8-12","12-16","16-20","20-24"])
+        }
+        if(period === 2){
+            setClicks([1,2,3,4,5,6])
+            setNiz(["0-4","4-8","8-12","12-16","16-20","20-24"])
+        }
+        if(period === 3){
+
+        }
+        if(period === 4){
+
+        }
+        if(period === 5){
+
+        }
+    },[period])
     return (
         <div>
             <HeaderLinksPage/>
@@ -98,7 +122,7 @@ const GraphPage = () => {
                         <div className="Charts">
                             <div className="countOfViewsPeriod">{summ}</div>
                             <div className="GlobalCountOfViewText">Общее количество кликов</div>
-                            <Chart labels={data}/>
+                            <Chart labels={niz} Clicks={clicks}/>
                         </div>
                         <div className="OptionsInGP">
                             <div style={{display:"flex",justifyContent:"space-between"}}>
