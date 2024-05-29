@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $inputText = $data['inputText'];
             $shortUrl = str_replace('https://nilurl.ru/', '', $data['shortUrl']);
             $tagValue = $data['tagValue'];
+            $tag_backgrounds = $data['tagColors']['color'];
+            $tag_svgcolor = $data['tagColors']['svgColor'];
             $android = $data['toggles']['android'] ?: 'false';
             $ios = $data['toggles']['ios'] ?: 'false';
             $comment = $data['comment'] ?? null;
@@ -42,21 +44,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
           
-            $maxIdQuery = "SELECT MAX(id_link) as max_id FROM links";
-            $maxIdResult = pg_query($conn, $maxIdQuery);
-            if ($maxIdResult) {
-                $maxIdRow = pg_fetch_assoc($maxIdResult);
-                $newIdLink = $maxIdRow['max_id'] + 1;
+            $maxIdQuery_links = "SELECT MAX(id_link) as max_id FROM links";
+            $maxIdResult_links = pg_query($conn, $maxIdQuery_links);
+            if ($maxIdResult_links) {
+                $maxIdRow_links = pg_fetch_assoc($maxIdResult_links);
+                $newIdLink_links = $maxIdRow_links['max_id'] + 1;}
 
+            $maxIdQuery_utm = "SELECT MAX(id_utm) as max_id FROM utm";
+                $maxIdResult_utm = pg_query($conn, $maxIdQuery_utm);
+                if ($maxIdResult_utm) {
+                    $maxIdRow_utm = pg_fetch_assoc($maxIdResult_utm);
+                    $newIdLink_utm = $maxIdRow_utm['max_id'] + 1;
              
-                $query = "INSERT INTO links (id_link, base_url, code_url, tag, user_id, commentary, date_last, date_now, ios, android, utm) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
-                $result = pg_query_params($conn, $query, array($newIdLink, $inputText, $shortUrl, $tagValue, $user_id, $comment, $dateLast, $dateNow, $ios, $android, $utm ? 'true' : 'false'));
+                $query = "INSERT INTO links (id_link, base_url, code_url, tag, user_id, commentary, date_last, date_now, ios, android, tag_backgrounds, tag_svgcolor, utm) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)";
+                $result = pg_query_params($conn, $query, array($newIdLink_links, $inputText, $shortUrl, $tagValue, $user_id, $comment, $dateLast, $dateNow, $ios, $android, $tag_backgrounds, $tag_svgcolor, $utm ? 'true' : 'false'));
 
                 if ($result && $utm) {
                   
                     $utmQuery = "INSERT INTO utm (id_utm, code_url, utm_source, utm_medium, utm_campaign, utm_term, utm_content, utm_referral) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
                     $utmResult = pg_query_params($conn, $utmQuery, array(
-                        $newIdLink,
+                        $newIdLink_utm,
                         $shortUrl,
                         $utm['UTM Source'] ?? 'false',
                         $utm['UTM Medium'] ?? 'false',
