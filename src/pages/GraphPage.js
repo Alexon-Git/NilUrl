@@ -12,35 +12,37 @@ import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
 import transition from "../LogicComp/Transition";
 import useAuth from "../pages/useAuth";
-import {DataFromServ, SortData} from "../LogicComp/GPFakeData";
+import { SortData} from "../LogicComp/GPFakeData";
 
 const GraphPage = () => {
     const [ssilki,setSsilki] = useState()
     const navigate = useNavigate();
+    const [DataFromServ,setDataFromServ] = useState()
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('data_clicks_user_all.php', {
                 method: 'GET',
                 credentials: 'include'
             });
-    
+
             const result = await response.json();
             setSsilki(result);
+            setDataFromServ(result)
         };
-    
+
         fetchData();
     }, []);
 
 
-    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
-    useEffect(() => {
-        if (!isLoading && !isLoggedIn && !isRedirected) {
-            setIsRedirected(true);
-            navigate('/login');
-        }
-    }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
+    // const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+    // useEffect(() => {
+    //     if (!isLoading && !isLoggedIn && !isRedirected) {
+    //         setIsRedirected(true);
+    //         navigate('/login');
+    //     }
+    // }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
 
- 
+
 
 
 
@@ -59,7 +61,7 @@ const GraphPage = () => {
     let now = new Date()
     useEffect(() => {
         let today = new Date(Date.now() - 1000 * 3600 * 4);
-    
+
         const processTimePeriod = (dateFake, periodLimits, labels) => {
             let arrayC = new Array(periodLimits.length).fill(0);
             dateFake.forEach((valueq) => {
@@ -75,7 +77,7 @@ const GraphPage = () => {
             setClicks(arrayC);
             setNiz(labels);
         };
-    
+
         const processHourPeriod = (dateFake, hours, labels) => {
             let arrayC = new Array(hours.length).fill(0);
             dateFake.forEach((valueq) => {
@@ -91,7 +93,7 @@ const GraphPage = () => {
             setClicks(arrayC);
             setNiz(labels);
         };
-    
+
         const processDayPeriod = (dateFake, days, labels) => {
             let arrayC = new Array(days.length).fill(0);
             dateFake.forEach((valueq) => {
@@ -107,7 +109,7 @@ const GraphPage = () => {
             setClicks(arrayC);
             setNiz(labels);
         };
-    
+
         const processMonthPeriod = (dateFake, months, labels) => {
             let arrayC = new Array(months.length).fill(0);
             dateFake.forEach((valueq) => {
@@ -123,7 +125,7 @@ const GraphPage = () => {
             setClicks(arrayC);
             setNiz(labels);
         };
-    
+
         switch (period) {
             case 0:
                 processTimePeriod(SortData(DataFromServ, 0), [20 * 60 * 1000, 40 * 60 * 1000, 60 * 60 * 1000], ["0-20 минут назад", "20-40 минут назад", "40-60 минут назад"]);
@@ -147,11 +149,11 @@ const GraphPage = () => {
                 break;
         }
     }, [period, DataFromServ]);
-    
 
-    if (isLoading) {
-        return <div>Загрузка...</div>;
-    }
+
+    // if (isLoading) {
+    //     return <div>Загрузка...</div>;
+    // }
     return (
         <div>
             <HeaderLinksPage/>
