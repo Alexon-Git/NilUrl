@@ -40,7 +40,7 @@ const GraphPage = () => {
         }
     }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
 
-
+ 
 
 
 
