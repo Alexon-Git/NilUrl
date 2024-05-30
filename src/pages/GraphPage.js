@@ -57,96 +57,103 @@ const GraphPage = () => {
     clicks.map((value, index, array)=>{
         summ+=value;
     })
-    useEffect(() => {
-        let today = new Date(Date.now() - 1000 * 3600 * 4);
+    useEffect(()=>{
+        let today = new Date(Date.now()-1000*3600*4)
+        if(period === 0){
+            const dateFake = SortData(DataFromServ,0)
 
-        const processTimePeriod = (dateFake, periodLimits, labels) => {
-            let arrayC = new Array(periodLimits.length).fill(0);
-            dateFake.forEach((valueq) => {
-                const value = new Date(valueq.time);
-                let condition = today.getTime() - value.getTime();
-                for (let i = 0; i < periodLimits.length; i++) {
-                    if (condition <= periodLimits[i]) {
-                        arrayC[i]++;
-                        break;
-                    }
-                }
-            });
-            setClicks(arrayC);
-            setNiz(labels);
-        };
+            let arrayC = [0,0,0]
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = today.getTime() - value.getTime()
+                if(condition <= 1000*60*20) arrayC[2]++;
+                if(condition <= 1000*60*40 && condition > 1000*60*20) arrayC[1]++;
+                if(condition <= 1000*60*60 && condition > 1000*60*40) arrayC[0]++;
+            })
 
-        const processHourPeriod = (dateFake, hours, labels) => {
-            let arrayC = new Array(hours.length).fill(0);
-            dateFake.forEach((valueq) => {
-                const value = new Date(valueq.time);
-                let condition = Math.abs(value.getHours() - today.getHours());
-                for (let i = 0; i < hours.length; i++) {
-                    if (condition <= hours[i]) {
-                        arrayC[i]++;
-                        break;
-                    }
-                }
-            });
-            setClicks(arrayC);
-            setNiz(labels);
-        };
+            setClicks(arrayC)
+            setNiz(["40-60 минут назад","20-40 минут назад","0-20 минут назад"])
 
-        const processDayPeriod = (dateFake, days, labels) => {
-            let arrayC = new Array(days.length).fill(0);
-            dateFake.forEach((valueq) => {
-                const value = new Date(valueq.time);
-                let condition = Math.abs(value.getDay() - today.getDay());
-                for (let i = 0; i < days.length; i++) {
-                    if (condition === days[i]) {
-                        arrayC[i]++;
-                        break;
-                    }
-                }
-            });
-            setClicks(arrayC);
-            setNiz(labels);
-        };
-
-        const processMonthPeriod = (dateFake, months, labels) => {
-            let arrayC = new Array(months.length).fill(0);
-            dateFake.forEach((valueq) => {
-                const value = new Date(valueq.time);
-                let condition = Math.abs(value.getMonth() - today.getMonth());
-                for (let i = 0; i < months.length; i++) {
-                    if (condition <= months[i]) {
-                        arrayC[i]++;
-                        break;
-                    }
-                }
-            });
-            setClicks(arrayC);
-            setNiz(labels);
-        };
-
-        switch (period) {
-            case 0:
-                processTimePeriod(SortData(DataFromServ, 0), [20 * 60 * 1000, 40 * 60 * 1000, 60 * 60 * 1000], ["0-20 минут назад", "20-40 минут назад", "40-60 минут назад"]);
-                break;
-            case 1:
-                processHourPeriod(SortData(DataFromServ, 1), [4, 8, 12, 16, 20, 24], ["0-4 часов назад", "4-8 часов назад", "8-12 часов назад", "12-16 часов назад", "16-20 часов назад", "20-24 часов назад"]);
-                break;
-            case 2:
-                processDayPeriod(SortData(DataFromServ, 2), [0, 1, 2, 3, 4, 5, 6], ["сегодня", "1 день назад", "2 дня назад", "3 дня назад", "4 дня назад", "5 дней назад", "6 дней назад"]);
-                break;
-            case 3:
-                processDayPeriod(SortData(DataFromServ, 3), Array.from({ length: 30 }, (_, i) => i), Array.from({ length: 30 }, (_, i) => `${i} дней назад`));
-                break;
-            case 4:
-                processMonthPeriod(SortData(DataFromServ, 3), [0, 1, 2], ["этот месяц", "1 месяц назад", "2 месяца назад"]);
-                break;
-            case 5:
-                // Добавьте обработку для периода 5, если необходимо
-                break;
-            default:
-                break;
         }
-    }, [period, DataFromServ]);
+        if(period === 1){
+            const dateFake = SortData(DataFromServ,1)
+
+            let arrayC = [0,0,0,0,0,0]
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = today.getTime() - value.getTime()
+                if(condition <= 4 * 3600 * 1000) arrayC[5]++;
+                if(condition <= 8 * 3600 * 1000 && condition > 4 * 3600 * 1000) arrayC[4]++;
+                if(condition <= 12 * 3600 * 1000 && condition > 8 * 3600 * 1000) arrayC[3]++;
+                if(condition <= 16 * 3600 * 1000 && condition > 12 * 3600 * 1000) arrayC[2]++;
+                if(condition <= 20 * 3600 * 1000 && condition > 16 * 3600 * 1000) arrayC[1]++;
+                if(condition <= 24 * 3600 * 1000 && condition > 20 * 3600 * 1000) arrayC[0]++;
+            })
+
+            setClicks(arrayC)
+            setNiz(["24-20 часов назад","20-16 часов назад","16-12 часов назад","12-8 часов назад","8-4 часов назад","4-0 часов назад"])
+        }
+        if(period === 2){
+            const dateFake = SortData(DataFromServ,2)
+            let arrayC = [0,0,0,0,0,0,0]
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = today.getTime() - value.getTime()
+                if(condition <= 24 * 3600 * 1000) arrayC[6]++;
+                if(condition <= 2*24 * 3600 * 1000 && condition > 24 * 3600 * 1000) arrayC[5]++;
+                if(condition <= 3*24 * 3600 * 1000 && condition > 2*24 * 3600 * 1000) arrayC[4]++;
+                if(condition <= 4*24 * 3600 * 1000 && condition > 3*24 * 3600 * 1000) arrayC[3]++;
+                if(condition <= 5*24 * 3600 * 1000 && condition > 4*24 * 3600 * 1000) arrayC[2]++;
+                if(condition <= 6*24 * 3600 * 1000 && condition > 5*24 * 3600 * 1000) arrayC[1]++;
+                if(condition <= 7*24 * 3600 * 1000 && condition > 6*24 * 3600 * 1000) arrayC[0]++;
+            })
+            setClicks(arrayC)
+            setNiz(["6 день назад","5 день назад","4 день назад","3 день назад","2 день назад","1 день назад","сегодня"])
+        }
+        if(period === 3){
+            const dateFake = SortData(DataFromServ,3)
+
+
+
+            let arrayC = new Array(30).fill(0)
+            let arrNiz = new Array(30).fill(0)
+
+            arrNiz.map((value,index,array)=>{
+                array[index] = 30-index
+            })
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = today.getTime() - value.getTime()
+
+                for(let i = 0;i<30;i++){
+                    let indexNorm = i+1;
+                    if(condition<=24 * 3600 * 1000*indexNorm && condition > 24 * 3600 * 1000*i){
+                        arrayC[29-i]++;
+                    }
+                }
+
+            })
+            setClicks(arrayC)
+
+            setNiz(arrNiz)
+        }
+        if(period === 4){
+            const dateFake = SortData(DataFromServ,3)
+            let arrayC = [0,0,0]
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = Math.abs(value.getMonth()-today.getMonth())
+                if(condition <= 0) arrayC[2]++;
+                if(condition <= 1 && condition > 0) arrayC[1]++;
+                if(condition <= 2 && condition > 1) arrayC[0]++;
+            })
+            setClicks(arrayC)
+            setNiz(["2 месяц назад","1 месяц назад","этот месяц",])
+        }
+        if(period === 5){
+
+        }
+    },[period])
 
 
     // if (isLoading) {
