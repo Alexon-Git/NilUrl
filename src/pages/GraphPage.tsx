@@ -32,13 +32,13 @@ const GraphPage = () => {
     // }, []);
 
 
-    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
-    useEffect(() => {
-        if (!isLoading && !isLoggedIn && !isRedirected) {
-            setIsRedirected(true);
-            navigate('/login');
-        }
-    }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
+    // const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+    // useEffect(() => {
+    //     if (!isLoading && !isLoggedIn && !isRedirected) {
+    //         setIsRedirected(true);
+    //         navigate('/login');
+    //     }
+    // }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
 
 
 
@@ -56,7 +56,6 @@ const GraphPage = () => {
     clicks.map((value, index, array)=>{
         summ+=value;
     })
-    let now = new Date()
     useEffect(()=>{
         let today = new Date(Date.now()-1000*3600*4)
         if(period === 0){
@@ -66,29 +65,32 @@ const GraphPage = () => {
             dateFake.map((valueq, index, array)=>{
                 const value = new Date(valueq.time)
                 const condition = today.getTime() - value.getTime()
-                if(condition <= 20) arrayC[0]++;
+                if(condition <= 20) arrayC[2]++;
                 if(condition <= 40 && condition > 20) arrayC[1]++;
-                if(condition <= 40 && condition > 60) arrayC[2]++;
+                if(condition <= 40 && condition > 60) arrayC[0]++;
             })
 
             setClicks(arrayC)
-            setNiz(["0-20 минут назад","20-40 минут назад","40-60 минут назад"])
+            setNiz(["40-60 минут назад","20-40 минут назад","0-20 минут назад"])
 
         }
         if(period === 1){
             const dateFake = SortData(DataFromServ,1)
 
-            let arrayC = [0,0,0]
+            let arrayC = [0,0,0,0,0,0]
             dateFake.map((valueq, index, array)=>{
                 const value = new Date(valueq.time)
                 const condition = Math.abs(value.getHours()-today.getHours())
-                if(condition <= 8) arrayC[0]++;
-                if(condition <= 16 && condition > 8) arrayC[1]++;
-                if(condition <= 24 && condition > 16) arrayC[2]++;
+                if(condition <= 4) arrayC[5]++;
+                if(condition <= 8 && condition > 4) arrayC[4]++;
+                if(condition <= 12 && condition > 8) arrayC[3]++;
+                if(condition <= 16 && condition > 12) arrayC[2]++;
+                if(condition <= 20 && condition > 16) arrayC[1]++;
+                if(condition <= 24 && condition > 20) arrayC[0]++;
             })
 
             setClicks(arrayC)
-            setNiz(["0-8 часов назад","8-16 часов назад","16-24 часов назад"])
+            setNiz(["24-20 часов назад","20-16 часов назад","16-12 часов назад","12-8 часов назад","8-4 часов назад","4-0 часов назад"])
         }
         if(period === 2){
             const dateFake = SortData(DataFromServ,2)
@@ -96,29 +98,33 @@ const GraphPage = () => {
             dateFake.map((valueq, index, array)=>{
                 const value = new Date(valueq.time)
                 const condition = Math.abs(value.getDay()-today.getDay())
-                if(condition == 0) arrayC[0]++;
-                if(condition == 1) arrayC[1]++;
-                if(condition == 2) arrayC[2]++;
-                if(condition == 3) arrayC[2]++;
+                if(condition == 0) arrayC[6]++;
+                if(condition == 1) arrayC[5]++;
+                if(condition == 2) arrayC[4]++;
+                if(condition == 3) arrayC[3]++;
                 if(condition == 4) arrayC[2]++;
-                if(condition == 5) arrayC[2]++;
-                if(condition == 6) arrayC[2]++;
+                if(condition == 5) arrayC[1]++;
+                if(condition == 6) arrayC[0]++;
             })
             setClicks(arrayC)
-            setNiz(["сегодня","1 день назад","2 день назад","3 день назад","4 день назад","5 день назад","6 день назад"])
+            setNiz(["6 день назад","5 день назад","4 день назад","3 день назад","2 день назад","1 день назад","сегодня"])
         }
         if(period === 3){
             const dateFake = SortData(DataFromServ,3)
-            let arrayC = [0,0,0]
+            let arrayC = new Array(30).fill(0)
             dateFake.map((valueq, index, array)=>{
                 const value = new Date(valueq.time)
                 const condition = Math.abs(value.getDay()-today.getDay())
-                if(condition <= 10) arrayC[0]++;
-                if(condition <= 20 && condition > 10) arrayC[1]++;
-                if(condition <= 30 && condition > 20) arrayC[2]++;
+                arrayC[condition]++;
             })
             setClicks(arrayC)
-            setNiz(["0-10 дней назад","11-20 дней назад","21-30 дней назад"])
+            let arrNiz = new Array(30)
+            let qwe = 30;
+            for(let i = 30;i>0;i--){
+                arrNiz[i] = Math.abs(i - qwe);
+
+            }
+            setNiz(arrNiz)
         }
         if(period === 4){
             const dateFake = SortData(DataFromServ,3)
@@ -126,12 +132,12 @@ const GraphPage = () => {
             dateFake.map((valueq, index, array)=>{
                 const value = new Date(valueq.time)
                 const condition = Math.abs(value.getMonth()-today.getMonth())
-                if(condition <= 0) arrayC[0]++;
+                if(condition <= 0) arrayC[2]++;
                 if(condition <= 1 && condition > 0) arrayC[1]++;
-                if(condition <= 2 && condition > 1) arrayC[2]++;
+                if(condition <= 2 && condition > 1) arrayC[0]++;
             })
             setClicks(arrayC)
-            setNiz(["этот месяц","1 месяц назад","2 месяц назад"])
+            setNiz(["2 месяц назад","1 месяц назад","этот месяц",])
         }
         if(period === 5){
 
