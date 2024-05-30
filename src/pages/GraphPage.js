@@ -26,7 +26,7 @@ const GraphPage = () => {
             });
             const result = await response.json();
             setSsilki(result);
-            setDataFromServ(DataFromServFake)
+            setDataFromServ(result)
         };
 
         fetchData();
