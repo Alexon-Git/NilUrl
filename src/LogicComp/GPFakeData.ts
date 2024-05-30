@@ -38,7 +38,7 @@ export interface DateFromServInterface {
     id:number
 }
 
-export const DataFromServ:DateFromServInterface[] =
+export const DataFromServFake:DateFromServInterface[] =
     [
         {
             "code_url": "cat",

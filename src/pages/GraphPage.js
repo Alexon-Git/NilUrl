@@ -12,22 +12,21 @@ import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
 import transition from "../LogicComp/Transition";
 import useAuth from "../pages/useAuth";
-import { SortData} from "../LogicComp/GPFakeData";
+import {DataFromServFake, SortData} from "../LogicComp/GPFakeData";
 
 const GraphPage = () => {
     const [ssilki,setSsilki] = useState()
     const navigate = useNavigate();
-    const [DataFromServ,setDataFromServ] = useState()
+    const [DataFromServ,setDataFromServ] = useState(DataFromServFake)
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('data_clicks_user_all.php', {
                 method: 'GET',
                 credentials: 'include'
             });
-
             const result = await response.json();
             setSsilki(result);
-            setDataFromServ(result)
+            setDataFromServ(DataFromServFake)
         };
 
         fetchData();
@@ -58,7 +57,6 @@ const GraphPage = () => {
     clicks.map((value, index, array)=>{
         summ+=value;
     })
-    let now = new Date()
     useEffect(() => {
         let today = new Date(Date.now() - 1000 * 3600 * 4);
 
