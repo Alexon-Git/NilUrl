@@ -117,8 +117,16 @@ const GpPeriod = ({ChangePeriodFunc}:GpPeriodInterface) => {
                 </li>
                 {
                     rule &&
-                    <li className="LIDP">
+                    <li className="LIDP" onClick={(e)=>{setPeriod("Последние 3 месяца");clickToGalki(4);}}>
                         <div>Последние 3 месяца</div>
+                        {
+                        flagsToGalka[4] &&
+                        <div style={{marginLeft:"auto",marginRight:"5px"}}>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.25939 0.128174C4.12502 0.128174 3.9875 0.181299 3.88437 0.284424C3.67812 0.490674 3.67812 0.828174 3.88437 1.03442L10.9437 8.0938L3.9875 15.05C3.78125 15.2563 3.78125 15.5938 3.9875 15.8C4.19375 16.0063 4.53125 16.0063 4.7375 15.8L12.0719 8.4688C12.2781 8.26255 12.2781 7.92505 12.0719 7.7188L4.6375 0.284424C4.53125 0.178174 4.39689 0.128174 4.25939 0.128174Z" fill="#2F2F2F"/>
+                            </svg>
+                        </div>
+                    }
                     </li>
                 }
                 {
@@ -129,8 +137,16 @@ const GpPeriod = ({ChangePeriodFunc}:GpPeriodInterface) => {
                 }
                 {
                     rule &&
-                    <li className="LIDP">
+                    <li className="LIDP" onClick={(e)=>{setPeriod("Последний год");clickToGalki(5);}}>
                         <div>Последний год</div>
+                        {
+                        flagsToGalka[5] &&
+                        <div style={{marginLeft:"auto",marginRight:"5px"}}>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.25939 0.128174C4.12502 0.128174 3.9875 0.181299 3.88437 0.284424C3.67812 0.490674 3.67812 0.828174 3.88437 1.03442L10.9437 8.0938L3.9875 15.05C3.78125 15.2563 3.78125 15.5938 3.9875 15.8C4.19375 16.0063 4.53125 16.0063 4.7375 15.8L12.0719 8.4688C12.2781 8.26255 12.2781 7.92505 12.0719 7.7188L4.6375 0.284424C4.53125 0.178174 4.39689 0.128174 4.25939 0.128174Z" fill="#2F2F2F"/>
+                            </svg>
+                        </div>
+                    }
                     </li>
                 }
                 {
