@@ -80,7 +80,7 @@ const SvgButtonContainer = ({ onTagClick }) => {
   const handleCancelClick = (event) => {
     event.preventDefault();
     onTagClick({
-      color: "rgba(255, 255, 255, 1)",
+      color: "rgba(229, 228, 226, 1)",
       svgColor: "#000000",
     });
   };
