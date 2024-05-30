@@ -2,17 +2,79 @@ import React, {useEffect, useRef, useState} from 'react';
 import MapGP from "./MapGP";
 import "../../styles/GraphPage/AddresGp.css"
 import {
+    DateFromServInterface,
     GPFakeDataBrowser,
     GPFakeDataCity,
     GPFakeDataCountry,
     GPFakeDataDevice,
     GPFakeDataOC
 } from "../../LogicComp/GPFakeData";
-const DevicesGp = () => {
 
-    const Device = [...GPFakeDataDevice]
-    const Browser = [...GPFakeDataBrowser]
-    const OC = [...GPFakeDataOC]
+
+interface AddresGpInt{
+    Dates:DateFromServInterface[]
+}
+
+interface DualData{
+    country:string,
+    clicks:number
+}
+const DevicesGp = ({Dates}:AddresGpInt) => {
+
+    const Device:DualData[] = []
+    const OC:DualData[] = []
+    const Browser:DualData[] = []
+    Dates.map((value,index)=>{
+        let flag:boolean = false;
+        Device.map((country,indexC)=>{
+            if(country.country == value.device) {
+                country.clicks++;
+                flag = true
+            }
+        })
+        if(flag === false){
+            let temp:DualData = {
+                country:value.device,
+                clicks:1
+            }
+            Device.push(temp)
+        }
+    })
+
+    Dates.map((value,index)=>{
+        let flag:boolean = false;
+        OC.map((country,indexC)=>{
+            if(country.country == value.os) {
+                country.clicks++;
+                flag = true
+            }
+        })
+        if(flag === false){
+            let temp:DualData = {
+                country:value.os,
+                clicks:1
+            }
+            OC.push(temp)
+        }
+    })
+
+    Dates.map((value,index)=>{
+        let flag:boolean = false;
+        Browser.map((country,indexC)=>{
+            if(country.country == value.browser) {
+                country.clicks++;
+                flag = true
+            }
+        })
+        if(flag === false){
+            let temp:DualData = {
+                country:value.browser,
+                clicks:1
+            }
+            Browser.push(temp)
+        }
+    })
+
     const [data,setData] = useState(Device)
     const [state,setState] = useState(
         new Array(3).fill(false)
@@ -76,7 +138,7 @@ const DevicesGp = () => {
             </div>
             {
                 data.map((value, index, array)=>
-                    <MapGP name={value.name} clickCount={value.clicks} key={index} SVG={"qwe"}/>
+                    <MapGP name={value.country} clickCount={value.clicks} key={index} SVG={"qwe"}/>
                 )
             }
         </div>

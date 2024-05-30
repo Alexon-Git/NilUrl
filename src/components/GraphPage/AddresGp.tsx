@@ -2,12 +2,56 @@ import React, {useRef, useState} from 'react';
 import "../../styles/GraphPage/AddresGp.css"
 
 import MapGP from "./MapGP";
-import {GPFakeDataCity, GPFakeDataCountry} from "../../LogicComp/GPFakeData";
-const AddresGp = () => {
+import {DateFromServInterface, GPFakeDataCity, GPFakeDataCountry} from "../../LogicComp/GPFakeData";
 
+interface AddresGpInt{
+    Dates:DateFromServInterface[]
+}
+
+interface DualData{
+    country:string,
+    clicks:number
+}
+
+const AddresGp = ({Dates}:AddresGpInt) => {
+    console.log(Dates)
     const [flag,setFlag] = useState(false)
-    const Cities = [...GPFakeDataCity]
-    const Countries = [...GPFakeDataCountry]
+    const Countries:DualData[] = []
+    const City:DualData[] = []
+    Dates.map((value,index)=>{
+        let flag:boolean = false;
+        Countries.map((country,indexC)=>{
+            if(country.country == value.country) {
+                country.clicks++;
+                flag = true
+            }
+        })
+        if(flag === false){
+            let temp:DualData = {
+                country:value.country,
+                clicks:1
+            }
+            Countries.push(temp)
+        }
+    })
+
+    Dates.map((value,index)=>{
+        let flag:boolean = false;
+        City.map((country,indexC)=>{
+            if(country.country == value.city) {
+                country.clicks++;
+                flag = true
+            }
+        })
+        if(flag === false){
+            let temp:DualData = {
+                country:value.city,
+                clicks:1
+            }
+            City.push(temp)
+        }
+    })
+
     const [data,setData] = useState(Countries)
     const refToBack = useRef<HTMLDivElement>(null)
 
@@ -25,7 +69,7 @@ const AddresGp = () => {
             refToBack.current.style.transition = "0.2s ease-in"
             refToBack.current.style.left = "103px"
             setFlag(true)
-            setData(Cities)
+            setData(City)
         }
     }
 
@@ -47,7 +91,7 @@ const AddresGp = () => {
             </div>
             {
                 data.map((value, index, array)=>
-                    <MapGP name={value.name} clickCount={value.clicks} key={index} SVG={"qwe"}/>
+                    <MapGP name={value.country} clickCount={value.clicks} key={index} SVG={"qwe"}/>
                 )
             }
         </div>

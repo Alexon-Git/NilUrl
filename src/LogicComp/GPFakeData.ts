@@ -26,7 +26,7 @@ export const GPFakeDataOC:GPFakeDataInterface[] = [
     {clicks:2,name:"Mac"}
 ]
 
-interface DateFromServInterface {
+export interface DateFromServInterface {
     code_url:string,
     redirect:boolean,
     device:string,

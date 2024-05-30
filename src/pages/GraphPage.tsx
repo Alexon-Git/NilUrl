@@ -213,10 +213,10 @@ const GraphPage = () => {
                             <div className="OptionsInGP">
                                 <div style={{display:"flex",justifyContent:"space-between"}}>
                                     <div className="AddressesInGP">
-                                        <AddresGp/>
+                                        <AddresGp Dates={DataFromServ}/>
                                     </div>
                                     <div className="DevicesInGP">
-                                        <DevicesGp/>
+                                        <DevicesGp Dates={DataFromServ}/>
                                     </div>
                                 </div>
                                 <div style={{display:"flex",justifyContent:"space-between",marginTop:"40px"}}>
