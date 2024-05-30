@@ -32,13 +32,13 @@ const GraphPage = () => {
     // }, []);
 
 
-    // const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
-    // useEffect(() => {
-    //     if (!isLoading && !isLoggedIn && !isRedirected) {
-    //         setIsRedirected(true);
-    //         navigate('/login');
-    //     }
-    // }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
+    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+    useEffect(() => {
+        if (!isLoading && !isLoggedIn && !isRedirected) {
+            setIsRedirected(true);
+            navigate('/login');
+        }
+    }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
 
 
 

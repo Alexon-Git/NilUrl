@@ -26,7 +26,7 @@ const CreatingLink = () => {
   const [tagValue, setTagValue] = useState("");
   const [tagColors, setTagColors] = useState({
     svgColor: "#000000",
-    color: "rgba(255, 255, 255, 1)",
+    color: "rgba(229, 228, 226, 1)",
   });
   const [toggles, setToggles] = useState([
     {
