@@ -12,24 +12,24 @@ import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
 import transition from "../LogicComp/Transition";
 import useAuth from "../pages/useAuth";
+import {DataFromServ, SortData} from "../LogicComp/GPFakeData";
 
 const GraphPage = () => {
     const [ssilki,setSsilki] = useState()
     const navigate = useNavigate();
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch('data_clicks_user_all.php', {
-                method: 'GET',
-                credentials: 'include'
-            });
-
-            const result = await response.json();
-            setSsilki(result);
-        };
-
-        fetchData();
-    }, []);
-    console.log(ssilki)
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await fetch('data_clicks_user_all.php', {
+    //             method: 'GET',
+    //             credentials: 'include'
+    //         });
+    //
+    //         const result = await response.json();
+    //         setSsilki(result);
+    //     };
+    //
+    //     fetchData();
+    // }, []);
 
 
     // const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
@@ -45,44 +45,99 @@ const GraphPage = () => {
 
 
 
+
     const [period,setPeriod] = useState(1)
     const ChangePeriod = (prop:number) =>{
         setPeriod(prop)
     }
-    console.log(period)
     const [clicks,setClicks] = useState([1,2,3,4])
     const [niz,setNiz] = useState(["qwe","qwe","asd","asd"])
-
-
-
-
     let summ = 0
     clicks.map((value, index, array)=>{
         summ+=value;
     })
     let now = new Date()
     useEffect(()=>{
+        let today = new Date(Date.now()-1000*3600*4)
         if(period === 0){
-            setClicks([6,2,4,4,5,6])
-            setNiz(["0-10","10-20","20-30","30-40","40-50","50-60"])
+            const dateFake = SortData(DataFromServ,0)
+
+            let arrayC = [0,0,0]
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = today.getTime() - value.getTime()
+                if(condition <= 20) arrayC[0]++;
+                if(condition <= 40 && condition > 20) arrayC[1]++;
+                if(condition <= 40 && condition > 60) arrayC[2]++;
+            })
+
+            setClicks(arrayC)
+            setNiz(["0-20 минут назад","20-40 минут назад","40-60 минут назад"])
+
         }
         if(period === 1){
-            setClicks([1,2,3,4,5,6])
-            setNiz(["0-4","4-8","8-12","12-16","16-20","20-24"])
+            const dateFake = SortData(DataFromServ,1)
+
+            let arrayC = [0,0,0]
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = Math.abs(value.getHours()-today.getHours())
+                if(condition <= 8) arrayC[0]++;
+                if(condition <= 16 && condition > 8) arrayC[1]++;
+                if(condition <= 24 && condition > 16) arrayC[2]++;
+            })
+
+            setClicks(arrayC)
+            setNiz(["0-8 часов назад","8-16 часов назад","16-24 часов назад"])
         }
         if(period === 2){
-
+            const dateFake = SortData(DataFromServ,2)
+            let arrayC = [0,0,0,0,0,0,0]
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = Math.abs(value.getDay()-today.getDay())
+                if(condition == 0) arrayC[0]++;
+                if(condition == 1) arrayC[1]++;
+                if(condition == 2) arrayC[2]++;
+                if(condition == 3) arrayC[2]++;
+                if(condition == 4) arrayC[2]++;
+                if(condition == 5) arrayC[2]++;
+                if(condition == 6) arrayC[2]++;
+            })
+            setClicks(arrayC)
+            setNiz(["сегодня","1 день назад","2 день назад","3 день назад","4 день назад","5 день назад","6 день назад"])
         }
         if(period === 3){
-
+            const dateFake = SortData(DataFromServ,3)
+            let arrayC = [0,0,0]
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = Math.abs(value.getDay()-today.getDay())
+                if(condition <= 10) arrayC[0]++;
+                if(condition <= 20 && condition > 10) arrayC[1]++;
+                if(condition <= 30 && condition > 20) arrayC[2]++;
+            })
+            setClicks(arrayC)
+            setNiz(["0-10 дней назад","11-20 дней назад","21-30 дней назад"])
         }
         if(period === 4){
-
+            const dateFake = SortData(DataFromServ,3)
+            let arrayC = [0,0,0]
+            dateFake.map((valueq, index, array)=>{
+                const value = new Date(valueq.time)
+                const condition = Math.abs(value.getMonth()-today.getMonth())
+                if(condition <= 0) arrayC[0]++;
+                if(condition <= 1 && condition > 0) arrayC[1]++;
+                if(condition <= 2 && condition > 1) arrayC[2]++;
+            })
+            setClicks(arrayC)
+            setNiz(["этот месяц","1 месяц назад","2 месяц назад"])
         }
         if(period === 5){
 
         }
     },[period])
+
     // if (isLoading) {
     //     return <div>Загрузка...</div>;
     // }

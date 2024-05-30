@@ -55,7 +55,6 @@ const DevicesGp = () => {
         }
     }
 
-    console.log(state)
     return (
         <div>
             <div className="AddressCountry">
