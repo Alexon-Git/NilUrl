@@ -68,6 +68,7 @@ const SettingsForm = () => {
           localStorage.setItem('refresh_token', data.refresh_token);
         } else {
           const text = data.message;
+          window.location.reload();
         alert(text);
         }
       })

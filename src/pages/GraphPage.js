@@ -29,14 +29,28 @@ const GraphPage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            try {
             const response = await fetch('data_clicks_user_all.php', {
                 method: 'GET',
                 credentials: 'include'
             });
+
             const result = await response.json();
-            setSsilki(result);
-            setDataFromServ(result);
-            setLoading(false);
+
+            if (result.success === false) {
+                window.location.reload();
+            } else {
+                setSsilki(result);
+                setDataFromServ(result);
+                setLoading(false);
+                
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+            window.location.reload();
+        }
+           
+            
         };
 
         fetchData();
@@ -238,7 +252,7 @@ const GraphPage = () => {
                                 <div className="GlobalCountOfViewText">Общее количество кликов</div>
                                 <Chart labels={niz} Clicks={clicks}/>
                             </div>
-                            {DataFromServ.length > 0 && (<div className="OptionsInGP">
+                            {DataFromServ.length > 0 &&  (<div className="OptionsInGP">
                                 <div style={{display:"flex",justifyContent:"space-between"}}>
                                     <div className="AddressesInGP">
                                         <AddresGp Dates={DataFromServ}/>
