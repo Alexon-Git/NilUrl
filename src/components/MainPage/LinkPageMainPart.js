@@ -22,7 +22,8 @@ const LinkPageMainPart = () => {
           .then(response => response.json())
           .then(data => {
             if (data && data.length > 0) {
-              setLinks(data.map(link => ({
+              setLinks(data.map((link, index) => ({
+                key: index + 1, // Assign a key value starting from 1
                 Data: link.date_now,
                 SvgPath: "/test.svg",
                 pathS: `nilurl.ru/${link.code_url}`,
@@ -43,6 +44,9 @@ const LinkPageMainPart = () => {
     }
   }, []);
 
+  // Find the highest key value
+  const highestKey = links.length > 0 ? Math.max(...links.map(link => link.key)) : 0;
+
   return (
     <div className="LinkPageMainPart">
       <div className="TopContainer">
@@ -50,14 +54,14 @@ const LinkPageMainPart = () => {
         <div className="RightTopCont">
           <SortNew />
           <TagsColumn/>
-          <CreateLinkNew />
+          <CreateLinkNew highestKey={highestKey} /> {/* Pass highestKey as a prop */}
         </div>
       </div>
       <div className="MainContainer">
         <div className="LinksContainer">
           {links.map((link, index) => (
             <LinksMapNew
-              key={index}
+              key={link.key} // Use the assigned key
               Data={link.Data}
               SvgPath={link.SvgPath}
               pathS={link.pathS}
@@ -66,11 +70,11 @@ const LinkPageMainPart = () => {
               Android={link.Android}
               IOS={link.IOS}
               clicks={link.clicks}
-              svgColor ={link.svgColor}
-              backgrounds = {link.backgrounds}
-              tagValue = {link.tagValue}
-              timer_flag = {link.timer_flag}
-              tag_flag = {link.tag_flag}
+              svgColor={link.svgColor}
+              backgrounds={link.backgrounds}
+              tagValue={link.tagValue}
+              timer_flag={link.timer_flag}
+              tag_flag={link.tag_flag}
             />
           ))}
           <LinksMapNew
@@ -83,11 +87,11 @@ const LinkPageMainPart = () => {
               Android={true}
               IOS={true}
               clicks={5}
-              svgColor ={"#63BD43"}
-              backgrounds = {"rgba(100, 235, 240, 1)"}
-              tagValue = {"тэг"}
-              timer_flag = {1}
-              tag_flag = {1}
+              svgColor={"#63BD43"}
+              backgrounds={"rgba(100, 235, 240, 1)"}
+              tagValue={"тэг"}
+              timer_flag={1}
+              tag_flag={1}
           />
         </div>
       </div>

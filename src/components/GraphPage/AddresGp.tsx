@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import "../../styles/GraphPage/AddresGp.css"
 
 import MapGP from "./MapGP";
-import {DateFromServInterface, GPFakeDataCity, GPFakeDataCountry} from "../../LogicComp/GPFakeData";
+import {DateFromServInterface} from "../../LogicComp/GPFakeData";
 
 interface AddresGpInt{
     Dates:DateFromServInterface[]

@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
 import CryptoJS from "crypto-js";
+import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode';
 import {
   FAQ,
   Toggle,
@@ -10,8 +12,20 @@ import {
 } from "../../components";
 
 const CreatingLink = () => {
-  // const [isPro, setIsPro] = useState(false);
-  const isPro = true;
+  useEffect(() => {
+    const accessToken = Cookies.get('access_token');
+    if (accessToken) {
+        const decodedToken = jwtDecode(accessToken);
+        const user_status = decodedToken.user_status;
+        if (user_status === "premium") {
+          setIsPro(true);
+        } 
+
+    }
+}, []);
+
+
+  const [isPro, setIsPro] = useState(false);
   const [activePopupId, setActivePopupId] = useState(null);
   const [showPopups, setShowPopups] = useState({
     utm: false,
@@ -399,8 +413,8 @@ const CreatingLink = () => {
                 <div className="functional__item-info">
                   <UpgradeToProPopup onClose={() => closePopup(toggle.id)}>
                     <p className="popup-message">
-                      Статистику за последние 3 месяца можно просмотреть в
-                      проекте с тарифным планом Pro. Создайте проект или
+                      Статистику за последний год, а так же более детальную настройка ссылок можно получить в
+                      проекте с тарифным планом Premium. Создайте проект или
                       перейдите к существующему проекту для обновления.
                     </p>
                     <button className="popup-button">Обновиться до Pro</button>

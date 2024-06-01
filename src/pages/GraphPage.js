@@ -1,23 +1,32 @@
-import React, {useEffect, useState} from "react";
-
-import "../styles/GraphPage/GraphPage.css"
+import React, { useEffect, useState } from "react";
+import "../styles/GraphPage/GraphPage.css";
 import GPPeriod from "../components/GraphPage/GPPeriod";
 import Chart from "../components/GraphPage/Chart";
 import AddresGp from "../components/GraphPage/AddresGp";
 import DevicesGp from "../components/GraphPage/DevicesGp";
 import RefsGp from "../components/GraphPage/RefsGp";
 import TopRefs from "../components/GraphPage/TopRefs";
-import {useNavigate} from "react-router-dom";
-import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
+import { useNavigate } from "react-router-dom";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
+import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree";
 import transition from "../LogicComp/Transition";
 import useAuth from "../pages/useAuth";
-import {DataFromServFake, SortData} from "../LogicComp/GPFakeData";
+import { SortData } from "../LogicComp/GPFakeData";
+import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode';
 
 const GraphPage = () => {
-    const [ssilki,setSsilki] = useState()
+    const [ssilki, setSsilki] = useState();
+    const [loading, setLoading] = useState(true);
+    const [userStatus, setUserStatus] = useState(null);
+    const [DataFromServ, setDataFromServ] = useState([]);
+    const [period, setPeriod] = useState(1);
+    const [clicks, setClicks] = useState([1, 2, 3, 4]);
+    const [niz, setNiz] = useState(["qwe", "qwe", "asd", "asd"]);
     const navigate = useNavigate();
-    const [DataFromServ,setDataFromServ] = useState(DataFromServFake)
+    const accessToken = Cookies.get('access_token');
+    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
+
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('data_clicks_user_all.php', {
@@ -26,182 +35,149 @@ const GraphPage = () => {
             });
             const result = await response.json();
             setSsilki(result);
-            setDataFromServ(result)
+            setDataFromServ(result);
+            setLoading(false);
         };
 
         fetchData();
     }, []);
 
-
-    const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
     useEffect(() => {
+        if (accessToken) {
+            const decodedToken = jwtDecode(accessToken);
+            const user_status = decodedToken.user_status;
+            setUserStatus(user_status);
+        }
         if (!isLoading && !isLoggedIn && !isRedirected) {
             setIsRedirected(true);
             navigate('/login');
         }
-    }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected]);
+    }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected, accessToken]);
 
-
-
-
-
-
-
-    const [period,setPeriod] = useState(1)
-    const ChangePeriod = (prop) =>{
-        setPeriod(prop)
-    }
-    const [clicks,setClicks] = useState([1,2,3,4])
-    const [niz,setNiz] = useState(["qwe","qwe","asd","asd"])
+    const ChangePeriod = (prop) => {
+        setPeriod(prop);
+    };
     let summ = 0
     clicks.map((value, index, array)=>{
         summ+=value;
     })
-    useEffect(()=>{
-        let today = new Date(Date.now()-1000*3600*4)
-        if(period === 0){
-            const dateFake = SortData(DataFromServ,0)
+    useEffect(() => {
+        let today = new Date(Date.now() - 1000 * 3600 * 4);
+        let arrayC = [];
+        let labels = [];
 
-            let arrayC = [0,0,0]
-            dateFake.map((valueq, index, array)=>{
-                const value = new Date(valueq.time)
-                const condition = today.getTime() - value.getTime()
-                if(condition <= 1000*60*20) arrayC[0]++;
-                if(condition <= 1000*60*40 && condition > 1000*60*20) arrayC[1]++;
-                if(condition <= 1000*60*60 && condition > 1000*60*40) arrayC[2]++;
-            })
-
-            setClicks(arrayC)
-            setNiz(["0-20 минут назад","20-40 минут назад","40-60 минут назад"])
-
-        }
-        if(period === 1){
-            const dateFake = SortData(DataFromServ,1)
-
-            let arrayC = [0,0,0,0,0,0]
-            dateFake.map((valueq, index, array)=>{
-                const value = new Date(valueq.time)
-                const condition = today.getTime() - value.getTime()
-                if(condition <= 4 * 3600 * 1000) arrayC[0]++;
-                if(condition <= 8 * 3600 * 1000 && condition > 4 * 3600 * 1000) arrayC[1]++;
-                if(condition <= 12 * 3600 * 1000 && condition > 8 * 3600 * 1000) arrayC[2]++;
-                if(condition <= 16 * 3600 * 1000 && condition > 12 * 3600 * 1000) arrayC[3]++;
-                if(condition <= 20 * 3600 * 1000 && condition > 16 * 3600 * 1000) arrayC[4]++;
-                if(condition <= 24 * 3600 * 1000 && condition > 20 * 3600 * 1000) arrayC[5]++;
-            })
-
-            setClicks(arrayC)
-            setNiz(["0-4 часов назад", "4-8 часов назад", "8-12 часов назад", "12-16 часов назад", "16-20 часов назад", "20-24 часов назад"])   
-        }
-        if(period === 2){
-            const dateFake = SortData(DataFromServ,2)
-            let arrayC = [0,0,0,0,0,0,0]
-            dateFake.map((valueq, index, array)=>{
-                const value = new Date(valueq.time)
-                const condition = today.getTime() - value.getTime()
-                if(condition <= 24 * 3600 * 1000) arrayC[0]++;
-                if(condition <= 2*24 * 3600 * 1000 && condition > 24 * 3600 * 1000) arrayC[1]++;
-                if(condition <= 3*24 * 3600 * 1000 && condition > 2*24 * 3600 * 1000) arrayC[2]++;
-                if(condition <= 4*24 * 3600 * 1000 && condition > 3*24 * 3600 * 1000) arrayC[3]++;
-                if(condition <= 5*24 * 3600 * 1000 && condition > 4*24 * 3600 * 1000) arrayC[4]++;
-                if(condition <= 6*24 * 3600 * 1000 && condition > 5*24 * 3600 * 1000) arrayC[5]++;
-                if(condition <= 7*24 * 3600 * 1000 && condition > 6*24 * 3600 * 1000) arrayC[6]++;
-            })
-            setClicks(arrayC)
-            setNiz(["сегодня", "1 день назад", "2 дня назад", "3 дня назад", "4 дня назад", "5 дней назад", "6 дней назад"]);
-        }
-        if (period === 3) {
-            const dateFake = SortData(DataFromServ, 3);
-        
-            let arrayC = new Array(30).fill(0);
-            let arrNiz = new Array(30).fill(0);
-        
-            arrNiz.map((value, index, array) => {
-                array[index] = index + 1;
-            });
-        
-            dateFake.map((valueq, index, array) => {
-                const value = new Date(valueq.time);
-                const condition = today.getTime() - value.getTime();
-        
-                for (let i = 0; i < 30; i++) {
-                    let indexNorm = i + 1;
-                    if (condition <= 24 * 3600 * 1000 * indexNorm && condition > 24 * 3600 * 1000 * i) {
-                        arrayC[i]++;
+        switch (period) {
+            case 0:
+                const dateFake0 = SortData(DataFromServ, 0);
+                arrayC = [0, 0, 0];
+                labels = ["0-20 минут назад", "20-40 минут назад", "40-60 минут назад"];
+                dateFake0.forEach((valueq) => {
+                    const value = new Date(valueq.time);
+                    const condition = today.getTime() - value.getTime();
+                    if (condition <= 1000 * 60 * 20) arrayC[0]++;
+                    else if (condition <= 1000 * 60 * 40) arrayC[1]++;
+                    else if (condition <= 1000 * 60 * 60) arrayC[2]++;
+                });
+                break;
+            case 1:
+                const dateFake1 = SortData(DataFromServ, 1);
+                arrayC = [0, 0, 0, 0, 0, 0];
+                labels = ["0-4 часов назад", "4-8 часов назад", "8-12 часов назад", "12-16 часов назад", "16-20 часов назад", "20-24 часов назад"];
+                dateFake1.forEach((valueq) => {
+                    const value = new Date(valueq.time);
+                    const condition = today.getTime() - value.getTime();
+                    if (condition <= 4 * 3600 * 1000) arrayC[0]++;
+                    else if (condition <= 8 * 3600 * 1000) arrayC[1]++;
+                    else if (condition <= 12 * 3600 * 1000) arrayC[2]++;
+                    else if (condition <= 16 * 3600 * 1000) arrayC[3]++;
+                    else if (condition <= 20 * 3600 * 1000) arrayC[4]++;
+                    else if (condition <= 24 * 3600 * 1000) arrayC[5]++;
+                });
+                break;
+            case 2:
+                const dateFake2 = SortData(DataFromServ, 2);
+                arrayC = [0, 0, 0, 0, 0, 0, 0];
+                labels = ["сегодня", "1 день назад", "2 дня назад", "3 дня назад", "4 дня назад", "5 дней назад", "6 дней назад"];
+                dateFake2.forEach((valueq) => {
+                    const value = new Date(valueq.time);
+                    const condition = today.getTime() - value.getTime();
+                    if (condition <= 24 * 3600 * 1000) arrayC[0]++;
+                    else if (condition <= 2 * 24 * 3600 * 1000) arrayC[1]++;
+                    else if (condition <= 3 * 24 * 3600 * 1000) arrayC[2]++;
+                    else if (condition <= 4 * 24 * 3600 * 1000) arrayC[3]++;
+                    else if (condition <= 5 * 24 * 3600 * 1000) arrayC[4]++;
+                    else if (condition <= 6 * 24 * 3600 * 1000) arrayC[5]++;
+                    else if (condition <= 7 * 24 * 3600 * 1000) arrayC[6]++;
+                });
+                break;
+            case 3:
+                const dateFake3 = SortData(DataFromServ, 3);
+                arrayC = new Array(30).fill(0);
+                labels = Array.from({ length: 30 }, (_, i) => i + 1);
+                dateFake3.forEach((valueq) => {
+                    const value = new Date(valueq.time);
+                    const condition = today.getTime() - value.getTime();
+                    for (let i = 0; i < 30; i++) {
+                        if (condition <= 24 * 3600 * 1000 * (i + 1) && condition > 24 * 3600 * 1000 * i) {
+                            arrayC[i]++;
+                        }
                     }
-                }
-            });
-        
-            setClicks(arrayC);
-            setNiz(arrNiz);
+                });
+                break;
+            case 4:
+                const dateFake4 = SortData(DataFromServ, 3);
+                arrayC = [0, 0, 0, 0, 0, 0];
+                labels = [
+                    "Текущий месяц (первая половина)",
+                    "Текущий месяц (вторая половина)",
+                    "Месяц назад (первая половина)",
+                    "Месяц назад (вторая половина)",
+                    "2 месяца назад (первая половина)",
+                    "2 месяца назад (вторая половина)"
+                ];
+                dateFake4.forEach((valueq) => {
+                    const value = new Date(valueq.time);
+                    const diffMonths = today.getMonth() - value.getMonth();
+                    const diffYears = today.getFullYear() - value.getFullYear();
+                    const totalMonths = diffYears * 12 + diffMonths;
+                    const monthHalf = value.getDate() > 15 ? 1 : 0;
+                    if (totalMonths === 0 && monthHalf === 0) arrayC[0]++;
+                    else if (totalMonths === 0 && monthHalf === 1) arrayC[1]++;
+                    else if (totalMonths === 1 && monthHalf === 0) arrayC[2]++;
+                    else if (totalMonths === 1 && monthHalf === 1) arrayC[3]++;
+                    else if (totalMonths === 2 && monthHalf === 0) arrayC[4]++;
+                    else if (totalMonths === 2 && monthHalf === 1) arrayC[5]++;
+                });
+                break;
+            case 5:
+                const dateFake5 = SortData(DataFromServ, 3);
+                arrayC = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                labels = [
+                    "этот месяц", "месяц назад", "2 месяца назад", "3 месяца назад", "4 месяца назад", "5 месяцев назад", "6 месяцев назад", "7 месяцев назад", "8 месяцев назад", "9 месяцев назад", "10 месяцев назад", "11 месяцев назад"
+                ];
+                dateFake5.forEach((valueq) => {
+                    const value = new Date(valueq.time);
+                    const diffMonths = today.getMonth() - value.getMonth();
+                    const diffYears = today.getFullYear() - value.getFullYear();
+                    const totalMonths = diffYears * 12 + diffMonths;
+                    if (totalMonths >= 0 && totalMonths <= 11) arrayC[totalMonths]++;
+                });
+                break;
+            default:
+                break;
         }
-        if (period === 4) {
-            const dateFake = SortData(DataFromServ, 3);
-            const arrayC = [0, 0, 0, 0, 0, 0];
-        
-            dateFake.forEach((valueq) => {
-                const value = new Date(valueq.time);
-                const diffMonths = today.getMonth() - value.getMonth();
-                const diffYears = today.getFullYear() - value.getFullYear();
-                const totalMonths = diffYears * 12 + diffMonths;
-                const monthHalf = value.getDate() > 15 ? 1 : 0; 
-        
-                if (totalMonths === 0 && monthHalf === 0) {
-                    arrayC[0]++;
-                } else if (totalMonths === 0 && monthHalf === 1) {
-                    arrayC[1]++;
-                } else if (totalMonths === 1 && monthHalf === 0) {
-                    arrayC[2]++;
-                } else if (totalMonths === 1 && monthHalf === 1) {
-                    arrayC[3]++;
-                } else if (totalMonths === 2 && monthHalf === 0) {
-                    arrayC[4]++;
-                } else if (totalMonths === 2 && monthHalf === 1) {
-                    arrayC[5]++;
-                }
-            });
-        
-            setClicks(arrayC);
-            setNiz([
-                "Текущий месяц (первая половина)",
-                "Текущий месяц (вторая половина)",
-                "Месяц назад (первая половина)",
-                "Месяц назад (вторая половина)",
-                "2 месяца назад (первая половина)",
-                "2 месяца назад (вторая половина)"
-            ]);
-        }
-    
-        if (period === 5) {
-            const dateFake = SortData(DataFromServ, 3);
-            const arrayC = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-            const monthsAgo = Array.from({ length: 12 }, (_, i) => i);
-        
-            dateFake.forEach((valueq) => {
-                const value = new Date(valueq.time);
-                const diffMonths = today.getMonth() - value.getMonth();
-                const diffYears = today.getFullYear() - value.getFullYear();
-                const totalMonths = diffYears * 12 + diffMonths;
-        
-                if (totalMonths <= 12 && totalMonths >= 1) {
-                    arrayC[totalMonths - 1]++;
-                }
-            });
-    
-            setClicks(arrayC);
-            setNiz([
-                "этот месяц","месяц назад","2 месяца назад","3 месяца назад","4 месяца назад","5 месяцев назад","6 месяцев назад","7 месяцев назад","8 месяцев назад","9 месяцев назад","10 месяцев назад", "11 месяцев назад"
-            ]);
-        }
+
+        setClicks(arrayC);
+        setNiz(labels);
     }, [period, DataFromServ]);
 
 
-    if (isLoading) {
+    if (isLoading && loading) {
         return <div>Загрузка...</div>;
-    }
+    } else {
     return (
         <div>
-            <HeaderLinksPage/>
+            {userStatus === 'free' ? <HeaderLinksPageFree /> : <HeaderLinksPage />}
             <div
                 style={{
                     backgroundImage: `url(${process.env.PUBLIC_URL + '/BackgroundDots.svg'})
@@ -214,9 +190,9 @@ const GraphPage = () => {
                     <div className="GPMainContainer">
                         <div className="GPCenterContainer">
                             <div className="LinkAndPeriod">
-                                <div className="GPLink" onClick={()=>navigate('/main')}>
+                                <div className="GPLink" onClick={()=>navigate('/links')}>
                                     <div className="NILURLTRYOPT">
-                                        NirUrl.com/try
+                                        Вернуться к ссылкам
                                     </div>
                                     <div style={{position:"relative"}}>
                                         <svg style={{marginTop:"5px"}} width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -262,7 +238,7 @@ const GraphPage = () => {
                                 <div className="GlobalCountOfViewText">Общее количество кликов</div>
                                 <Chart labels={niz} Clicks={clicks}/>
                             </div>
-                            <div className="OptionsInGP">
+                            {DataFromServ.length > 0 && (<div className="OptionsInGP">
                                 <div style={{display:"flex",justifyContent:"space-between"}}>
                                     <div className="AddressesInGP">
                                         <AddresGp Dates={DataFromServ}/>
@@ -279,7 +255,7 @@ const GraphPage = () => {
                                         <TopRefs/>
                                     </div>
                                 </div>
-                            </div>
+                            </div>)}
                         </div>
                     </div>
                 </div>
@@ -287,5 +263,5 @@ const GraphPage = () => {
         </div>
     );
 };
-
+}
 export default transition(GraphPage);

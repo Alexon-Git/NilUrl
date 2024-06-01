@@ -2,12 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import MapGP from "./MapGP";
 import "../../styles/GraphPage/AddresGp.css"
 import {
-    DateFromServInterface,
-    GPFakeDataBrowser,
-    GPFakeDataCity,
-    GPFakeDataCountry,
-    GPFakeDataDevice,
-    GPFakeDataOC
+    DateFromServInterface
 } from "../../LogicComp/GPFakeData";
 
 

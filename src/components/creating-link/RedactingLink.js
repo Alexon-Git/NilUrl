@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
+import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode';
 import {
   FAQ,
   Toggle,
@@ -9,8 +11,18 @@ import {
 } from "../../components";
 
 const RedactingLink = ({ pathS }) => {
-  // const [isPro, setIsPro] = useState(false);
-  const isPro = true;
+  useEffect(() => {
+    const accessToken = Cookies.get('access_token');
+    if (accessToken) {
+        const decodedToken = jwtDecode(accessToken);
+        const user_status = decodedToken.user_status;
+        if (user_status === "premium") {
+          setIsPro(true);
+        } 
+
+    }
+}, []);
+  const [isPro, setIsPro] = useState(false);
   const [activePopupId, setActivePopupId] = useState(null);
   const [date_last, setDate_last] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
