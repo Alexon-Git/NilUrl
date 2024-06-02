@@ -84,7 +84,7 @@ const ErrorPage = () => {
         ))}
         <div className="error-text">
           <h1 className="error-code">404</h1>
-          <p className="error-message">Упс... страница не найдена. Возможно ссылка была удалена пользователем</p>
+          <p className="error-message">Упс... страница не найдена. Возможно ссылка была удалена.</p>
         </div>
       </div>
     </div>

@@ -130,7 +130,9 @@ const RedactingLink = ({ pathS }) => {
       tagColors: tagColors,
       toggles: {
         utm: toggles.find(toggle => toggle.id === 'utm').checked ? getUTMData() : false,
-        date: selectedDate ? getDateData(selectedDate) : (date_last ? date_last : false),
+        date: toggles.find(toggle => toggle.id === 'date').checked 
+        ? (selectedDate ? getDateData(selectedDate) : (date_last ? date_last : false))
+        : false,
         ios: toggles.find(toggle => toggle.id === 'ios').checked ? getIOSData() : false,
         android: toggles.find(toggle => toggle.id === 'android').checked ? getAndroidData() : false,
       },
