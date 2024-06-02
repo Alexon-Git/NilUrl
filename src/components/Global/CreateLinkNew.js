@@ -4,17 +4,10 @@ import CreatingLink from "../creating-link/CreatingLink";
 import Overlay from '../creating-link/Overlay';
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
-const CreateLinkNew = ({highestKey}) => {
+const CreateLinkNew = ({highestKey, userStatus}) => {
     const [flag,setFlag] = useState(false)
-    const [userStatus, setUserStatus] = useState(null);
-    useEffect(() => {
-        const accessToken = Cookies.get('access_token');
-        if (accessToken) {
-            const decodedToken = jwtDecode(accessToken);
-            const user_status = decodedToken.user_status;
-            setUserStatus(user_status);
-        }
-    }, []);
+    
+    
 
     const click = () => {
         if (userStatus === 'free' && highestKey >= 15) {
@@ -25,9 +18,9 @@ const CreateLinkNew = ({highestKey}) => {
     };
     return (
         <div>
-            {flag &&
+            {flag && 
                 <Overlay onClose={()=> setFlag(false)}>
-                    <CreatingLink />
+                    <CreatingLink userStatus = {userStatus}/>
                 </Overlay>
             }
 

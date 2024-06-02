@@ -5,15 +5,18 @@ import PricesPage from "./pages/PricesPage"
 import GraphPage from "./pages/GraphPage";
 import MainPage from "./pages/MainPage";
 import LinksPage from "./pages/LinksPage";
+import  {DataProvider}  from '../src/LogicComp/DataProvider';
 import {BrowserRouter, useNavigate} from "react-router-dom";
 import AppRouter from "./LogicComp/AppRouter";
 
 const App = () => {
 
   return (
-    <BrowserRouter>
-      <AppRouter/>
-    </BrowserRouter>
+    <DataProvider>
+      <BrowserRouter>
+        <AppRouter/>
+      </BrowserRouter>
+    </DataProvider>
   )
 };
 

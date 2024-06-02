@@ -8,18 +8,25 @@ import useAuth from "../pages/useAuth";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
+import { usePremium } from '../LogicComp/DataProvider';
 
 const LinksPage = () => {
     const navigate = useNavigate();
     const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
-    const [userStatus, setUserStatus] = useState(null); 
+    const { isPremium, setIsPremium } = usePremium();
+    const [userStatus, setUserStatus] = useState();
 
     useEffect(() => {
         const accessToken = Cookies.get('access_token');
         if (accessToken) {
             const decodedToken = jwtDecode(accessToken);
-            const user_status = decodedToken.user_status;
-            setUserStatus(user_status);
+            const userStatus_ = decodedToken.user_status;
+            if (userStatus === "premium") {
+                setIsPremium(true);
+            } else{
+                setIsPremium(false);
+            }
+            setUserStatus(userStatus_);
         }
 
         if (!isLoading && !isLoggedIn && !isRedirected) {

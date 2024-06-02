@@ -9,8 +9,12 @@ import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
 import TagsColumn from "../LinksPage/TagsColumn";
 
+
 const LinkPageMainPart = () => {
+
   const [links, setLinks] = useState([]);
+  const [userStatus, setUserStatus] = useState(null);
+  
 
   useEffect(() => {
     const accessToken = Cookies.get('access_token');
@@ -23,7 +27,7 @@ const LinkPageMainPart = () => {
           .then(data => {
             if (data && data.length > 0) {
               setLinks(data.map((link, index) => ({
-                key: index + 1, // Assign a key value starting from 1
+                key: index + 1, 
                 Data: link.date_now,
                 SvgPath: "/test.svg",
                 pathS: `nilurl.ru/${link.code_url}`,
@@ -54,7 +58,7 @@ const LinkPageMainPart = () => {
         <div className="RightTopCont">
           <SortNew />
           <TagsColumn/>
-          <CreateLinkNew highestKey={highestKey} /> {/* Pass highestKey as a prop */}
+          <CreateLinkNew userStatus={userStatus} highestKey={highestKey} /> 
         </div>
       </div>
       <div className="MainContainer">

@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
 import CryptoJS from "crypto-js";
-import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode';
+import { usePremium } from '../../LogicComp/DataProvider';
 import {
   FAQ,
   Toggle,
@@ -12,20 +11,11 @@ import {
 } from "../../components";
 
 const CreatingLink = () => {
-  useEffect(() => {
-    const accessToken = Cookies.get('access_token');
-    if (accessToken) {
-        const decodedToken = jwtDecode(accessToken);
-        const user_status = decodedToken.user_status;
-        if (user_status === "premium") {
-          setIsPro(true);
-        } 
+  
+  const {isPremium} = usePremium();
 
-    }
-}, []);
-
-
-  const [isPro, setIsPro] = useState(false);
+ 
+  const [isPro, setIsPro] = useState(isPremium);
   const [activePopupId, setActivePopupId] = useState(null);
   const [showPopups, setShowPopups] = useState({
     utm: false,
