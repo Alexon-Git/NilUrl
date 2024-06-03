@@ -1,11 +1,11 @@
 import React from "react";
 import "./buttons.css";
 
-function BuyButton({ children, onClick, ...props }) {
- 
+function FreeButton({ children, onClick, ...props }) {
+
   return (
-    <button className="loader" onClick={onClick}>
-      <span>Купить подписку</span>
+    <button className="loader" id="free" onClick={onClick}>
+      <span>Попробовать бесплатно</span>
       <svg
         width="20"
         height="20"
@@ -34,4 +34,4 @@ function BuyButton({ children, onClick, ...props }) {
   );
 }
 
-export default BuyButton;
+export default FreeButton;

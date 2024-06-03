@@ -14,7 +14,12 @@
   transition: padding-right 0.5s;
   cursor: pointer;
 }
-
+#free {
+  background-color: hsl(0, 0%, 0%); 
+}
+#free:hover:after {
+  background-color: rgb(0, 250, 62);
+}
 .loader:after {
   content: "";
   position: absolute;

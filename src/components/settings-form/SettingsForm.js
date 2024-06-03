@@ -23,6 +23,7 @@ const SettingsForm = () => {
     }
   }, []);
 
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -31,7 +32,8 @@ const SettingsForm = () => {
     }));
   };
 
-  const handleDeleteModalOpen = () => {
+  const handleDeleteModalOpen = (e) => {
+    e.preventDefault();
     setIsDeleteModalOpen(true);
     document.body.style.overflow = 'hidden';
   };
@@ -118,6 +120,7 @@ const SettingsForm = () => {
                   value={item.value}
                   maxLength={item.maxLength}
                   onChange={handleChange}
+                  
                 />
                 <div className="settings__controls__form-footer">
                   <p className="description">

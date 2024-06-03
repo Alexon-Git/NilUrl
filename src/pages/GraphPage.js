@@ -254,7 +254,9 @@ const GraphPage = () => {
                             </div>
                             <div className="Charts">
                                 <div className="countOfViewsPeriod">{summ}</div>
-                                <div className="GlobalCountOfViewText">Общее количество кликов</div>
+                                <div className="GlobalCountOfViewText">
+                                        Общее количество кликов { pathS ? `по ссылке "${pathS}"` : '' }
+                                </div>
                                 <Chart labels={niz} Clicks={clicks}/>
                             </div>
                             {DataFromServ.length > 0 &&  (<div className="OptionsInGP">

@@ -18,7 +18,9 @@ const FirstContainerMainPage = () => {
         updatedHovered[index] = true;
         setIsHovered(updatedHovered);
     };
-
+    const handleBuyButtonClick = () => {
+        
+      };
     const handleMouseLeave = (index:any) => {
         const updatedHovered = [...isHovered];
         updatedHovered[index] = false;
@@ -43,6 +45,7 @@ const FirstContainerMainPage = () => {
             <div className="ButtonsBuyOrTry">
                 <div onClick={()=>{navigate(PRICEPAGE_ROUTE)}} style={{display:"inline-flex"}}>
                 <BuyButton
+                    onClick = {handleBuyButtonClick}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
