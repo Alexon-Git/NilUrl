@@ -2,17 +2,18 @@ import React, {useState, useEffect, useRef } from "react";
 import QRCode from "qrcode.react";
 import QRLogo from "../../img/qr-logo.png";
 
-const QRCodeGenerator = React.forwardRef(({ showLogo, borderColor }, ref) => {
-  const [url, setUrl] = useState("");  return (
+const QRCodeGenerator = React.forwardRef(({ showLogo, borderColor, pathS }, ref ) => {
+    return (
     <div ref={ref} className="qr-code-container" style={{ borderColor: borderColor }}>
       <QRCode
-        value={url}
+        value={pathS}
         size={141}
+        level={'Q'}
         renderAs={"svg"}
         includeMargin={false}
         imageSettings={
           showLogo
-            ? { src: QRLogo, height: 40, width: 30, excavate: true }
+            ? { src: QRLogo, height: 32, width: 24, excavate: true }
             : null
         }
       />

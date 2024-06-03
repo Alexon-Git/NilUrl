@@ -49,11 +49,30 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
     function delayedFunc() {
          setCopied(false)
         }
-    const onCopyClick = () =>{
-        navigator.clipboard.writeText(pathS);
-        setCopied(true);
-        setTimeout(delayedFunc,2000)
-    }
+        const onCopyClick = () => {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(pathS).then(() => {
+                    setCopied(true);
+                    setTimeout(delayedFunc, 2000);
+                }).catch(err => {
+                    console.error('Could not copy text: ', err);
+                });
+            } else {
+                const textArea = document.createElement('textarea');
+                textArea.value = pathS;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    setCopied(true);
+                    setTimeout(delayedFunc, 2000);
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        };
     return (
         <div className="mainCLMP">
             {linkChangeFlag &&
@@ -64,7 +83,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
             {
                 qrFlag &&
                 <Overlay onClose={closeQrLink}>
-                <QRComponent />
+                <QRComponent pathS={pathS} />
                 </Overlay>
             }
             {flagTimer == 1 &&
@@ -103,7 +122,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
                             <div style={{display:"inline-flex",marginLeft:"5px"}}>
                                 <div  className="blockForCopySVG" style={{display:"flex",marginLeft:"10px"}}>
                                     {
-                                        copied &&<img src={process.env.PUBLIC_URL + '/checkmark.png'} style={{width:"18px",height:"18px"}}></img>
+                                        copied &&<img src={process.env.PUBLIC_URL + '/checkmark.png'} style={{width:"15px",height:"15px"}}></img>
                                     }
                                     {!copied &&
                                     <svg onClick={()=>{onCopyClick()}} width="15" height="15" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">

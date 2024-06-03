@@ -3,12 +3,12 @@ import QRCodeGenerator from "./QRCodeGenerator";
 import { QRImage, Toggle, ColorPickerGfg } from "../../components";
 import "./qrComponent.css";
 
-function QRComponent() {
+function QRComponent({pathS}) {
+  
   const [showLogo, setShowLogo] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [borderColor, setBorderColor] = useState("#000000");
   const qrRef = useRef(null);
-
   const toggleEditing = () => {
     setIsEditing(!isEditing);
   };
@@ -87,6 +87,7 @@ function QRComponent() {
       </div>
       <div className="qr__main">
         <QRCodeGenerator
+          pathS={pathS}
           ref={qrRef}
           showLogo={showLogo}
           borderColor={borderColor}
@@ -139,7 +140,7 @@ function QRComponent() {
                   ind={1}
                   size="big"
                 />
-                <p className="toggle-text">Логотип Nil-URL.ru</p>
+                <p className="toggle-text">Логотип NilURL.ru</p>
               </div>
             </div>
             <div className="toggle-logo">

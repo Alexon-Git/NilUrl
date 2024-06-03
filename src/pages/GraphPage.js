@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
 import "../styles/GraphPage/GraphPage.css";
 import GPPeriod from "../components/GraphPage/GPPeriod";
 import Chart from "../components/GraphPage/Chart";
@@ -16,7 +17,8 @@ import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
 
 const GraphPage = () => {
-    const [ssilki, setSsilki] = useState();
+    const location = useLocation();
+    const { pathS } = location.state || {};
     const [loading, setLoading] = useState(true);
     const [userStatus, setUserStatus] = useState(null);
     const [DataFromServ, setDataFromServ] = useState([]);
@@ -27,34 +29,37 @@ const GraphPage = () => {
     const accessToken = Cookies.get('access_token');
     const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-            const response = await fetch('data_clicks_user_all.php', {
-                method: 'GET',
-                credentials: 'include'
-            });
+                // Формирование URL с параметром pathS, если он не null
+                let url = 'data_clicks_user_all.php';
+                if (pathS) {
+                    url += `?pathS=${encodeURIComponent(pathS)}`;
+                }
 
-            const result = await response.json();
+                const response = await fetch(url, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
 
-            if (result.success === false) {
+                const result = await response.json();
+
+                if (result.success === false) {
+                    window.location.reload();
+                } else {
+                    setDataFromServ(result);
+                    setLoading(false);
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
                 window.location.reload();
-            } else {
-                setSsilki(result);
-                setDataFromServ(result);
-                setLoading(false);
-                
             }
-        } catch (error) {
-            console.error('Ошибка:', error);
-            window.location.reload();
-        }
-           
-            
         };
 
         fetchData();
-    }, []);
+    }, [pathS]);
 
     useEffect(() => {
         if (accessToken) {
