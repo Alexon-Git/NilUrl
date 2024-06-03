@@ -128,11 +128,11 @@ const CreatingLink = () => {
   };
 
   const getIOSData = () => {
-    return document.querySelector('.ios__android-input').value;
+    return document.querySelector('.ios-input').value;
   };
   
   const getAndroidData = () => {
-    return document.querySelector('.ios__android-input').value;
+    return document.querySelector('.android-input').value;
   };
   
   const getCommentData = () => {
@@ -526,36 +526,36 @@ const UTMInputs = () => {
 };
 
 const IOSComponent = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue_IOS, setInputValue_IOS] = useState("");
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    setInputValue_IOS(event.target.value);
   };
 
   return (
     <input
-      className="ios__android-input"
+      className="ios-input"
       type="text"
       placeholder="https://apps.apple.com/app/18362974"
-      value={inputValue}
+      value={inputValue_IOS}
       onChange={handleInputChange}
     />
   );
 };
 
 const AndroidComponent = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue_android, setInputValue_android] = useState("");
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    setInputValue_android(event.target.value);
   };
 
   return (
     <input
-      className="ios__android-input"
+      className="android-input"
       type="text"
       placeholder="https://play.google.com/store/apps/details?id=18362974"
-      value={inputValue}
+      value={inputValue_android}
       onChange={handleInputChange}
     />
   );

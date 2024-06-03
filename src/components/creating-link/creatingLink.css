@@ -167,7 +167,7 @@
   outline: none;
 }
 
-.ios__android-input {
+.android-input, .ios-input{
   height: 35px;
   margin-bottom: 10px;
   width: 100%;
