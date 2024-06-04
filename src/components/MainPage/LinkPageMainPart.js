@@ -6,6 +6,7 @@ import SortButton from "../LinksPage/SortButton";
 import CreateLinkNew from "../Global/CreateLinkNew";
 import SortNew from "../LinksPage/SortNew";
 import Cookies from 'js-cookie';
+import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import TagsColumn from "../LinksPage/TagsColumn";
 
@@ -23,13 +24,15 @@ const LinkPageMainPart = () => {
       const userId = decodedToken.user_id;
 
       fetch(`get_links.php?user_id=${userId}`)
-          .then(response => response.json())
-          .then(data => {
-            if (data && data.length > 0) {
-              setLinks(data.map((link, index) => ({
-                key: index + 1, 
+        .then(response => response.json())
+        .then(async data => {
+          if (data && data.length > 0) {
+            const linksWithSvg = await Promise.all(data.map(async (link, index) => {
+              const svgPath = await fetchFavicon(link.base_url);
+              return {
+                key: index + 1,
                 Data: link.date_now,
-                SvgPath: "/test.svg",
+                SvgPath: svgPath,
                 pathS: `nilurl.ru/${link.code_url}`,
                 pathL: link.base_url,
                 UTM: link.utm,
@@ -41,14 +44,52 @@ const LinkPageMainPart = () => {
                 tagValue: link.tag,
                 timer_flag: link.timer_flag,
                 tag_flag: link.tag_flag,
-              })));
-            }
-          })
-          .catch(error => console.error('Error fetching data:', error));
+              };
+            }));
+            setLinks(linksWithSvg);
+          }
+        })
+        .catch(error => console.error('Error fetching data:', error));
     }
   }, []);
+  
+  const fetchFavicon = async (url) => {
+    try {
+      const proxyUrl = 'https://corsproxy.io/?';
+      const targetUrl = new URL(url);
+      const baseUrl = targetUrl.origin;
+      const response = await axios.get(proxyUrl + targetUrl.href);
+      const html = response.data;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      let favicon = '/NilLogo.svg'; 
 
-  // Find the highest key value
+
+      const iconLink = doc.querySelector('link[rel="icon"]') ||
+                       doc.querySelector('link[rel="shortcut icon"]') ||
+                       doc.querySelector('link[rel*="icon"]');
+      if (iconLink) {
+        favicon = iconLink.href;
+      } else {
+       
+        const response = await axios.get(proxyUrl + baseUrl + '/favicon.ico');
+        if (response.status === 200) {
+          favicon = baseUrl + '/favicon.ico';
+        }
+      }
+
+   
+      if (favicon && !favicon.startsWith('http')) {
+        favicon = baseUrl + favicon;
+      }
+
+      return favicon;
+    } catch (error) {
+      console.error('Error fetching favicon:', error);
+      return '/NilLogo.svg'; 
+    }
+  };
+
   const highestKey = links.length > 0 ? Math.max(...links.map(link => link.key)) : 0;
 
   return (

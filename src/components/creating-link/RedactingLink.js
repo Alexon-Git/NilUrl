@@ -143,17 +143,20 @@ const RedactingLink = ({ pathS }) => {
   };
   
   const getUTMData = () => {
-    const utmInputs = document.querySelectorAll('.utm__input-item input[type="text"]');
+    const utmInputs = document.querySelectorAll('.utm__input-item input[type="text"], .utm__input-item input[type="checkbox"]');
     const utmData = {};
-  
+
     utmInputs.forEach(input => {
-      const id = input.id;
-      const value = input.value;
-      utmData[id] = value ? value : false;
+        const id = input.id;
+        if (input.type === "checkbox") {
+            utmData[id] = input.checked; 
+        } else {
+            utmData[id] = input.value ? input.value : false; 
+        }
     });
-  
+
     return utmData;
-  };
+};
   
   const getDateData = (selectedDate) => {
     const day = selectedDate.getDate().toString().padStart(2, "0");
@@ -290,7 +293,9 @@ const RedactingLink = ({ pathS }) => {
             utm_campaign: "",
             utm_term: "",
             utm_content: "",
-            utm_referral: ""
+            utm_referral: "",
+            utm_android: "",
+            utm_ioc: "",
           };
           const finalUtmData = utm !== "false" ? utm_data : defaultUtmData;
           setDate_last(date_last);
@@ -576,51 +581,127 @@ const CommentComponent = ( { initialComment }) => {
   );
 };
 
+
+
 const UTMInputs = ({ initialUTM }) => {
-  const [inputs, setInputs] = useState([
-    { id: "UTM Referral", title: "UTM Referral", value: "", checked: false, inputType: "text" },
-    { id: "UTM Source", title: "UTM Source", value: "", checked: false, inputType: "text" },
-    { id: "UTM Medium", title: "UTM Medium", value: "", checked: false, inputType: "text" },
-    { id: "UTM Campaign", title: "UTM Campaign", value: "", checked: false, inputType: "text" },
-    { id: "UTM Term", title: "UTM Term", value: "", checked: false, inputType: "text" },
-    { id: "UTM Content", title: "UTM Content", value: "", checked: false, inputType: "text" },
-  ]);
+  const [utmReferral, setUtmReferral] = useState('');
+  const [utmSource, setUtmSource] = useState('');
+  const [utmMedium, setUtmMedium] = useState('');
+  const [utmCampaign, setUtmCampaign] = useState('');
+  const [utmTerm, setUtmTerm] = useState('');
+  const [utmContent, setUtmContent] = useState('');
+  const [utmAndroid, setUtmAndroid] = useState(false);
+  const [utmIOC, setUtmIOC] = useState(false);
 
   useEffect(() => {
     if (initialUTM) {
-      setInputs((prevInputs) => prevInputs.map((input) => ({
-        ...input,
-        value: initialUTM[input.id.toLowerCase().replace(" ", "_")] || "",
-      })));
+      setUtmReferral(initialUTM.utm_referral || '');
+      setUtmSource(initialUTM.utm_source || '');
+      setUtmMedium(initialUTM.utm_medium || '');
+      setUtmCampaign(initialUTM.utm_campaign || '');
+      setUtmTerm(initialUTM.utm_term || '');
+      setUtmContent(initialUTM.utm_content || '');
+      setUtmAndroid(initialUTM.utm_android || false);
+      setUtmIOC(initialUTM.utm_ioc || false);
     }
   }, [initialUTM]);
 
-  const handleInputChange = (id, value) => {
-    setInputs((prevInputs) => {
-      const newInputs = prevInputs.map((input) =>
-        input.id === id ? { ...input, value } : input
-      );
-      return newInputs;
-    });
+  const handleTextChange = (setter) => (e) => {
+    setter(e.target.value);
+  };
+
+  const handleCheckboxChange = (setter) => (e) => {
+    setter(e.target.checked);
   };
 
   return (
     <div className="utm__input">
-      {inputs.map((input) => (
-        <div className="utm__input-item" key={input.id}>
-          <label className="utm__input-label" htmlFor={input.id}>
-            {input.title}
-          </label>
-          <input
-            className="utm__input-input"
-            type={input.inputType}
-            id={input.id}
-            value={input.value}
-            onChange={(e) => handleInputChange(input.id, e.target.value)}
-            placeholder={`Введите ${input.title}`}
-          />
-        </div>
-      ))}
+      <div className="utm__input-item">
+        <label className="utm__input-label" htmlFor="UTM Referral">Referral</label>
+        <input
+          className="utm__input-input"
+          type="text"
+          id="UTM Referral"
+          value={utmReferral}
+          onChange={handleTextChange(setUtmReferral)}
+          placeholder="Referral"
+        />
+      </div>
+      <div className="utm__input-item">
+        <label className="utm__input-label" htmlFor="UTM Source">UTM Source</label>
+        <input
+          className="utm__input-input"
+          type="text"
+          id="UTM Source"
+          value={utmSource}
+          onChange={handleTextChange(setUtmSource)}
+          placeholder="yandex_direct, google_adword"
+        />
+      </div>
+      <div className="utm__input-item">
+        <label className="utm__input-label" htmlFor="UTM Medium">UTM Medium</label>
+        <input
+          className="utm__input-input"
+          type="text"
+          id="UTM Medium"
+          value={utmMedium}
+          onChange={handleTextChange(setUtmMedium)}
+          placeholder="cpc, retargeting, banner"
+        />
+      </div>
+      <div className="utm__input-item">
+        <label className="utm__input-label" htmlFor="UTM Campaign">UTM Campaign</label>
+        <input
+          className="utm__input-input"
+          type="text"
+          id="UTM Campaign"
+          value={utmCampaign}
+          onChange={handleTextChange(setUtmCampaign)}
+          placeholder="banner, {campaign_id}"
+        />
+      </div>
+      <div className="utm__input-item">
+        <label className="utm__input-label" htmlFor="UTM Term">UTM Term</label>
+        <input
+          className="utm__input-input"
+          type="text"
+          id="UTM Term"
+          value={utmTerm}
+          onChange={handleTextChange(setUtmTerm)}
+          placeholder="kupit_velosiped,{keyword}"
+        />
+      </div>
+      <div className="utm__input-item">
+        <label className="utm__input-label" htmlFor="UTM Content">UTM Content</label>
+        <input
+          className="utm__input-input"
+          type="text"
+          id="UTM Content"
+          value={utmContent}
+          onChange={handleTextChange(setUtmContent)}
+          placeholder="skidka_50,{phrase_id}"
+        />
+      </div>
+      <div className="utm__input-item">
+        <label className="utm__input-label" htmlFor="UTM Android">UTM Android Metrika</label>
+        <input
+          className="utm__input-input"
+          type="checkbox"
+          id="UTM Android"
+          checked={utmAndroid}
+          onChange={handleCheckboxChange(setUtmAndroid)}
+        />
+      </div>
+      <div className="utm__input-item">
+        <label className="utm__input-label" htmlFor="UTM iOC">UTM iOC Metrika</label>
+        <input
+          className="utm__input-input"
+          type="checkbox"
+          id="UTM iOC"
+          checked={utmIOC}
+          onChange={handleCheckboxChange(setUtmIOC)}
+        />
+      </div>
     </div>
   );
 };

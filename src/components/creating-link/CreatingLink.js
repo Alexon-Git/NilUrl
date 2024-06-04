@@ -106,17 +106,20 @@ const CreatingLink = () => {
   };
   
   const getUTMData = () => {
-    const utmInputs = document.querySelectorAll('.utm__input-item input[type="text"]');
+    const utmInputs = document.querySelectorAll('.utm__input-item input[type="text"], .utm__input-item input[type="checkbox"]');
     const utmData = {};
-  
+
     utmInputs.forEach(input => {
-      const id = input.id;
-      const value = input.value;
-      utmData[id] = value ? value : false;
+        const id = input.id;
+        if (input.type === "checkbox") {
+            utmData[id] = input.checked; 
+        } else {
+            utmData[id] = input.value ? input.value : false; 
+        }
     });
-  
+
     return utmData;
-  };
+};
   
   const getDateData = (selectedDate) => {
     const day = selectedDate.getDate().toString().padStart(2, "0");
@@ -303,7 +306,7 @@ const CreatingLink = () => {
       type="text"
       placeholder="https://nilurl.ru/Ffv3cv"
       value={shortUrl}
-      onChange={(e) => setShortUrl(e.target.value)} // Обработчик изменений
+      onChange={(e) => setShortUrl(e.target.value)} 
     />
   </div>
 </div>
@@ -459,40 +462,62 @@ const CommentComponent = () => {
 
 const UTMInputs = () => {
   const [inputs, setInputs] = useState([
-    { id: "Referral",
+    { 
+      id: "Referral",
       title: "Referral",
       checked: false,
-      inputType: "text" 
+      inputType: "text", 
+      placeholder:"Referral"
     },
     {
       id: "UTM Source",
       title: "UTM Source",
       checked: false,
-      inputType: "text"
+      inputType: "text",
+      placeholder:"yandex_direct, google_adwords"
     },
     {
       id: "UTM Medium",
       title: "UTM Medium",
       checked: false,
-      inputType: "text"
+      inputType: "text",
+      placeholder:"cpc, retargeting, banner"
     },
     {
       id: "UTM Campaign",
       title: "UTM Campaign",
       checked: false,
-      inputType: "text"
+      inputType: "text",
+      placeholder:"banner, {campaign_id}"
     },
-    { id: "UTM Term",
+    { 
+      id: "UTM Term",
       title: "UTM Term",
       checked: false,
-      inputType: "text" 
+      inputType: "text", 
+      placeholder:"kupit_velosiped, {keyword}"
     },
     {
       id: "UTM Content",
       title: "UTM Content",
       checked: false,
-      inputType: "text"
+      inputType: "text",
+      placeholder:"skidka_50, {phrase_id}"
     },
+    {
+      id: "Android UTM Metrika",
+      title: "Android UTM Metrika",
+      checked: false,
+      inputType: "checkbox"
+
+    },
+    {
+      id: "iOS UTM Metrika",
+      title: "iOS UTM Metrika",
+      checked: false,
+      inputType: "checkbox"
+ 
+    }
   ]);
 
   const handleInputChange = (id) => {
@@ -517,7 +542,7 @@ const UTMInputs = () => {
             id={input.id}
             checked={input.checked}
             onChange={() => handleInputChange(input.id)}
-            placeholder="https://nilurl/Ffv3cv.ru"
+            placeholder={input.placeholder}
           />
         </div>
       ))}

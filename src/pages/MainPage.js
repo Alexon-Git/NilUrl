@@ -1,4 +1,4 @@
-import React , { useEffect} from 'react';
+import React , { useEffect,useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import "../styles/Global/HeaderMainPage.css"
 import Clients from "../components/MainPage/Clients";
@@ -20,6 +20,7 @@ const MainPage = () => {
             navigate('/links');
         }
     }, []);
+    
     return (
         <div>
             <NoLoginHeader/>
@@ -30,6 +31,7 @@ const MainPage = () => {
 
                 }}
             >
+                
                 <FirstContainerMainPage/>
                 <VideoComp/>
                 <PriceMp/>
