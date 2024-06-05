@@ -55,19 +55,21 @@ const LinkPageMainPart = () => {
   
   const fetchFavicon = async (url) => {
     try {
-      const proxyUrl = 'https://corsproxy.io/?';
+      const proxyUrl = 'http://nilurl.ru:97/?';
       const targetUrl = new URL(url);
       const baseUrl = targetUrl.origin;
       const response = await axios.get(proxyUrl + targetUrl.href);
       const html = response.data;
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
-      let favicon = '/NilLogo.svg'; 
+      let favicon = '/NilLogo.svg'; // Используйте ссылку по умолчанию, если иконка не найдена
 
-
-      const iconLink = doc.querySelector('link[rel="icon"]') ||
-                       doc.querySelector('link[rel="shortcut icon"]') ||
-                       doc.querySelector('link[rel*="icon"]');
+      // Проверка различных возможных местоположений favicon
+      const iconLink =  doc.querySelector('link[rel="icon"]') ||
+                        doc.querySelector('link[rel="shortcut icon"]') ||
+                        doc.querySelector('link[rel*="icon"]') ||
+                        doc.querySelector('link[rel="apple-touch-icon"]') ||
+                        doc.querySelector('link[rel="apple-touch-icon-precomposed"]');
       if (iconLink) {
         favicon = iconLink.href;
       } else {
