@@ -7,11 +7,12 @@ import { useNavigate } from "react-router-dom";
 const DeleteAccountModal = ({ onClose }) => {
   const navigate = useNavigate();
   const handleDeleteAccount = () => {
-    fetch('delete_account.php', {
+    fetch('http://localhost:8000/delete_account.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify({}),
     })
     .then(response => response.json())

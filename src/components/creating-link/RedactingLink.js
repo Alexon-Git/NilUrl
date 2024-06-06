@@ -26,11 +26,12 @@ const RedactingLink = ({ pathS }) => {
   };
 
   try {
-      const response = await fetch('delete_link.php', {
+      const response = await fetch('http://localhost:8000/delete_link.php', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
           },
+          credentials: 'include',
           body: JSON.stringify(data),
       });
 
@@ -100,11 +101,12 @@ const RedactingLink = ({ pathS }) => {
 
   const sendLinkDataToServer = async (data) => {
     try {
-      const response = await fetch('update_link.php', {
+      const response = await fetch('http://localhost:8000/update_link.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ ...data, pathS }),
       });
   
@@ -266,11 +268,12 @@ const RedactingLink = ({ pathS }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("get_link_for_update.php", {
+        const response = await fetch("http://localhost:8000/get_link_for_update.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: 'include',
           body: JSON.stringify({ pathS }),
         });
         if (!response.ok) {

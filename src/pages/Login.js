@@ -42,7 +42,7 @@ function Log() {
     };
 
     const handleLogin = () => {
-        fetch('check_loginData.php', {
+        fetch('http://localhost:8000/check_loginData.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

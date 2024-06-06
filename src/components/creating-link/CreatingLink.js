@@ -65,11 +65,12 @@ const CreatingLink = () => {
 
   const sendLinkDataToServer = async (data) => {
     try {
-      const response = await fetch('post_link.php', {
+      const response = await fetch('http://localhost:8000/post_link.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(data),
       });
   

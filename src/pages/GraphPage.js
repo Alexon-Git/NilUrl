@@ -35,7 +35,7 @@ const GraphPage = () => {
         const fetchData = async () => {
             try {
                 // Формирование URL с параметром pathS, если он не null
-                let url = 'data_clicks_user_all.php';
+                let url = 'http://localhost:8000/data_clicks_user_all.php';
                 if (pathS) {
                     url += `?pathS=${encodeURIComponent(pathS)}`;
                 }
@@ -55,7 +55,7 @@ const GraphPage = () => {
                 }
             } catch (error) {
                 console.error('Ошибка:', error);
-                window.location.reload();
+                
             }
         };
 

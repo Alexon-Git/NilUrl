@@ -54,11 +54,12 @@ const SettingsForm = () => {
       return;
     }
 
-    fetch('update_user_data.php', {
+    fetch('http://localhost:8000/update_user_data.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify(formData),
     })
       .then(response => response.json())
