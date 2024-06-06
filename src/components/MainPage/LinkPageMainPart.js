@@ -7,17 +7,19 @@ import CreateLinkNew from "../Global/CreateLinkNew";
 import SortNew from "../LinksPage/SortNew";
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import TagsColumn from "../LinksPage/TagsColumn";
 
-
 const LinkPageMainPart = () => {
-
   const [links, setLinks] = useState([]);
   const [userStatus, setUserStatus] = useState(null);
-  
+  const [reloadKey, setReloadKey] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 15000);
     const accessToken = Cookies.get('access_token');
     if (accessToken) {
       const decodedToken = jwtDecode(accessToken);
@@ -62,9 +64,9 @@ const LinkPageMainPart = () => {
       const html = response.data;
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
-      let favicon = '/NilLogo.svg'; // Используйте ссылку по умолчанию, если иконка не найдена
+      let favicon = '/NilLogo.svg'; 
 
-      // Проверка различных возможных местоположений favicon
+    
       const iconLink =  doc.querySelector('link[rel="icon"]') ||
                         doc.querySelector('link[rel="shortcut icon"]') ||
                         doc.querySelector('link[rel*="icon"]') ||
@@ -91,7 +93,38 @@ const LinkPageMainPart = () => {
       return '/NilLogo.svg'; 
     }
   };
-
+  useEffect(() => {
+   
+  
+  }, [reloadKey]);
+const convertDateFormat = (dateString) => {
+  const parts = dateString.split('.');
+  return new Date(parts[2], parts[1] - 1, parts[0]);
+};
+  const sortLinks = (option) => {
+    let sortedLinks = [...links];
+    console.log(option);
+    switch (option) {
+      case 0:
+        sortedLinks.sort((a, b) => new Date(convertDateFormat(a.Data)) - new Date(convertDateFormat(b.Data)));
+        break;
+      case 1:
+        sortedLinks.sort((a, b) => new Date(convertDateFormat(b.Data)) - new Date(convertDateFormat(a.Data)));
+        break;
+      case 2:
+        sortedLinks.sort((a, b) => a.pathS.localeCompare(b.pathS));
+        break;
+      case 3:
+        sortedLinks.sort((a, b) => b.pathS.localeCompare(a.pathS));
+        break;
+      default:
+        
+        break;
+    }
+    
+    setLinks(sortedLinks);
+    setReloadKey(prevKey => prevKey + 1); 
+  };
   const highestKey = links.length > 0 ? Math.max(...links.map(link => link.key)) : 0;
 
   return (
@@ -99,49 +132,41 @@ const LinkPageMainPart = () => {
       <div className="TopContainer">
         <div className="FakeDivLP"></div>
         <div className="RightTopCont">
-          <SortNew />
+          <SortNew sortLinks={sortLinks} />
           <TagsColumn/>
           <CreateLinkNew userStatus={userStatus} highestKey={highestKey} /> 
         </div>
       </div>
       <div className="MainContainer">
-        <div className="LinksContainer">
-          {links.map((link, index) => (
-            <LinksMapNew
-              key={link.key} // Use the assigned key
-              Data={link.Data}
-              SvgPath={link.SvgPath}
-              pathS={link.pathS}
-              pathL={link.pathL}
-              UTM={link.UTM}
-              Android={link.Android}
-              IOS={link.IOS}
-              clicks={link.clicks}
-              svgColor={link.svgColor}
-              backgrounds={link.backgrounds}
-              tagValue={link.tagValue}
-              timer_flag={link.timer_flag}
-              tag_flag={link.tag_flag}
-            />
-          ))}
-          <LinksMapNew
-              key={0}
-              Data={"28.05.2024"}
-              SvgPath={"link.SvgPath"}
-              pathS={"link.pathS"}
-              pathL={"Тестовая Ссылка Для Всех Данных"}
-              UTM={true}
-              Android={true}
-              IOS={true}
-              clicks={5}
-              svgColor={"#63BD43"}
-              backgrounds={"rgba(100, 235, 240, 1)"}
-              tagValue={"тэг"}
-              timer_flag={1}
-              tag_flag={1}
-          />
-        </div>
-      </div>
+  <div className="LinksContainer">
+    {links.length > 0 ? (
+      links.map((link, index) => (
+        <LinksMapNew
+          key={link.key} 
+          Data={link.Data}
+          SvgPath={link.SvgPath}
+          pathS={link.pathS}
+          pathL={link.pathL}
+          UTM={link.UTM}
+          Android={link.Android}
+          IOS={link.IOS}
+          clicks={link.clicks}
+          svgColor={link.svgColor}
+          backgrounds={link.backgrounds}
+          tagValue={link.tagValue}
+          timer_flag={link.timer_flag}
+          tag_flag={link.tag_flag}
+        />
+      ))
+    ) : (
+      loading ? (
+        <div>Загрузка...</div>
+      ) : (
+        <div>Ссылки не найдены. Пожалуйста, перезагрузите страницу.</div>
+      )
+    )}
+  </div>
+</div>
     </div>
   );
 };

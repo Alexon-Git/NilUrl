@@ -5,6 +5,9 @@
     align-items: center;
     display: flex;
 }
+.SortDropdown {
+    padding-left: 60px;
+}
 .FontSizeTextGP{
     margin-left: 30px;
     font-size: 20px;

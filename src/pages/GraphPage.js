@@ -27,6 +27,7 @@ const GraphPage = () => {
     const [niz, setNiz] = useState(["qwe", "qwe", "asd", "asd"]);
     const navigate = useNavigate();
     const accessToken = Cookies.get('access_token');
+    const [dateFake, setDateFake] = useState([]);
     const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
 
 
@@ -84,97 +85,98 @@ const GraphPage = () => {
         let today = new Date(Date.now() - 1000 * 3600 * 4);
         let arrayC = [];
         let labels = [];
+        let filteredData = [];
 
         switch (period) {
             case 0:
-                const dateFake0 = SortData(DataFromServ, 0);
-                arrayC = [0, 0, 0];
-                labels = ["0-20 минут назад", "20-40 минут назад", "40-60 минут назад"];
-                dateFake0.forEach((valueq) => {
-                    const value = new Date(valueq.time);
-                    const condition = today.getTime() - value.getTime();
-                    if (condition <= 1000 * 60 * 20) arrayC[0]++;
-                    else if (condition <= 1000 * 60 * 40) arrayC[1]++;
-                    else if (condition <= 1000 * 60 * 60) arrayC[2]++;
-                });
-                break;
-            case 1:
-                const dateFake1 = SortData(DataFromServ, 1);
-                arrayC = [0, 0, 0, 0, 0, 0];
-                labels = ["0-4 часов назад", "4-8 часов назад", "8-12 часов назад", "12-16 часов назад", "16-20 часов назад", "20-24 часов назад"];
-                dateFake1.forEach((valueq) => {
-                    const value = new Date(valueq.time);
-                    const condition = today.getTime() - value.getTime();
-                    if (condition <= 4 * 3600 * 1000) arrayC[0]++;
-                    else if (condition <= 8 * 3600 * 1000) arrayC[1]++;
-                    else if (condition <= 12 * 3600 * 1000) arrayC[2]++;
-                    else if (condition <= 16 * 3600 * 1000) arrayC[3]++;
-                    else if (condition <= 20 * 3600 * 1000) arrayC[4]++;
-                    else if (condition <= 24 * 3600 * 1000) arrayC[5]++;
-                });
-                break;
-            case 2:
-                const dateFake2 = SortData(DataFromServ, 2);
-                arrayC = [0, 0, 0, 0, 0, 0, 0];
-                labels = ["сегодня", "1 день назад", "2 дня назад", "3 дня назад", "4 дня назад", "5 дней назад", "6 дней назад"];
-                dateFake2.forEach((valueq) => {
-                    const value = new Date(valueq.time);
-                    const condition = today.getTime() - value.getTime();
-                    if (condition <= 24 * 3600 * 1000) arrayC[0]++;
-                    else if (condition <= 2 * 24 * 3600 * 1000) arrayC[1]++;
-                    else if (condition <= 3 * 24 * 3600 * 1000) arrayC[2]++;
-                    else if (condition <= 4 * 24 * 3600 * 1000) arrayC[3]++;
-                    else if (condition <= 5 * 24 * 3600 * 1000) arrayC[4]++;
-                    else if (condition <= 6 * 24 * 3600 * 1000) arrayC[5]++;
-                    else if (condition <= 7 * 24 * 3600 * 1000) arrayC[6]++;
-                });
-                break;
-            case 3:
-                const dateFake3 = SortData(DataFromServ, 3);
-                arrayC = new Array(30).fill(0);
-                labels = Array.from({ length: 30 }, (_, i) => i + 1);
-                dateFake3.forEach((valueq) => {
-                    const value = new Date(valueq.time);
-                    const condition = today.getTime() - value.getTime();
-                    for (let i = 0; i < 30; i++) {
-                        if (condition <= 24 * 3600 * 1000 * (i + 1) && condition > 24 * 3600 * 1000 * i) {
-                            arrayC[i]++;
-                        }
+            filteredData = SortData(DataFromServ, 0);
+            arrayC = [0, 0, 0];
+            labels = ["0-20 минут назад", "20-40 минут назад", "40-60 минут назад"];
+            filteredData.forEach((valueq) => {
+                const value = new Date(valueq.time);
+                const condition = today.getTime() - value.getTime();
+                if (condition <= 1000 * 60 * 20) arrayC[0]++;
+                else if (condition <= 1000 * 60 * 40) arrayC[1]++;
+                else if (condition <= 1000 * 60 * 60) arrayC[2]++;
+            });
+            break;
+        case 1:
+            filteredData = SortData(DataFromServ, 1);
+            arrayC = [0, 0, 0, 0, 0, 0];
+            labels = ["0-4 часов назад", "4-8 часов назад", "8-12 часов назад", "12-16 часов назад", "16-20 часов назад", "20-24 часов назад"];
+            filteredData.forEach((valueq) => {
+                const value = new Date(valueq.time);
+                const condition = today.getTime() - value.getTime();
+                if (condition <= 4 * 3600 * 1000) arrayC[0]++;
+                else if (condition <= 8 * 3600 * 1000) arrayC[1]++;
+                else if (condition <= 12 * 3600 * 1000) arrayC[2]++;
+                else if (condition <= 16 * 3600 * 1000) arrayC[3]++;
+                else if (condition <= 20 * 3600 * 1000) arrayC[4]++;
+                else if (condition <= 24 * 3600 * 1000) arrayC[5]++;
+            });
+            break;
+        case 2:
+            filteredData = SortData(DataFromServ, 2);
+            arrayC = [0, 0, 0, 0, 0, 0, 0];
+            labels = ["сегодня", "1 день назад", "2 дня назад", "3 дня назад", "4 дня назад", "5 дней назад", "6 дней назад"];
+            filteredData.forEach((valueq) => {
+                const value = new Date(valueq.time);
+                const condition = today.getTime() - value.getTime();
+                if (condition <= 24 * 3600 * 1000) arrayC[0]++;
+                else if (condition <= 2 * 24 * 3600 * 1000) arrayC[1]++;
+                else if (condition <= 3 * 24 * 3600 * 1000) arrayC[2]++;
+                else if (condition <= 4 * 24 * 3600 * 1000) arrayC[3]++;
+                else if (condition <= 5 * 24 * 3600 * 1000) arrayC[4]++;
+                else if (condition <= 6 * 24 * 3600 * 1000) arrayC[5]++;
+                else if (condition <= 7 * 24 * 3600 * 1000) arrayC[6]++;
+            });
+            break;
+        case 3:
+            filteredData = SortData(DataFromServ, 3);
+            arrayC = new Array(30).fill(0);
+            labels = Array.from({ length: 30 }, (_, i) => i + 1);
+            filteredData.forEach((valueq) => {
+                const value = new Date(valueq.time);
+                const condition = today.getTime() - value.getTime();
+                for (let i = 0; i < 30; i++) {
+                    if (condition <= 24 * 3600 * 1000 * (i + 1) && condition > 24 * 3600 * 1000 * i) {
+                        arrayC[i]++;
                     }
-                });
-                break;
-            case 4:
-                const dateFake4 = SortData(DataFromServ, 3);
-                arrayC = [0, 0, 0, 0, 0, 0];
-                labels = [
-                    "Текущий месяц (первая половина)",
-                    "Текущий месяц (вторая половина)",
-                    "Месяц назад (первая половина)",
-                    "Месяц назад (вторая половина)",
-                    "2 месяца назад (первая половина)",
-                    "2 месяца назад (вторая половина)"
-                ];
-                dateFake4.forEach((valueq) => {
-                    const value = new Date(valueq.time);
-                    const diffMonths = today.getMonth() - value.getMonth();
-                    const diffYears = today.getFullYear() - value.getFullYear();
-                    const totalMonths = diffYears * 12 + diffMonths;
-                    const monthHalf = value.getDate() > 15 ? 1 : 0;
-                    if (totalMonths === 0 && monthHalf === 0) arrayC[0]++;
-                    else if (totalMonths === 0 && monthHalf === 1) arrayC[1]++;
-                    else if (totalMonths === 1 && monthHalf === 0) arrayC[2]++;
-                    else if (totalMonths === 1 && monthHalf === 1) arrayC[3]++;
-                    else if (totalMonths === 2 && monthHalf === 0) arrayC[4]++;
-                    else if (totalMonths === 2 && monthHalf === 1) arrayC[5]++;
-                });
-                break;
+                }
+            });
+            break;
+        case 4:
+            filteredData = SortData(DataFromServ, 3);
+            arrayC = [0, 0, 0, 0, 0, 0];
+            labels = [
+                "Текущий месяц 1/2",
+                "Текущий месяц 2/2",
+                "Месяц назад  1/2",
+                "Месяц назад 2/2",
+                "2 месяца назад 1/2",
+                "2 месяца назад 2/2"
+            ];
+            filteredData.forEach((valueq) => {
+                const value = new Date(valueq.time);
+                const diffMonths = today.getMonth() - value.getMonth();
+                const diffYears = today.getFullYear() - value.getFullYear();
+                const totalMonths = diffYears * 12 + diffMonths;
+                const monthHalf = value.getDate() > 15 ? 1 : 0;
+                if (totalMonths === 0 && monthHalf === 0) arrayC[0]++;
+                else if (totalMonths === 0 && monthHalf === 1) arrayC[1]++;
+                else if (totalMonths === 1 && monthHalf === 0) arrayC[2]++;
+                else if (totalMonths === 1 && monthHalf === 1) arrayC[3]++;
+                else if (totalMonths === 2 && monthHalf === 0) arrayC[4]++;
+                else if (totalMonths === 2 && monthHalf === 1) arrayC[5]++;
+            });
+            break;
             case 5:
-                const dateFake5 = SortData(DataFromServ, 3);
+                filteredData = SortData(DataFromServ, 3);
                 arrayC = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                 labels = [
                     "этот месяц", "месяц назад", "2 месяца назад", "3 месяца назад", "4 месяца назад", "5 месяцев назад", "6 месяцев назад", "7 месяцев назад", "8 месяцев назад", "9 месяцев назад", "10 месяцев назад", "11 месяцев назад"
                 ];
-                dateFake5.forEach((valueq) => {
+                filteredData.forEach((valueq) => {
                     const value = new Date(valueq.time);
                     const diffMonths = today.getMonth() - value.getMonth();
                     const diffYears = today.getFullYear() - value.getFullYear();
@@ -183,11 +185,12 @@ const GraphPage = () => {
                 });
                 break;
             default:
-                break;
+                filteredData = [];
         }
 
         setClicks(arrayC);
         setNiz(labels);
+        setDateFake(filteredData);
     }, [period, DataFromServ]);
 
 
@@ -262,10 +265,10 @@ const GraphPage = () => {
                             {DataFromServ.length > 0 &&  (<div className="OptionsInGP">
                                 <div style={{display:"flex",justifyContent:"space-between"}}>
                                     <div className="AddressesInGP">
-                                        <AddresGp Dates={DataFromServ}/>
+                                        <AddresGp Dates={dateFake} />
                                     </div>
                                     <div className="DevicesInGP">
-                                        <DevicesGp Dates={DataFromServ}/>
+                                        <DevicesGp Dates={dateFake}/>
                                     </div>
                                 </div>
                                 <div style={{display:"flex",justifyContent:"space-between",marginTop:"40px"}}>

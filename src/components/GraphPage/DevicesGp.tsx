@@ -1,116 +1,118 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import MapGP from "./MapGP";
-import "../../styles/GraphPage/AddresGp.css"
-import {
-    DateFromServInterface
-} from "../../LogicComp/GPFakeData";
+import "../../styles/GraphPage/AddresGp.css";
+import { DateFromServInterface } from "../../LogicComp/GPFakeData";
 
-
-interface AddresGpInt{
-    Dates:DateFromServInterface[]
+interface AddresGpInt {
+    Dates: DateFromServInterface[];
 }
 
-interface DualData{
-    country:string,
-    clicks:number
+interface DualData {
+    country: string;
+    clicks: number;
 }
-const DevicesGp = ({Dates}:AddresGpInt) => {
 
-    const Device:DualData[] = []
-    const OC:DualData[] = []
-    const Browser:DualData[] = []
-    Dates.map((value,index)=>{
-        let flag:boolean = false;
-        Device.map((country,indexC)=>{
-            if(country.country == value.device) {
-                country.clicks++;
-                flag = true
+const DevicesGp = ({ Dates }: AddresGpInt) => {
+    const [data, setData] = useState<DualData[]>([]);
+    const [Device, setDevice] = useState<DualData[]>([]);
+    const [OC, setOC] = useState<DualData[]>([]);
+    const [Browser, setBrowser] = useState<DualData[]>([]);
+    const [state, setState] = useState([true, false, false]);
+    const refToBack = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const device: DualData[] = [];
+        const oc: DualData[] = [];
+        const browser: DualData[] = [];
+
+        Dates.forEach((value) => {
+            let deviceFlag = false;
+            device.forEach((d) => {
+                if (d.country === value.device) {
+                    d.clicks++;
+                    deviceFlag = true;
+                }
+            });
+            if (!deviceFlag) {
+                device.push({ country: value.device, clicks: 1 });
             }
-        })
-        if(flag === false){
-            let temp:DualData = {
-                country:value.device,
-                clicks:1
+
+            let ocFlag = false;
+            oc.forEach((o) => {
+                if (o.country === value.os) {
+                    o.clicks++;
+                    ocFlag = true;
+                }
+            });
+            if (!ocFlag) {
+                oc.push({ country: value.os, clicks: 1 });
             }
-            Device.push(temp)
-        }
-    })
 
-    Dates.map((value,index)=>{
-        let flag:boolean = false;
-        OC.map((country,indexC)=>{
-            if(country.country == value.os) {
-                country.clicks++;
-                flag = true
+            let browserFlag = false;
+            browser.forEach((b) => {
+                if (b.country === value.browser) {
+                    b.clicks++;
+                    browserFlag = true;
+                }
+            });
+            if (!browserFlag) {
+                browser.push({ country: value.browser, clicks: 1 });
             }
-        })
-        if(flag === false){
-            let temp:DualData = {
-                country:value.os,
-                clicks:1
-            }
-            OC.push(temp)
+        });
+
+        setDevice(device);
+        setOC(oc);
+        setBrowser(browser);
+        setData(device); 
+    }, [Dates]);
+
+    const clickDevice = () => {
+        if (refToBack.current !== null && !state[0]) {
+            refToBack.current.style.transition = "0.2s ease-in";
+            refToBack.current.style.left = "-1px";
+            setState([true, false, false]);
+            setData(Device);
         }
-    })
+    };
 
-    Dates.map((value,index)=>{
-        let flag:boolean = false;
-        Browser.map((country,indexC)=>{
-            if(country.country == value.browser) {
-                country.clicks++;
-                flag = true
-            }
-        })
-        if(flag === false){
-            let temp:DualData = {
-                country:value.browser,
-                clicks:1
-            }
-            Browser.push(temp)
+    const clickGoogle = () => {
+        if (refToBack.current !== null && !state[1]) {
+            refToBack.current.style.transition = "0.2s ease-in";
+            refToBack.current.style.left = "102px";
+            setState([false, true, false]);
+            setData(Browser);
         }
-    })
+    };
 
-    const [data,setData] = useState(Device)
-    const [state,setState] = useState(
-        new Array(3).fill(false)
-    )
-
-    useEffect(()=>{
-        const arr = [true,false,false]
-        setState(arr)
-    },[])
-
-    const refToBack = useRef<HTMLDivElement>(null)
-
-    const clickDevice = () =>{
-        if(refToBack.current!=null && !state[0]){
-            refToBack.current.style.transition = "0.2s ease-in"
-            refToBack.current.style.left = "-1px"
-            const arr = [true,false,false]
-            setState(arr)
-            setData(Device)
+    const clickOC = () => {
+        if (refToBack.current !== null && !state[2]) {
+            refToBack.current.style.transition = "0.2s ease-in";
+            refToBack.current.style.left = "206px";
+            setState([false, false, true]);
+            setData(OC);
         }
-    }
+    };
 
-    const clickGoogle = () =>{
-        if(refToBack.current!=null && !state[1]){
-            refToBack.current.style.transition = "0.2s ease-in"
-            refToBack.current.style.left = "102px"
-            const arr = [false,true,false]
-            setState(arr)
-            setData(Browser)
+    const sortData = (type: string) => {
+        let sortedData = [...data];
+        switch (type) {
+            case "alphabeticalAsc":
+                sortedData.sort((a, b) => a.country.localeCompare(b.country));
+                break;
+            case "alphabeticalDesc":
+                sortedData.sort((a, b) => b.country.localeCompare(a.country));
+                break;
+            case "clicksAsc":
+                sortedData.sort((a, b) => a.clicks - b.clicks);
+                break;
+            case "clicksDesc":
+                sortedData.sort((a, b) => b.clicks - a.clicks);
+                break;
+            default:
+                break;
         }
-    }
-
-    const clickOC = () =>{
-        if(refToBack.current!=null && !state[2]){
-            refToBack.current.style.transition = "0.2s ease-in"
-            refToBack.current.style.left = "206px"
-            const arr = [false,false,true]
-            setState(arr)
-            setData(OC)
-        }
-    }
+        setData(sortedData);
+    };
 
     return (
         <div>
@@ -118,24 +120,33 @@ const DevicesGp = ({Dates}:AddresGpInt) => {
                 <div className="FontSizeTextGP">
                     Устройства
                 </div>
+                
                 <div className="CotainerForBackAddress">
-                    <div onClick={(event)=>{clickDevice()}} className="CountryGPinAd">
+                    <div onClick={clickDevice} className="CountryGPinAd">
                         Устройство
                     </div>
-                    <div onClick={(event)=>{clickGoogle()}} className="CountryGPinAd">
+                    <div onClick={clickGoogle} className="CountryGPinAd">
                         Браузер
                     </div>
-                    <div onClick={(event)=>{clickOC()}} className="CityGPinAd">
+                    <div onClick={clickOC} className="CityGPinAd">
                         ОС
                     </div>
                     <div ref={refToBack} className="BackForAddress"></div>
                 </div>
+                
             </div>
-            {
-                data.map((value, index, array)=>
-                    <MapGP name={value.country} clickCount={value.clicks} key={index} SVG={"qwe"}/>
-                )
-            }
+            <div className="SortDropdown" >
+                <select onChange={(e) => sortData(e.target.value)}>
+                    <option value="">Sort</option>
+                    <option value="alphabeticalAsc">(А-Я)</option>
+                    <option value="alphabeticalDesc">(Я-А)</option>
+                    <option value="clicksAsc">(↑)</option>
+                    <option value="clicksDesc">(↓)</option>
+                </select>
+            </div>
+            {data.map((value, index) => (
+                <MapGP name={value.country} clickCount={value.clicks} key={index} SVG={"qwe"} />
+            ))}
         </div>
     );
 };
