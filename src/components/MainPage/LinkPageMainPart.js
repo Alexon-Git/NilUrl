@@ -128,6 +128,7 @@ const convertDateFormat = (dateString) => {
   const highestKey = links.length > 0 ? Math.max(...links.map(link => link.key)) : 0;
 
   return (
+    <div className='image-background'>
     <div className="LinkPageMainPart">
       <div className="TopContainer">
         <div className="FakeDivLP"></div>
@@ -167,6 +168,7 @@ const convertDateFormat = (dateString) => {
     )}
   </div>
 </div>
+    </div>
     </div>
   );
 };

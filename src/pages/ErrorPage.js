@@ -64,6 +64,7 @@ const ErrorPage = () => {
   const shuffledPositions = shuffleArray(initialPositions);
 
   return (
+    <div className="image-background">
     <div className="error-page wrapper">
       <div>
         {shuffledPositions.map((position, index) => (
@@ -87,6 +88,7 @@ const ErrorPage = () => {
           <p className="error-message">Упс... страница не найдена. Возможно ссылка была удалена.</p>
         </div>
       </div>
+    </div>
     </div>
   );
 };
