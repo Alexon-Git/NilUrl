@@ -1,6 +1,9 @@
 .AddressCountry{
     margin-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     margin-top: 20px;
+    gap: 15px;
     justify-content: space-between;
     align-items: center;
     display: flex;
@@ -14,8 +17,6 @@
     font-size: 20px;
     font-weight: 700;
     gap: 20px; /* Отступ между элементами */
-    padding-left: 30px;
-    padding-right: 30px;
   }
 .CotainerForBackAddress{
     display: inline-flex;

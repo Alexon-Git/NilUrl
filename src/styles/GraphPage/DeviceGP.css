@@ -1,0 +1,37 @@
+.AddressCountryDev {
+    margin-bottom: 30px;
+    margin-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .FontSizeTextGPDev {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    gap: 15px;
+  }
+  
+  .NavigationButtonDev {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .CategoryDev {
+  }
+  
+  .DeviceSwapDev {
+    width: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 30px;
+    margin-left: auto;
+  }
+  

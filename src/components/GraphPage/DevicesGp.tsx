@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MapGP from "./MapGP";
-import "../../styles/GraphPage/AddresGp.css";
+import "../../styles/GraphPage/DeviceGP.css";
 import { DateFromServInterface } from "../../LogicComp/GPFakeData";
 import SortButtonDev from "../buttons/SortButtonDev";
 
@@ -18,8 +18,13 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
   const [Device, setDevice] = useState<DualData[]>([]);
   const [OC, setOC] = useState<DualData[]>([]);
   const [Browser, setBrowser] = useState<DualData[]>([]);
-  const [state, setState] = useState([true, false, false]);
-  const refToBack = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const categories = [
+    { name: "Устройство", data: Device },
+    { name: "Браузер", data: Browser },
+    { name: "ОС", data: OC }
+  ];
 
   useEffect(() => {
     const device: DualData[] = [];
@@ -67,31 +72,16 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
     setData(device);
   }, [Dates]);
 
-  const clickDevice = () => {
-    if (refToBack.current !== null && !state[0]) {
-      refToBack.current.style.transition = "0.2s ease-in";
-      refToBack.current.style.left = "-1px";
-      setState([true, false, false]);
-      setData(Device);
-    }
+  useEffect(() => {
+    setData(categories[currentIndex].data);
+  }, [currentIndex, categories]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? categories.length - 1 : prevIndex - 1));
   };
 
-  const clickGoogle = () => {
-    if (refToBack.current !== null && !state[1]) {
-      refToBack.current.style.transition = "0.2s ease-in";
-      refToBack.current.style.left = "102px";
-      setState([false, true, false]);
-      setData(Browser);
-    }
-  };
-
-  const clickOC = () => {
-    if (refToBack.current !== null && !state[2]) {
-      refToBack.current.style.transition = "0.2s ease-in";
-      refToBack.current.style.left = "206px";
-      setState([false, false, true]);
-      setData(OC);
-    }
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === categories.length - 1 ? 0 : prevIndex + 1));
   };
 
   const sortData = (type: string) => {
@@ -124,24 +114,15 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
   ];
 
   return (
-    <div>
-      <div className="AddressCountry">
-      <div className="FontSizeTextGP">
-        Устройства
+    <div className="AddressCountryDev">
+      <div className="FontSizeTextGPDev">
+        <span>Устройства</span>
         <SortButtonDev columns={columns} />
-            </div>
-        <div className="CotainerForBackAddress">
-          <div onClick={clickDevice} className="CountryGPinAd">
-            Устройство
-          </div>
-          <div onClick={clickGoogle} className="CountryGPinAd">
-            Браузер
-          </div>
-          <div onClick={clickOC} className="CityGPinAd">
-            ОС
-          </div>
-          <div ref={refToBack} className="BackForAddress"></div>
-        </div>
+      </div>
+      <div className="DeviceSwapDev">
+      <button className="NavigationButtonDev" onClick={handlePrev}>⬅</button>
+      <div className="CategoryDev">{categories[currentIndex].name}</div>
+      <button className="NavigationButtonDev" onClick={handleNext}>➡</button>
       </div>
       {data.map((value, index) => (
         <MapGP
