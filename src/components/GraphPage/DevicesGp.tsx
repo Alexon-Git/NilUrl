@@ -19,6 +19,7 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
   const [OC, setOC] = useState<DualData[]>([]);
   const [Browser, setBrowser] = useState<DualData[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [sortOption, setSortOption] = useState(0);
 
   const categories = [
     { name: "Устройство", data: Device },
@@ -84,32 +85,35 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
     setCurrentIndex((prevIndex) => (prevIndex === categories.length - 1 ? 0 : prevIndex + 1));
   };
 
-  const sortData = (type: string) => {
-    let sortedData = [...data];
-    switch (type) {
-      case "alphabeticalAsc":
+  useEffect(() => {
+    let sortedData = [...categories[currentIndex].data];
+    switch (sortOption) {
+      case 0:
+        sortedData = [...categories[currentIndex].data];
+        break;
+      case 1:
         sortedData.sort((a, b) => a.country.localeCompare(b.country));
         break;
-      case "alphabeticalDesc":
+      case 2:
         sortedData.sort((a, b) => b.country.localeCompare(a.country));
         break;
-      case "clicksAsc":
-        sortedData.sort((a, b) => a.clicks - b.clicks);
-        break;
-      case "clicksDesc":
+      case 3:
         sortedData.sort((a, b) => b.clicks - a.clicks);
+        break;
+      case 4:
+        sortedData.sort((a, b) => a.clicks - b.clicks);
         break;
       default:
         break;
     }
     setData(sortedData);
-  };
+  }, [sortOption, data]);
 
   const columns = [
     { label: "По умолчанию", value: 0 },
-    { label: "Дата ↓", value: 1 },
-    { label: "По кликам ↓", value: 2 },
-    { label: "Дата ↑", value: 3 },
+    { label: "Алфавит ↓", value: 1 },
+    { label: "Алфавит ↑", value: 2 },
+    { label: "По кликам ↓", value: 3 },
     { label: "По кликам ↑", value: 4 },
   ];
 
@@ -117,7 +121,7 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
     <div className="AddressCountryDev">
       <div className="FontSizeTextGPDev">
         <span>Устройства</span>
-        <SortButtonDev columns={columns} />
+        <SortButtonDev columns={columns} setSortOption={setSortOption} />
       </div>
       <div className="DeviceSwapDev">
       <button className="NavigationButtonDev" onClick={handlePrev}>⬅</button>

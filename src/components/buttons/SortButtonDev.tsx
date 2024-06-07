@@ -8,9 +8,10 @@ interface SortingOption {
 
 interface SortButtonGPProps {
   columns: SortingOption[];
+  setSortOption: (value: number) => void;
 }
 
-const SortButtonDev: React.FC<SortButtonGPProps> = ({ columns }) => {
+const SortButtonDev: React.FC<SortButtonGPProps> = ({ columns, setSortOption }) => {
   const [selectedOption, setSelectedOption] = useState(columns[0]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const ulRef = useRef<HTMLUListElement>(null);
@@ -34,6 +35,7 @@ const SortButtonDev: React.FC<SortButtonGPProps> = ({ columns }) => {
 
   const handleOptionClick = (option: SortingOption) => {
     setSelectedOption(option);
+    setSortOption(option.value);
     setIsDropdownOpen(false);
   };
 

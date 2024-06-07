@@ -19,6 +19,13 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
   const [Countries, setCountries] = useState<DualData[]>([]);
   const [City, setCity] = useState<DualData[]>([]);
   const refToBack = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [sortOption, setSortOption] = useState(0);
+
+const categories = [
+    { name: "Страны", data: Countries },
+    { name: "Города", data: City }
+  ];
 
   useEffect(() => {
     const countries: DualData[] = [];
@@ -53,69 +60,60 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
     setData(countries);
   }, [Dates]);
 
-  const clickCountry = () => {
-    if (refToBack.current !== null && flag) {
-      refToBack.current.style.transition = "0.2s ease-in";
-      refToBack.current.style.left = "-1px";
-      setFlag(false);
-      setData(Countries);
-    }
+  useEffect(() => {
+    setData(categories[currentIndex].data);
+  }, [currentIndex, categories]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? categories.length - 1 : prevIndex - 1));
   };
 
-  const clickCity = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (refToBack.current !== null && !flag) {
-      refToBack.current.style.transition = "0.2s ease-in";
-      refToBack.current.style.left = "103px";
-      setFlag(true);
-      setData(City);
-    }
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === categories.length - 1 ? 0 : prevIndex + 1));
   };
 
-  const sortData = (type: string) => {
-    let sortedData = [...data];
-    switch (type) {
-      case "alphabeticalAsc":
+  useEffect(() => {
+    let sortedData = [...categories[currentIndex].data];
+    switch (sortOption) {
+      case 0:
+        sortedData = [...categories[currentIndex].data];
+        break;
+      case 1:
         sortedData.sort((a, b) => a.country.localeCompare(b.country));
         break;
-      case "alphabeticalDesc":
+      case 2:
         sortedData.sort((a, b) => b.country.localeCompare(a.country));
         break;
-      case "clicksAsc":
-        sortedData.sort((a, b) => a.clicks - b.clicks);
-        break;
-      case "clicksDesc":
+      case 3:
         sortedData.sort((a, b) => b.clicks - a.clicks);
+        break;
+      case 4:
+        sortedData.sort((a, b) => a.clicks - b.clicks);
         break;
       default:
         break;
     }
     setData(sortedData);
-  };
+  }, [sortOption, data]);
 
   const columns = [
     { label: "По умолчанию", value: 0 },
-    { label: "Дата ↓", value: 1 },
-    { label: "По кликам ↓", value: 2 },
-    { label: "Дата ↑", value: 3 },
+    { label: "Алфавит ↓", value: 1 },
+    { label: "Алфавит ↑", value: 2 },
+    { label: "По кликам ↓", value: 3 },
     { label: "По кликам ↑", value: 4 },
   ];
 
   return (
-    <div>
-      <div className="AddressCountry">
-        <div className="FontSizeTextGP">
-        Адреса
-        <SortButtonAdd columns={columns} />
-            </div>
-        <div className="CotainerForBackAddress">
-          <div onClick={clickCountry} className="CountryGPinAd">
-            Cтрана
-          </div>
-          <div onClick={clickCity} className="CityGPinAd">
-            Город
-          </div>
-          <div ref={refToBack} className="BackForAddress"></div>
-        </div>
+    <div className="AddressCountryDev">
+      <div className="FontSizeTextGPDev">
+        <span>Адреса</span>
+        <SortButtonAdd columns={columns} setSortOption={setSortOption} />
+      </div>
+      <div className="DeviceSwapDev">
+      <button className="NavigationButtonDev" onClick={handlePrev}>⬅</button>
+      <div className="CategoryDev">{categories[currentIndex].name}</div>
+      <button className="NavigationButtonDev" onClick={handleNext}>➡</button>
       </div>
       {data.map((value, index) => (
         <MapGP
