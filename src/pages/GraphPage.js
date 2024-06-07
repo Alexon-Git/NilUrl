@@ -30,7 +30,7 @@ const GraphPage = () => {
   const [dateFake, setDateFake] = useState([]);
   const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
 
-     useEffect(() => {
+  useEffect(() => {
         const fetchData = async () => {
             try {
                 // Формирование URL с параметром pathS, если он не null
@@ -71,7 +71,7 @@ const GraphPage = () => {
             setIsRedirected(true);
             navigate('/login');
         }
-    }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected, accessToken]); 
+    }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected, accessToken]);
 
   const ChangePeriod = (prop) => {
     setPeriod(prop);
@@ -291,9 +291,9 @@ const GraphPage = () => {
                     </div>
                   </div>
                   <div style={{display:"flex",justifyContent:"space-between",marginTop:"40px"}}>
-                    <div className="REFSGP">
+                {/*    <div className="REFSGP">
                       <RefsGp />
-                    </div>
+    </div> */}
                     <div className="TOPREFGP">
                       <TopRefs />
                     </div>
