@@ -1,0 +1,69 @@
+.dropdownGraphLinks{
+    width:240px;
+    border-radius:0.5em;
+}
+.SVGinPeriodTop{
+    margin-left:auto;
+    rotate: 90deg;
+}
+.ButtonToDrop{
+
+    box-shadow: 0px 2px 8px 0px #0000001A;
+    border: none;
+    background-color: white;
+    width: 240px;
+    height: 47px;
+    border-radius: 0.5em;
+}
+
+.LIDPBlocked{
+    border-radius: 0.5em;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    font-size:16px;
+    width: 220px;
+    height: 40px;
+    margin:10px;
+    color: gray;
+}
+.LIDPBlocked div{
+    padding-left: 10px;
+}
+.LIDP{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    font-size:16px;
+    width: 220px;
+    height: 40px;
+    margin:10px;
+}
+
+.LIDP div{
+    padding-left: 10px;
+}
+.LIDP:hover{
+    border-radius: 0.5em;
+    transition: background-color 0.1s ease-in;
+    background-color: #e1e1e1;
+    cursor: pointer;
+}
+.ULDP{
+    z-index: 2;
+    width: 240px;
+    position: absolute;
+    background-color: white;
+    border-radius: 0.5em;
+    box-shadow: 5px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    margin-top: 10px;
+    padding-left:0px;
+    max-height: 0px;
+    overflow: hidden;
+}
+.buttonGPPDrop{
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+

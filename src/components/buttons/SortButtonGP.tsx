@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import "../../styles/LinksPage/SortNew.css";
+import "./sortButtonGP.css";
 
 interface SortingOption {
   label: string;
