@@ -23,7 +23,7 @@ const MainPage = () => {
     return (
         <div>
             <NoLoginHeader/>
-            <div className='image-background'>                
+            <div className='mp-background'>                
                 <FirstContainerMainPage/>
                 <VideoComp/>
                 <PriceMp/>

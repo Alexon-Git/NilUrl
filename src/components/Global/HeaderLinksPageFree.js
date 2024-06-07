@@ -6,22 +6,26 @@ import {jwtDecode} from 'jwt-decode'
 import {LINKSPAGE_ROUTE, SETTINGPAGE_ROUTE} from "../../LogicComp/utils/Const";
 const HeaderLinksPage = () => {
   const [username, setUsername] = useState('');
+  const [usernameInitial, setUsernameInitial] = useState('');
   const navigator = useNavigate()
+
   useEffect(() => {
     const accessToken = Cookies.get('access_token');
     if (accessToken) {
       const decodedToken = jwtDecode(accessToken);
       setUsername(decodedToken.username);
+      setUsernameInitial(decodedToken.username.charAt(0));
     }
   }, []);
+
   return (
     <div style={{borderBottom:"1px solid #E5E7EB"}}>
       <div className="HeaderLinksPageC">
         <div className="leftUserLogo">
           <div className="UserLogoWord">
             <div style={{paddingBottom:"2px"}}>
-                            {username}
-                        </div>
+              {usernameInitial}
+            </div>
           </div>
         </div>
         <div className="CentreHeaderLinksPageC">

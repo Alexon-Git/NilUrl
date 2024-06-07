@@ -202,7 +202,7 @@ const GraphPage = () => {
           <div className="title__container">
             <h4 className="settings__title wrapper-title">Аналитика</h4>
           </div>
-          <div className="image-background">
+          <div className="gp-background">
             <div className="GPMainContainer">
               <di className="GPCenterContainer">
                 <div className="LinkAndPeriod">

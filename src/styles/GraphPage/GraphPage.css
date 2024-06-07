@@ -1,3 +1,13 @@
+.gp-background {
+    background-image: url(./../../img/background-image.svg);
+    background-color: rgba(0,125,52, 0.05);  
+    background-repeat: repeat;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid rgba(221, 221, 221, 1);
+    overflow: hidden;
+  }
+
 .GPMainContainer{
     display: flex;
     width: 100%;

@@ -105,7 +105,7 @@ const SettingsForm = () => {
         <div className="title__container">
           <h4 className="settings__title wrapper-title">Настройки</h4>
         </div>
-        <div className="image-background">
+        <div className="sf-background">
         <div className="settings__controls wrapper">
           <div className="settings__controls__menu">
             <div className="settings__controls__menu-item">Основные</div>

@@ -1,26 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import "../../styles/Global/HeaderLinksPage.css"
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode'
-import {LINKSPAGE_ROUTE, SETTINGPAGE_ROUTE} from "../../LogicComp/utils/Const";
+import { jwtDecode } from 'jwt-decode'
+import { LINKSPAGE_ROUTE, SETTINGPAGE_ROUTE } from "../../LogicComp/utils/Const";
+
+
 const HeaderLinksPage = () => {
     const [username, setUsername] = useState('');
-    const navigator = useNavigate()
+    const [usernameInitial, setUsernameInitial] = useState('');
+    const navigator = useNavigate();
+
     useEffect(() => {
         const accessToken = Cookies.get('access_token');
         if (accessToken) {
             const decodedToken = jwtDecode(accessToken);
             setUsername(decodedToken.username);
+            setUsernameInitial(decodedToken.username.charAt(0));
         }
     }, []);
+
     return (
-        <div style={{borderBottom:"1px solid #E5E7EB"}}>
+        <div style={{ borderBottom: "1px solid #E5E7EB" }}>
             <div className="HeaderLinksPageC">
                 <div className="leftUserLogo">
                     <div className="UserLogoWord">
-                        <div style={{paddingBottom:"2px"}}>
-                            {username}
+                        <div style={{ paddingBottom: "2px" }}>
+                            {usernameInitial}
                         </div>
                     </div>
                 </div>
