@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import "../../styles/GraphPage/AddresGp.css";
 import MapGP from "./MapGP";
 import { DateFromServInterface } from "../../LogicComp/GPFakeData";
-import SortButtonGP from "../buttons/SortButtonGP2";
+import SortButtonAdd from "../buttons/SortButtonAdd";
 
 interface AddresGpInt {
   Dates: DateFromServInterface[];
@@ -93,18 +93,20 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
   };
 
   const columns = [
-    { label: "Дата ↓", value: 0 },
-    { label: "Дата ↑", value: 1 },
-    { label: "По алфавиту ↓", value: 2 },
-    { label: "По алфавиту ↑", value: 3 },
-    { label: "По рейтингу ↓", value: 4 },
-    { label: "По рейтингу ↑", value: 5 },
+    { label: "По умолчанию", value: 0 },
+    { label: "Дата ↓", value: 1 },
+    { label: "По кликам ↓", value: 2 },
+    { label: "Дата ↑", value: 3 },
+    { label: "По кликам ↑", value: 4 },
   ];
 
   return (
     <div>
       <div className="AddressCountry">
-        <div className="FontSizeTextGP">Адреса</div>
+        <div className="FontSizeTextGP">
+        Адреса
+        <SortButtonAdd columns={columns} />
+            </div>
         <div className="CotainerForBackAddress">
           <div onClick={clickCountry} className="CountryGPinAd">
             Cтрана
@@ -114,16 +116,6 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
           </div>
           <div ref={refToBack} className="BackForAddress"></div>
         </div>
-      </div>
-      <div className="SortDropdown">
-        <SortButtonGP columns={columns} />
-        <select onChange={(e) => sortData(e.target.value)}>
-          <option value="">Sort</option>
-          <option value="alphabeticalAsc">(А-Я)</option>
-          <option value="alphabeticalDesc">(Я-А)</option>
-          <option value="clicksAsc">(↑)</option>
-          <option value="clicksDesc">(↓)</option>
-        </select>
       </div>
       {data.map((value, index) => (
         <MapGP

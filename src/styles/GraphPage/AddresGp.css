@@ -6,13 +6,17 @@
     display: flex;
 }
 .SortDropdown {
-    padding-left: 60px;
+    padding-left: 30px;
 }
-.FontSizeTextGP{
-    margin-left: 30px;
+.FontSizeTextGP {
+    display: flex;
+    align-items:center;
     font-size: 20px;
     font-weight: 700;
-}
+    gap: 20px; /* Отступ между элементами */
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 .CotainerForBackAddress{
     display: inline-flex;
     position: relative;

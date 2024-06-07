@@ -1,57 +1,56 @@
-.dropdownGraphLinks{
-    width:240px;
+.dropdownGraphLinksGP{
+    width: auto;
     border-radius:0.5em;
 }
-.SVGinPeriodTop{
+.SVGinPeriodTopGP{
     margin-left:auto;
     rotate: 90deg;
 }
-.ButtonToDrop{
-
+.ButtonToDropGP{
     box-shadow: 0px 2px 8px 0px #0000001A;
     border: none;
     background-color: white;
-    width: 240px;
-    height: 47px;
+    width: auto;
+    height: auto;
     border-radius: 0.5em;
 }
 
-.LIDPBlocked{
+.LIDPBlockedGP{
     border-radius: 0.5em;
     display: flex;
     align-items: center;
     list-style-type: none;
     font-size:16px;
-    width: 220px;
+    width: 180px;
     height: 40px;
     margin:10px;
     color: gray;
 }
-.LIDPBlocked div{
+.LIDPBlockedGP div{
     padding-left: 10px;
 }
-.LIDP{
+.LIDPGP{
     display: flex;
     align-items: center;
     list-style-type: none;
     font-size:16px;
-    width: 220px;
+    width: 160px;
     height: 40px;
     margin:10px;
 }
 
-.LIDP div{
+.LIDPGP div{
     padding-left: 10px;
 }
-.LIDP:hover{
+.LIDPGP:hover{
     border-radius: 0.5em;
     transition: background-color 0.1s ease-in;
     background-color: #e1e1e1;
     cursor: pointer;
 }
-.ULDP{
+.ULDPGP{
     z-index: 2;
-    width: 240px;
+    width: 180px;
     position: absolute;
     background-color: white;
     border-radius: 0.5em;
@@ -61,9 +60,8 @@
     max-height: 0px;
     overflow: hidden;
 }
-.buttonGPPDrop{
+.buttonGPPDropGP{
     display: flex;
     align-items: center;
     font-size: 14px;
 }
-
