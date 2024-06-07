@@ -24,8 +24,7 @@ const LinkPageMainPart = () => {
     if (accessToken) {
       const decodedToken = jwtDecode(accessToken);
       const userId = decodedToken.user_id;
-
-      fetch(`http://localhost:8000/get_links.php?user_id=${userId}`)
+      fetch(`http://nilurl.ru:8000/get_links.php?user_id=${userId}`)
         .then(response => response.json())
         .then(async data => {
           if (data && data.length > 0) {

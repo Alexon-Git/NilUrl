@@ -9,6 +9,7 @@ import  {DataProvider}  from '../src/LogicComp/DataProvider';
 import {BrowserRouter, useNavigate} from "react-router-dom";
 import AppRouter from "./LogicComp/AppRouter";
 
+
 const App = () => {
 
   return (

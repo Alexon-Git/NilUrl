@@ -35,7 +35,7 @@ const GraphPage = () => {
         const fetchData = async () => {
             try {
                 // Формирование URL с параметром pathS, если он не null
-                let url = 'http://localhost:8000/data_clicks_user_all.php';
+                let url = 'http://nilurl.ru:8000/data_clicks_user_all.php';
                 if (pathS) {
                     url += `?pathS=${encodeURIComponent(pathS)}`;
                 }

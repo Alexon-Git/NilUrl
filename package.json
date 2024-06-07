@@ -34,8 +34,8 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
-    "start:frontend": "react-scripts start", 
+    "start": "concurrently \"cross-env HOST=192.168.1.100 PORT=3000 npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "react-scripts start",
     "start:backend": "php -S localhost:8000 -t api",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -65,6 +65,7 @@
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
     "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "gh-pages": "^6.1.1",
     "sass": "^1.74.1",
     "typescript": "^4.9.5"

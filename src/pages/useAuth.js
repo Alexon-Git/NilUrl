@@ -32,7 +32,7 @@ const useAuth = () => {
             Cookies.remove('access_token');
           } else {
             try {
-              const response = await fetch('http://localhost:8000/refresh-token-endpoint.php', {
+              const response = await fetch('http://nilurl.ru:8000/refresh-token-endpoint.php', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

@@ -54,16 +54,18 @@ const SettingsForm = () => {
       return;
     }
 
-    fetch('http://localhost:8000/update_user_data.php', {
+    fetch('http://nilurl.ru:8000/update_user_data.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
+      
       body: JSON.stringify(formData),
+      access_token: JSON.stringify(Cookies.get('access_token')),
     })
       .then(response => response.json())
       .then(data => {
+        console.log(formData);
         if (data.success) {
           alert('Изменения сохранены успешно.');
           // Обновляем токены в куках и localStorage
