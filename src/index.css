@@ -2,91 +2,127 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
- .slide-in {
-   position: fixed;
-   top: 0;
-   right: 0;
-   width: 100%;
-   height: 100vh;
-   background: white;
-   transform-origin: left;
- }
- .slide-out{
-   position: fixed;
-   top: 0;
-   right: 0;
-   width: 100%;
-   height: 100vh;
-   background: white;
-   transform-origin: right;
- }
+.slide-in {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  transform-origin: left;
+}
+.slide-out {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  transform-origin: right;
+}
 
+:root {
+  --scroll-size: 12px;
+  --scroll-radius: 20px;
+  --scroll-track: rgba(0, 0, 0, 0.2); 
+  --bg-mask: rgba(255, 255, 255, 0.15); 
+  --scroll-thumb-color: #777777d1; 
+  --scroll-thumb: linear-gradient(
+    45deg,
+    var(--bg-mask) 20%,
+    transparent 20%,
+    transparent 40%,
+    var(--bg-mask) 40%,
+    var(--bg-mask) 60%,
+    transparent 60%,
+    transparent 80%,
+    var(--bg-mask) 80%
+  );
+}
 
+.image-background {
+  background-image: url(./img/background-image.svg),
+    linear-gradient(rgba(166, 165, 255, 0.1), rgba(166, 165, 255, 0.1));
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid rgba(221, 221, 221, 1);
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: var(--scroll-size);
+  background: none;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+  background: none;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+  border-radius: var(--scroll-radius);
+  background-image: var(--scroll-thumb);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(var(--scroll-thumb-color-rgb, 85, 85, 85), 0.8);
+}
 
 @font-face {
   font-family: "Helvetica Neue Cyr";
-  src:
-    local("helveticaneuecyr_black"),
+  src: local("helveticaneuecyr_black"),
     url("./fonts/helveticaneuecyr_black.otf") format("opentype");
   font-weight: 900;
 }
 
 @font-face {
   font-family: "Helvetica Neue Cyr";
-  src:
-    local("helveticaneuecyr_roman"),
+  src: local("helveticaneuecyr_roman"),
     url("./fonts/helveticaneuecyr_roman.otf") format("opentype");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Helvetica Neue Cyr";
-  src:
-    local("helveticaneuecyr_bold"),
+  src: local("helveticaneuecyr_bold"),
     url("./fonts/helveticaneuecyr_bold.ttf") format("truetype");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "Helvetica Neue Cyr";
-  src:
-    local("helveticaneuecyr_medium"),
+  src: local("helveticaneuecyr_medium"),
     url("./fonts/helveticaneuecyr_medium.ttf") format("truetype");
   font-weight: 500;
 }
 
 @font-face {
   font-family: "Roboto";
-  src:
-    local("Roboto"),
-    url("./fonts/Roboto.ttf") format("truetype");
+  src: local("Roboto"), url("./fonts/Roboto.ttf") format("truetype");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Roboto";
-  src:
-    local("Roboto-bold"),
-    url("./fonts/Roboto-bold.ttf") format("truetype");
+  src: local("Roboto-bold"), url("./fonts/Roboto-bold.ttf") format("truetype");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "Segoe UI";
-  src:
-    local("Segoe UI"),
-    url("./fonts/Segoe\ UI.ttf") format("truetype");
+  src: local("Segoe UI"), url("./fonts/Segoe\ UI.ttf") format("truetype");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Segoe UI";
-  src:
-    local("Segoe UI SemiBold"),
+  src: local("Segoe UI SemiBold"),
     url("./fonts/Segoe\ UI\ SemiBold.ttf") format("truetype");
   font-weight: 600;
 }

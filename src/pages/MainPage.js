@@ -6,7 +6,6 @@ import PriceMp from "../components/MainPage/PriceMP";
 import VideoComp from "../components/MainPage/VideoComp";
 import FirstContainerMainPage from "../components/MainPage/FirstContainerMainPage";
 import Cookies from 'js-cookie';
-import "../styles/Global/BackgroundDots.css"
 import HeaderMainPage from "../components/Global/HeaderMainPage";
 import FooterMP from "../components/footer-mp/FooterMP";
 import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
@@ -24,14 +23,7 @@ const MainPage = () => {
     return (
         <div>
             <NoLoginHeader/>
-            <div
-                style={{
-                    backgroundImage: `url(${process.env.PUBLIC_URL + '/BackgroundDots.svg'})
-                    `,
-
-                }}
-            >
-                
+            <div className='image-background'>                
                 <FirstContainerMainPage/>
                 <VideoComp/>
                 <PriceMp/>
