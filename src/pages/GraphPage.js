@@ -204,7 +204,7 @@ const GraphPage = () => {
           </div>
           <div className="gp-background">
             <div className="GPMainContainer">
-              <di className="GPCenterContainer">
+              <div className="GPCenterContainer">
                 <div className="LinkAndPeriod">
                   <div className="GPLink" onClick={() => navigate("/links")}>
                     <div className="NILURLTRYOPT">Вернуться к ссылкам</div>
@@ -281,7 +281,7 @@ const GraphPage = () => {
                   </div>
                   <Chart labels={niz} Clicks={clicks}/>
                 </div>
-                {DataFromServ.length > 0 &&  (<div className="OptionsInGP">
+            {DataFromServ.length > 0 &&  (<div className="OptionsInGP">
                   <div style={{display:"flex",justifyContent:"space-between"}}>
                     <div className="AddressesInGP">
                       <AddresGp Dates={dateFake} />
@@ -299,8 +299,8 @@ const GraphPage = () => {
                     </div>
                   </div>
                 </div>
-                )}
-              </di>
+           )}
+              </div>
             </div>
           </div>
         </div>

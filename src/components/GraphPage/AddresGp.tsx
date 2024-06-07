@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import "../../styles/GraphPage/AddresGp.css";
 import MapGP from "./MapGP";
 import { DateFromServInterface } from "../../LogicComp/GPFakeData";
+import SortButtonGP from "../buttons/SortButtonGP"
 
 interface AddresGpInt {
     Dates: DateFromServInterface[];
@@ -91,6 +92,15 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
         setData(sortedData);
     };
 
+    const columns = [
+        { label: "Дата ↓", value: 0 },
+        { label: "Дата ↑", value: 1 },
+        { label: "По алфавиту ↓", value: 2 },
+        { label: "По алфавиту ↑", value: 3 },
+        { label: "По рейтингу ↓", value: 4 },
+        { label: "По рейтингу ↑", value: 5 }
+    ];
+
     return (
         <div>
             <div className="AddressCountry">
@@ -108,7 +118,8 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
                 </div>
             </div>
             <div className="SortDropdown">
-            <select onChange={(e) => sortData(e.target.value)}>
+                <SortButtonGP columns={columns} />
+                <select onChange={(e) => sortData(e.target.value)}>
                     <option value="">Sort</option>
                     <option value="alphabeticalAsc">(А-Я)</option>
                     <option value="alphabeticalDesc">(Я-А)</option>
