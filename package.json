@@ -35,7 +35,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     
-    "start": "cross-env HOST=192.168.1.100 PORT=3000 npm run start:frontend",
+    "start": "react-scripts start",
     "start:frontend": "react-scripts start",
     "start:backend": "php -S localhost:8000 -t api",
     "build": "react-scripts build",
