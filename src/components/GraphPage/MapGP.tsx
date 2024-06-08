@@ -31,7 +31,7 @@ const MapGp = ({SVG,clickCount,name}:MapGpInterface) => {
                             {name}
                         </div>
                     </div>
-                    <div style={{color:"grey",paddingLeft:"20px",paddingTop:"10px"}}>{clickCount}</div>
+                    <div style={{color:"grey",paddingLeft:"20px"}}>{clickCount}</div>
             </div>
         </div>
     );
