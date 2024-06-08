@@ -10,7 +10,7 @@ interface MapGpInterface{
 const MapGp = ({SVG,clickCount,name}:MapGpInterface) => {
     return (
         <div className="MPContainerGP">
-                <div className="ContainerForCountries">
+                <div className="ContainerForCountries" style={{display:"inline-flex"}}>
                     <div style={{display:"inline-flex"}}>
                         <div>
                             {/*<svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
@@ -31,7 +31,7 @@ const MapGp = ({SVG,clickCount,name}:MapGpInterface) => {
                             {name}
                         </div>
                     </div>
-                    <div style={{color:"grey"}}>{clickCount}</div>
+                    <div style={{color:"grey",paddingLeft:"20px"}}>{clickCount}</div>
             </div>
         </div>
     );

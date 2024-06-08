@@ -106,7 +106,7 @@ const categories = [
 
   return (
     <div className="AddressCountryDev">
-      <div className="AddHeader">
+      <div className="AddHeader" style={{marginBottom:"20px"}}>
         <div className="FontSizeTextGPDev">
           <span>Устройства</span>
           <SortButtonAdd columns={columns} setSortOption={setSortOption} />
