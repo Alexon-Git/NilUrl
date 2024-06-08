@@ -7,7 +7,26 @@
     border-bottom: 1px solid rgba(221, 221, 221, 1);
     overflow: hidden;
   }
+  .MPContainerGP {
+    margin-left: 30px;
+    margin-top: 30px;
+}
 
+.ContainerForCountries {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Это добавлено, чтобы вертикально центрировать текст */
+}
+
+.CountryName {
+    margin-left: 10px;
+}
+
+.ClickCount {
+    color: grey;
+    padding-left: 20px;
+}
+  
 .GPMainContainer{
     display: flex;
     width: 100%;

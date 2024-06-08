@@ -108,7 +108,7 @@ const categories = [
     <div className="AddressCountryDev">
       <div className="AddHeader" style={{marginBottom:"20px"}}>
         <div className="FontSizeTextGPDev">
-          <span>Устройства</span>
+          <span>Адреса</span>
           <SortButtonAdd columns={columns} setSortOption={setSortOption} />
         </div>
         <div className="DeviceSwapDev">
@@ -122,7 +122,7 @@ const categories = [
         </div>
       </div>
       {data.map((value, index) => (
-        <div className="MapGPRow" style={{paddingBottom:"5px"}} key={index}>
+        <div key={index}>
           <MapGP
             name={value.country}
             clickCount={value.clicks}

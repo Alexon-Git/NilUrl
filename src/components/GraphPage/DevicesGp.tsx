@@ -119,7 +119,7 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
 
   return (
     <div className="AddressCountryDev">
-      <div className="AddHeader">
+      <div className="AddHeader" style={{marginBottom:"20px"}}>
         <div className="FontSizeTextGPDev">
           <span>Устройства</span>
           <SortButtonDev columns={columns} setSortOption={setSortOption} />
@@ -135,7 +135,7 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
         </div>
       </div>
       {data.map((value, index) => (
-        <div className="MapGPRow" style={{paddingBottom:"5px"}} key={index}>
+        <div key={index}>
           <MapGP
             name={value.country}
             clickCount={value.clicks}
