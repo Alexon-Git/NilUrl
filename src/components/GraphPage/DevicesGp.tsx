@@ -126,11 +126,11 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
         </div>
         <div className="DeviceSwapDev">
           <button className="NavigationButtonDev" onClick={handlePrev}>
-            ⬅️
+          ⬅
           </button>
           <div className="CategoryDev">{categories[currentIndex].name}</div>
           <button className="NavigationButtonDev" onClick={handleNext}>
-            ➡️
+          ➡
           </button>
         </div>
       </div>
