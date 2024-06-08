@@ -135,12 +135,12 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
         </div>
       </div>
       {data.map((value, index) => (
-        <div className="MapGPRow" key={index}>
+        <div className="MapGPRow" style={{paddingBottom:"5px"}} key={index}>
           <MapGP
             name={value.country}
             clickCount={value.clicks}
             SVG={"qwe"}
-          />  
+          />
         </div>
       ))}
     </div>
