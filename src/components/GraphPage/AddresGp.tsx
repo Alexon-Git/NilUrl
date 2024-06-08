@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import "../../styles/GraphPage/AddresGp.css";
+import "../../styles/GraphPage/DeviceGP.css";
 import MapGP from "./MapGP";
 import { DateFromServInterface } from "../../LogicComp/GPFakeData";
 import SortButtonAdd from "../buttons/SortButtonAdd";
@@ -106,25 +106,33 @@ const categories = [
 
   return (
     <div className="AddressCountryDev">
-      <div className="FontSizeTextGPDev">
-        <span>Адреса</span>
-        <SortButtonAdd columns={columns} setSortOption={setSortOption} />
-      </div>
-      <div className="DeviceSwapDev">
-      <button className="NavigationButtonDev" onClick={handlePrev}>⬅</button>
-      <div className="CategoryDev">{categories[currentIndex].name}</div>
-      <button className="NavigationButtonDev" onClick={handleNext}>➡</button>
+      <div className="AddHeader">
+        <div className="FontSizeTextGPDev">
+          <span>Устройства</span>
+          <SortButtonAdd columns={columns} setSortOption={setSortOption} />
+        </div>
+        <div className="DeviceSwapDev">
+          <button className="NavigationButtonDev" onClick={handlePrev}>
+            ⬅️
+          </button>
+          <div className="CategoryDev">{categories[currentIndex].name}</div>
+          <button className="NavigationButtonDev" onClick={handleNext}>
+            ➡️
+          </button>
+        </div>
       </div>
       {data.map((value, index) => (
-        <MapGP
-          name={value.country}
-          clickCount={value.clicks}
-          key={index}
-          SVG={"qwe"}
-        />
+        <div className="MapGPRow" key={index}>
+          <MapGP
+            name={value.country}
+            clickCount={value.clicks}
+            SVG={"qwe"}
+          />
+        </div>
       ))}
     </div>
   );
 };
+
 
 export default AddresGp;

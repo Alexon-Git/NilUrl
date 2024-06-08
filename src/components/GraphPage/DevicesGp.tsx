@@ -119,22 +119,29 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
 
   return (
     <div className="AddressCountryDev">
-      <div className="FontSizeTextGPDev">
-        <span>Устройства</span>
-        <SortButtonDev columns={columns} setSortOption={setSortOption} />
-      </div>
-      <div className="DeviceSwapDev">
-      <button className="NavigationButtonDev" onClick={handlePrev}>⬅</button>
-      <div className="CategoryDev">{categories[currentIndex].name}</div>
-      <button className="NavigationButtonDev" onClick={handleNext}>➡</button>
+      <div className="AddHeader">
+        <div className="FontSizeTextGPDev">
+          <span>Устройства</span>
+          <SortButtonDev columns={columns} setSortOption={setSortOption} />
+        </div>
+        <div className="DeviceSwapDev">
+          <button className="NavigationButtonDev" onClick={handlePrev}>
+            ⬅️
+          </button>
+          <div className="CategoryDev">{categories[currentIndex].name}</div>
+          <button className="NavigationButtonDev" onClick={handleNext}>
+            ➡️
+          </button>
+        </div>
       </div>
       {data.map((value, index) => (
-        <MapGP
-          name={value.country}
-          clickCount={value.clicks}
-          key={index}
-          SVG={"qwe"}
-        />
+        <div className="MapGPRow" key={index}>
+          <MapGP
+            name={value.country}
+            clickCount={value.clicks}
+            SVG={"qwe"}
+          />  
+        </div>
       ))}
     </div>
   );
