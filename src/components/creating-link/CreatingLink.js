@@ -23,6 +23,22 @@ const CreatingLink = () => {
     ios: false,
     android: false,
   });
+
+  const fetchTags = async () => {
+    const response = await fetch('http://nilurl.ru:8000/get_tag.php', {
+      method: 'POST',
+      credentials: 'include', 
+      headers: {
+        'Content-Type': 'application/json'
+        
+      },
+     
+    });
+    const data = await response.json();
+    return data.tags; 
+  };
+
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [inputText, setInputText] = useState("");

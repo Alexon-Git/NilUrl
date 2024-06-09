@@ -281,7 +281,8 @@ const GraphPage = () => {
                     </div>
                     <Chart labels={niz} Clicks={clicks}/>
                   </div>
-                  {DataFromServ.length > 0 && (<div className="OptionsInGP">
+                  {DataFromServ.length > 0 && (
+                      <div className="OptionsInGP">
                         <div style={{display: "flex", justifyContent: "space-between"}}>
                           <div className="AddressesInGP">
                             <AddresGp Dates={dateFake}/>
@@ -290,16 +291,17 @@ const GraphPage = () => {
                             <DevicesGp Dates={dateFake}/>
                           </div>
                         </div>
-                        <div style={{display: "flex", justifyContent: "space-between" , marginTop: "50px"}}>
-                          {/*    <div className="REFSGP">
-                      <RefsGp /></div> */}
-                      
-                          <div className="TOPREFGP" >
-                            <TopRefs/>
+                        { !pathS && (
+                          <div style={{display: "flex", justifyContent: "space-between", marginTop: "50px"}}>
+                            {/*    <div className="REFSGP">
+                            <RefsGp /></div> */}
+                            <div className="TOPREFGP">
+                              <TopRefs/>
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
-                  )}
+                    )}
                 </div>
               </div>
             </div>

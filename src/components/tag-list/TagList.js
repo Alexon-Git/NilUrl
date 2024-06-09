@@ -4,7 +4,7 @@ import "./tagList.css";
 const SvgButton = ({ background, svgColor, onClick }) => {
   return (
     <button
-      className="svg-button"
+      className="svg-button"  
       style={{ backgroundColor: background }}
       onClick={onClick}
     >
