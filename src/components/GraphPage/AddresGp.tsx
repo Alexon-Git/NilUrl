@@ -123,6 +123,10 @@ const categories = [
           </button> 
         </div>
       </div>
+      <div style={{
+        height: "300px",
+        overflowY: "auto"
+            }}>
       {data.map((value, index) => (
         <div key={index}>
           <MapGP
@@ -134,6 +138,7 @@ const categories = [
           />
         </div>
       ))}
+      </div>
     </div>
   );
 };

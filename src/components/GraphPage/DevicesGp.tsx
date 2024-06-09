@@ -134,6 +134,10 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
           </button>
         </div>
       </div>
+      <div style={{
+    height: "500px",
+    overflowY: "auto"
+          }}>
       {data.map((value, index) => (
         <div key={index}>
           <MapGP
@@ -144,7 +148,7 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
             country_code={""}
           />
         </div>
-      ))}
+      ))}</div>
     </div>
   );
 };

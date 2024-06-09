@@ -24,7 +24,10 @@ const TopRefs = () => {
                     <span>Топовые URL-Адреса</span>
                 </div>
             </div>
-
+            <div style={{
+                height: "500px",
+                overflowY: "auto"
+                    }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
                 {links.map((link, index) => (
                     <div key={index} style={{ marginBottom: "15px", display: "flex", justifyContent: "space-between" }}>
@@ -48,7 +51,7 @@ const TopRefs = () => {
                             {link.clicks}
                         </div>
                     </div>
-                ))}
+                ))}</div>
             </div>
         </div>
     );
@@ -56,6 +59,3 @@ const TopRefs = () => {
 
 
 export default TopRefs;
-
-                        
-                   
