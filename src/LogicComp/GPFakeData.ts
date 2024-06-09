@@ -8,7 +8,8 @@ export interface DateFromServInterface {
     os:string,
     browser:string,
     time:string,
-    id:number
+    id:number,
+    country_code:string
 }
 
 export const SortData = (Data: DateFromServInterface[], period: number) => {

@@ -140,6 +140,8 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
             name={value.country}
             clickCount={value.clicks}
             SVG={"qwe"}
+            category={categories[currentIndex].name}
+            country_code={""}
           />
         </div>
       ))}

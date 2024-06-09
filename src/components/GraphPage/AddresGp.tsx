@@ -11,6 +11,7 @@ interface AddresGpInt {
 interface DualData {
   country: string;
   clicks: number;
+  country_code:string;
 }
 
 const AddresGp = ({ Dates }: AddresGpInt) => {
@@ -18,6 +19,7 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
   const [data, setData] = useState<DualData[]>([]);
   const [Countries, setCountries] = useState<DualData[]>([]);
   const [City, setCity] = useState<DualData[]>([]);
+  const [countryCode, setCountryCode] = useState<string>("");
   const refToBack = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sortOption, setSortOption] = useState(0);
@@ -40,7 +42,7 @@ const categories = [
         }
       });
       if (!countryFlag) {
-        countries.push({ country: value.country, clicks: 1 });
+        countries.push({ country: value.country, clicks: 1, country_code: value.country_code});
       }
 
       let cityFlag = false;
@@ -51,7 +53,7 @@ const categories = [
         }
       });
       if (!cityFlag) {
-        city.push({ country: value.city, clicks: 1 });
+        city.push({ country: value.city, clicks: 1, country_code: value.country_code });
       }
     });
 
@@ -127,6 +129,8 @@ const categories = [
             name={value.country}
             clickCount={value.clicks}
             SVG={"qwe"}
+            category={categories[currentIndex].name}
+            country_code= {value.country_code}
           />
         </div>
       ))}

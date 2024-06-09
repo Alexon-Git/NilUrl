@@ -7,7 +7,7 @@ import CreateLinkNew from "../Global/CreateLinkNew";
 import SortNew from "../LinksPage/SortNew";
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import {jwtDecode }from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import TagsColumn from "../LinksPage/TagsColumn";
 
 const LinkPageMainPart = () => {
@@ -15,12 +15,13 @@ const LinkPageMainPart = () => {
   const [userStatus, setUserStatus] = useState(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [selectedTags, setSelectedTags] = useState([]); // Добавлено состояние для выбранных тегов
+  const [selectedTags, setSelectedTags] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 15000);
+
     const accessToken = Cookies.get('access_token');
     if (accessToken) {
       const decodedToken = jwtDecode(accessToken);
@@ -43,7 +44,7 @@ const LinkPageMainPart = () => {
                 clicks: link.clicks,
                 svgColor: link.tag_svgcolor,
                 backgrounds: link.tag_backgrounds,
-                tagValue: link.tag,
+                tagValue: link.tag || "Без тэга", // Добавлено значение по умолчанию "Без тэга"
                 timer_flag: link.timer_flag,
                 tag_flag: link.tag_flag,
               };
@@ -53,8 +54,10 @@ const LinkPageMainPart = () => {
         })
         .catch(error => console.error('Error fetching data:', error));
     }
+
+    return () => clearTimeout(timer);
   }, []);
-  
+
   const fetchFavicon = async (url) => {
     try {
       const proxyUrl = 'http://nilurl.ru:97/?';
@@ -66,11 +69,11 @@ const LinkPageMainPart = () => {
       const doc = parser.parseFromString(html, 'text/html');
       let favicon = '/NilLogo.svg'; 
 
-      const iconLink =  doc.querySelector('link[rel="icon"]') ||
-                        doc.querySelector('link[rel="shortcut icon"]') ||
-                        doc.querySelector('link[rel*="icon"]') ||
-                        doc.querySelector('link[rel="apple-touch-icon"]') ||
-                        doc.querySelector('link[rel="apple-touch-icon-precomposed"]');
+      const iconLink = doc.querySelector('link[rel="icon"]') ||
+        doc.querySelector('link[rel="shortcut icon"]') ||
+        doc.querySelector('link[rel*="icon"]') ||
+        doc.querySelector('link[rel="apple-touch-icon"]') ||
+        doc.querySelector('link[rel="apple-touch-icon-precomposed"]');
       if (iconLink) {
         favicon = iconLink.href;
       } else {
@@ -135,10 +138,10 @@ const LinkPageMainPart = () => {
   };
 
   const filteredLinks = links.filter(link => {
-    return selectedTags.every(tag => 
-      link.tagValue !== tag.name || 
-      link.svgColor !== tag.svgColor || 
-      link.backgrounds !== tag.backgrounds
+    return selectedTags.length === 0 || selectedTags.some(tag => 
+      link.tagValue === tag.name && 
+      link.svgColor === tag.svgColor && 
+      link.backgrounds === tag.backgrounds
     );
   });
 
@@ -149,7 +152,7 @@ const LinkPageMainPart = () => {
           <div className="FakeDivLP"></div>
           <div className="RightTopCont">
             <SortNew sortLinks={sortLinks} />
-            <TagsColumn updateSelectedTags={updateSelectedTags} links={links} /> 
+            <TagsColumn updateSelectedTags={updateSelectedTags} links={links} selectedTags={selectedTags} /> 
             <CreateLinkNew userStatus={userStatus} highestKey={highestKey} /> 
           </div>
         </div>
