@@ -290,11 +290,11 @@ const GraphPage = () => {
                             <DevicesGp Dates={dateFake}/>
                           </div>
                         </div>
-                        <div style={{display: "flex", justifyContent: "space-between", marginTop: "40px"}}>
+                        <div style={{display: "flex", justifyContent: "space-between" , marginTop: "50px"}}>
                           {/*    <div className="REFSGP">
-                      <RefsGp />
-    </div> */}
-                          <div className="TOPREFGP">
+                      <RefsGp /></div> */}
+                      
+                          <div className="TOPREFGP" >
                             <TopRefs/>
                           </div>
                         </div>
