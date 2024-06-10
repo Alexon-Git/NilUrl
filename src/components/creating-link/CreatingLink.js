@@ -40,10 +40,10 @@ const CreatingLink = () => {
 
   const validateInput = () => {
     const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
-    const shortUrlPattern = /^https:\/\/nilurl\.ru\/[A-Za-z0-9]{3,}$/;
+    const shortUrlPattern = /[A-Za-z0-9]{3,}$/;
     const noSpecialCharsPattern = /^[A-Za-z0-9]+$/;
     const urlError = 'Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.';
-    const shortUrlError = 'Короткая ссылка должна начинаться с https://nilurl.ru/ и содержать минимум 3 символа после https://nilurl.ru/.';
+    const shortUrlError = 'Короткая ссылка должна содержать минимум 3 символа.';
     const specialCharsError = 'Короткая ссылка не должна содержать специальных символов.';
     const tagLengthError = 'Название тэга должно быть не более 15 символов.';
     const commentLengthError = 'Комментарий должен быть не более 500 символов.';
@@ -60,14 +60,13 @@ const CreatingLink = () => {
       alert(urlError);
       return false;
     }
-
-    if (!shortUrlPattern.test(shortUrl)) {
-      alert(shortUrlError);
+    if (!noSpecialCharsPattern.test(shortUrl.replace(''))) {
+      alert(specialCharsError);
       return false;
     }
 
-    if (!noSpecialCharsPattern.test(shortUrl.replace('https://nilurl.ru/', ''))) {
-      alert(specialCharsError);
+    if (!shortUrlPattern.test(shortUrl)) {
+      alert(shortUrlError);
       return false;
     }
 
@@ -168,9 +167,10 @@ const CreatingLink = () => {
   };
   
   const collectLinkData = () => {
+    const fullShortUrl = `https://nilurl.ru/${shortUrl}`;
     const linkData = {
       inputText: inputText,
-      shortUrl: shortUrl,
+      shortUrl: fullShortUrl,
       tagValue: tagValue,
       tagColors: tagColors,
       toggles: {
@@ -291,7 +291,7 @@ const CreatingLink = () => {
         return randomCase;
       })
       .join("");
-    const url = `https://nilurl.ru/${randomShortId}`;
+    const url = `${randomShortId}`;
     return url;
   };
 
@@ -358,34 +358,11 @@ const CreatingLink = () => {
         <div className="link__input">
   <div className="link__input-title">Короткая ссылка</div>
   <div className="input__container">
-    <span className="svg__infinity">
-      <svg
-        width="35"
-        height="35"
-        viewBox="0 0 35 35"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
-        <circle
-          cx="17.5"
-          cy="17.5"
-          r="17"
-          stroke="#9A9A9A"
-          strokeOpacity="0.5"
-        />
-        <path
-          d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
-          stroke="black"
-          strokeWidth="1.28"
-          strokeLinecap="round"
-        />
-      </svg>
-    </span>
+  <span className="static-text" style={{ fontSize: "16px" }}>https://nilurl.ru/</span>
     <input
       className="link-input"
       type="text"
-      placeholder="https://nilurl.ru/Ffv3cv"
+      placeholder="Ffv3cv"
       value={shortUrl}
       onChange={(e) => setShortUrl(e.target.value)} 
     />
