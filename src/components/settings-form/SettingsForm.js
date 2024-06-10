@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./settings-form.css";
 import { DeleteAccountModal, Overlay } from "../../components";
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 const SettingsForm = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +23,6 @@ const SettingsForm = () => {
     }
   }, []);
 
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -47,10 +46,25 @@ const SettingsForm = () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
+  const containsSpecialCharacters = (string) => {
+    return /[!@#\$%\^\&*\)\(+=._-]+/.test(string);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!validateEmail(formData.email)) {
+      alert('Email должен быть действительным.');
+      return;
+    }
+
+    if (formData.username.length < 3) {
+      alert('Имя пользователя должно быть не менее 3 символов.');
+      return;
+    }
+
+    if (containsSpecialCharacters(formData.username)) {
+      alert('Имя пользователя не должно содержать специальных символов.');
       return;
     }
 
@@ -59,13 +73,11 @@ const SettingsForm = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      
       body: JSON.stringify(formData),
       access_token: JSON.stringify(Cookies.get('access_token')),
     })
       .then(response => response.json())
       .then(data => {
-        console.log(formData);
         if (data.success) {
           alert('Изменения сохранены успешно.');
           // Обновляем токены в куках и localStorage
@@ -74,7 +86,7 @@ const SettingsForm = () => {
         } else {
           const text = data.message;
           window.location.reload();
-        alert(text);
+          alert(text);
         }
       })
       .catch(error => {
@@ -101,11 +113,11 @@ const SettingsForm = () => {
   ];
 
   return (
-      <div className="main">
-        <div className="title__container">
-          <h4 className="settings__title wrapper-title">Настройки</h4>
-        </div>
-        <div className="sf-background">
+    <div className="main">
+      <div className="title__container">
+        <h4 className="settings__title wrapper-title">Настройки</h4>
+      </div>
+      <div className="sf-background">
         <div className="settings__controls wrapper">
           <div className="settings__controls__menu">
             <div className="settings__controls__menu-item">Основные</div>
@@ -123,12 +135,11 @@ const SettingsForm = () => {
                   value={item.value}
                   maxLength={item.maxLength}
                   onChange={handleChange}
-                  
                 />
                 <div className="settings__controls__form-footer">
                   <p className="description">
                     {item.name === "username"
-                      ? "Не более 32 символов"
+                      ? "Не менее 3 символов и не более 32 символов"
                       : "Email должен быть действительным"}
                   </p>
                   <button className="button" type="submit">

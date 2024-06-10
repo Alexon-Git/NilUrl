@@ -27,13 +27,66 @@ function Reg() {
         setPasswordSec(event.target.value);
     };
 
+    const isValidEmail = (email: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const isValidUsername = (username: string) => {
+        const usernameRegex = /^[a-zA-Z0-9_]+$/;
+        return usernameRegex.test(username);
+    };
+
     const onButtonClick = () => {
-        if (password !== passwordSec && ref.current !== null) {
-            ref.current.style.color = "red";
-            ref.current.innerText = "Не совпадают пароли";
-        } else {
-            handleRegistration();
+        if (!email) {
+            alert('Пожалуйста, введите адрес электронной почты.');
+            return;
         }
+
+        if (!username) {
+            alert('Пожалуйста, введите имя пользователя.');
+            return;
+        }
+
+        if (!password) {
+            alert('Пожалуйста, введите пароль.');
+            return;
+        }
+
+        if (!passwordSec) {
+            alert('Пожалуйста, введите подтверждение пароля.');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            alert('Пожалуйста, введите действительный адрес электронной почты.');
+            return;
+        }
+
+        if (!isValidUsername(username)) {
+            alert('Имя пользователя не должно содержать специальных символов.');
+            return;
+        }
+
+        if (username.length < 3) {
+            alert('Имя пользователя должно быть не менее 3 символов.');
+            return;
+        }
+
+        if (password.length < 6) {
+            alert('Пароль должен содержать минимум 6 символов.');
+            return;
+        }
+
+        if (password !== passwordSec) {
+            if (ref.current !== null) {
+                ref.current.style.color = "red";
+                ref.current.innerText = "Не совпадают пароли";
+            }
+            return;
+        }
+
+        handleRegistration();
     };
 
     const handleRegistration = () => {

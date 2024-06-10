@@ -58,7 +58,70 @@ const RedactingLink = ({ pathS }) => {
   });
 
   
+  const validateInput = () => {
+    const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
+    const shortUrlPattern = /^https:\/\/nilurl\.ru\/[A-Za-z0-9]{3,}$/;
+    const noSpecialCharsPattern = /^[A-Za-z0-9]+$/;
+    const urlError = 'Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.';
+    const shortUrlError = 'Короткая ссылка должна начинаться с https://nilurl.ru/ и содержать минимум 3 символа после https://nilurl.ru/.';
+    const specialCharsError = 'Короткая ссылка не должна содержать специальных символов.';
+    const tagLengthError = 'Название тэга должно быть не более 15 символов.';
+    const commentLengthError = 'Комментарий должен быть не более 500 символов.';
+    const utmLengthError = 'Каждое поле UTM должно быть не более 50 символов.';
+    const iosUrlError = 'iOS URL должен быть действительной ссылкой.';
+    const androidUrlError = 'Android URL должен быть действительной ссылкой.';
 
+    if (!inputText || !shortUrl) {
+      alert('Поля ваша ссылка и короткая ссылка обязательны для заполнения.');
+      return false;
+    }
+
+    if (!urlPattern.test(inputText)) {
+      alert(urlError);
+      return false;
+    }
+
+    if (!shortUrlPattern.test(shortUrl)) {
+      alert(shortUrlError);
+      return false;
+    }
+
+    if (!noSpecialCharsPattern.test(shortUrl.replace('https://nilurl.ru/', ''))) {
+      alert(specialCharsError);
+      return false;
+    }
+
+    if (tagValue.length > 15) {
+      alert(tagLengthError);
+      return false;
+    }
+
+    const commentInput = getCommentData();
+    if (commentInput && commentInput.length > 500) {
+      alert(commentLengthError);
+      return false;
+    }
+
+    const utmData = getUTMData();
+    for (const key in utmData) {
+      if (utmData[key].length > 50) {
+        alert(utmLengthError);
+        return false;
+      }
+    }
+
+    if (toggles.find(toggle => toggle.id === 'ios').checked && !urlPattern.test(getIOSData())) {
+      alert(iosUrlError);
+      return false;
+    }
+
+    if (toggles.find(toggle => toggle.id === 'android').checked && !urlPattern.test(getAndroidData())) {
+      alert(androidUrlError);
+      return false;
+    }
+
+    return true;
+  };
   const [selectedDate, setSelectedDate] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [inputText, setInputText] = useState("");
@@ -242,9 +305,10 @@ const RedactingLink = ({ pathS }) => {
   
 
   const handleCreateLink = () => {
-    const linkData = collectLinkData();
-    sendLinkDataToServer(linkData);
-    console.log("Создать ссылку");
+    if (validateInput()) {
+      const linkData = collectLinkData();
+      sendLinkDataToServer(linkData);
+    }
   };
 
   const handleCreateLinkKeyDown = (event) => {
