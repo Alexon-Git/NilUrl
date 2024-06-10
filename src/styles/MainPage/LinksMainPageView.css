@@ -110,3 +110,7 @@
     border: solid 1px #E5E7EB;
     border-radius: 6px;
 }
+
+.skeleton {
+display: flex;
+}
