@@ -125,7 +125,8 @@ const categories = [
       </div>
       <div style={{
         height: "300px",
-        overflowY: "auto"
+        overflowY: "auto",
+        marginTop: "25px"
             }}>
       {data.map((value, index) => (
         <div key={index}>

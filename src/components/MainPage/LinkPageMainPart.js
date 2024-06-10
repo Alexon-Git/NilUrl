@@ -80,11 +80,15 @@ const LinkPageMainPart = () => {
         const response = await axios.get(proxyUrl + baseUrl + '/favicon.ico');
         if (response.status === 200) {
           favicon = baseUrl + '/favicon.ico';
+        } else {
+          
         }
       }
 
       if (favicon && !favicon.startsWith('http')) {
         favicon = baseUrl + favicon;
+      } else {
+        
       }
 
       return favicon;

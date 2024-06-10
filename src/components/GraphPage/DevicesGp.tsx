@@ -135,8 +135,9 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
         </div>
       </div>
       <div style={{
-    height: "500px",
-    overflowY: "auto"
+    height: "300px",
+    overflowY: "auto",
+    marginTop: "25px"
           }}>
       {data.map((value, index) => (
         <div key={index}>
