@@ -42,7 +42,7 @@ function Reg() {
             username: username
         };
 
-        fetch('http://localhost:8000/check_unique.php', {
+        fetch('http://nilurl.ru:8000/check_unique.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ function Reg() {
             password: password
         };
 
-        fetch('http://localhost:8000/register.php', {
+        fetch('http://nilurl.ru:8000/register.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
