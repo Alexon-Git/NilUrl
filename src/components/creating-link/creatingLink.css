@@ -194,6 +194,7 @@
   z-index: 999;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); /* Для поддержки Safari */
+  animation: fadeIn 0.3s ease forwards;
 }
 
 .creating__link {

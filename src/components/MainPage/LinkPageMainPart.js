@@ -44,7 +44,7 @@ const LinkPageMainPart = () => {
                 clicks: link.clicks,
                 svgColor: link.tag_svgcolor,
                 backgrounds: link.tag_backgrounds,
-                tagValue: link.tag || "Без тэга", // Добавлено значение по умолчанию "Без тэга"
+                tagValue: link.tag || "Без тэга", 
                 timer_flag: link.timer_flag,
                 tag_flag: link.tag_flag,
               };
@@ -95,7 +95,6 @@ const LinkPageMainPart = () => {
   };
 
   useEffect(() => {
-    // Используйте reloadKey для повторного рендеринга при изменении состояния
   }, [reloadKey]);
 
   const convertDateFormat = (dateString) => {

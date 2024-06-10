@@ -1,7 +1,7 @@
 body {
     height: 100vh;
     /* background: linear-gradient(90deg, #e25186, #ffa238); */
-    backdrop-filter: blur(20px);
+    
 }
 
 /* .slider-thumb::before {

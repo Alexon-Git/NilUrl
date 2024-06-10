@@ -78,7 +78,7 @@ function Log() {
         .then(response => {
             if (response.success) {
                 localStorage.setItem('refresh_token', response.refresh_token);
-                setCookie('access_token', response.access_token, 1); // Устанавливаем access токен на 1 день
+                setCookie('access_token', response.access_token, 1); 
                 navigate('/links');
             } else {
                 alert('Неправильный email или пароль');

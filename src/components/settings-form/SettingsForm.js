@@ -80,7 +80,6 @@ const SettingsForm = () => {
       .then(data => {
         if (data.success) {
           alert('Изменения сохранены успешно.');
-          // Обновляем токены в куках и localStorage
           Cookies.set('access_token', data.access_token, { expires: 1 });
           localStorage.setItem('refresh_token', data.refresh_token);
         } else {
