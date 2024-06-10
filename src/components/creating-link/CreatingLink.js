@@ -357,10 +357,10 @@ const CreatingLink = () => {
         </div>
         <div className="link__input">
   <div className="link__input-title">Короткая ссылка</div>
-  <div className="input__container">
-  <span className="static-text" style={{ fontSize: "16px" }}>https://nilurl.ru/</span>
+  <div className="input__container-short">
+  <span className="static-text">https://nilurl.ru/</span>
     <input
-      className="link-input"
+      className="link-input-short"
       type="text"
       placeholder="Ffv3cv"
       value={shortUrl}
