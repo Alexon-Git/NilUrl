@@ -1,5 +1,8 @@
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import "../../styles/MainPage/LinksMainPageView.css"
+
 
 interface LinksMapInt{
     imageURL:string,
@@ -77,17 +80,21 @@ const LinksMap:React.FC<LinksMapInt>= ({clicks,path,imageURL}:LinksMapInt) => {
         )
             :
         (
-            <div className="containerNoContentMP">
-                <svg style={{marginLeft:"8px"}} width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="40" height="40" rx="20" fill="#E5E7EB"/>
-                </svg>
-                <svg style={{marginLeft:"12px"}} width="380" height="50" viewBox="0 0 380 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="112" height="24" rx="6" fill="#E5E7EB"/>
-                    <rect x="120" width="24" height="24" rx="12" fill="#E5E7EB"/>
-                    <rect x="152" width="97" height="24" rx="6" fill="#E5E7EB"/>
-                    <rect y="34" width="380" height="16" rx="6" fill="#E5E7EB"/>
-                </svg>
+            <div className="LinksMapOneContainer" style={{ width: "100%" }}>
+            <div className="LogoAndTextLinksMap skeleton">
+                <Skeleton circle={true} width={35} height={35} />
+                <div className="SmallAndLargeLink">
+                    <Skeleton width={165.59} height={20} />
+                    <Skeleton width={134.1} height={15} />
+                </div>
+                <div className="ButtonsContainerLinksMap" style={{ display: "flex", gap: "10px" }}>
+                    <Skeleton circle={true} width={28} height={28} style={{ marginLeft: '5px' }} />
+                    <Skeleton circle={true} width={28} height={28} />
+                    <Skeleton width={92} height={24} style={{ marginTop: '5px' }} />
+
+                </div>
             </div>
+        </div>
         )
     );
 };
