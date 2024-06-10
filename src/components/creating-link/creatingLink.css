@@ -296,6 +296,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   background-color: #fff;
   padding: 0 10px;
   border: 1px solid rgba(154, 154, 154, 0.5);
@@ -312,4 +313,11 @@
   font-weight: 500;
   font-size: 14px;
   outline: none;
+}
+
+.link__input-short-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }

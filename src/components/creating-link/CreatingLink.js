@@ -357,6 +357,31 @@ const CreatingLink = () => {
         </div>
         <div className="link__input">
   <div className="link__input-title">Короткая ссылка</div>
+  <div className="link__input-short-form">
+  <span className="svg__infinity">
+              <svg
+                width="35"
+                height="35"
+                viewBox="0 0 35 35"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
+                <circle
+                  cx="17.5"
+                  cy="17.5"
+                  r="17"
+                  stroke="#9A9A9A"
+                  strokeOpacity="0.5"
+                />
+                <path
+                  d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
+                  stroke="black"
+                  strokeWidth="1.28"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
   <div className="input__container-short">
   <span className="static-text">https://nilurl.ru/</span>
       <input
@@ -366,6 +391,7 @@ const CreatingLink = () => {
       value={shortUrl}
       onChange={(e) => setShortUrl(e.target.value)} 
     />
+  </div>
   </div>
 </div>
         <div className="link__input">
