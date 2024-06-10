@@ -119,7 +119,7 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
 
   return (
     <div className="AddressCountryDev">
-      <div className="AddHeader" style={{marginBottom:"20px"}}>
+      <div className="AddHeader" >
         <div className="FontSizeTextGPDev">
           <span>Устройства</span>
           <SortButtonDev columns={columns} setSortOption={setSortOption} />

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
+import axios from 'axios';
 import CryptoJS from "crypto-js";
 import { usePremium } from '../../LogicComp/DataProvider';
 import {
@@ -23,6 +24,43 @@ const CreatingLink = () => {
     ios: false,
     android: false,
   });
+
+
+  const fetchFavicon = async (url) => {
+    try {
+      const proxyUrl = 'http://nilurl.ru:97/?';
+      const targetUrl = new URL(url);
+      const baseUrl = targetUrl.origin;
+      const response = await axios.get(proxyUrl + targetUrl.href);
+      const html = response.data;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      let favicon = '/NilLogo.svg'; 
+
+      const iconLink = doc.querySelector('link[rel="icon"]') ||
+        doc.querySelector('link[rel="shortcut icon"]') ||
+        doc.querySelector('link[rel*="icon"]') ||
+        doc.querySelector('link[rel="apple-touch-icon"]') ||
+        doc.querySelector('link[rel="apple-touch-icon-precomposed"]');
+      if (iconLink) {
+        favicon = iconLink.href;
+      } else {
+        const response = await axios.get(proxyUrl + baseUrl + '/favicon.ico');
+        if (response.status === 200) {
+          favicon = baseUrl + '/favicon.ico';
+        }
+      }
+
+      if (favicon && !favicon.startsWith('http')) {
+        favicon = baseUrl + favicon;
+      }
+
+      return favicon;
+    } catch (error) {
+      console.error('Error fetching favicon:', error);
+      return '/NilLogo.svg'; 
+    }
+  };
 
   const fetchTags = async () => {
     const response = await fetch('http://nilurl.ru:8000/get_tag.php', {
