@@ -19,14 +19,17 @@
     align-items: center;
     justify-content: center;
 }
-.CentreHeaderLinksPageC{
-    margin-left: 70px;
+.CentreHeaderLinksPageC {
     display: inline-flex;
     align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 25px;
 }
 .CentreHeaderLinksPageT{
     cursor: pointer;
-    margin-right: 25px;
     font-weight: 400;
     font-size: 14px;
 }
@@ -64,4 +67,12 @@
     border-radius: 9999px;
     right: 0px;
     bottom: 0px;
+}
+
+.header_button-exit {
+font-family: "Helvetica Neue Cyr";
+font-size: 14px;
+font-weight: 500;
+line-height: 28px;
+cursor: pointer;
 }

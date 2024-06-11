@@ -39,6 +39,7 @@ const HeaderLinksPage = () => {
             Аналитика
           </div>
         </div>
+        <div className='header-right' style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
         <div
           onClick={() => {
             navigator("/price");
@@ -116,6 +117,8 @@ const HeaderLinksPage = () => {
               </linearGradient>
             </defs>
           </svg>
+        </div>
+        <p className="header_button-exit" onClick={()=>{}}>Выйти</p>
         </div>
       </div>
     </div>

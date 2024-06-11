@@ -41,6 +41,7 @@ const HeaderLinksPage = () => {
                         Аналитика
                     </div>
                 </div>
+                <div className='header-right' style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
                 <div style={{display:"inline-flex",alignItems:"center"}}>
                     <svg width="86" height="31" viewBox="0 0 86 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_552_765"  maskUnits="userSpaceOnUse" x="0" y="0" width="86" height="31">
@@ -57,6 +58,8 @@ const HeaderLinksPage = () => {
                             </linearGradient>
                         </defs>
                     </svg>
+                </div>
+                <p className="header_button-exit" onClick={()=>{}}>Выйти</p>
                 </div>
             </div>
         </div>
