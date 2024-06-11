@@ -108,7 +108,7 @@ const categories = [
 
   return (
     <div className="AddressCountryDev">
-      <div className="AddHeader" style={{marginBottom:"20px"}}>
+      <div className="AddHeader">
         <div className="FontSizeTextGPDev">
           <span>Адреса</span>
           <SortButtonAdd columns={columns} setSortOption={setSortOption} />
@@ -125,7 +125,8 @@ const categories = [
       </div>
       <div style={{
         height: "300px",
-        overflowY: "auto"
+        overflowY: "auto",
+        marginTop: "25px"
             }}>
       {data.map((value, index) => (
         <div key={index}>

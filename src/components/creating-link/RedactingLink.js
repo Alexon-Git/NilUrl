@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
+import axios from 'axios';
 
 import { usePremium } from '../../LogicComp/DataProvider';
 import {
@@ -10,8 +11,68 @@ import {
   UpgradeToProPopup,
 } from "../../components";
 
-const RedactingLink = ({ pathS }) => {
-  
+const RedactingLink = ({ pathS, pathL }) => {
+
+ 
+
+  const [faviconSVG, setFaviconSVG] = useState();
+
+  useEffect(() => {
+    fetchFavicon(pathL)
+      .then((svg) => setFaviconSVG(svg))
+      .catch((error) => {
+        console.error('Error fetching favicon:', error);
+        setFaviconLoadError(true);
+      });
+  }, [pathL]);
+
+  const handleChange = (event) => {
+    const inputURL = event.target.value;
+    fetchFavicon(inputURL)
+      .then((svg) => setFaviconSVG(svg))
+      .catch((error) => console.error('Error fetching favicon:', error));
+  };
+  const [faviconLoadError, setFaviconLoadError] = useState(false);
+  const fetchFavicon = async (url) => {
+    try {
+      const proxyUrl = 'http://nilurl.ru:97/?';
+      const targetUrl = new URL(url);
+      const baseUrl = targetUrl.origin;
+      const response = await axios.get(proxyUrl + targetUrl.href);
+      const html = response.data;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      let favicon = '/NilLogo.svg'; 
+      
+      const iconLink = doc.querySelector('link[rel="icon"]') ||
+        doc.querySelector('link[rel="shortcut icon"]') ||
+        doc.querySelector('link[rel*="icon"]') ||
+        doc.querySelector('link[rel="apple-touch-icon"]') ||
+        doc.querySelector('link[rel="apple-touch-icon-precomposed"]');
+      if (iconLink) {
+        favicon = iconLink.href;
+      } else {
+        const response = await axios.get(proxyUrl + baseUrl + '/favicon.ico');
+        if (response.status === 200) {
+          favicon = baseUrl + '/favicon.ico';
+        } 
+      }
+
+      if (favicon && !favicon.startsWith('http')) {
+        favicon = baseUrl + favicon;
+      }
+
+      return favicon;
+    } catch (error) {
+      console.error('Error fetching favicon:', error);
+      return '/NilLogo.svg'; 
+    }
+  };
+
+
+
+
+
   const {isPremium} = usePremium();
 
   const [isPro, setIsPro] = useState(isPremium);
@@ -439,37 +500,47 @@ const RedactingLink = ({ pathS }) => {
               type="text"
               placeholder="https://app.dub.co/aleksandr-vysochenko"
               value={inputText}
-              onChange={handleLongUrlChange}
+              onChange={(e) => {
+                handleLongUrlChange(e);
+                handleChange(e);
+              }}
+              
             />
           </div>
         </div>
         <div className="link__input">
           <div className="link__input-title">Короткая ссылка</div>
           <div className="input__container">
-            <span className="svg__infinity">
-              <svg
-                width="35"
-                height="35"
-                viewBox="0 0 35 35"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
-                <circle
-                  cx="17.5"
-                  cy="17.5"
-                  r="17"
-                  stroke="#9A9A9A"
-                  strokeOpacity="0.5"
-                />
-                <path
-                  d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
-                  stroke="black"
-                  strokeWidth="1.28"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
+          <span className="svg__infinity">
+          {faviconSVG ? (
+        <img src={faviconSVG} alt="Favicon" onError={() => setFaviconLoadError(true)} />
+      ) : (
+        <svg
+          width="35"
+          height="35"
+          viewBox="0 0 35 35"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
+          <circle
+            cx="17.5"
+            cy="17.5"
+            r="17"
+            stroke="#9A9A9A"
+            strokeOpacity="0.5"
+          />
+          <path
+            d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
+            stroke="black"
+            strokeWidth="1.28"
+            strokeLinecap="round"
+          />
+        </svg>
+      )}
+      {faviconLoadError && <img className="SVGLinksLP" src="/NilLogo.svg"/>}
+
+      </span>
             <input
               className="link-input"
               type="text"

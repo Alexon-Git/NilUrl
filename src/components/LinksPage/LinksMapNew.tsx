@@ -30,6 +30,10 @@ interface LinksMapInt{
 
 const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android,IOS,clicks, svgColor, backgrounds, tagValue,timer_flag,tag_flag}:LinksMapInt) => {
     const navigate = useNavigate();
+    const [imageLoadError, setImageLoadError] = useState(false);
+    const handleImageError = () => {
+        setImageLoadError(true);
+      };
     const [linkChangeFlag,setLinkChangeFlag] = useState(false)
     const [qrFlag,setQrFlag] = useState(false)
     const ref = useRef<HTMLDivElement>(null);
@@ -77,7 +81,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
         <div className="mainCLMP">
             {linkChangeFlag &&
                  <Overlay onClose={closeCreatingLink}>
-                 <RedactingLink pathS={pathS} />
+                 <RedactingLink pathS={pathS} pathL={pathL}  />
                </Overlay>
             }
             {
@@ -110,7 +114,10 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
             }
                 <div style={{display:"inline-block"}}>
                     <div className="SVGCOntLP">
-                        <img className="SVGLinksLP" src={SvgPath}/>
+                    {!imageLoadError ? (
+                        <img className="SVGLinksLP" src={SvgPath} onError={handleImageError} />) : (
+                            <img className="SVGLinksLP" src="/NilLogo.svg"/>
+                          )}
                     </div>
                 </div>
                 <div className="LinksDateCopy">

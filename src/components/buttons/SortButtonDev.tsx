@@ -44,8 +44,8 @@ const SortButtonDev: React.FC<SortButtonGPProps> = ({ columns, setSortOption }) 
       <button className="ButtonToDropGP" onClick={toggleDropdown}>
         <div className="buttonGPPDropGP">
           <svg
-            width="30"
-            height="30"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

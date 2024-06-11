@@ -119,7 +119,7 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
 
   return (
     <div className="AddressCountryDev">
-      <div className="AddHeader" style={{marginBottom:"20px"}}>
+      <div className="AddHeader" >
         <div className="FontSizeTextGPDev">
           <span>Устройства</span>
           <SortButtonDev columns={columns} setSortOption={setSortOption} />
@@ -135,8 +135,9 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
         </div>
       </div>
       <div style={{
-    height: "500px",
-    overflowY: "auto"
+    height: "300px",
+    overflowY: "auto",
+    marginTop: "25px"
           }}>
       {data.map((value, index) => (
         <div key={index}>
