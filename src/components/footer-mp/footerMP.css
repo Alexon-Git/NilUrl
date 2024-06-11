@@ -1,5 +1,4 @@
 .NewFooterMainContainer {
-    width: 100%;
     padding-top: 50px;
     padding-bottom: 50px;
     position: relative;
@@ -86,16 +85,7 @@
     }
 }
 
-@media (min-width: 1000px) and (max-width: 1440px) {
-    .NewFooterContainer {
-        padding-left: 100px;
-        padding-right: 100px;
-    }
-    .NewCopyright {
-        padding-left: 100px;
-        padding-right: 100px;
-    }
-}
+
 
 .wrapper {
     max-width: 1440px;

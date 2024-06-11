@@ -113,7 +113,7 @@ const VideoComp = () => {
   const [youtubeID] = useState("Tbeud0H_gGw");
 
   return (
-    <div>
+    <div className="wrapper">
       <div className="MainVideoCompContainer">
         <div className="StrongFunctionText">
           <div className="GradintVordMP">Мощные</div> функции для{" "}

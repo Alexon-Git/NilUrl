@@ -105,6 +105,7 @@ function Log() {
               src={BackImage}
               alt="Назад"
               onClick={() => {}}
+              style={{ width: '90px', height: 'auto' }}
             />
           </span>
           <a href="https://nil-agency.ru" className="a3_1">

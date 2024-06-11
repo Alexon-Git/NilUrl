@@ -157,23 +157,6 @@
   box-sizing: border-box;
 }
 
-.wrapper {
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
 .wrapper-title {
   max-width: 1440px;
-}
-
-@media screen and (min-width: 1441px) {
-  .wrapper {
-    width: 75%;
-    max-width: none;
-  }
-  .wrapper-title {
-    width: 75%;
-    margin-left: 0;
-    max-width: none;
-  }
 }

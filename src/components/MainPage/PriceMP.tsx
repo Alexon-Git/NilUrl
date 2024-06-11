@@ -12,7 +12,7 @@ const PriceMp = () => {
                  <div style={{display:"inline-block",marginLeft:"20px"}}>цены</div>
             </div>
             <div className="ContTOCEntr">
-                <div className="FlexInIMPMP">
+                <div className="FlexInIMPMP wrapper">
                     <svg className="CircleMP" width="1240" height="600" viewBox="0 0 1240 600" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g opacity="0.5" filter="url(#filter0_f_1_899)">
                             <ellipse cx="594.862" cy="309.121" rx="350.224" ry="180.251" transform="rotate(-27.8851 594.862 309.121)" fill="url(#paint0_linear_1_899)"/>

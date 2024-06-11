@@ -160,7 +160,7 @@ function Reg() {
       <div className="d2_2">
         <div className="d3_1">
           <span className="button__login-back">
-            <img src={BackImage} alt="Назад" onClick={() => {}} />
+            <img src={BackImage} alt="Назад" onClick={() => {}} style={{ width: '90px', height: 'auto' }} />
           </span>
           <a href="https://nil-agency.ru" className="a3_1">
             <img

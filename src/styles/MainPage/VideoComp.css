@@ -55,8 +55,6 @@
 @media (min-width: 500px) and (max-width: 1500px){
     .videoPlusAccordions{
     display: flex;
-    margin-left: 0.5%;
-    width: 99%;
     height: 540px;
     border: 1px solid #E5E7EB;
     border-radius: 12px;
@@ -86,11 +84,8 @@
 
 @media (min-width: 1500px) and (max-width: 3000px){
     .videoPlusAccordions{
-        margin-left: 10%;
         display: flex;
-        width: 80%;
         height: 640px;
-
         border-radius: 12px;
         background-color: white;
         box-shadow: 10px -50px 94px 1px #C7C7C733 inset;

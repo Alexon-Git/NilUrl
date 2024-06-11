@@ -24,10 +24,10 @@ const MainPage = () => {
         <div>
             <NoLoginHeader/>
             <div className='mp-background'>                
-                <FirstContainerMainPage/>
-                <VideoComp/>
-                <PriceMp/>
-                <Clients/>
+                <FirstContainerMainPage />
+                <VideoComp />
+                <PriceMp />
+                <Clients />
             </div>
             <FooterMP/>
         </div>
