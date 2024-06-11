@@ -9,19 +9,11 @@
   }
 
 .LinkPageMainPart{
-    margin: 0;
-    padding: 0;
-    width: 100%;
     height: calc(100vh - (65px + 65px));
     text-align: center;
 }
 .TopContainer{
-    padding-left: 5%;
-    padding-right: 5%;
     height: 10%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
     position: relative;
 }
 .FakeDivLP{
@@ -37,13 +29,7 @@
 }
 .MainContainer{
     padding-top: 25px;
-    height: auto;
-    padding-left: 5%;
-    padding-right: 5%;
-    margin-left: auto;
-    margin-right: auto;
     position: relative;
-    max-width: 1600px;
     height: 80%;
 }
 .FilerContainer{

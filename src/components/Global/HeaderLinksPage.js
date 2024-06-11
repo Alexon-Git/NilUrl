@@ -22,7 +22,7 @@ const HeaderLinksPage = () => {
 
     return (
         <div style={{ borderBottom: "1px solid #E5E7EB" }}>
-            <div className="HeaderLinksPageC">
+            <div className="HeaderLinksPageC wrapper">
                 <div className="leftUserLogo">
                     <div className="UserLogoWord">
                         <div style={{ paddingBottom: "2px" }}>

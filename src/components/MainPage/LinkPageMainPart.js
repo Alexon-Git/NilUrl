@@ -150,7 +150,7 @@ const LinkPageMainPart = () => {
 
   return (
     <div className='lp-background'>
-      <div className="LinkPageMainPart">
+      <div className="LinkPageMainPart wrapper">
         <div className="TopContainer">
           <div className="FakeDivLP"></div>
           <div className="RightTopCont">
