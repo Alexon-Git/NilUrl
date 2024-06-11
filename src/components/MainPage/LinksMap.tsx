@@ -82,13 +82,13 @@ const LinksMap:React.FC<LinksMapInt>= ({clicks,path,imageURL}:LinksMapInt) => {
         (
             <div className="LinksMapOneContainer" style={{ width: "100%" }}>
             <div className="LogoAndTextLinksMap" style={{ display: "flex" }}>
-                <Skeleton circle={true} width={35} height={35} />
+                <Skeleton circle={true} width={30} height={35} />
                 <div className="SmallAndLargeLink">
                     <Skeleton width={165.59} height={20} />
                     <Skeleton width={134.1} height={15} />
                 </div>
                 <div className="ButtonsContainerLinksMap" style={{ display: "flex", gap: "10px" }}>
-                    <Skeleton circle={true} width={28} height={28} style={{ marginLeft: '5px' }} />
+                    <Skeleton circle={true} width={28} height={28} style={{ marginLeft: '10px' }} />
                     <Skeleton circle={true} width={28} height={28} />
                     <Skeleton width={92} height={24} style={{ marginTop: '5px' }} />
 

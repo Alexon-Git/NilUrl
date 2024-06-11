@@ -24,7 +24,7 @@
 .left-image {
   position: absolute;
   left: 0;
-  top: 50%;
+  top: 51%;
   transform: translateY(-50%);
 }
 

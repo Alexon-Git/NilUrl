@@ -110,25 +110,26 @@
 .button {
   height: 40px;
   padding: 10px 16px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #d1d5db; /* Darkened from #e5e7eb */
   border-radius: 6px;
-  transition: background-color 0.3s, color 0.3s border-color 0.3s;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0em;
   text-align: center;
-  color: #6b7280;
+  color: #4b5563; 
+  background-color: #dee0e3;
 }
 
 .button:hover {
-  background-color: #f3f4f6;
-  border-color: rgb(151, 155, 159);
+  background-color: #cdcecf; 
+  border-color: #9ca3af; 
 }
 
 .button:active {
-  background-color: #d1d5db;
-  border-color: #9ca3af;
+  background-color: #9ca3af; /* Darkened from #d1d5db */
+  border-color: #6b7280; /* Darkened from #9ca3af */
 }
 
 .red {
