@@ -5,7 +5,7 @@ function FreeButton({ children, onClick, ...props }) {
 
   return (
     <button className="loader" id="free" onClick={onClick}>
-      <span>Попробовать бесплатно</span>
+      <span>Попробовать</span>
       <svg
         width="20"
         height="20"

@@ -70,6 +70,7 @@ body {
     height: 100vh;
     width: 100vw;
     justify-content: center;
+    align-items: center;
 }
 .d2_1 {
     display: none;
@@ -162,7 +163,6 @@ body {
     --tw-ring-shadow: 0 0 #0000;
     position: relative;
     z-index: 10;
-    margin-top: calc(25vh);
     height: fit-content;
     width: 100%;
     max-width: 28rem;
@@ -530,4 +530,9 @@ body {
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 0.15s;
+}
+
+.button__login-back {
+margin-right: auto;
+cursor: pointer;
 }

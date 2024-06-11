@@ -72,7 +72,7 @@ const VideoComp = () => {
         if (secondAcc.current !== null) {
           if (accView[ind] === false) {
             secondAcc.current.style.transition = "max-height 1s ease-in";
-            secondAcc.current.style.maxHeight = "14vh";
+            secondAcc.current.style.maxHeight = "20vh";
             if (accView[0] === true && firstAcc.current != null) {
               firstAcc.current.style.transition = "max-height 1s ease-in";
               firstAcc.current.style.maxHeight = "0";
@@ -92,7 +92,7 @@ const VideoComp = () => {
         if (thirdAcc.current !== null) {
           if (accView[ind] === false) {
             thirdAcc.current.style.transition = "max-height 1s ease-in";
-            thirdAcc.current.style.maxHeight = "14vh";
+            thirdAcc.current.style.maxHeight = "20vh";
             if (accView[0] === true && firstAcc.current != null) {
               firstAcc.current.style.transition = "max-height 1s ease-in";
               firstAcc.current.style.maxHeight = "0";
@@ -370,7 +370,7 @@ const VideoComp = () => {
 >
   <img
     src={imageSrc}
-    alt="Video Placeholder"
+    alt=""
     style={{
         width: "70%",
         height: "80%",
