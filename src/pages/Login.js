@@ -1,7 +1,7 @@
 import "./Regest.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { REGPAGE_ROUTE } from "../LogicComp/utils/Const";
+import { REGPAGE_ROUTE, MAINPAGE_ROUTE } from "../LogicComp/utils/Const";
 import { useState } from "react";
 import {BackImage} from "../components"
 
@@ -68,7 +68,7 @@ function Log() {
       return;
     }
 
-    fetch("http://nilurl.ru:8000/check_loginData.php", {
+    fetch("https://nilurl.ru:8000/check_loginData.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +104,7 @@ function Log() {
             <img
               src={BackImage}
               alt="Назад"
-              onClick={() => {}}
+              onClick={() => {navigate(MAINPAGE_ROUTE);}}
             />
           </span>
           <a href="https://nil-agency.ru" className="a3_1">

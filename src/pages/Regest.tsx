@@ -96,7 +96,7 @@ function Reg() {
       username: username,
     };
 
-    fetch("http://nilurl.ru:8000/check_unique.php", {
+    fetch("https://nilurl.ru:8000/check_unique.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +126,7 @@ function Reg() {
       password: password,
     };
 
-    fetch("http://nilurl.ru:8000/register.php", {
+    fetch("https://nilurl.ru:8000/register.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

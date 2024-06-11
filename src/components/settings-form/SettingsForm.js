@@ -68,13 +68,13 @@ const SettingsForm = () => {
       return;
     }
 
-    fetch('http://nilurl.ru:8000/update_user_data.php', {
+    fetch('https://nilurl.ru:8000/update_user_data.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
-      access_token: JSON.stringify(Cookies.get('access_token')),
+      credentials: 'include'
     })
       .then(response => response.json())
       .then(data => {

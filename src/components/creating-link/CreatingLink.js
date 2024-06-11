@@ -27,7 +27,7 @@ const CreatingLink = () => {
 
   const [faviconSVG, setFaviconSVG] = useState(null);
 
-  const handleChange = async (event) => {
+  const handleChange = (event) => {
     const inputURL = event.target.value;
     fetchFavicon(inputURL)
       .then((svg) => setFaviconSVG(svg))
@@ -36,7 +36,7 @@ const CreatingLink = () => {
   const [faviconLoadError, setFaviconLoadError] = useState(false);
   const fetchFavicon = async (url) => {
     try {
-      const proxyUrl = 'http://nilurl.ru:97/?';
+      const proxyUrl = 'https://nilurl.ru/?';
       const targetUrl = new URL(url);
       const baseUrl = targetUrl.origin;
       const response = await axios.get(proxyUrl + targetUrl.href);
@@ -71,7 +71,7 @@ const CreatingLink = () => {
   };
 
   const fetchTags = async () => {
-    const response = await fetch('http://nilurl.ru:8000/get_tag.php', {
+    const response = await fetch('https://nilurl.ru:8000/get_tag.php', {
       method: 'POST',
       credentials: 'include', 
       headers: {
@@ -189,7 +189,7 @@ const CreatingLink = () => {
 
   const sendLinkDataToServer = async (data) => {
     try {
-      const response = await fetch('http://nilurl.ru:8000/post_link.php', {
+      const response = await fetch('https://nilurl.ru:8000/post_link.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -409,7 +409,7 @@ const CreatingLink = () => {
   <div className="link__input-short-form">
   <span className="svg__infinity">
   {faviconSVG ? (
-        <img src={faviconSVG} alt="Favicon" onError={() => setFaviconLoadError(true)} />
+        <img  width="35" height="35" src={faviconSVG} alt="Favicon" onError={() => setFaviconLoadError(true)} />
       ) : (
         <svg
           width="35"
@@ -434,7 +434,7 @@ const CreatingLink = () => {
           />
         </svg>
       )}
-      {faviconLoadError && <img className="SVGLinksLP" src="/NilLogo.svg"/>}
+      {faviconLoadError && <img width="35" height="35" className="SVGLinksLP" src="/NilLogo.svg"/>}
             </span>
   <div className="input__container-short">
   <span className="static-text">https://nilurl.ru/</span>

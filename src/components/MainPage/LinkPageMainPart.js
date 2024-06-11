@@ -26,7 +26,7 @@ const LinkPageMainPart = () => {
     if (accessToken) {
       const decodedToken = jwtDecode(accessToken);
       const userId = decodedToken.user_id;
-      fetch(`http://nilurl.ru:8000/get_links.php?user_id=${userId}`)
+      fetch(`https://nilurl.ru:8000/get_links.php?user_id=${userId}`)
         .then(response => response.json())
         .then(async data => {
           if (data && data.length > 0) {
@@ -60,7 +60,7 @@ const LinkPageMainPart = () => {
 
   const fetchFavicon = async (url) => {
     try {
-      const proxyUrl = 'http://nilurl.ru:97/?';
+      const proxyUrl = 'https://nilurl.ru/?';
       const targetUrl = new URL(url);
       const baseUrl = targetUrl.origin;
       const response = await axios.get(proxyUrl + targetUrl.href);

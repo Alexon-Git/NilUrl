@@ -7,7 +7,7 @@ const TopRefs = () => {
     useEffect(() => {
         const fetchLinks = async () => {
             try {
-                const response = await axios.get('http://nilurl.ru:8000/top_links.php', { withCredentials: true });
+                const response = await axios.get('https://nilurl.ru:8000/top_links.php', { withCredentials: true });
                 setLinks(response.data);
             } catch (error) {
                 console.error('Error fetching links:', error);

@@ -35,7 +35,7 @@ const RedactingLink = ({ pathS, pathL }) => {
   const [faviconLoadError, setFaviconLoadError] = useState(false);
   const fetchFavicon = async (url) => {
     try {
-      const proxyUrl = 'http://nilurl.ru:97/?';
+      const proxyUrl = 'https://nilurl.ru/?';
       const targetUrl = new URL(url);
       const baseUrl = targetUrl.origin;
       const response = await axios.get(proxyUrl + targetUrl.href);
@@ -69,7 +69,19 @@ const RedactingLink = ({ pathS, pathL }) => {
     }
   };
 
-
+  const fetchTags = async () => {
+    const response = await fetch('https://nilurl.ru:8000/get_tag.php', {
+      method: 'POST',
+      credentials: 'include', 
+      headers: {
+        'Content-Type': 'application/json'
+        
+      },
+     
+    });
+    const data = await response.json();
+    return data.tags; 
+  };
 
 
 
@@ -87,7 +99,7 @@ const RedactingLink = ({ pathS, pathL }) => {
   };
 
   try {
-      const response = await fetch('http://nilurl.ru:8000/delete_link.php', {
+      const response = await fetch('https://nilurl.ru:8000/delete_link.php', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -225,7 +237,7 @@ const RedactingLink = ({ pathS, pathL }) => {
 
   const sendLinkDataToServer = async (data) => {
     try {
-      const response = await fetch('http://nilurl.ru:8000/update_link.php', {
+      const response = await fetch('https://nilurl.ru:8000/update_link.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -393,7 +405,7 @@ const RedactingLink = ({ pathS, pathL }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://nilurl.ru:8000/get_link_for_update.php", {
+        const response = await fetch("https://nilurl.ru:8000/get_link_for_update.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -513,7 +525,7 @@ const RedactingLink = ({ pathS, pathL }) => {
           <div className="input__container">
           <span className="svg__infinity">
           {faviconSVG ? (
-        <img src={faviconSVG} alt="Favicon" onError={() => setFaviconLoadError(true)} />
+        <img  width="35" height="35" src={faviconSVG} alt="Favicon" onError={() => setFaviconLoadError(true)} />
       ) : (
         <svg
           width="35"
@@ -538,8 +550,7 @@ const RedactingLink = ({ pathS, pathL }) => {
           />
         </svg>
       )}
-      {faviconLoadError && <img className="SVGLinksLP" src="/NilLogo.svg"/>}
-
+      {faviconLoadError && <img width="35" height="35" className="SVGLinksLP" src="/NilLogo.svg"/>}
       </span>
             <input
               className="link-input"
