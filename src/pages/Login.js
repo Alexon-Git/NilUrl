@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { REGPAGE_ROUTE, MAINPAGE_ROUTE } from "../LogicComp/utils/Const";
 import { useState } from "react";
 import {BackImage} from "../components"
+import { Helmet } from 'react-helmet';
 
 function Log() {
   const navigate = useNavigate();
@@ -91,7 +92,11 @@ function Log() {
   };
 
   return (
+          
     <div className="d1">
+          <Helmet>
+            <title>Авторизация</title>
+          </Helmet>
       <div
         className="d2_1"
         style={{ background: "linear-gradient(225deg, #e25186, #6059ff)" }}
@@ -104,7 +109,7 @@ function Log() {
             <img
               src={BackImage}
               alt="Назад"
-onClick={() => {navigate(MAINPAGE_ROUTE);}}
+              onClick={() => {navigate(MAINPAGE_ROUTE);}}
               style={{ width: '90px', height: 'auto' }}
             />
           </span>

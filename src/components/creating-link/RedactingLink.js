@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
 import axios from 'axios';
-
+import { useNavigate } from "react-router-dom";
+import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
 import { usePremium } from '../../LogicComp/DataProvider';
 import {
   FAQ,
@@ -12,7 +13,7 @@ import {
 } from "../../components";
 
 const RedactingLink = ({ pathS, pathL }) => {
-
+  const navigate = useNavigate();
  
 
   const [faviconSVG, setFaviconSVG] = useState();
@@ -661,7 +662,7 @@ const RedactingLink = ({ pathS, pathL }) => {
                       проекте с тарифным планом Pro. Создайте проект или
                       перейдите к существующему проекту для обновления.
                     </p>
-                    <button className="popup-button">Обновиться до Pro</button>
+                    <button className="popup-button" onClick={() => {navigate(PRICEPAGE_ROUTE);}}>Обновиться до Pro</button>
                   </UpgradeToProPopup>
                 </div>
               )}

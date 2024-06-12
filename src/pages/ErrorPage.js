@@ -1,6 +1,7 @@
 import React from "react";
 import "./errorPage.css";
 import { Ampersand, Hashtag, Tilde, Triangle, Underscore } from "../components";
+import { Helmet } from 'react-helmet';
 
 const ErrorPage = () => {
   const initialPositions = [
@@ -66,6 +67,9 @@ const ErrorPage = () => {
   return (
     <div className="image-background">
     <div className="error-page wrapper">
+    <Helmet>
+    <title>Ошибка 404</title>
+  </Helmet>
       <div>
         {shuffledPositions.map((position, index) => (
           <div

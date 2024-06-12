@@ -3,6 +3,9 @@ import "./creatingLink.css";
 import axios from 'axios';
 import CryptoJS from "crypto-js";
 import { usePremium } from '../../LogicComp/DataProvider';
+import { useNavigate } from "react-router-dom";
+import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
+
 import {
   FAQ,
   Toggle,
@@ -15,7 +18,7 @@ const CreatingLink = () => {
   
   const {isPremium} = usePremium();
 
- 
+  const navigate = useNavigate();
   const [isPro, setIsPro] = useState(isPremium);
   const [activePopupId, setActivePopupId] = useState(null);
   const [showPopups, setShowPopups] = useState({
@@ -548,7 +551,7 @@ const CreatingLink = () => {
                       проекте с тарифным планом Premium. Создайте проект или
                       перейдите к существующему проекту для обновления.
                     </p>
-                    <button className="popup-button">Обновиться до Pro</button>
+                    <button className="popup-button" onClick={() => {navigate(PRICEPAGE_ROUTE);}}>Обновиться до Pro</button>
                   </UpgradeToProPopup>
                 </div>
               )}

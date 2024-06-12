@@ -6,6 +6,7 @@ import useAuth from "../pages/useAuth";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
+import { Helmet } from 'react-helmet';
 
 const SettingsPage = () => {
   const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
@@ -30,7 +31,10 @@ const SettingsPage = () => {
   }
 
   return (
-    <>
+    <><Helmet>
+    <title>Настройки</title>
+  </Helmet>
+    
       {userStatus === 'free' ? <HeaderLinksPageFree /> : <HeaderLinksPage />}
       <SettingsForm />
     </>

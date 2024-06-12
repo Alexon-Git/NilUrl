@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import HeaderMainPage from "../components/Global/HeaderMainPage";
 import FooterMP from "../components/footer-mp/FooterMP";
 import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
+import { Helmet } from 'react-helmet';
 
 const MainPage = () => {
     const navigate = useNavigate();
@@ -22,6 +23,9 @@ const MainPage = () => {
     
     return (
         <div>
+            <Helmet>
+            <title>Основная страница</title>
+          </Helmet>
             <NoLoginHeader/>
             <div className='mp-background'>                
                 <FirstContainerMainPage />

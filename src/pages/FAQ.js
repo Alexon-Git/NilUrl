@@ -8,6 +8,7 @@ import useAuth from "../pages/useAuth";
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 const FAQ = () => {
   const accessToken = Cookies.get("access_token");
@@ -332,6 +333,9 @@ const FAQ = () => {
   return (
     
     <div className="faq wrapper">
+          <Helmet>
+            <title>Помощь</title>
+          </Helmet>
       {userStatus === 'no_login' && <NoLoginHeader />}
       {userStatus === 'free' && <HeaderLinksPageFree />}
       {userStatus === 'premium' && <HeaderLinksPage />}

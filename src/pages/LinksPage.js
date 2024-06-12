@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
 import { usePremium } from '../LogicComp/DataProvider';
+import { Helmet } from 'react-helmet';
 
 const LinksPage = () => {
     const navigate = useNavigate();
@@ -41,6 +42,9 @@ const LinksPage = () => {
 
     return (
         <div>
+            <Helmet>
+            <title>Ссылки</title>
+            </Helmet>
             {userStatus === 'free' ? <HeaderLinksPageFree /> : <HeaderLinksPage />}
             <TopLinks />
             <LinkPageMainPart />

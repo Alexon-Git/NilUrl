@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "../../styles/Global/CreateLinkNew.css"
 import CreatingLink from "../creating-link/CreatingLink";
 import Overlay from '../creating-link/Overlay';
-import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode';
+
 const CreateLinkNew = ({highestKey, userStatus}) => {
     const [flag,setFlag] = useState(false)
     

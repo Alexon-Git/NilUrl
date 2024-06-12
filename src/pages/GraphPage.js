@@ -15,6 +15,7 @@ import useAuth from "../pages/useAuth";
 import { SortData } from "../LogicComp/GPFakeData";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+import { Helmet } from 'react-helmet';
 
 const GraphPage = () => {
   const location = useLocation();
@@ -197,6 +198,9 @@ const GraphPage = () => {
   } else {
     return (
         <div>
+          <Helmet>
+            <title>Аналитика</title>
+          </Helmet>
           {userStatus === "free" ? <HeaderLinksPageFree/> : <HeaderLinksPage/>}
           <div>
             <div className="title__container">

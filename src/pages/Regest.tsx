@@ -1,8 +1,9 @@
 import "./Regest.css";
 import { useNavigate } from "react-router-dom";
-import { LOGINPAGE_ROUTE } from "../LogicComp/utils/Const";
+import { LOGINPAGE_ROUTE, MAINPAGE_ROUTE } from "../LogicComp/utils/Const";
 import { useRef, useState } from "react";
 import { BackImage } from "../components";
+import { Helmet } from 'react-helmet';
 
 function Reg() {
   const ref = useRef<HTMLButtonElement>(null);
@@ -151,6 +152,9 @@ function Reg() {
 
   return (
     <div className="d1">
+          <Helmet>
+            <title>Регистрация</title>
+          </Helmet>
       <div
         className="d2_1"
         style={{ background: "linear-gradient(225deg, #e25186, #6059ff)" }}
@@ -160,7 +164,7 @@ function Reg() {
       <div className="d2_2">
         <div className="d3_1">
           <span className="button__login-back">
-            <img src={BackImage} alt="Назад" onClick={() => {}} style={{ width: '90px', height: 'auto' }} />
+            <img src={BackImage} alt="Назад" onClick={() => {navigate(MAINPAGE_ROUTE);}} style={{ width: '90px', height: 'auto' }} />
           </span>
           <a href="https://nil-agency.ru" className="a3_1">
             <img
