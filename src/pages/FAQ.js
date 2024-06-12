@@ -1,8 +1,33 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./faq.css";
+import HeaderLinksPage from "../components/Global/HeaderLinksPage";
+import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree"; 
+import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
+import "../styles/Global/HeaderMainPage.css"
+import useAuth from "../pages/useAuth";
+import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode';
+import { useNavigate } from "react-router-dom";
 
 const FAQ = () => {
+  const accessToken = Cookies.get("access_token");
+  const navigate = useNavigate();
+  const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
   const [expandedIndex, setExpandedIndex] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [userStatus, setUserStatus] = useState(null);
+
+  useEffect(() => {
+    if (accessToken) {
+      const decodedToken = jwtDecode(accessToken);
+      const user_status = decodedToken.user_status;
+      setUserStatus(user_status);
+    }
+    if (!isLoading && !isLoggedIn && !isRedirected) {
+      setIsRedirected(true);
+      setUserStatus("no_login");
+    }
+  }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected, accessToken]);
 
   const questions = [
     "Что я могу сделать с помощью NIL URL?",
@@ -305,7 +330,11 @@ const FAQ = () => {
   };
 
   return (
+    
     <div className="faq wrapper">
+      {userStatus === 'no_login' && <NoLoginHeader />}
+      {userStatus === 'free' && <HeaderLinksPageFree />}
+      {userStatus === 'premium' && <HeaderLinksPage />}
       {questions.map((question, index) => (
         <div key={index} className="faq-item">
           <button
