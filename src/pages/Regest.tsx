@@ -1,7 +1,7 @@
 import "./Regest.css";
 import { useNavigate } from "react-router-dom";
 import { LOGINPAGE_ROUTE, MAINPAGE_ROUTE } from "../LogicComp/utils/Const";
-import { useRef, useState } from "react";
+import { useRef, useState,useEffect} from "react";
 import { BackImage } from "../components";
 import { Helmet } from 'react-helmet';
 
@@ -12,6 +12,25 @@ function Reg() {
   const [password, setPassword] = useState("");
   const [passwordSec, setPasswordSec] = useState("");
   const [username, setUsername] = useState("");
+  
+  useEffect(() => {
+    const access_token = getCookie("access_token");
+    if (access_token) {
+      navigate("/links");
+    }
+  }, []);
+
+  const getCookie = (name:string) => {
+    const cookieArray = document.cookie.split(";");
+    for (let i = 0; i < cookieArray.length; i++) {
+      const cookiePair = cookieArray[i].split("=");
+      if (name === cookiePair[0].trim()) {
+        return decodeURIComponent(cookiePair[1]);
+      }
+    }
+    return null;
+  };
+
 
   const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
