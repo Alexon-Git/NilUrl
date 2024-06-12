@@ -5,7 +5,9 @@ import {
     LINKSPAGE_ROUTE, LOGINPAGE_ROUTE,
     MAINPAGE_ROUTE,
     PRICEPAGE_ROUTE, REGPAGE_ROUTE,
-    SETTINGPAGE_ROUTE
+    SETTINGPAGE_ROUTE,
+    FAQ_ROUTE,
+
 } from "./utils/Const";
 import LinksPage from "../pages/LinksPage";
 import GraphPage from "../pages/GraphPage";
@@ -15,6 +17,9 @@ import React, {JSX} from "react";
 import ErrorPage from "../pages/ErrorPage";
 import Reg from "../pages/Regest";
 import Log from "../pages/Login";
+import FAQ from "../pages/FAQ";
+
+
 
 export interface routerType {
     title: string;
@@ -58,5 +63,10 @@ export const publicRoutes:routerType[] = [
         path:REGPAGE_ROUTE,
         element:<Reg/>,
         title:"registration"
+    },
+    {
+        path:FAQ_ROUTE,
+        element:<FAQ/>,
+        title:"faq"
     }
 ]
