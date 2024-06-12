@@ -10,7 +10,11 @@ const HeaderLinksPage = () => {
     const [username, setUsername] = useState('');
     const [usernameInitial, setUsernameInitial] = useState('');
     const navigator = useNavigate();
-
+    const handleLogout = () => {
+        Cookies.remove('access_token');
+        window.location.reload();
+      };
+    
     useEffect(() => {
         const accessToken = Cookies.get('access_token');
         if (accessToken) {
@@ -59,7 +63,7 @@ const HeaderLinksPage = () => {
                         </defs>
                     </svg>
                 </div>
-                <p className="header_button-exit" onClick={()=>{}}>Выйти</p>
+                <p className="header_button-exit" onClick={handleLogout}>Выйти</p>
                 </div>
             </div>
         </div>
