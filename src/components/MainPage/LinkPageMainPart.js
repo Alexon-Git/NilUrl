@@ -60,7 +60,7 @@ const LinkPageMainPart = () => {
 
   const fetchFavicon = async (url) => {
     try {
-      const proxyUrl = 'https://nilurl.ru/?';
+      const proxyUrl = 'https://nilurl.ru:81/?';
       const targetUrl = new URL(url);
       const baseUrl = targetUrl.origin;
       const response = await axios.get(proxyUrl + targetUrl.href);
