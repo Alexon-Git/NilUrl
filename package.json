@@ -9,6 +9,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
+    "bad-words": "^3.0.4",
     "chart.js": "^4.4.2",
     "cookie": "^0.6.0",
     "crypto-js": "^4.2.0",

@@ -6,6 +6,8 @@ import { usePremium } from '../../LogicComp/DataProvider';
 import { useNavigate } from "react-router-dom";
 import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
 
+
+
 import {
   FAQ,
   Toggle,
@@ -15,7 +17,57 @@ import {
 } from "../../components";
 
 const CreatingLink = () => {
-  
+
+  const Filter = require('bad-words');
+  const filter = new Filter();
+  const transliterateToLatin = (text) => {
+    const translitMap = {
+        'а': ['а', 'a', '@'],
+        'б': ['б', '6', 'b'],
+        'в': ['в', 'b', 'v'],
+        'г': ['г', 'r', 'g'],
+        'д': ['д', 'd', 'g'],
+        'е': ['е', 'e'],
+        'ё': ['ё', 'e'],
+        'ж': ['ж', 'zh', '*'],
+        'з': ['з', '3', 'z'],
+        'и': ['и', 'u', 'i'],
+        'й': ['й', 'u', 'i'],
+        'к': ['к', 'k', 'i{', '|{'],
+        'л': ['л', 'l', 'ji'],
+        'м': ['м', 'm'],
+        'н': ['н', 'h', 'n'],
+        'о': ['о', 'o', '0'],
+        'п': ['п', 'n', 'p'],
+        'р': ['р', 'r', 'p'],
+        'с': ['с', 'c', 's'],
+        'т': ['т', 'm', 't'],
+        'у': ['у', 'y', 'u'],
+        'ф': ['ф', 'f'],
+        'х': ['х', 'x', 'h', '}{'],
+        'ц': ['ц', 'c', 'u,'],
+        'ч': ['ч', 'ch'],
+        'ш': ['ш', 'sh'],
+        'щ': ['щ', 'sch'],
+        'ь': ['ь', 'b'],
+        'ы': ['ы', 'bi'],
+        'ъ': ['ъ'],
+        'э': ['э', 'e'],
+        'ю': ['ю', 'io'],
+        'я': ['я', 'ya']
+    };
+
+    return text.split('').map(char => {
+        for (const cyrillic in translitMap) {
+            if (translitMap[cyrillic].includes(char)) {
+                return cyrillic;
+            }
+        }
+        
+        return char;
+    }).join('');
+};
+
   const {isPremium} = usePremium();
 
   const navigate = useNavigate();
@@ -87,7 +139,7 @@ const CreatingLink = () => {
     return data.tags; 
   };
 
-  const validateInput = () => {
+  const validateInput =  () => {
     const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
     const shortUrlPattern = /[A-Za-z0-9]{3,}$/;
     const noSpecialCharsPattern = /^[A-Za-z0-9]+$/;
@@ -99,6 +151,8 @@ const CreatingLink = () => {
     const utmLengthError = 'Каждое поле UTM должно быть не более 50 символов.';
     const iosUrlError = 'iOS URL должен быть действительной ссылкой.';
     const androidUrlError = 'Android URL должен быть действительной ссылкой.';
+    const bannedWordsError = 'Ваша ссылка или комментарий содержит недопустимые слова.';
+
 
     if (!inputText || !shortUrl) {
       alert('Поля ваша ссылка и короткая ссылка обязательны для заполнения.');
@@ -119,6 +173,13 @@ const CreatingLink = () => {
       return false;
     }
 
+    const transliteratedText = transliterateToLatin(shortUrl);
+    if (filter.isProfane(transliteratedText)) { 
+        alert(bannedWordsError);
+        console.log(transliteratedText);
+        return false;
+    } 
+    console.log(transliteratedText);
     if (tagValue.length > 15) {
       alert(tagLengthError);
       return false;
