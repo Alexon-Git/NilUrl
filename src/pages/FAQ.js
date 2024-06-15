@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./faq.css";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
-import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree"; 
+import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree";
 import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
-import "../styles/Global/HeaderMainPage.css"
+import "../styles/Global/HeaderMainPage.css";
 import useAuth from "../pages/useAuth";
-import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
 const FAQ = () => {
   const accessToken = Cookies.get("access_token");
@@ -64,15 +64,15 @@ const FAQ = () => {
           QR-кодов, позволяющий генерировать фирменные QR-коды для ссылок
           прямо в <strong>NIL URL</strong>.
         </li>
-        </ul>
-        <br></br>
-        <center>
-            <img className="faq-img" src="/faq-screen-1.png" alt="Screenshot" />
-          </center>
-          <center>
-            <em>Скриншот страницы аналитики для короткой ссылки на NIL URL</em>
-          </center>
-          <br></br>
+      </ul>
+      <br></br>
+      <center>
+        <img className="faq-img" src="/faq-screen-1.png" alt="Screenshot" />
+      </center>
+      <center>
+        <em>Скриншот страницы аналитики для короткой ссылки на NIL URL</em>
+      </center>
+      <br></br>
       <h2>Кто использует NIL URL?</h2>
       <p>
         <strong>NIL URL</strong> идеально подходит для современных маркетинговых
@@ -138,13 +138,13 @@ const FAQ = () => {
       </h2>
       <br></br>
       <center>
-      <p>
-        <img
-          className="faq-img"
-          src="/faq-screen-2.png"
-          alt="Конструктор ссылок NIL URL"
-        />
-      </p>
+        <p>
+          <img
+            className="faq-img"
+            src="/faq-screen-2.png"
+            alt="Конструктор ссылок NIL URL"
+          />
+        </p>
       </center>
       <br></br>
       <p>
@@ -214,11 +214,11 @@ const FAQ = () => {
       </p>
       <br></br>
       <center>
-      <img
-        className="faq-img"
-        src="/faq-screen-3.png"
-        alt="Пример настройки срока действия ссылки"
-      />
+        <img
+          className="faq-img"
+          src="/faq-screen-3.png"
+          alt="Пример настройки срока действия ссылки"
+        />
       </center>
       <br></br>
       <p>
@@ -242,18 +242,18 @@ const FAQ = () => {
       </p>
       <br></br>
       <center>
-      <img
-        className="faq-img"
-        src="/faq-screen-4.png"
-        alt="Пример настройки срока действия ссылки"
-      />
+        <img
+          className="faq-img"
+          src="/faq-screen-4.png"
+          alt="Пример настройки срока действия ссылки"
+        />
       </center>
       <br></br>
     </>,
     /* ----------------------------------------------------------------------------- */
     <>
       <p>
-        Эта функция доступна только для 
+        Эта функция доступна только для
         <strong> тарифных планов Pro и выше</strong>.
       </p>
       <p>
@@ -267,17 +267,17 @@ const FAQ = () => {
       </p>
       <br></br>
       <center>
-      <img
-        className="faq-img"
-        src="/faq-screen-5.png"
-        alt="Пример настройки таргетинга на устройства"
-      />
-      <p>
-        <em>
-          Используйте таргетинг на устройства, чтобы персонализировать поведение
+        <img
+          className="faq-img"
+          src="/faq-screen-5.png"
+          alt="Пример настройки таргетинга на устройства"
+        />
+        <p>
+          <em>
+            Используйте таргетинг на устройства, чтобы персонализировать поведение
           ссылки в зависимости от типа устройства пользователя
-        </em>
-      </p>
+          </em>
+        </p>
       </center>
       <br></br>
       <p>
@@ -303,14 +303,14 @@ const FAQ = () => {
       </p>
       <br></br>
       <center>
-      <img
-        className="faq-img"
-        src="/faq-screen-6.png"
-        alt="Пример добавления комментариев к ссылкам"
-      />
-      <p>
-        <em>Добавление комментариев к ссылкам</em>
-      </p>
+        <img
+          className="faq-img"
+          src="/faq-screen-6.png"
+          alt="Пример добавления комментариев к ссылкам"
+        />
+        <p>
+          <em>Добавление комментариев к ссылкам</em>
+        </p>
       </center>
       <br></br>
       <p>
@@ -319,16 +319,17 @@ const FAQ = () => {
       </p>
       <br></br>
       <center>
-      <img
-        className="faq-img"
-        src="/faq-screen-7.png"
-        alt="Пример отображения комментариев на карточке ссылок"
-      />
-      <p>
-        <em>
-          Комментарии отображаются в виде пузырьков сообщений на карточке ссылок
-        </em>
-      </p>
+        <img
+          className="faq-img"
+          src="/faq-screen-7.png"
+          alt="Пример отображения комментариев на карточке ссылок"
+        />
+        <p>
+          <em>
+            Комментарии отображаются в виде пузырьков сообщений на карточке
+            ссылок
+          </em>
+        </p>
       </center>
       <br></br>
     </>,
@@ -338,7 +339,10 @@ const FAQ = () => {
     <>
       <Helmet>
         <title>FAQ</title>
-        <meta name="description" content="Часто задаваемые вопросы (FAQ) по NIL URL" />
+        <meta
+          name="description"
+          content="Часто задаваемые вопросы (FAQ) по NIL URL"
+        />
       </Helmet>
       {userStatus === "no_login" ? (
         <NoLoginHeader />
@@ -349,14 +353,32 @@ const FAQ = () => {
       )}
       <div className={`faq-container ${isSidebarVisible ? '' : 'collapsed'}`}>
         <div className="faq-sidebar">
-<button className={`toggle-sidebar-btn ${isSidebarVisible ? 'open' : 'closed'}`} onClick={() => setIsSidebarVisible(!isSidebarVisible)}>
+          <button
+            className={`toggle-sidebar-btn ${
+              isSidebarVisible ? "open" : "closed"
+            }`}
+            onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+          >
             <svg width="28px" height="28px" viewBox="-1 -1 64 64" version="1.1">
-              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" >
-                <g id="Button-circle-arrow-right" stroke="#6B6C6E" stroke-width="2" >
+              <g
+                id="Page-1"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+              >
+                <g
+                  id="Button-circle-arrow-right"
+                  stroke="#6B6C6E"
+                  stroke-width="2"
+                >
                   <circle id="Oval" cx="31" cy="31" r="31"></circle>
                   <path d="M31,5 C45.4,5 57,16.6 57,31" id="Shape"></path>
                   <path d="M31,57 C16.6,57 5,45.4 5,31" id="Shape"></path>
-                  <path d="M31,37 L31,42.3 C31,42.7 31.3,43 31.7,43 L47.2,32.9 C47.6,32.6 47.9,31.8 47.9,31.5 L47.9,31.5 C47.9,31.5 47.6,30.3 47.2,30 L31.7,19.8 C31.3,19.8 31,20.1 31,20.5 L31,25.8" id="Shape"></path>
+                  <path
+                    d="M31,37 L31,42.3 C31,42.7 31.3,43 31.7,43 L47.2,32.9 C47.6,32.6 47.9,31.8 47.9,31.5 L47.9,31.5 C47.9,31.5 47.6,30.3 47.2,30 L31.7,19.8 C31.3,19.8 31,20.1 31,20.5 L31,25.8"
+                    id="Shape"
+                  ></path>
                   <path d="M33.9,26.1 L21,26.1" id="Shape"></path>
                   <path d="M33.9,37.1 L21,37.1" id="Shape"></path>
                 </g>
