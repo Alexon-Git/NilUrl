@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./faq.css";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
 import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree"; 
@@ -6,7 +6,7 @@ import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
 import "../styles/Global/HeaderMainPage.css"
 import useAuth from "../pages/useAuth";
 import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 
@@ -14,9 +14,9 @@ const FAQ = () => {
   const accessToken = Cookies.get("access_token");
   const navigate = useNavigate();
   const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
-  const [expandedIndex, setExpandedIndex] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [expandedIndex, setExpandedIndex] = useState(0);
   const [userStatus, setUserStatus] = useState(null);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   useEffect(() => {
     if (accessToken) {
@@ -31,11 +31,11 @@ const FAQ = () => {
   }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected, accessToken]);
 
   const questions = [
-    "Что я могу сделать с помощью NIL URL?",
-    "Как создать короткую ссылку на NIL URL?",
+    "Функционал NIL URL",
+    "Как создать короткую ссылку?",
     "UTM builder",
     "Срок годности",
-    "Таргетинг на устройства (iOS / Android)",
+    "Таргетинг на устройства",
     "Комментарии к ссылке",
   ];
 
@@ -65,13 +65,14 @@ const FAQ = () => {
           прямо в <strong>NIL URL</strong>.
         </li>
         </ul>
+        <br></br>
         <center>
             <img className="faq-img" src="/faq-screen-1.png" alt="Screenshot" />
           </center>
           <center>
             <em>Скриншот страницы аналитики для короткой ссылки на NIL URL</em>
           </center>
-
+          <br></br>
       <h2>Кто использует NIL URL?</h2>
       <p>
         <strong>NIL URL</strong> идеально подходит для современных маркетинговых
@@ -135,6 +136,7 @@ const FAQ = () => {
       <h2>
         <strong>Конструктор ссылок NIL URL</strong>
       </h2>
+      <br></br>
       <center>
       <p>
         <img
@@ -144,6 +146,7 @@ const FAQ = () => {
         />
       </p>
       </center>
+      <br></br>
       <p>
         <em>Конструктор ссылок NIL URL</em> включает:
       </p>
@@ -157,21 +160,18 @@ const FAQ = () => {
         </li>
         <li>
           <strong>Выбор тега</strong> (для пользовательских доменов): позволяет
-          упорядочивать ссылки по тегам. Узнайте больше о тегах
-          <a href="#">здесь</a>.
+          упорядочивать ссылки по тегам. Узнайте больше о тегах <a href="#">здесь</a>.
         </li>
         <li>
           <strong>Комментарии</strong>: добавление комментариев к ссылкам для
           командного использования. <a href="#">Узнать больше</a>.
         </li>
         <li>
-          <strong>Конструктор UTM</strong>: добавление UTM-параметров к ссылкам.
-          <a href="#">Узнать больше</a>.
+          <strong>Конструктор UTM</strong>: добавление UTM-параметров к ссылкам. <a href="#">Узнать больше</a>.
         </li>
         <li>
           <strong>Пользовательские карточки в социальных сетях</strong>:
-          настройка внешнего вида ссылок при публикации в социальных сетях.
-          <a href="#">Узнать больше</a>.
+          настройка внешнего вида ссылок при публикации в социальных сетях. <a href="#">Узнать больше</a>.
         </li>
         <li>
           <strong>Дата истечения срока действия</strong>: установка даты
@@ -179,13 +179,11 @@ const FAQ = () => {
         </li>
         <li>
           <strong>Таргетинг на устройства</strong>: назначение уникального
-          целевого URL для устройств iOS и Android.
-          <a href="#">Узнать больше</a>.
+          целевого URL для устройств iOS и Android. <a href="#">Узнать больше</a>.
         </li>
         <li>
           <strong>Геотаргетинг</strong> (только для Pro-плана): перенаправление
-          пользователей на разные ссылки в зависимости от их местоположения.
-          <a href="#">Узнать больше</a>.
+          пользователей на разные ссылки в зависимости от их местоположения. <a href="#">Узнать больше</a>.
         </li>
       </ul>
     </>,
@@ -214,6 +212,7 @@ const FAQ = () => {
         После истечения срока действия ссылки пользователи увидят страницу
         "Ссылка с истекшим сроком действия" при попытке перейти по ней.
       </p>
+      <br></br>
       <center>
       <img
         className="faq-img"
@@ -221,6 +220,7 @@ const FAQ = () => {
         alt="Пример настройки срока действия ссылки"
       />
       </center>
+      <br></br>
       <p>
         Примечание: все переходы по ссылке после истечения срока действия{" "}
         <strong>не</strong> будут отслеживаться.
@@ -240,6 +240,7 @@ const FAQ = () => {
         <strong>URL-адрес с истекшим сроком действия</strong> в разделе "Срок
         действия ссылки".
       </p>
+      <br></br>
       <center>
       <img
         className="faq-img"
@@ -247,6 +248,7 @@ const FAQ = () => {
         alt="Пример настройки срока действия ссылки"
       />
       </center>
+      <br></br>
     </>,
     /* ----------------------------------------------------------------------------- */
     <>
@@ -263,19 +265,21 @@ const FAQ = () => {
         активировав опцию "Таргетинг на iOS" в конструкторе ссылок, и другой URL
         для устройств Android, включив "Таргетинг на Android".
       </p>
+      <br></br>
       <center>
       <img
         className="faq-img"
         src="/faq-screen-5.png"
         alt="Пример настройки таргетинга на устройства"
       />
-      </center>
       <p>
         <em>
           Используйте таргетинг на устройства, чтобы персонализировать поведение
           ссылки в зависимости от типа устройства пользователя
         </em>
       </p>
+      </center>
+      <br></br>
       <p>
         Эта функция особенно полезна для перенаправления пользователей iOS в App
         Store для загрузки приложения, а пользователей Android — в Google Play
@@ -297,6 +301,7 @@ const FAQ = () => {
         В <strong>NIL URL</strong> можно добавлять комментарии к ссылкам,
         активировав опцию "Комментарии" в конструкторе ссылок.
       </p>
+      <br></br>
       <center>
       <img
         className="faq-img"
@@ -307,57 +312,77 @@ const FAQ = () => {
         <em>Добавление комментариев к ссылкам</em>
       </p>
       </center>
+      <br></br>
       <p>
         Примечание: гиперссылки поддерживаются в комментариях. Это позволяет
         добавлять больше контекста к ссылкам.
       </p>
+      <br></br>
       <center>
       <img
         className="faq-img"
         src="/faq-screen-7.png"
         alt="Пример отображения комментариев на карточке ссылок"
       />
-      </center>
       <p>
         <em>
           Комментарии отображаются в виде пузырьков сообщений на карточке ссылок
         </em>
       </p>
+      </center>
+      <br></br>
     </>,
   ];
 
-  const handleToggle = (index) => {
-    setExpandedIndex(index === expandedIndex ? null : index);
-  };
-
   return (
-    
-    <div className="faq wrapper">
-          <Helmet>
-            <title>Помощь</title>
-          </Helmet>
-      {userStatus === 'no_login' && <NoLoginHeader />}
-      {userStatus === 'free' && <HeaderLinksPageFree />}
-      {userStatus === 'premium' && <HeaderLinksPage />}
-      {questions.map((question, index) => (
-        <div key={index} className="faq-item">
-          <button
-            className="faq-question"
-            onClick={() => handleToggle(index)}
-            aria-expanded={expandedIndex === index}
-          >
-            {question}
+    <>
+      <Helmet>
+        <title>FAQ</title>
+        <meta name="description" content="Часто задаваемые вопросы (FAQ) по NIL URL" />
+      </Helmet>
+      {userStatus === "no_login" ? (
+        <NoLoginHeader />
+      ) : userStatus === "free" ? (
+        <HeaderLinksPageFree />
+      ) : (
+        <HeaderLinksPage />
+      )}
+      <div className={`faq-container ${isSidebarVisible ? '' : 'collapsed'}`}>
+        <div className="faq-sidebar">
+<button className={`toggle-sidebar-btn ${isSidebarVisible ? 'open' : 'closed'}`} onClick={() => setIsSidebarVisible(!isSidebarVisible)}>
+            <svg width="28px" height="28px" viewBox="-1 -1 64 64" version="1.1">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" >
+                <g id="Button-circle-arrow-right" stroke="#6B6C6E" stroke-width="2" >
+                  <circle id="Oval" cx="31" cy="31" r="31"></circle>
+                  <path d="M31,5 C45.4,5 57,16.6 57,31" id="Shape"></path>
+                  <path d="M31,57 C16.6,57 5,45.4 5,31" id="Shape"></path>
+                  <path d="M31,37 L31,42.3 C31,42.7 31.3,43 31.7,43 L47.2,32.9 C47.6,32.6 47.9,31.8 47.9,31.5 L47.9,31.5 C47.9,31.5 47.6,30.3 47.2,30 L31.7,19.8 C31.3,19.8 31,20.1 31,20.5 L31,25.8" id="Shape"></path>
+                  <path d="M33.9,26.1 L21,26.1" id="Shape"></path>
+                  <path d="M33.9,37.1 L21,37.1" id="Shape"></path>
+                </g>
+              </g>
+            </svg>
           </button>
-          <div
-            className={`faq-answer ${
-              expandedIndex === index ? "expanded" : ""
-            }`}
-          >
-            {answers[index]}
-          </div>
+          <h2>Часто задаваемые вопросы</h2>
+          <ul>
+            {questions.map((question, index) => (
+              <li
+                key={index}
+                className={expandedIndex === index ? "active" : ""}
+                onClick={() => setExpandedIndex(index)}
+                data-tooltip={question}
+              >
+                {question}
+              </li>
+            ))}
+          </ul>
         </div>
-      ))}
-    </div>
+        <div className="faq-content">
+          <h2>{questions[expandedIndex]}</h2>
+          <div>{answers[expandedIndex]}</div>
+        </div>
+      </div>
+    </>
   );
 };
 
