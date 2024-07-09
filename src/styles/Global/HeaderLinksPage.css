@@ -53,6 +53,7 @@
   border-radius: 9999px;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .AbsoluteDoteUserLogo {
   position: absolute;
@@ -65,10 +66,43 @@
 }
 
 .header_button-exit {
-  font-family: "Helvetica Neue Cyr";
+  font-family: "Segoe UI";
   font-size: 14px;
-  font-weight: 500;
-  line-height: 28px;
+  font-weight: 400;
+  line-height: 20px;
   cursor: pointer;
-  color: grey;
+  margin: 0;
+  display: flex; 
+  align-items:baseline;
+
+  gap: 10px;   
+}
+ 
+
+.header-right-status {
+  background: linear-gradient(90deg, #646463 -6.92%, #000000 50.38%, #646463 107.69%);
+  width: 65px;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.header-popup {
+  width: 120px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 65px;
+  padding: 15px 10px; 
+  right: 0;
+  z-index: 1200;
 }
