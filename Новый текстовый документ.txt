@@ -1,5 +1,0 @@
-onClick={handleDeleteModalOpen}
-  const handleDeleteModalOpen = () => {
-    setIsDeleteModalOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
