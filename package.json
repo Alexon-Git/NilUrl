@@ -33,6 +33,7 @@
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
     "react-youtube": "^10.1.0",
+    "sitemap": "^8.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -41,7 +42,7 @@
     "start": "react-scripts start",
     "start:frontend": "react-scripts start",
     "start:backend": "php -S localhost:8000 -t api",
-    "build": "react-scripts build && node change-title.js",
+    "build": "react-scripts build && node change-title.js && node generate-sitemap.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -1,0 +1,4 @@
+# robots.txt for nilurl.ru
+
+# Указать путь к файлу sitemap для более эффективного индексирования сайта
+Sitemap: https://www.nilurl.ru:8000/sitemap.xml
