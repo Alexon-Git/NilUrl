@@ -145,6 +145,18 @@
   margin-bottom: 10px;
 }
 
+.utm__input-item--checkbox .utm__input-label {
+  flex: none;
+  width: 92%;
+  border-right: none;
+}
+
+.utm__input-item--checkbox .utm__input-input {
+  flex: none;
+  width: 5%;
+  margin: 0;
+}
+
 .utm__input-label {
   flex: 1;
   display: flex;

@@ -95,6 +95,25 @@
   cursor: pointer;
 }
 
+.header-right-status-pro {
+  background: linear-gradient(90deg, #624CEB 0%, #FF35AE 100%);
+  width: 65px;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+
+
+
 .header-popup {
   width: 120px;
   border-radius: 6px;

@@ -697,14 +697,32 @@ const UTMInputs = () => {
   };
 
   return (
-    <div className="utm__input">
+      <div className="utm__input">
       {inputs.map((input) => (
-        <div className="utm__input-item" key={input.id}>
-          <label className="utm__input-label" htmlFor={input.id}>
+        <div
+          className={`utm__input-item ${
+            input.id === "Android UTM Metrika" || input.id === "iOS UTM Metrika"
+              ? "utm__input-item--checkbox"
+              : ""
+          }`}
+          key={input.id}
+        >
+          <label
+            className={`utm__input-label ${
+              input.id === "Android UTM Metrika" || input.id === "iOS UTM Metrika"
+                ? "utm__input-label--checkbox"
+                : ""
+            }`}
+            htmlFor={input.id}
+          >
             {input.title}
           </label>
           <input
-            className="utm__input-input"
+            className={`utm__input-input ${
+              input.id === "Android UTM Metrika" || input.id === "iOS UTM Metrika"
+                ? "utm__input-input--checkbox"
+                : ""
+            }`}
             type={input.inputType}
             id={input.id}
             checked={input.checked}
@@ -716,6 +734,7 @@ const UTMInputs = () => {
     </div>
   );
 };
+
 
 const IOSComponent = () => {
   const [inputValue_IOS, setInputValue_IOS] = useState("");

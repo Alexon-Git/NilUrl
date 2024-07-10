@@ -833,9 +833,9 @@ const UTMInputs = ({ initialUTM }) => {
         />
       </div>
       <div className="utm__input-item">
-        <label className="utm__input-label" htmlFor="UTM Android">UTM Android Metrika</label>
+        <label className="utm__input-label--checkbox" htmlFor="UTM Android">UTM Android Metrika</label>
         <input
-          className="utm__input-input"
+          className="utm__input-input--checkbox"
           type="checkbox"
           id="UTM Android"
           checked={utmAndroid}
@@ -843,9 +843,9 @@ const UTMInputs = ({ initialUTM }) => {
         />
       </div>
       <div className="utm__input-item">
-        <label className="utm__input-label" htmlFor="UTM iOC">UTM iOC Metrika</label>
+        <label className="utm__input-label--checkbox" htmlFor="UTM iOC">UTM iOC Metrika</label>
         <input
-          className="utm__input-input"
+          className="utm__input-input--checkbox"
           type="checkbox"
           id="UTM iOC"
           checked={utmIOC}
