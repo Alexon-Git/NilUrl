@@ -1,12 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
-import axios from 'axios';
+import axios from "axios";
 import CryptoJS from "crypto-js";
-import { usePremium } from '../../LogicComp/DataProvider';
+import { usePremium } from "../../LogicComp/DataProvider";
 import { useNavigate } from "react-router-dom";
 import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
-
-
 
 import {
   FAQ,
@@ -17,9 +15,7 @@ import {
 } from "../../components";
 
 const CreatingLink = () => {
-
-
-  const {isPremium} = usePremium();
+  const { isPremium } = usePremium();
 
   const navigate = useNavigate();
   const [isPro, setIsPro] = useState(isPremium);
@@ -32,26 +28,33 @@ const CreatingLink = () => {
   });
 
   const [faviconSVG, setFaviconSVG] = useState(null);
+  const [isPopupActive, setIsPopupActive] = useState(false);
 
+  const handleIconClick = () => {
+    console.log('Icon clicked. Previous state:', isPopupActive);
+    setIsPopupActive(!isPopupActive);
+    console.log('New state:', !isPopupActive);
+  };
   const handleChange = (event) => {
     const inputURL = event.target.value;
     fetchFavicon(inputURL)
       .then((svg) => setFaviconSVG(svg))
-      .catch((error) => console.error('Error fetching favicon:', error));
+      .catch((error) => console.error("Error fetching favicon:", error));
   };
   const [faviconLoadError, setFaviconLoadError] = useState(false);
   const fetchFavicon = async (url) => {
     try {
-      const proxyUrl = 'https://nilurl.ru/?';
+      const proxyUrl = "https://nilurl.ru/?";
       const targetUrl = new URL(url);
       const baseUrl = targetUrl.origin;
       const response = await axios.get(proxyUrl + targetUrl.href);
       const html = response.data;
       const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      let favicon = '/NilLogo.svg'; 
+      const doc = parser.parseFromString(html, "text/html");
+      let favicon = "/NilLogo.svg";
 
-      const iconLink = doc.querySelector('link[rel="icon"]') ||
+      const iconLink =
+        doc.querySelector('link[rel="icon"]') ||
         doc.querySelector('link[rel="shortcut icon"]') ||
         doc.querySelector('link[rel*="icon"]') ||
         doc.querySelector('link[rel="apple-touch-icon"]') ||
@@ -59,54 +62,53 @@ const CreatingLink = () => {
       if (iconLink) {
         favicon = iconLink.href;
       } else {
-        const response = await axios.get(proxyUrl + baseUrl + '/favicon.ico');
+        const response = await axios.get(proxyUrl + baseUrl + "/favicon.ico");
         if (response.status === 200) {
-          favicon = baseUrl + '/favicon.ico';
+          favicon = baseUrl + "/favicon.ico";
         }
       }
 
-      if (favicon && !favicon.startsWith('http')) {
+      if (favicon && !favicon.startsWith("http")) {
         favicon = baseUrl + favicon;
       }
 
       return favicon;
     } catch (error) {
-      console.error('Error fetching favicon:', error);
-      return '/NilLogo.svg'; 
+      console.error("Error fetching favicon:", error);
+      return "/NilLogo.svg";
     }
   };
 
   const fetchTags = async () => {
-    const response = await fetch('https://nilurl.ru:8000/get_tag.php', {
-      method: 'POST',
-      credentials: 'include', 
+    const response = await fetch("https://nilurl.ru:8000/get_tag.php", {
+      method: "POST",
+      credentials: "include",
       headers: {
-        'Content-Type': 'application/json'
-        
+        "Content-Type": "application/json",
       },
-     
     });
     const data = await response.json();
-    return data.tags; 
+    return data.tags;
   };
 
   const validateInput = async () => {
     const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
     const shortUrlPattern = /[A-Za-z0-9]{3,}$/;
     const noSpecialCharsPattern = /^[A-Za-z0-9]+$/;
-    const urlError = 'Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.';
-    const shortUrlError = 'Короткая ссылка должна содержать минимум 3 символа.';
-    const specialCharsError = 'Короткая ссылка не должна содержать специальных символов.';
-    const tagLengthError = 'Название тэга должно быть не более 15 символов.';
-    const commentLengthError = 'Комментарий должен быть не более 500 символов.';
-    const utmLengthError = 'Каждое поле UTM должно быть не более 50 символов.';
-    const iosUrlError = 'iOS URL должен быть действительной ссылкой.';
-    const androidUrlError = 'Android URL должен быть действительной ссылкой.';
-    const bannedWordsError = 'Ваша ссылка содержит недопустимые слова.';
-
+    const urlError =
+      "Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.";
+    const shortUrlError = "Короткая ссылка должна содержать минимум 3 символа.";
+    const specialCharsError =
+      "Короткая ссылка не должна содержать специальных символов.";
+    const tagLengthError = "Название тэга должно быть не более 15 символов.";
+    const commentLengthError = "Комментарий должен быть не более 500 символов.";
+    const utmLengthError = "Каждое поле UTM должно быть не более 50 символов.";
+    const iosUrlError = "iOS URL должен быть действительной ссылкой.";
+    const androidUrlError = "Android URL должен быть действительной ссылкой.";
+    const bannedWordsError = "Ваша ссылка содержит недопустимые слова.";
 
     if (!inputText || !shortUrl) {
-      alert('Поля ваша ссылка и короткая ссылка обязательны для заполнения.');
+      alert("Поля ваша ссылка и короткая ссылка обязательны для заполнения.");
       return false;
     }
 
@@ -114,7 +116,7 @@ const CreatingLink = () => {
       alert(urlError);
       return false;
     }
-    if (!noSpecialCharsPattern.test(shortUrl.replace(''))) {
+    if (!noSpecialCharsPattern.test(shortUrl.replace(""))) {
       alert(specialCharsError);
       return false;
     }
@@ -125,25 +127,23 @@ const CreatingLink = () => {
     }
 
     try {
-        const response = await fetch('https://nilurl.ru:8000/check_swear', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ text: shortUrl })
-        });
-        const data = await response.json();
+      const response = await fetch("https://nilurl.ru:8000/check_swear", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: shortUrl }),
+      });
+      const data = await response.json();
 
-        if (data.profanity) {
-            alert(bannedWordsError);
-            return false;
-        }
-
+      if (data.profanity) {
+        alert(bannedWordsError);
+        return false;
+      }
     } catch (error) {
-        console.error('Error checking profanity:', error);
+      console.error("Error checking profanity:", error);
     }
 
-    
     if (tagValue.length > 15) {
       alert(tagLengthError);
       return false;
@@ -163,12 +163,18 @@ const CreatingLink = () => {
       }
     }
 
-    if (toggles.find(toggle => toggle.id === 'ios').checked && !urlPattern.test(getIOSData())) {
+    if (
+      toggles.find((toggle) => toggle.id === "ios").checked &&
+      !urlPattern.test(getIOSData())
+    ) {
       alert(iosUrlError);
       return false;
     }
 
-    if (toggles.find(toggle => toggle.id === 'android').checked && !urlPattern.test(getAndroidData())) {
+    if (
+      toggles.find((toggle) => toggle.id === "android").checked &&
+      !urlPattern.test(getAndroidData())
+    ) {
       alert(androidUrlError);
       return false;
     }
@@ -191,15 +197,12 @@ const CreatingLink = () => {
       checked: false,
       info: <CommentComponent />,
     },
-    { id: "utm",
-     title: "UTM-метка",
-      checked: false,
-       info: <UTMInputs /> },
+    { id: "utm", title: "UTM-метка", checked: false, info: <UTMInputs /> },
     {
       id: "date",
       title: "Дата окончания",
       checked: false,
-      info: <Calendar onDateChange={setSelectedDate}/>,
+      info: <Calendar onDateChange={setSelectedDate} />,
     },
     {
       id: "ios",
@@ -217,29 +220,29 @@ const CreatingLink = () => {
 
   const sendLinkDataToServer = async (data) => {
     try {
-      const response = await fetch('https://nilurl.ru:8000/post_link.php', {
-        method: 'POST',
+      const response = await fetch("https://nilurl.ru:8000/post_link.php", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify(data),
       });
-  
+
       const result = await response.json();
-  
-      if (result.status === 'success') {
-        alert('Ссылка успешно создана!');
-        window.location.reload(); 
+
+      if (result.status === "success") {
+        alert("Ссылка успешно создана!");
+        window.location.reload();
       } else {
         const message = result.message;
         alert(message);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
-  
+
   const collectLinkData = () => {
     const fullShortUrl = `https://nilurl.ru/${shortUrl}`;
     const linkData = {
@@ -248,33 +251,43 @@ const CreatingLink = () => {
       tagValue: tagValue,
       tagColors: tagColors,
       toggles: {
-        utm: toggles.find(toggle => toggle.id === 'utm').checked ? getUTMData() : false,
+        utm: toggles.find((toggle) => toggle.id === "utm").checked
+          ? getUTMData()
+          : false,
         date: selectedDate ? getDateData(selectedDate) : false,
-        ios: toggles.find(toggle => toggle.id === 'ios').checked ? getIOSData() : false,
-        android: toggles.find(toggle => toggle.id === 'android').checked ? getAndroidData() : false,
+        ios: toggles.find((toggle) => toggle.id === "ios").checked
+          ? getIOSData()
+          : false,
+        android: toggles.find((toggle) => toggle.id === "android").checked
+          ? getAndroidData()
+          : false,
       },
-      comment: toggles.find(toggle => toggle.id === 'comment').checked ? getCommentData() : false,
+      comment: toggles.find((toggle) => toggle.id === "comment").checked
+        ? getCommentData()
+        : false,
     };
-  
+
     return linkData;
   };
-  
+
   const getUTMData = () => {
-    const utmInputs = document.querySelectorAll('.utm__input-item input[type="text"], .utm__input-item input[type="checkbox"]');
+    const utmInputs = document.querySelectorAll(
+      '.utm__input-item input[type="text"], .utm__input-item input[type="checkbox"]'
+    );
     const utmData = {};
 
-    utmInputs.forEach(input => {
-        const id = input.id;
-        if (input.type === "checkbox") {
-            utmData[id] = input.checked; 
-        } else {
-            utmData[id] = input.value ? input.value : false; 
-        }
+    utmInputs.forEach((input) => {
+      const id = input.id;
+      if (input.type === "checkbox") {
+        utmData[id] = input.checked;
+      } else {
+        utmData[id] = input.value ? input.value : false;
+      }
     });
 
     return utmData;
-};
-  
+  };
+
   const getDateData = (selectedDate) => {
     const day = selectedDate.getDate().toString().padStart(2, "0");
     const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
@@ -285,15 +298,15 @@ const CreatingLink = () => {
   };
 
   const getIOSData = () => {
-    return document.querySelector('.ios-input').value;
+    return document.querySelector(".ios-input").value;
   };
-  
+
   const getAndroidData = () => {
-    return document.querySelector('.android-input').value;
+    return document.querySelector(".android-input").value;
   };
-  
+
   const getCommentData = () => {
-    const commentInput = document.querySelector('.custom-textarea');
+    const commentInput = document.querySelector(".custom-textarea");
     return commentInput ? commentInput.value : false;
   };
 
@@ -372,10 +385,10 @@ const CreatingLink = () => {
   const handleCreateLink = async () => {
     const isValid = await validateInput();
     if (isValid) {
-        const linkData = collectLinkData();
-        sendLinkDataToServer(linkData);
+      const linkData = collectLinkData();
+      sendLinkDataToServer(linkData);
     }
-};
+  };
 
   const handleCreateLinkKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -394,6 +407,23 @@ const CreatingLink = () => {
   const handleMouseOut = () => {
     console.log("Скрыть подсказку");
   };
+
+  ////////
+  const [tags, setTags] = useState([
+    { text: "Название тега", textColor: '#000000', bgColor: '#ff3fff' },
+    { text: "Название тега много много много тега тега тега тега тега тега тега", textColor: '#f45fff', bgColor: '#0000ff' },
+    { text: "Название тега", textColor: '#ff0000', bgColor: '#00ff00' },
+    { text: "Название тега", textColor: '#00d000', bgColor: '#ffd1ff' },
+    { text: "Название тега", textColor: '#2f15ff', bgColor: '#07d0ff' },
+    { text: "Название тега", textColor: '#ff6000', bgColor: '#01ff00' }
+  ]);
+///////////////
+
+const handleTagClick = (tag) => {
+  setTagColors({ color: tag.bgColor, svgColor: tag.textColor });
+  setTagValue(tag.text);
+  setIsPopupActive(false);
+};
 
   return (
     <div className="creating__link">
@@ -434,115 +464,156 @@ const CreatingLink = () => {
           </div>
         </div>
         <div className="link__input">
-  <div className="link__input-title">Короткая ссылка</div>
-  <div className="link__input-short-form">
-  <span className="svg__infinity">
-  {faviconSVG ? (
-        <img  width="35" height="35" src={faviconSVG} alt="Favicon" onError={() => setFaviconLoadError(true)} />
-      ) : (
-        <svg
-          width="35"
-          height="35"
-          viewBox="0 0 35 35"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
-          <circle
-            cx="17.5"
-            cy="17.5"
-            r="17"
-            stroke="#9A9A9A"
-            strokeOpacity="0.5"
-          />
-          <path
-            d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
-            stroke="black"
-            strokeWidth="1.28"
-            strokeLinecap="round"
-          />
-        </svg>
-      )}
-      {faviconLoadError && <img width="35" height="35" className="SVGLinksLP" src="/NilLogo.svg"/>}
+          <div className="link__input-title">Короткая ссылка</div>
+          <div className="link__input-short-form">
+            <span className="svg__infinity">
+              {faviconSVG ? (
+                <img
+                  width="35"
+                  height="35"
+                  src={faviconSVG}
+                  alt="Favicon"
+                  onError={() => setFaviconLoadError(true)}
+                />
+              ) : (
+                <svg
+                  width="35"
+                  height="35"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
+                  <circle
+                    cx="17.5"
+                    cy="17.5"
+                    r="17"
+                    stroke="#9A9A9A"
+                    strokeOpacity="0.5"
+                  />
+                  <path
+                    d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
+                    stroke="black"
+                    strokeWidth="1.28"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              )}
+              {faviconLoadError && (
+                <img
+                  width="35"
+                  height="35"
+                  className="SVGLinksLP"
+                  src="/NilLogo.svg"
+                />
+              )}
             </span>
-  <div className="input__container-short">
-  <span className="static-text">https://nilurl.ru/</span>
-      <input
-      className="link-input-short"
-      type="text"
-      placeholder="Ffv3cv"
-      value={shortUrl}
-      onChange={(e) => setShortUrl(e.target.value)} 
-    />
-  </div>
-  </div>
-</div>
-        <div className="link__input">
-          <div className="link__input-title">Тег ссылки</div>
-          <div className="input__container">
-            <div
-              className="input__icon left-image"
-              onClick={handleMouseEnter}
-              style={{
-                backgroundColor: tagColors.color,
-                borderLeft: "1px solid transparent",
-                borderRight: "1px solid rgba(154, 154, 154, 0.5)",
-                borderRadius: "6px 0 0 6px",
-              }}
-            >
-              <svg
-                className="input__svg"
-                width="17"
-                height="18"
-                viewBox="0 0 17 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ boxSizing: "content-box" }}
-              >
-                <path
-                  d="M5.4375 1.625H8.07283C8.71481 1.625 9.03585 1.625 9.33799 1.69753C9.60583 1.76183 9.86185 1.86789 10.0968 2.01182C10.3617 2.17415 10.5886 2.40115 11.0427 2.85515L15.9375 7.75M4.60608 7.79357H4.61483M6.32281 4.25H5.2625C3.79236 4.25 3.05729 4.25 2.49578 4.53611C2.00185 4.78778 1.60028 5.18935 1.34861 5.68328C1.0625 6.24479 1.0625 6.97986 1.0625 8.45V9.51032C1.0625 10.1523 1.0625 10.4733 1.13503 10.7755C1.19933 11.0433 1.30539 11.2993 1.44932 11.5343C1.61165 11.7991 1.83865 12.0261 2.29265 12.4802L5.09265 15.2802C6.1322 16.3197 6.65197 16.8395 7.25129 17.0342C7.77856 17.2055 8.34644 17.2055 8.87371 17.0342C9.473 16.8395 9.99284 16.3197 11.0323 15.2802L12.0927 14.2198C13.1322 13.1803 13.652 12.6605 13.8467 12.0612C14.018 11.5339 14.018 10.9661 13.8467 10.4388C13.652 9.8395 13.1322 9.31966 12.0927 8.28016L9.29266 5.48015C8.83863 5.02615 8.61165 4.79915 8.34679 4.63682C8.11185 4.49289 7.85583 4.38683 7.58799 4.32253C7.28585 4.25 6.96481 4.25 6.32281 4.25ZM5.04358 7.79357C5.04358 8.03516 4.84771 8.23107 4.60608 8.23107C4.36445 8.23107 4.16858 8.03516 4.16858 7.79357C4.16858 7.55195 4.36445 7.35607 4.60608 7.35607C4.84771 7.35607 5.04358 7.55195 5.04358 7.79357Z"
-                  stroke={tagColors.svgColor}
-                  strokeWidth="1.28"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            {isHovered && (
-              <div
-                className="tag-list-container"
-                onMouseLeave={handleMouseLeave}
-              >
-                <TagList onTagClick={setTagColors} />
-              </div>
-            )}
-            <input
-              className="link-input png"
-              type="text"
-              placeholder="Название тега"
-              value={tagValue}
-              onChange={handleTagChange}
-            />
-            <div className="input__icon right-image">
-              {" "}
-              <svg
-                width="14"
-                height="8"
-                viewBox="0 0 14 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 1L7 7L13 1"
-                  stroke="black"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+            <div className="input__container-short">
+              <span className="static-text">https://nilurl.ru/</span>
+              <input
+                className="link-input-short"
+                type="text"
+                placeholder="Ffv3cv"
+                value={shortUrl}
+                onChange={(e) => setShortUrl(e.target.value)}
+              />
             </div>
           </div>
         </div>
+        <div className="link__input">
+      <div className="link__input-title">Тег ссылки</div>
+      <div className="input__container">
+        <div
+          className="input__icon left-image"
+          onClick={handleMouseEnter}
+          style={{
+            backgroundColor: tagColors.color,
+            borderLeft: '1px solid transparent',
+            borderRight: '1px solid rgba(154, 154, 154, 0.5)',
+            borderRadius: '6px 0 0 6px',
+          }}
+        >
+          <svg
+            className="input__svg"
+            width="17"
+            height="18"
+            viewBox="0 0 17 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ boxSizing: 'content-box' }}
+          >
+            <path
+              d="M5.4375 1.625H8.07283C8.71481 1.625 9.03585 1.625 9.33799 1.69753C9.60583 1.76183 9.86185 1.86789 10.0968 2.01182C10.3617 2.17415 10.5886 2.40115 11.0427 2.85515L15.9375 7.75M4.60608 7.79357H4.61483M6.32281 4.25H5.2625C3.79236 4.25 3.05729 4.25 2.49578 4.53611C2.00185 4.78778 1.60028 5.18935 1.34861 5.68328C1.0625 6.24479 1.0625 6.97986 1.0625 8.45V9.51032C1.0625 10.1523 1.0625 10.4733 1.13503 10.7755C1.19933 11.0433 1.30539 11.2993 1.44932 11.5343C1.61165 11.7991 1.83865 12.0261 2.29265 12.4802L5.09265 15.2802C6.1322 16.3197 6.65197 16.8395 7.25129 17.0342C7.77856 17.2055 8.34644 17.2055 8.87371 17.0342C9.473 16.8395 9.99284 16.3197 11.0323 15.2802L12.0927 14.2198C13.1322 13.1803 13.652 12.6605 13.8467 12.0612C14.018 11.5339 14.018 10.9661 13.8467 10.4388C13.652 9.8395 13.1322 9.31966 12.0927 8.28016L9.29266 5.48015C8.83863 5.02615 8.61165 4.79915 8.34679 4.63682C8.11185 4.49289 7.85583 4.38683 7.58799 4.32253C7.28585 4.25 6.96481 4.25 6.32281 4.25ZM5.04358 7.79357C5.04358 8.03516 4.84771 8.23107 4.60608 8.23107C4.36445 8.23107 4.16858 8.03516 4.16858 7.79357C4.16858 7.55195 4.36445 7.35607 4.60608 7.35607C4.84771 7.35607 5.04358 7.55195 5.04358 7.79357Z"
+              stroke={tagColors.svgColor}
+              strokeWidth="1.28"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+        {isHovered && (
+          <div
+            className="tag-list-container"
+            onMouseLeave={handleMouseLeave}
+          >
+            <TagList onTagClick={handleTagClick} />
+          </div>
+        )}
+        <input
+          className="link-input png"
+          type="text"
+          placeholder="Название тега"
+          value={tagValue}
+          onChange={(e) => setTagValue(e.target.value)}
+        />
+        <div
+          className={`input__icon right-image ${
+            isPopupActive ? '' : 'active'
+          }`}
+          onClick={handleIconClick}
+        >
+          <svg
+            width="14"
+            height="8"
+            viewBox="0 0 14 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ transform: isPopupActive ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          >
+            <path
+              d="M1 1L7 7L13 1"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <div
+            className={`tag-popup-container ${
+              isPopupActive ? '' : 'active'
+            }`}
+          >
+            {tags.map((tag, index) => (
+              <div
+                className="tag-object"
+                key={index}
+                onClick={() => handleTagClick(tag)}
+              >
+                <p
+                  className="tag-info"
+                  style={{
+                    backgroundColor: tag.bgColor,
+                    color: tag.textColor,
+                  }}
+                >
+                  {tag.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
         <div className="link__functional">
           <p className="link__functional-title">Функционал</p>
           {toggles.map((toggle) => (
@@ -573,11 +644,19 @@ const CreatingLink = () => {
                 <div className="functional__item-info">
                   <UpgradeToProPopup onClose={() => closePopup(toggle.id)}>
                     <p className="popup-message">
-                      Статистику за последний год, а так же более детальную настройка ссылок можно получить в
-                      проекте с тарифным планом Premium. Создайте проект или
-                      перейдите к существующему проекту для обновления.
+                      Статистику за последний год, а так же более детальную
+                      настройка ссылок можно получить в проекте с тарифным
+                      планом Premium. Создайте проект или перейдите к
+                      существующему проекту для обновления.
                     </p>
-                    <button className="popup-button" onClick={() => {navigate(PRICEPAGE_ROUTE);}}>Обновиться до Pro</button>
+                    <button
+                      className="popup-button"
+                      onClick={() => {
+                        navigate(PRICEPAGE_ROUTE);
+                      }}
+                    >
+                      Обновиться до Pro
+                    </button>
                   </UpgradeToProPopup>
                 </div>
               )}
@@ -629,62 +708,60 @@ const CommentComponent = () => {
 
 const UTMInputs = () => {
   const [inputs, setInputs] = useState([
-    { 
+    {
       id: "Referral",
       title: "Referral",
       checked: false,
-      inputType: "text", 
-      placeholder:"Referral"
+      inputType: "text",
+      placeholder: "Referral",
     },
     {
       id: "UTM Source",
       title: "UTM Source",
       checked: false,
       inputType: "text",
-      placeholder:"yandex_direct, google_adwords"
+      placeholder: "yandex_direct, google_adwords",
     },
     {
       id: "UTM Medium",
       title: "UTM Medium",
       checked: false,
       inputType: "text",
-      placeholder:"cpc, retargeting, banner"
+      placeholder: "cpc, retargeting, banner",
     },
     {
       id: "UTM Campaign",
       title: "UTM Campaign",
       checked: false,
       inputType: "text",
-      placeholder:"banner, {campaign_id}"
+      placeholder: "banner, {campaign_id}",
     },
-    { 
+    {
       id: "UTM Term",
       title: "UTM Term",
       checked: false,
-      inputType: "text", 
-      placeholder:"kupit_velosiped, {keyword}"
+      inputType: "text",
+      placeholder: "kupit_velosiped, {keyword}",
     },
     {
       id: "UTM Content",
       title: "UTM Content",
       checked: false,
       inputType: "text",
-      placeholder:"skidka_50, {phrase_id}"
+      placeholder: "skidka_50, {phrase_id}",
     },
     {
       id: "Android UTM Metrika",
       title: "Android UTM Metrika",
       checked: false,
-      inputType: "checkbox"
-
+      inputType: "checkbox",
     },
     {
       id: "iOS UTM Metrika",
       title: "iOS UTM Metrika",
       checked: false,
-      inputType: "checkbox"
- 
-    }
+      inputType: "checkbox",
+    },
   ]);
 
   const handleInputChange = (id) => {
@@ -697,7 +774,7 @@ const UTMInputs = () => {
   };
 
   return (
-      <div className="utm__input">
+    <div className="utm__input">
       {inputs.map((input) => (
         <div
           className={`utm__input-item ${
@@ -709,7 +786,8 @@ const UTMInputs = () => {
         >
           <label
             className={`utm__input-label ${
-              input.id === "Android UTM Metrika" || input.id === "iOS UTM Metrika"
+              input.id === "Android UTM Metrika" ||
+              input.id === "iOS UTM Metrika"
                 ? "utm__input-label--checkbox"
                 : ""
             }`}
@@ -719,7 +797,8 @@ const UTMInputs = () => {
           </label>
           <input
             className={`utm__input-input ${
-              input.id === "Android UTM Metrika" || input.id === "iOS UTM Metrika"
+              input.id === "Android UTM Metrika" ||
+              input.id === "iOS UTM Metrika"
                 ? "utm__input-input--checkbox"
                 : ""
             }`}
@@ -734,7 +813,6 @@ const UTMInputs = () => {
     </div>
   );
 };
-
 
 const IOSComponent = () => {
   const [inputValue_IOS, setInputValue_IOS] = useState("");

@@ -35,6 +35,7 @@
   transform: translateY(-50%);
   border-left: 1px solid rgba(154, 154, 154, 0.5);
   cursor: pointer;
+  z-index: 10001;
 }
 
 .tag-list-container {
@@ -52,6 +53,66 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.input__icon.right-image svg {
+  transition: transform 0.3s ease;
+}
+
+.input__icon.right-image.active svg {
+  transform: rotate(180deg);
+}
+
+.tag-popup-container {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  transition: height 0.3s ease;
+  height: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: white;
+  height: 200px;
+  width: 364px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10001;
+  box-sizing: border-box;
+}
+
+.tag-popup-container.active {
+ display: none;
+}
+
+.tag-object {
+  width: 100%;
+  padding: 5px 10px;
+  box-sizing: border-box;
+}
+
+.tag-object:hover {
+  --tw-bg-opacity: 1;
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.tag-info {
+  max-width: 175px;
+  min-width: 50px;
+  width: fit-content;
+  height: 24px;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 .link__input-title {
@@ -100,6 +161,7 @@
 
 .functional__item-faq {
   padding-top: 5px;
+  cursor: pointer;
 }
 
 .toggle__switch {
@@ -121,6 +183,7 @@
 /* Стили для специфичных элементов */
 .png {
   padding: 0 45px;
+  font-family: "Helvetica Neue Cyr";
 }
 
 .custom-textarea {
@@ -252,6 +315,16 @@
   scrollbar-gutter: stable both-edges;
   background-image: url(./../../img/background-image.svg);
   background-repeat: repeat;
+}
+
+.tag-popup-container::-webkit-scrollbar {
+  width: 8px;
+  position: absolute; /* Ensures scrollbar is overlay */
+}
+
+.tag-popup-container::-webkit-scrollbar-thumb {
+  background: rgba(217, 217, 217, 1);
+  border-radius: 6px;
 }
 
 .creating__link__main::-webkit-scrollbar {
