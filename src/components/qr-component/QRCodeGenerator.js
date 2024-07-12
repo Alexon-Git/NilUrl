@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import QRCode from "qrcode.react";
 import QRLogo from "../../img/qr-logo.png";
 
@@ -11,15 +11,13 @@ const QRCodeGenerator = React.forwardRef(({ showLogo, borderColor, pathS }, ref 
         level={'Q'}
         renderAs={"svg"}
         includeMargin={false}
+        fgColor={borderColor} // Установить цвет QR-кода
         imageSettings={
           showLogo
-            ? { src: QRLogo, height: 32, width: 24, excavate: true }
+            ? { src: QRLogo, height: 37.6, width: 32, excavate: true }
             : null
         }
       />
-      <style>
-        {`.qr-code-container svg path:nth-of-type(2) { fill: ${borderColor}; }`}
-      </style>
     </div>
   );
 });

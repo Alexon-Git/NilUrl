@@ -21,61 +21,55 @@ function QRComponent({pathS}) {
     const qrSvg = qrRef.current.querySelector("svg");
     const serializer = new XMLSerializer();
     let svgStr = serializer.serializeToString(qrSvg);
-  
-    svgStr = svgStr.replace(/currentColor/g, borderColor);
-    svgStr = svgStr.replace(/<svg/g, `<svg fill="${borderColor}"`);
-  
+
     const DOMURL = window.URL || window.webkitURL || window;
     const img = new Image();
     const svg = new Blob([svgStr], { type: "image/svg+xml" });
     const url = DOMURL.createObjectURL(svg);
-  
+
     img.onload = () => {
-      const qrCanvas = document.createElement("canvas");
-      const ctx = qrCanvas.getContext("2d");
-      qrCanvas.width = img.width;
-      qrCanvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-  
-      qrCanvas.toBlob((blob) => {
-        const item = new ClipboardItem({ "image/png": blob });
-        navigator.clipboard.write([item]);
-        alert("QR code copied to clipboard!");
-      }, "image/png");
+        const qrCanvas = document.createElement("canvas");
+        const ctx = qrCanvas.getContext("2d");
+        qrCanvas.width = 500; // Set width to 500px
+        qrCanvas.height = 500; // Set height to 500px
+        ctx.drawImage(img, 0, 0, 500, 500); // Draw image scaled to 500x500
+
+        qrCanvas.toBlob((blob) => {
+            const item = new ClipboardItem({ "image/png": blob });
+            navigator.clipboard.write([item]);
+            alert("QR code copied to clipboard!");
+        }, "image/png");
     };
     img.src = url;
-  };
-  
-  const downloadQRCode = () => {
+};
+
+const downloadQRCode = () => {
     const qrSvg = qrRef.current.querySelector("svg");
     const serializer = new XMLSerializer();
     let svgStr = serializer.serializeToString(qrSvg);
-  
-    svgStr = svgStr.replace(/currentColor/g, borderColor);
-    svgStr = svgStr.replace(/<svg/g, `<svg fill="${borderColor}"`);
-  
+
     const DOMURL = window.URL || window.webkitURL || window;
     const img = new Image();
     const svg = new Blob([svgStr], { type: "image/svg+xml" });
     const url = DOMURL.createObjectURL(svg);
-  
+
     img.onload = () => {
-      const qrCanvas = document.createElement("canvas");
-      const ctx = qrCanvas.getContext("2d");
-      qrCanvas.width = img.width;
-      qrCanvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-  
-      // Download QR code as PNG
-      const link = document.createElement("a");
-      link.href = qrCanvas.toDataURL("image/png");
-      link.download = "qrcode.png";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+        const qrCanvas = document.createElement("canvas");
+        const ctx = qrCanvas.getContext("2d");
+        qrCanvas.width = 500; // Set width to 500px
+        qrCanvas.height = 500; // Set height to 500px
+        ctx.drawImage(img, 0, 0, 500, 500); // Draw image scaled to 500x500
+
+        // Download QR code as PNG
+        const link = document.createElement("a");
+        link.href = qrCanvas.toDataURL("image/png");
+        link.download = "qrcode.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
     img.src = url;
-  };
+};
 
   return (
     <div className="creating__qr">
