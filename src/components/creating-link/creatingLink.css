@@ -47,7 +47,7 @@
 .svg__infinity,
 .input__icon {
   width: 35px;
-  height: 35px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -294,10 +294,10 @@
 }
 
 .static-text {
-  display: flex; 
+  display: flex;
   background-color: #fff;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   font-weight: 500;
   font-size: 14px;
   border-radius: 0 6px 6px 0;

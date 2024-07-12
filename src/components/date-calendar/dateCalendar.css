@@ -5,42 +5,43 @@
   border: 1px solid #000;
   border-radius: 8px;
   margin-bottom: 10px;
+  font-family: "Helvetica Neue Cyr";
 }
 
 .date-left {
-  background-image: linear-gradient(#6a11cb, #2575fc);
+  background-color: #000;
   color: white;
-  padding: 0 10px; 
+  padding: 0 10px;
   max-width: 100px;
-  border-radius: 8px 0 0 8px;
+  border-radius: 7px 0 0 7px;
   display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
-  height: 100%; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .date-right {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
-  flex-grow: 1; 
+  justify-content: space-between;
+  flex-grow: 1;
   height: 100%;
 }
 
 .date-right-content {
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .date-right-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2px 10px; 
+  padding: 2px 10px;
 }
 
 .month-year {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
 }
 
@@ -53,6 +54,7 @@
 .date-table {
   width: 100%;
   table-layout: fixed;
+  font-size: 14px;
 }
 
 #col-right #title button {
@@ -85,7 +87,7 @@
 #col-right .active {
   cursor: pointer;
   border-radius: 10%;
-  background-image: linear-gradient(#6a11cb, #2575fc);
+  background-color: #000;
   color: #ffffff;
 }
 
@@ -107,14 +109,13 @@
 .date-right-footer-button {
   cursor: pointer;
   border-radius: 5px;
-  background-image: linear-gradient(#6a11cb, #2575fc);
+  background-color: #000;
   color: #ffffff;
-  padding: 5px 10px; 
-  border: none; 
-  outline: none; 
-  transition: background-color 0.3s; 
-}
-
-.date-right-footer-button:hover {
-  background-image: linear-gradient(#2575fc, #6a11cb); 
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Helvetica Neue Cyr";
 }

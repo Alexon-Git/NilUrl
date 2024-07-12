@@ -45,22 +45,12 @@ body {
 }
 
 :root {
-  --scroll-size: 12px;
+  --scroll-size: 8px;
   --scroll-radius: 20px;
   --scroll-track: rgba(0, 0, 0, 0.2); 
   --bg-mask: rgba(255, 255, 255, 0.15); 
   --scroll-thumb-color: #777777d1; 
-  --scroll-thumb: linear-gradient(
-    45deg,
-    var(--bg-mask) 20%,
-    transparent 20%,
-    transparent 40%,
-    var(--bg-mask) 40%,
-    var(--bg-mask) 60%,
-    transparent 60%,
-    transparent 80%,
-    var(--bg-mask) 80%
-  );
+
 }
 
 .image-background {
