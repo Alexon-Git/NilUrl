@@ -14,7 +14,13 @@ import {
 
 const RedactingLink = ({ pathS, pathL }) => {
   const navigate = useNavigate();
- 
+  const [isPopupActive, setIsPopupActive] = useState(false);
+
+  const handleIconClick = () => {
+    console.log('Icon clicked. Previous state:', isPopupActive);
+    setIsPopupActive(!isPopupActive);
+    console.log('New state:', !isPopupActive);
+  };
 
   const [faviconSVG, setFaviconSVG] = useState();
 
@@ -477,6 +483,22 @@ const RedactingLink = ({ pathS, pathL }) => {
     fetchData();
   }, [pathS]);
 
+  const [tags, setTags] = useState([
+    { text: "Название тега", textColor: '#000000', bgColor: '#ff3fff' },
+    { text: "Название тега много много много тега тега тега тега тега тега тега", textColor: '#f45fff', bgColor: '#0000ff' },
+    { text: "Название тега", textColor: '#ff0000', bgColor: '#00ff00' },
+    { text: "Название тега", textColor: '#00d000', bgColor: '#ffd1ff' },
+    { text: "Название тега", textColor: '#2f15ff', bgColor: '#07d0ff' },
+    { text: "Название тега", textColor: '#ff6000', bgColor: '#01ff00' }
+  ]);
+///////////////
+
+const handleTagClick = (tag) => {
+  setTagColors({ color: tag.bgColor, svgColor: tag.textColor });
+  setTagValue(tag.text);
+  setIsPopupActive(false);
+};
+
   if (isLoading) {
     return <div>Загрузка...</div>; }
   if (error) {
@@ -608,24 +630,52 @@ const RedactingLink = ({ pathS, pathL }) => {
               value={tagValue}
               onChange={handleTagChange}
             />
-            <div className="input__icon right-image">
-              {" "}
-              <svg
-                width="14"
-                height="8"
-                viewBox="0 0 14 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            <div
+          className={`input__icon right-image ${
+            isPopupActive ? '' : 'active'
+          }`}
+          onClick={handleIconClick}
+        >
+          <svg
+            width="14"
+            height="8"
+            viewBox="0 0 14 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ transform: isPopupActive ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          >
+            <path
+              d="M1 1L7 7L13 1"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <div
+            className={`tag-popup-container ${
+              isPopupActive ? '' : 'active'
+            }`}
+          >
+            {tags.map((tag, index) => (
+              <div
+                className="tag-object"
+                key={index}
+                onClick={() => handleTagClick(tag)}
               >
-                <path
-                  d="M1 1L7 7L13 1"
-                  stroke="black"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
+                <p
+                  className="tag-info"
+                  style={{
+                    backgroundColor: tag.bgColor,
+                    color: tag.textColor,
+                  }}
+                >
+                  {tag.text}
+                </p>
+              </div>
+            ))}
+          </div>
+          </div>
           </div>
         </div>
         <div className="link__functional">
