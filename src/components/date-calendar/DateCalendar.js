@@ -132,12 +132,12 @@ class Calendar extends React.Component {
     }
 
     const today = new Date();
-    if (
-      newYear === today.getFullYear() &&
-      newMonth === today.getMonth() &&
-      newDay < today.getDate()
-    ) {
-      newDay = today.getDate() + 1;
+    const minimumDay = newYear === today.getFullYear() && newMonth === today.getMonth()
+      ? today.getDate() + 1
+      : 1;
+
+    if (newDay < minimumDay) {
+      newDay = minimumDay;
     }
 
     const selectedDate = new Date(newYear, newMonth, newDay);
