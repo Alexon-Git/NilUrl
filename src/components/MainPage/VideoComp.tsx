@@ -51,19 +51,19 @@ const VideoComp = () => {
       case 0:
         if (firstAcc.current !== null) {
           if (accView[ind] === false) {
-            firstAcc.current.style.transition = "max-height 1s ease-in";
+            firstAcc.current.style.transition = "max-height 0.5s ease-in";
             firstAcc.current.style.maxHeight = "150px";
             if (accView[1] === true && secondAcc.current != null) {
-              secondAcc.current.style.transition = "max-height 1s ease-in";
+              secondAcc.current.style.transition = "max-height 0.5s ease-in";
               secondAcc.current.style.maxHeight = "0";
             }
             if (accView[2] === true && thirdAcc.current != null) {
-              thirdAcc.current.style.transition = "max-height 1s ease-in";
+              thirdAcc.current.style.transition = "max-height 0.5s ease-in";
               thirdAcc.current.style.maxHeight = "0";
             }
           }
           if (accView[ind] === true) {
-            firstAcc.current.style.transition = "max-height 1s ease-in";
+            firstAcc.current.style.transition = "max-height 0.5s ease-in";
             firstAcc.current.style.maxHeight = "0";
           }
         }
@@ -71,19 +71,19 @@ const VideoComp = () => {
       case 1:
         if (secondAcc.current !== null) {
           if (accView[ind] === false) {
-            secondAcc.current.style.transition = "max-height 1s ease-in";
+            secondAcc.current.style.transition = "max-height 0.5s ease-in";
             secondAcc.current.style.maxHeight = "20vh";
             if (accView[0] === true && firstAcc.current != null) {
-              firstAcc.current.style.transition = "max-height 1s ease-in";
+              firstAcc.current.style.transition = "max-height 0.5s ease-in";
               firstAcc.current.style.maxHeight = "0";
             }
             if (accView[2] === true && thirdAcc.current != null) {
-              thirdAcc.current.style.transition = "max-height 1s ease-in";
+              thirdAcc.current.style.transition = "max-height 0.5s ease-in";
               thirdAcc.current.style.maxHeight = "0";
             }
           }
           if (accView[ind] === true) {
-            secondAcc.current.style.transition = "max-height 1s ease-in";
+            secondAcc.current.style.transition = "max-height 0.5s ease-in";
             secondAcc.current.style.maxHeight = "0";
           }
         }
@@ -91,19 +91,19 @@ const VideoComp = () => {
       case 2:
         if (thirdAcc.current !== null) {
           if (accView[ind] === false) {
-            thirdAcc.current.style.transition = "max-height 1s ease-in";
+            thirdAcc.current.style.transition = "max-height 0.5s ease-in";
             thirdAcc.current.style.maxHeight = "20vh";
             if (accView[0] === true && firstAcc.current != null) {
-              firstAcc.current.style.transition = "max-height 1s ease-in";
+              firstAcc.current.style.transition = "max-height 0.5s ease-in";
               firstAcc.current.style.maxHeight = "0";
             }
             if (accView[1] === true && secondAcc.current != null) {
-              secondAcc.current.style.transition = "max-height 1s ease-in";
+              secondAcc.current.style.transition = "max-height 0.5s ease-in";
               secondAcc.current.style.maxHeight = "0";
             }
           }
           if (accView[ind] === true) {
-            thirdAcc.current.style.transition = "max-height 1s ease-in";
+            thirdAcc.current.style.transition = "max-height 0.5s ease-in";
             thirdAcc.current.style.maxHeight = "0";
           }
         }
