@@ -5,26 +5,36 @@ import LinksMap from "./LinksMap";
 
 const LinksMainPageView = () => {
     const [arr, setArr] = useState(LinksPropTest);
-    const [inputValue, setInputValue] = useState("http://nilurl.ru/login");
-    const values = ["http://nilurl.ru/login", "http://nilurl.ru/registation", "http://nilurl.ru/price"];
+    const [inputValue, setInputValue] = useState("https://nilurl.ru/login");
+    const values = ["https://nilurl.ru/login", "https://nilurl.ru/registration", "https://nilurl.ru/price"];
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [clickCount, setClickCount] = useState(0);
 
     const click = () => {
-        const arrTemp = [...arr];
-        const obj: LinksIntMap = {
-            imageURL: "/NILLogo.png",
-            path: inputValue,
-            clicksCount: 0
-        };
+        if (clickCount < 4) {
+            const arrTemp = [...arr];
+            const obj: LinksIntMap = {
+                imageURL: "/NILLogo.png",
+                path: inputValue,
+                clicksCount: 0
+            };
 
-        arrTemp.splice(1, 0, obj);
-        arrTemp.pop();
-        setArr(arrTemp);
+            arrTemp.splice(1, 0, obj);
+            arrTemp.pop();
+            setArr(arrTemp);
 
-        // Update input value to the next in the list
-        const nextIndex = (currentIndex + 1) % values.length;
-        setInputValue(values[nextIndex]);
-        setCurrentIndex(nextIndex);
+            // Update input value to the next in the list
+            const nextIndex = (currentIndex + 1) % values.length;
+            setInputValue(values[nextIndex]);
+            setCurrentIndex(nextIndex);
+
+            setClickCount(prev => prev + 1);
+
+            // Check if it's the 4th click and navigate to /price
+            if (clickCount === 3) {
+                window.location.href = "https://nilurl.ru/price";
+            }
+        }
     };
 
     return (
