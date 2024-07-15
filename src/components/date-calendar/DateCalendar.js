@@ -157,19 +157,11 @@ class Calendar extends React.Component {
 
   handleWeekClick = (e) => {
     e.preventDefault();
-    const selectedDate = new Date(
-      this.state.year,
-      this.state.month,
-      this.state.day
-    );
     const today = new Date();
-    const nextWeek = new Date(selectedDate);
-    nextWeek.setDate(selectedDate.getDate() + 7);
-    if (nextWeek < today) {
-      return;
-    }
-    this.props.onDateChange(nextWeek);
+    const nextWeek = new Date(today);
+    nextWeek.setDate(today.getDate() + 7);
 
+    this.props.onDateChange(nextWeek);
     this.getDateData(nextWeek);
 
     this.setState({
@@ -179,8 +171,7 @@ class Calendar extends React.Component {
       firstDay:
         new Date(nextWeek.getFullYear(), nextWeek.getMonth(), 1).getDay() === 0
           ? 6
-          : new Date(nextWeek.getFullYear(), nextWeek.getMonth(), 1).getDay() -
-            1,
+          : new Date(nextWeek.getFullYear(), nextWeek.getMonth(), 1).getDay() - 1,
       strMonth: Object.keys(arrMonth)[nextWeek.getMonth()],
       strMonthValue: arrMonth[Object.keys(arrMonth)[nextWeek.getMonth()]],
     });
@@ -188,26 +179,11 @@ class Calendar extends React.Component {
 
   handleMonthClick = (e) => {
     e.preventDefault();
-    const selectedDate = new Date(
-      this.state.year,
-      this.state.month,
-      this.state.day
-    );
     const today = new Date();
-    const nextMonth = new Date(selectedDate);
-    nextMonth.setMonth(selectedDate.getMonth() + 1);
-    if (nextMonth.getDate() !== this.state.day) {
-      nextMonth.setDate(0);
-    }
-    if (
-      nextMonth.getFullYear() < today.getFullYear() ||
-      (nextMonth.getFullYear() === today.getFullYear() &&
-        nextMonth.getMonth() < today.getMonth())
-    ) {
-      return;
-    }
-    this.props.onDateChange(nextMonth);
+    const nextMonth = new Date(today);
+    nextMonth.setMonth(today.getMonth() + 1);
 
+    this.props.onDateChange(nextMonth);
     this.getDateData(nextMonth);
 
     this.setState({
@@ -215,8 +191,7 @@ class Calendar extends React.Component {
       month: nextMonth.getMonth(),
       day: nextMonth.getDate(),
       firstDay:
-        new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1).getDay() ===
-        0
+        new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1).getDay() === 0
           ? 6
           : new Date(
               nextMonth.getFullYear(),
