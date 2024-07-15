@@ -130,6 +130,13 @@ const RedactingLink = ({ pathS, pathL }) => {
     
 
   };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+};
+
   const [showPopups, setShowPopups] = useState({
     utm: false,
     date: false,
@@ -719,7 +726,7 @@ const handleTagClick = (tag) => {
             </div>
           ))}
         </div>
-        <button className="delete__link" onClick={handleDeleteClick}>
+        <button className="delete__link" onClick={handleDeleteClick} onKeyPress={handleKeyPress}>
           Удалить
           <svg
             width="18"
