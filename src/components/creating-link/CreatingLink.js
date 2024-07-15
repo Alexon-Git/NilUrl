@@ -89,7 +89,20 @@ const CreatingLink = () => {
         },
       });
       const data = await response.json();
-      setTags(data.tags);
+
+      
+      const filteredTags = data.tags
+        .filter(tag => tag.text !== "")
+        .reduce((acc, current) => {
+          const x = acc.find(item => item.text === current.text);
+          if (!x) {
+            return acc.concat([current]);
+          } else {
+            return acc;
+          }
+        }, []);
+
+      setTags(filteredTags);
     };
 
     fetchTags();
@@ -549,21 +562,21 @@ const handleTagClick = (tag) => {
           </svg>
         </div>
         {isHovered && (
-          <div
-            className="tag-list-container"
-            onMouseLeave={handleMouseLeave}
-          >
-            <TagList onTagClick={handleTagClick} />
-          </div>
-        )}
-        <input
-          className="link-input png"
-          type="text"
-          placeholder="Название тега"
-          value={tagValue}
-          onChange={(e) => setTagValue(e.target.value)}
-        />
-        <div
+              <div
+                className="tag-list-container"
+                onMouseLeave={handleMouseLeave}
+              >
+                <TagList onTagClick={setTagColors} />
+              </div>
+            )}
+            <input
+              className="link-input png short-redact"
+              type="text"
+              placeholder="Название тега"
+              value={tagValue}
+              onChange={handleTagChange}
+            />
+            <div
           className={`input__icon right-image ${
             isPopupActive ? '' : 'active'
           }`}
@@ -599,11 +612,11 @@ const handleTagClick = (tag) => {
                 <p
                   className="tag-info"
                   style={{
-                    backgroundColor: tag.backgroundColor,
-                    color: tag.svgColor,
+                    backgroundColor: tag.bgColor,
+                    color: tag.textColor,
                   }}
                 >
-                  {tag.name}
+                  {tag.text}
                 </p>
               </div>
             ))}
