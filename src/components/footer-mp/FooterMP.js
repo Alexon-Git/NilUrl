@@ -3,6 +3,19 @@ import "./footerMP.css";
 import { FooterLogo } from "../../components";
 
 const FooterMp = () => {
+
+  const handleTelegramClick = () => {
+    window.open('https://t.me/Nil_IT', '_blank');
+  };
+
+  const handleVkClick = () => {
+    window.open('https://vk.ru/nil_agency', '_blank');
+  };
+
+  const handleImgClick = () => {
+    window.open('https://nil-agency.ru/', '_blank');
+  };
+
   return (
     <div className="NewFooterMainContainer wrapper">
       <div className="NewFooterContainer">
@@ -67,6 +80,7 @@ const FooterMp = () => {
                 viewBox="0 0 30 30"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                onClick={handleTelegramClick}
               >
                 <path
                   fill-rule="evenodd"
@@ -83,6 +97,7 @@ const FooterMp = () => {
                 viewBox="0 0 30 30"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                onClick={handleVkClick}
               >
                 <path
                   d="M14.8 1C7.1908 1 1 7.1908 1 14.8C1 22.4092 7.1908 28.6 14.8 28.6C22.4098 28.6 28.6 22.4092 28.6 14.8C28.6 7.1908 22.4098 1 14.8 1ZM20.7838 17.521C22.126 18.7126 22.405 19.138 22.4506 19.2106C23.0068 20.0926 21.8338 20.2 21.8338 20.2H19.3618C19.3618 20.2 18.76 20.2066 18.2458 19.8658C17.4076 19.3168 16.5298 18.2524 15.913 18.4372C15.3952 18.592 15.4 19.2916 15.4 19.8898C15.4 20.104 15.2158 20.2 14.8 20.2C14.3842 20.2 14.2114 20.2 14.0272 20.2C12.673 20.2 11.2036 19.744 9.7378 18.2122C7.6642 16.0468 5.8456 11.6848 5.8456 11.6848C5.8456 11.6848 5.7382 11.4652 5.8552 11.3314C5.9878 11.1814 6.3484 11.2006 6.3484 11.2006L8.7454 11.2C8.7454 11.2 8.971 11.2426 9.133 11.3566C9.2668 11.4502 9.3412 11.629 9.3412 11.629C9.3412 11.629 9.7438 12.9586 10.2568 13.8064C11.2588 15.4612 11.725 15.5032 12.0652 15.325C12.562 15.067 12.4 13.3078 12.4 13.3078C12.4 13.3078 12.4222 12.5524 12.163 12.2158C11.9632 11.9554 11.581 11.8168 11.4142 11.7952C11.2792 11.7778 11.5048 11.5414 11.7922 11.4064C12.1762 11.2354 12.6988 11.1916 13.6 11.2C14.3014 11.2066 14.5036 11.2486 14.7772 11.3116C15.6046 11.5024 15.4 12.0058 15.4 13.7734C15.4 14.3398 15.322 15.136 15.7492 15.4C15.9334 15.514 16.5646 15.6532 17.6878 13.8292C18.2212 12.964 18.6454 11.5288 18.6454 11.5288C18.6454 11.5288 18.733 11.371 18.8692 11.293C19.0084 11.2132 19.0042 11.215 19.195 11.215C19.3858 11.215 21.2992 11.2 21.7192 11.2C22.1386 11.2 22.5322 11.1952 22.6 11.4412C22.6972 11.7946 22.2904 13.0054 21.2596 14.3194C19.5658 16.4758 19.378 16.2742 20.7838 17.521Z"
@@ -113,7 +128,7 @@ const FooterMp = () => {
       <div className="NewCopyright">
         <p className="NewDefaultTextFooter">© 2024 NilURL</p>
         <span className="NewCopyright__logo">
-          <img src={FooterLogo} alt="Site developed by Nil"></img>
+          <img src={FooterLogo} style={{ cursor: "pointer" }} alt="Site developed by Nil" onClick={handleImgClick}></img>
         </span>
       </div>
     </div>
