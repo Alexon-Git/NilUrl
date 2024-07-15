@@ -63,7 +63,7 @@ const downloadQRCode = () => {
         // Download QR code as PNG
         const link = document.createElement("a");
         link.href = qrCanvas.toDataURL("image/png");
-        link.download = "qrcode.png";
+        link.download = pathS +".png";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
