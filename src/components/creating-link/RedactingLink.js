@@ -726,7 +726,7 @@ const handleTagClick = (tag) => {
             </div>
           ))}
         </div>
-        <button className="delete__link" onClick={handleDeleteClick} onKeyPress={handleKeyPress}>
+        <button className="delete__link" onClick={handleDeleteClick} onKeyDown={handleKeyPress}>
           Удалить
           <svg
             width="18"
