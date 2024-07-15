@@ -400,6 +400,11 @@
   outline: none;
 }
 
+.short-redact {
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 .link__input-short-form {
   display: flex;
   align-items: center;
