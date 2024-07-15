@@ -818,6 +818,18 @@ const UTMInputs = ({ initialUTM }) => {
     setter(e.target.checked);
   };
 
+  const getClassNames = (inputId) => {
+    const isCheckbox = inputId === "UTM Android" || inputId === "UTM iOC";
+    return {
+      itemClass: `utm__input-item ${isCheckbox ? "utm__input-item--checkbox" : ""}`,
+      labelClass: `utm__input-label ${isCheckbox ? "utm__input-label--checkbox" : ""}`,
+      inputClass: `utm__input-input ${isCheckbox ? "utm__input-input--checkbox" : ""}`,
+    };
+  };
+
+  const androidClassNames = getClassNames("UTM Android");
+  const iocClassNames = getClassNames("UTM iOC");
+
   return (
     <div className="utm__input">
       <div className="utm__input-item">
@@ -886,26 +898,26 @@ const UTMInputs = ({ initialUTM }) => {
           placeholder="skidka_50,{phrase_id}"
         />
       </div>
-      <div className="utm__input-item">
-        <label className="utm__input-label--checkbox" htmlFor="UTM Android">UTM Android Metrika</label>
+      <div className={androidClassNames.itemClass}>
+        <label className={androidClassNames.labelClass} htmlFor="UTM Android">UTM Android Metrika</label>
         <input
-          className="utm__input-input--checkbox"
+          className={androidClassNames.inputClass}
           type="checkbox"
           id="UTM Android"
           checked={utmAndroid}
           onChange={handleCheckboxChange(setUtmAndroid)}
         />
       </div>
-      <div className="utm__input-item">
-        <label className="utm__input-label--checkbox" htmlFor="UTM iOC">UTM iOC Metrika</label>
+      <div className={iocClassNames.itemClass}>
+        <label className={iocClassNames.labelClass} htmlFor="UTM iOC">UTM iOC Metrika</label>
         <input
-          className="utm__input-input--checkbox"
+          className={iocClassNames.inputClass}
           type="checkbox"
           id="UTM iOC"
           checked={utmIOC}
           onChange={handleCheckboxChange(setUtmIOC)}
         />
-      </div>
+    </div>
     </div>
   );
 };

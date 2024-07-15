@@ -221,7 +221,7 @@ function Reg() {
               className="in3_1"
               id="passp-field-login"
               name="login"
-              placeholder="Email"
+              placeholder="Электронная почта"
               value={email}
               onChange={onEmailChange}
             />

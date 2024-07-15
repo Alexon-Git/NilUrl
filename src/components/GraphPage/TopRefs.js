@@ -25,7 +25,7 @@ const TopRefs = () => {
                 </div>
             </div>
             <div style={{
-                height: "500px",
+                height: "290px",
                 overflowY: "auto"
                     }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
