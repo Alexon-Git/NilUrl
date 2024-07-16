@@ -82,30 +82,39 @@ const CreatingLink = ({ onClose }) => {
 
   useEffect(() => {
     const fetchTags = async () => {
-      const response = await fetch("https://nilurl.ru:8000/get_tag.php", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-
-      
-      const filteredTags = data.tags
-        .filter(tag => tag.text !== "")
-        .reduce((acc, current) => {
-          const x = acc.find(item => item.text === current.text);
-          if (!x) {
-            return acc.concat([current]);
-          } else {
-            return acc;
-          }
-        }, []);
-
-      setTags(filteredTags);
+      try {
+        const response = await fetch("https://nilurl.ru:8000/get_tag.php", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error("Ошибка при получении данных");
+        }
+  
+        const data = await response.json();
+  
+        const filteredTags = data.tags
+          .filter(tag => tag.text !== "")
+          .reduce((acc, current) => {
+            const x = acc.find(item => item.text === current.text);
+            if (!x) {
+              return acc.concat([current]);
+            } else {
+              return acc;
+            }
+          }, []);
+  
+        setTags(filteredTags);
+      } catch (error) {
+        console.error("Ошибка при загрузке тегов:", error);
+        // здесь можно добавить логику для обработки ошибки, например, установку стейта ошибки или вывод сообщения пользователю
+      }
     };
-
+  
     fetchTags();
   }, []);
 
