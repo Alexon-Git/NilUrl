@@ -591,7 +591,7 @@ const handleTagClick = (tag) => {
       {faviconLoadError && <img width="35" height="35" className="SVGLinksLP" src="/NilLogo.svg"/>}
       </span>
             <input
-              className="link-input"
+              className="link-input short-redact"
               type="text"
               placeholder="https://nilurl.ru/Ffv3cv"
               value={shortUrl}
@@ -639,7 +639,7 @@ const handleTagClick = (tag) => {
               </div>
             )}
             <input
-              className="link-input png short-redact"
+              className="link-input png"
               type="text"
               placeholder="Название тега"
               value={tagValue}

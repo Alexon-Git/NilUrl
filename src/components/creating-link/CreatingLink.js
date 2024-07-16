@@ -585,7 +585,7 @@ const handleTagClick = (tag) => {
               </div>
             )}
             <input
-              className="link-input png short-redact"
+              className="link-input png"
               type="text"
               placeholder="Название тега"
               value={tagValue}

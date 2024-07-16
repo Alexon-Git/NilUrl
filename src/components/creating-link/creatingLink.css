@@ -83,7 +83,7 @@
 }
 
 .tag-popup-container.active {
- display: none;
+  display: none;
 }
 
 .tag-object {
@@ -94,7 +94,7 @@
 
 .tag-object:hover {
   --tw-bg-opacity: 1;
-    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
 .tag-info {
@@ -401,8 +401,8 @@
 }
 
 .short-redact {
-  color: rgb(107 114 128 / var(--tw-text-opacity));
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  color: rgb(107, 114, 128);
+  background-color: rgb(243, 244, 246);
 }
 
 .link__input-short-form {
