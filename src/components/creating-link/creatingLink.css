@@ -35,7 +35,7 @@
   transform: translateY(-50%);
   border-left: 1px solid rgba(154, 154, 154, 0.5);
   cursor: pointer;
-  z-index: 10001;
+  z-index: 1000;
 }
 
 .tag-list-container {

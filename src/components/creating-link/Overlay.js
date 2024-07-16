@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./creatingLink.css";
 
 const Overlay = ({ children, onClose }) => {
-  const handleClickOutside = (event) => {
+  const [isMouseDownOutside, setIsMouseDownOutside] = useState(false);
+
+  const handleMouseDown = (event) => {
     if (event.target === event.currentTarget) {
-      onClose(); // Закрыть компонент при клике на оверлей
+      setIsMouseDownOutside(true);
+    } else {
+      setIsMouseDownOutside(false);
     }
   };
 
+  const handleMouseUp = (event) => {
+    if (isMouseDownOutside && event.target === event.currentTarget) {
+      onClose(); // Закрыть компонент при отпускании кнопки мыши на оверлее
+    }
+    setIsMouseDownOutside(false);
+  };
+
   return (
-    <div className="overlay" onClick={handleClickOutside}>
+    <div className="overlay" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       {React.cloneElement(children, { onClose })}
     </div>
   );

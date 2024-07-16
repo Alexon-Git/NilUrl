@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
-import { usePremium } from '../../LogicComp/DataProvider';
+import { usePremium } from "../../LogicComp/DataProvider";
 import {
   FAQ,
   Toggle,
@@ -12,15 +12,16 @@ import {
   UpgradeToProPopup,
 } from "../../components";
 
-const RedactingLink = ({ pathS, pathL}) => {
+const RedactingLink = ({ pathS, pathL }) => {
   const navigate = useNavigate();
   const [isPopupActive, setIsPopupActive] = useState(false);
- // const [isPopupVisible, setIsPopupVisible] = useState(true);
+  const [isNewPopupActive, setIsNewPopupActive] = useState(false);
+  // const [isPopupVisible, setIsPopupVisible] = useState(true);
 
   const handleIconClick = () => {
-    console.log('Icon clicked. Previous state:', isPopupActive);
+    console.log("Icon clicked. Previous state:", isPopupActive);
     setIsPopupActive(!isPopupActive);
-    console.log('New state:', !isPopupActive);
+    console.log("New state:", !isPopupActive);
   };
 
   const [faviconSVG, setFaviconSVG] = useState();
@@ -29,7 +30,7 @@ const RedactingLink = ({ pathS, pathL}) => {
     fetchFavicon(pathL)
       .then((svg) => setFaviconSVG(svg))
       .catch((error) => {
-        console.error('Error fetching favicon:', error);
+        console.error("Error fetching favicon:", error);
         setFaviconLoadError(true);
       });
   }, [pathL]);
@@ -38,21 +39,22 @@ const RedactingLink = ({ pathS, pathL}) => {
     const inputURL = event.target.value;
     fetchFavicon(inputURL)
       .then((svg) => setFaviconSVG(svg))
-      .catch((error) => console.error('Error fetching favicon:', error));
+      .catch((error) => console.error("Error fetching favicon:", error));
   };
   const [faviconLoadError, setFaviconLoadError] = useState(false);
   const fetchFavicon = async (url) => {
     try {
-      const proxyUrl = 'https://nilurl.ru/?';
+      const proxyUrl = "https://nilurl.ru/?";
       const targetUrl = new URL(url);
       const baseUrl = targetUrl.origin;
       const response = await axios.get(proxyUrl + targetUrl.href);
       const html = response.data;
       const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      let favicon = '/NilLogo.svg'; 
-      
-      const iconLink = doc.querySelector('link[rel="icon"]') ||
+      const doc = parser.parseFromString(html, "text/html");
+      let favicon = "/NilLogo.svg";
+
+      const iconLink =
+        doc.querySelector('link[rel="icon"]') ||
         doc.querySelector('link[rel="shortcut icon"]') ||
         doc.querySelector('link[rel*="icon"]') ||
         doc.querySelector('link[rel="apple-touch-icon"]') ||
@@ -60,20 +62,20 @@ const RedactingLink = ({ pathS, pathL}) => {
       if (iconLink) {
         favicon = iconLink.href;
       } else {
-        const response = await axios.get(proxyUrl + baseUrl + '/favicon.ico');
+        const response = await axios.get(proxyUrl + baseUrl + "/favicon.ico");
         if (response.status === 200) {
-          favicon = baseUrl + '/favicon.ico';
-        } 
+          favicon = baseUrl + "/favicon.ico";
+        }
       }
 
-      if (favicon && !favicon.startsWith('http')) {
+      if (favicon && !favicon.startsWith("http")) {
         favicon = baseUrl + favicon;
       }
 
       return favicon;
     } catch (error) {
-      console.error('Error fetching favicon:', error);
-      return '/NilLogo.svg'; 
+      console.error("Error fetching favicon:", error);
+      return "/NilLogo.svg";
     }
   };
 
@@ -88,16 +90,15 @@ const RedactingLink = ({ pathS, pathL}) => {
       });
       const data = await response.json();
 
-      
       const filteredTags = data.tags
-      .filter(tag => tag.text !== "")
-      .reduce((acc, current) => {
-        const x = acc.find(item => item.text === current.text);
-        if (!x) {
-          return acc.concat([current]);
-        } else {
-          return acc;
-        }
+        .filter((tag) => tag.text !== "")
+        .reduce((acc, current) => {
+          const x = acc.find((item) => item.text === current.text);
+          if (!x) {
+            return acc.concat([current]);
+          } else {
+            return acc;
+          }
         }, []);
 
       setTags(filteredTags);
@@ -106,9 +107,7 @@ const RedactingLink = ({ pathS, pathL}) => {
     fetchTags();
   }, []);
 
-
-
-  const {isPremium} = usePremium();
+  const { isPremium } = usePremium();
 
   const [isPro, setIsPro] = useState(isPremium);
   const [activePopupId, setActivePopupId] = useState(null);
@@ -118,33 +117,31 @@ const RedactingLink = ({ pathS, pathL}) => {
   const handleDeleteClick = async (event) => {
     event.preventDefault();
     const data = {
-      pathS: pathS, 
-  };
+      pathS: pathS,
+    };
 
-  try {
-      const response = await fetch('https://nilurl.ru:8000/delete_link.php', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify(data),
+    try {
+      const response = await fetch("https://nilurl.ru:8000/delete_link.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
 
-      if (result.status === 'success') {
-          alert('Ссылка удалена успешно!');
-          window.location.reload();
+      if (result.status === "success") {
+        alert("Ссылка удалена успешно!");
+        window.location.reload();
       } else {
-          alert(result.message);
+        alert(result.message);
       }
-  } catch (error) {
-      console.error('Ошибка:', error);
-      alert('Возникла ошибка при удалении ссылки.');
-  }
-    
-
+    } catch (error) {
+      console.error("Ошибка:", error);
+      alert("Возникла ошибка при удалении ссылки.");
+    }
   };
 
   const [showPopups, setShowPopups] = useState({
@@ -154,22 +151,24 @@ const RedactingLink = ({ pathS, pathL}) => {
     android: false,
   });
 
-  
   const validateInput = () => {
     const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
     const shortUrlPattern = /^https:\/\/nilurl\.ru\/[A-Za-z0-9]{3,}$/;
     const noSpecialCharsPattern = /^[A-Za-z0-9]+$/;
-    const urlError = 'Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.';
-    const shortUrlError = 'Короткая ссылка должна начинаться с https://nilurl.ru/ и содержать минимум 3 символа после https://nilurl.ru/.';
-    const specialCharsError = 'Короткая ссылка не должна содержать специальных символов.';
-    const tagLengthError = 'Название тэга должно быть не более 15 символов.';
-    const commentLengthError = 'Комментарий должен быть не более 500 символов.';
-    const utmLengthError = 'Каждое поле UTM должно быть не более 50 символов.';
-    const iosUrlError = 'iOS URL должен быть действительной ссылкой.';
-    const androidUrlError = 'Android URL должен быть действительной ссылкой.';
+    const urlError =
+      "Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.";
+    const shortUrlError =
+      "Короткая ссылка должна начинаться с https://nilurl.ru/ и содержать минимум 3 символа после https://nilurl.ru/.";
+    const specialCharsError =
+      "Короткая ссылка не должна содержать специальных символов.";
+    const tagLengthError = "Название тэга должно быть не более 15 символов.";
+    const commentLengthError = "Комментарий должен быть не более 500 символов.";
+    const utmLengthError = "Каждое поле UTM должно быть не более 50 символов.";
+    const iosUrlError = "iOS URL должен быть действительной ссылкой.";
+    const androidUrlError = "Android URL должен быть действительной ссылкой.";
 
     if (!inputText || !shortUrl) {
-      alert('Поля ваша ссылка и короткая ссылка обязательны для заполнения.');
+      alert("Поля ваша ссылка и короткая ссылка обязательны для заполнения.");
       return false;
     }
 
@@ -183,7 +182,9 @@ const RedactingLink = ({ pathS, pathL}) => {
       return false;
     }
 
-    if (!noSpecialCharsPattern.test(shortUrl.replace('https://nilurl.ru/', ''))) {
+    if (
+      !noSpecialCharsPattern.test(shortUrl.replace("https://nilurl.ru/", ""))
+    ) {
       alert(specialCharsError);
       return false;
     }
@@ -207,12 +208,18 @@ const RedactingLink = ({ pathS, pathL}) => {
       }
     }
 
-    if (toggles.find(toggle => toggle.id === 'ios').checked && !urlPattern.test(getIOSData())) {
+    if (
+      toggles.find((toggle) => toggle.id === "ios").checked &&
+      !urlPattern.test(getIOSData())
+    ) {
       alert(iosUrlError);
       return false;
     }
 
-    if (toggles.find(toggle => toggle.id === 'android').checked && !urlPattern.test(getAndroidData())) {
+    if (
+      toggles.find((toggle) => toggle.id === "android").checked &&
+      !urlPattern.test(getAndroidData())
+    ) {
       alert(androidUrlError);
       return false;
     }
@@ -225,7 +232,7 @@ const RedactingLink = ({ pathS, pathL}) => {
   const [shortUrl, setShortUrl] = useState("");
   const [tagValue, setTagValue] = useState("");
   const [tagColors, setTagColors] = useState({
-    svgColor: "black",  
+    svgColor: "black",
     color: "transparent",
   });
   const [toggles, setToggles] = useState([
@@ -235,13 +242,10 @@ const RedactingLink = ({ pathS, pathL}) => {
       checked: true,
       info: <CommentComponent />,
     },
-    { id: "utm", 
-      title: "UTM-метка",
-      checked: true,
-      info: <UTMInputs /> },
+    { id: "utm", title: "UTM-метка", checked: true, info: <UTMInputs /> },
     {
       id: "date",
-      title: "Дата окончания", 
+      title: "Дата окончания",
       checked: true,
       info: <Calendar onDateChange={setSelectedDate} />,
     },
@@ -261,29 +265,29 @@ const RedactingLink = ({ pathS, pathL}) => {
 
   const sendLinkDataToServer = async (data) => {
     try {
-      const response = await fetch('https://nilurl.ru:8000/update_link.php', {
-        method: 'POST',
+      const response = await fetch("https://nilurl.ru:8000/update_link.php", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify({ ...data, pathS }),
       });
-  
+
       const result = await response.json();
-  
-      if (result.status === 'success') {
-        alert('Данные успешно изменены!');
-        window.location.reload(); 
+
+      if (result.status === "success") {
+        alert("Данные успешно изменены!");
+        window.location.reload();
       } else {
         const message = result.message;
         alert(message);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
-  
+
   const collectLinkData = () => {
     const linkData = {
       inputText: inputText,
@@ -291,35 +295,49 @@ const RedactingLink = ({ pathS, pathL}) => {
       tagValue: tagValue,
       tagColors: tagColors,
       toggles: {
-        utm: toggles.find(toggle => toggle.id === 'utm').checked ? getUTMData() : false,
-        date: toggles.find(toggle => toggle.id === 'date').checked 
-        ? (selectedDate ? getDateData(selectedDate) : (date_last ? date_last : false))
-        : false,
-        ios: toggles.find(toggle => toggle.id === 'ios').checked ? getIOSData() : false,
-        android: toggles.find(toggle => toggle.id === 'android').checked ? getAndroidData() : false,
+        utm: toggles.find((toggle) => toggle.id === "utm").checked
+          ? getUTMData()
+          : false,
+        date: toggles.find((toggle) => toggle.id === "date").checked
+          ? selectedDate
+            ? getDateData(selectedDate)
+            : date_last
+            ? date_last
+            : false
+          : false,
+        ios: toggles.find((toggle) => toggle.id === "ios").checked
+          ? getIOSData()
+          : false,
+        android: toggles.find((toggle) => toggle.id === "android").checked
+          ? getAndroidData()
+          : false,
       },
-      comment: toggles.find(toggle => toggle.id === 'comment').checked ? getCommentData() : false,
+      comment: toggles.find((toggle) => toggle.id === "comment").checked
+        ? getCommentData()
+        : false,
     };
-  
+
     return linkData;
   };
-  
+
   const getUTMData = () => {
-    const utmInputs = document.querySelectorAll('.utm__input-item input[type="text"], .utm__input-item input[type="checkbox"]');
+    const utmInputs = document.querySelectorAll(
+      '.utm__input-item input[type="text"], .utm__input-item input[type="checkbox"]'
+    );
     const utmData = {};
 
-    utmInputs.forEach(input => {
-        const id = input.id;
-        if (input.type === "checkbox") {
-            utmData[id] = input.checked; 
-        } else {
-            utmData[id] = input.value ? input.value : false; 
-        }
+    utmInputs.forEach((input) => {
+      const id = input.id;
+      if (input.type === "checkbox") {
+        utmData[id] = input.checked;
+      } else {
+        utmData[id] = input.value ? input.value : false;
+      }
     });
 
     return utmData;
-};
-  
+  };
+
   const getDateData = (selectedDate) => {
     const day = selectedDate.getDate().toString().padStart(2, "0");
     const month = (selectedDate.getMonth() + 1).toString().padStart(2, "0");
@@ -330,15 +348,15 @@ const RedactingLink = ({ pathS, pathL}) => {
   };
 
   const getIOSData = () => {
-    return document.querySelector('.ios-input').value;
+    return document.querySelector(".ios-input").value;
   };
-  
+
   const getAndroidData = () => {
-    return document.querySelector('.android-input').value;
+    return document.querySelector(".android-input").value;
   };
-  
+
   const getCommentData = () => {
-    const commentInput = document.querySelector('.custom-textarea');
+    const commentInput = document.querySelector(".custom-textarea");
     return commentInput ? commentInput.value : false;
   };
 
@@ -385,6 +403,10 @@ const RedactingLink = ({ pathS, pathL}) => {
     setActivePopupId(null);
   };
 
+  const closeNewPopup = () => {
+    setIsNewPopupActive(false);
+  };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -396,17 +418,14 @@ const RedactingLink = ({ pathS, pathL}) => {
   const handleLongUrlChange = async (event) => {
     const newText = event.target.value;
     setInputText(newText);
-    
   };
-
-  
 
   const handleCreateLink = () => {
     if (validateInput()) {
       const linkData = collectLinkData();
       sendLinkDataToServer(linkData);
-    //  setIsPopupVisible(false);
-     // onClose();
+      //  setIsPopupVisible(false);
+      // onClose();
     }
   };
 
@@ -430,30 +449,51 @@ const RedactingLink = ({ pathS, pathL}) => {
     console.log("Скрыть подсказку");
   };
 
+  const handleIconClickFAQ = () => {
+    console.log("Открыть popup");
+    // Логика для открытия popup, например, изменение состояния
+    setIsNewPopupActive(!isNewPopupActive);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://nilurl.ru:8000/get_link_for_update.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: 'include',
-          body: JSON.stringify({ pathS }),
-        });
+        const response = await fetch(
+          "https://nilurl.ru:8000/get_link_for_update.php",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({ pathS }),
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-       
+
         const data = await response.json();
         if (data.status === "success") {
-          const { base_url, code_url, tag, commentary, android, ios, utm, utm_data, date_last, tag_svgcolor, tag_backgrounds} = data.data;
+          const {
+            base_url,
+            code_url,
+            tag,
+            commentary,
+            android,
+            ios,
+            utm,
+            utm_data,
+            date_last,
+            tag_svgcolor,
+            tag_backgrounds,
+          } = data.data;
           setInputText(base_url);
           setShortUrl(`https://nilurl.ru/${code_url}`);
           setTagValue(tag);
           setTagColors({
             svgColor: tag_svgcolor,
-            color: tag_backgrounds
+            color: tag_backgrounds,
           });
           const defaultUtmData = {
             utm_source: "",
@@ -467,22 +507,57 @@ const RedactingLink = ({ pathS, pathL}) => {
           };
           const finalUtmData = utm !== "false" ? utm_data : defaultUtmData;
           setDate_last(date_last);
-          setToggles((prevToggles) => prevToggles.map((toggle) => {
-            switch (toggle.id) {
-              case "comment":
-                return { ...toggle, info: <CommentComponent initialComment={commentary} />, checked: !!commentary };
-              case "utm":
-                return { ...toggle, info: <UTMInputs initialUTM={finalUtmData} />, checked: utm  };
-              case "date":  
-                return { ...toggle, info: <Calendar initialDate={date_last} onDateChange={setSelectedDate}/> , checked: !!date_last };
-              case "ios":
-                return {...toggle, info: <IOSComponent initialURL={ios !== "false" ? ios : ""} />, checked: ios !== "false", value: ios !== "false" ? ios : "", };
-              case "android":
-                return {...toggle, info: <AndroidComponent initialURL={android !== "false" ? android : ""} />, checked: android !== "false", value: android !== "false" ? android : "", };
-              default:
-                return toggle;
-            }
-          }  ));
+          setToggles((prevToggles) =>
+            prevToggles.map((toggle) => {
+              switch (toggle.id) {
+                case "comment":
+                  return {
+                    ...toggle,
+                    info: <CommentComponent initialComment={commentary} />,
+                    checked: !!commentary,
+                  };
+                case "utm":
+                  return {
+                    ...toggle,
+                    info: <UTMInputs initialUTM={finalUtmData} />,
+                    checked: utm,
+                  };
+                case "date":
+                  return {
+                    ...toggle,
+                    info: (
+                      <Calendar
+                        initialDate={date_last}
+                        onDateChange={setSelectedDate}
+                      />
+                    ),
+                    checked: !!date_last,
+                  };
+                case "ios":
+                  return {
+                    ...toggle,
+                    info: (
+                      <IOSComponent initialURL={ios !== "false" ? ios : ""} />
+                    ),
+                    checked: ios !== "false",
+                    value: ios !== "false" ? ios : "",
+                  };
+                case "android":
+                  return {
+                    ...toggle,
+                    info: (
+                      <AndroidComponent
+                        initialURL={android !== "false" ? android : ""}
+                      />
+                    ),
+                    checked: android !== "false",
+                    value: android !== "false" ? android : "",
+                  };
+                default:
+                  return toggle;
+              }
+            })
+          );
         } else {
           const text = data.message;
           alert(text);
@@ -497,7 +572,7 @@ const RedactingLink = ({ pathS, pathL}) => {
           window.location.reload();
         }, 1000);
       } finally {
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     };
 
@@ -505,21 +580,22 @@ const RedactingLink = ({ pathS, pathL}) => {
   }, [pathS]);
 
   const [tags, setTags] = useState([]);
-///////////////
+  ///////////////
 
-const handleTagClick = (tag) => {
-  setTagColors({ color: tag.bgColor, svgColor: tag.textColor });
-  setTagValue(tag.text);
-  setIsPopupActive(false);
-};
+  const handleTagClick = (tag) => {
+    setTagColors({ color: tag.bgColor, svgColor: tag.textColor });
+    setTagValue(tag.text);
+    setIsPopupActive(false);
+  };
 
   if (isLoading) {
-    return <div>Загрузка...</div>; }
+    return <div>Загрузка...</div>;
+  }
   if (error) {
-      return <div>Страница обновляется до актуальных данных...</div>;
+    return <div>Страница обновляется до актуальных данных...</div>;
   }
   return (
-  //  isPopupVisible && (
+    //  isPopupVisible && (
     <div className="creating__link">
       <div className="creating__link__header">
         <span className="header__svg">
@@ -554,42 +630,54 @@ const handleTagClick = (tag) => {
                 handleLongUrlChange(e);
                 handleChange(e);
               }}
-              
             />
           </div>
         </div>
         <div className="link__input">
           <div className="link__input-title">Короткая ссылка</div>
           <div className="input__container">
-          <span className="svg__infinity">
-          {faviconSVG ? (
-        <img  width="35" height="35" src={faviconSVG} alt="Favicon" onError={() => setFaviconLoadError(true)} />
-      ) : (
-        <svg
-          width="35"
-          height="35"
-          viewBox="0 0 35 35"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
-          <circle
-            cx="17.5"
-            cy="17.5"
-            r="17"
-            stroke="#9A9A9A"
-            strokeOpacity="0.5"
-          />
-          <path
-            d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
-            stroke="black"
-            strokeWidth="1.28"
-            strokeLinecap="round"
-          />
-        </svg>
-      )}
-      {faviconLoadError && <img width="35" height="35" className="SVGLinksLP" src="/NilLogo.svg"/>}
-      </span>
+            <span className="svg__infinity">
+              {faviconSVG ? (
+                <img
+                  width="35"
+                  height="35"
+                  src={faviconSVG}
+                  alt="Favicon"
+                  onError={() => setFaviconLoadError(true)}
+                />
+              ) : (
+                <svg
+                  width="35"
+                  height="35"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="17.5" cy="17.5" r="17.5" fill="white" />
+                  <circle
+                    cx="17.5"
+                    cy="17.5"
+                    r="17"
+                    stroke="#9A9A9A"
+                    strokeOpacity="0.5"
+                  />
+                  <path
+                    d="M19.25 17.5C19.25 19.9162 17.2912 21.875 14.875 21.875H13.125C10.7088 21.875 8.75 19.9162 8.75 17.5C8.75 15.0838 10.7088 13.125 13.125 13.125H13.5625M15.75 17.5C15.75 15.0838 17.7088 13.125 20.125 13.125H21.875C24.2912 13.125 26.25 15.0838 26.25 17.5C26.25 19.9162 24.2912 21.875 21.875 21.875H21.4375"
+                    stroke="black"
+                    strokeWidth="1.28"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              )}
+              {faviconLoadError && (
+                <img
+                  width="35"
+                  height="35"
+                  className="SVGLinksLP"
+                  src="/NilLogo.svg"
+                />
+              )}
+            </span>
             <input
               className="link-input short-redact"
               type="text"
@@ -646,51 +734,53 @@ const handleTagClick = (tag) => {
               onChange={handleTagChange}
             />
             <div
-          className={`input__icon right-image ${
-            isPopupActive ? '' : 'active'
-          }`}
-          onClick={handleIconClick}
-        >
-          <svg
-            width="14"
-            height="8"
-            viewBox="0 0 14 8"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ transform: isPopupActive ? 'rotate(180deg)' : 'rotate(0deg)' }}
-          >
-            <path
-              d="M1 1L7 7L13 1"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <div
-            className={`tag-popup-container ${
-              isPopupActive ? '' : 'active'
-            }`}
-          >
-            {tags.map((tag, index) => (
-              <div
-                className="tag-object"
-                key={index}
-                onClick={() => handleTagClick(tag)}
+              className={`input__icon right-image ${
+                isPopupActive ? "" : "active"
+              }`}
+              onClick={handleIconClick}
+            >
+              <svg
+                width="14"
+                height="8"
+                viewBox="0 0 14 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  transform: isPopupActive ? "rotate(180deg)" : "rotate(0deg)",
+                }}
               >
-                <p
-                  className="tag-info"
-                  style={{
-                    backgroundColor: tag.bgColor,
-                    color: tag.textColor,
-                  }}
-                >
-                  {tag.text}
-                </p>
+                <path
+                  d="M1 1L7 7L13 1"
+                  stroke="black"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <div
+                className={`tag-popup-container ${
+                  isPopupActive ? "" : "active"
+                }`}
+              >
+                {tags.map((tag, index) => (
+                  <div
+                    className="tag-object"
+                    key={index}
+                    onClick={() => handleTagClick(tag)}
+                  >
+                    <p
+                      className="tag-info"
+                      style={{
+                        backgroundColor: tag.bgColor,
+                        color: tag.textColor,
+                      }}
+                    >
+                      {tag.text}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          </div>
+            </div>
           </div>
         </div>
         <div className="link__functional">
@@ -705,8 +795,25 @@ const handleTagClick = (tag) => {
                     alt="Подсказка:"
                     onMouseOver={handleMouseOver}
                     onMouseOut={handleMouseOut}
+                    onClick={handleIconClickFAQ} // Добавляем обработчик события onClick
                   ></img>
                 </span>
+                {isNewPopupActive && (
+                  <UpgradeToProPopup onClose={() => closeNewPopup(toggle.id)}>
+                    <p className="popup-message">
+                      Для получения дополнительной информации рекомендуем
+                      посетить наш раздел часто задаваемых вопросов (FAQ).
+                    </p>
+                    <button
+                      className="popup-button"
+                      onClick={() => {
+                        navigate(PRICEPAGE_ROUTE);
+                      }}
+                    >
+                      Перейти к FAQ
+                    </button>
+                  </UpgradeToProPopup>
+                )}
                 <div className="toggle__switch">
                   <Toggle
                     initialChecked={toggle.checked}
@@ -723,21 +830,29 @@ const handleTagClick = (tag) => {
                 <div className="functional__item-info">
                   <UpgradeToProPopup onClose={() => closePopup(toggle.id)}>
                     <p className="popup-message">
-                      Статистику за последние 3 месяца можно просмотреть в
-                      проекте с тарифным планом Pro. Создайте проект или
-                      перейдите к существующему проекту для обновления.
+                      Статистику за последний год, а так же более детальную
+                      настройку ссылок можно получить в проекте с тарифным
+                      планом Premium.
                     </p>
-                    <button className="popup-button" onClick={() => {navigate(PRICEPAGE_ROUTE);}}>Обновиться до Pro</button>
+                    <button
+                      className="popup-button"
+                      onClick={() => {
+                        navigate(PRICEPAGE_ROUTE);
+                      }}
+                    >
+                      Обновиться до Pro
+                    </button>
                   </UpgradeToProPopup>
                 </div>
               )}
             </div>
           ))}
         </div>
-        <button 
-        className="delete__link" 
-        type="button"
-        onClick={handleDeleteClick}>
+        <button
+          className="delete__link"
+          type="button"
+          onClick={handleDeleteClick}
+        >
           Удалить
           <svg
             width="18"
@@ -768,11 +883,11 @@ const handleTagClick = (tag) => {
         </button>
       </div>
     </div>
- // )
+    // )
   );
 };
 
-const CommentComponent = ( { initialComment }) => {
+const CommentComponent = ({ initialComment }) => {
   const textAreaRef = useRef(null);
   const [val, setVal] = useState(initialComment);
   const handleChange = (e) => {
@@ -800,26 +915,24 @@ const CommentComponent = ( { initialComment }) => {
   );
 };
 
-
-
 const UTMInputs = ({ initialUTM }) => {
-  const [utmReferral, setUtmReferral] = useState('');
-  const [utmSource, setUtmSource] = useState('');
-  const [utmMedium, setUtmMedium] = useState('');
-  const [utmCampaign, setUtmCampaign] = useState('');
-  const [utmTerm, setUtmTerm] = useState('');
-  const [utmContent, setUtmContent] = useState('');
+  const [utmReferral, setUtmReferral] = useState("");
+  const [utmSource, setUtmSource] = useState("");
+  const [utmMedium, setUtmMedium] = useState("");
+  const [utmCampaign, setUtmCampaign] = useState("");
+  const [utmTerm, setUtmTerm] = useState("");
+  const [utmContent, setUtmContent] = useState("");
   const [utmAndroid, setUtmAndroid] = useState(false);
   const [utmIOC, setUtmIOC] = useState(false);
 
   useEffect(() => {
     if (initialUTM) {
-      setUtmReferral(initialUTM.utm_referral || '');
-      setUtmSource(initialUTM.utm_source || '');
-      setUtmMedium(initialUTM.utm_medium || '');
-      setUtmCampaign(initialUTM.utm_campaign || '');
-      setUtmTerm(initialUTM.utm_term || '');
-      setUtmContent(initialUTM.utm_content || '');
+      setUtmReferral(initialUTM.utm_referral || "");
+      setUtmSource(initialUTM.utm_source || "");
+      setUtmMedium(initialUTM.utm_medium || "");
+      setUtmCampaign(initialUTM.utm_campaign || "");
+      setUtmTerm(initialUTM.utm_term || "");
+      setUtmContent(initialUTM.utm_content || "");
       setUtmAndroid(initialUTM.utm_android || false);
       setUtmIOC(initialUTM.utm_ioc || false);
     }
@@ -836,9 +949,15 @@ const UTMInputs = ({ initialUTM }) => {
   const getClassNames = (inputId) => {
     const isCheckbox = inputId === "UTM Android" || inputId === "UTM iOC";
     return {
-      itemClass: `utm__input-item ${isCheckbox ? "utm__input-item--checkbox" : ""}`,
-      labelClass: `utm__input-label ${isCheckbox ? "utm__input-label--checkbox" : ""}`,
-      inputClass: `utm__input-input ${isCheckbox ? "utm__input-input--checkbox" : ""}`,
+      itemClass: `utm__input-item ${
+        isCheckbox ? "utm__input-item--checkbox" : ""
+      }`,
+      labelClass: `utm__input-label ${
+        isCheckbox ? "utm__input-label--checkbox" : ""
+      }`,
+      inputClass: `utm__input-input ${
+        isCheckbox ? "utm__input-input--checkbox" : ""
+      }`,
     };
   };
 
@@ -848,7 +967,9 @@ const UTMInputs = ({ initialUTM }) => {
   return (
     <div className="utm__input">
       <div className="utm__input-item">
-        <label className="utm__input-label" htmlFor="UTM Referral">Referral</label>
+        <label className="utm__input-label" htmlFor="UTM Referral">
+          Referral
+        </label>
         <input
           className="utm__input-input"
           type="text"
@@ -859,7 +980,9 @@ const UTMInputs = ({ initialUTM }) => {
         />
       </div>
       <div className="utm__input-item">
-        <label className="utm__input-label" htmlFor="UTM Source">UTM Source</label>
+        <label className="utm__input-label" htmlFor="UTM Source">
+          UTM Source
+        </label>
         <input
           className="utm__input-input"
           type="text"
@@ -870,7 +993,9 @@ const UTMInputs = ({ initialUTM }) => {
         />
       </div>
       <div className="utm__input-item">
-        <label className="utm__input-label" htmlFor="UTM Medium">UTM Medium</label>
+        <label className="utm__input-label" htmlFor="UTM Medium">
+          UTM Medium
+        </label>
         <input
           className="utm__input-input"
           type="text"
@@ -881,7 +1006,9 @@ const UTMInputs = ({ initialUTM }) => {
         />
       </div>
       <div className="utm__input-item">
-        <label className="utm__input-label" htmlFor="UTM Campaign">UTM Campaign</label>
+        <label className="utm__input-label" htmlFor="UTM Campaign">
+          UTM Campaign
+        </label>
         <input
           className="utm__input-input"
           type="text"
@@ -892,7 +1019,9 @@ const UTMInputs = ({ initialUTM }) => {
         />
       </div>
       <div className="utm__input-item">
-        <label className="utm__input-label" htmlFor="UTM Term">UTM Term</label>
+        <label className="utm__input-label" htmlFor="UTM Term">
+          UTM Term
+        </label>
         <input
           className="utm__input-input"
           type="text"
@@ -903,7 +1032,9 @@ const UTMInputs = ({ initialUTM }) => {
         />
       </div>
       <div className="utm__input-item">
-        <label className="utm__input-label" htmlFor="UTM Content">UTM Content</label>
+        <label className="utm__input-label" htmlFor="UTM Content">
+          UTM Content
+        </label>
         <input
           className="utm__input-input"
           type="text"
@@ -914,7 +1045,9 @@ const UTMInputs = ({ initialUTM }) => {
         />
       </div>
       <div className={androidClassNames.itemClass}>
-        <label className={androidClassNames.labelClass} htmlFor="UTM Android">UTM Android Metrika</label>
+        <label className={androidClassNames.labelClass} htmlFor="UTM Android">
+          UTM Android Metrika
+        </label>
         <input
           className={androidClassNames.inputClass}
           type="checkbox"
@@ -924,7 +1057,9 @@ const UTMInputs = ({ initialUTM }) => {
         />
       </div>
       <div className={iocClassNames.itemClass}>
-        <label className={iocClassNames.labelClass} htmlFor="UTM iOC">UTM iOC Metrika</label>
+        <label className={iocClassNames.labelClass} htmlFor="UTM iOC">
+          UTM iOC Metrika
+        </label>
         <input
           className={iocClassNames.inputClass}
           type="checkbox"
@@ -932,12 +1067,10 @@ const UTMInputs = ({ initialUTM }) => {
           checked={utmIOC}
           onChange={handleCheckboxChange(setUtmIOC)}
         />
-    </div>
+      </div>
     </div>
   );
 };
-
-
 
 const IOSComponent = ({ initialURL }) => {
   const [inputValue_IOS, setInputValue_IOS] = useState(initialURL);
