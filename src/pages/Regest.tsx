@@ -162,7 +162,6 @@ function Reg() {
       .then((data) => {
         if (data.success) {
           setIsVerificationSent(true);
-          setServerVerificationCode(data.verificationCode);
         } else {
           alert("Не удалось отправить проверочный код. Пожалуйста, попробуйте снова.");
         }
@@ -176,11 +175,36 @@ function Reg() {
   };
 
   const verifyCodeAndRegister = () => {
-    if (verificationCode !== serverVerificationCode) {
-      alert("Неправильный проверочный код.");
-      return;
-    }
+    const userData = {
+      email: email,
+      verificationCode: verificationCode, 
+    };
 
+    fetch("https://nilurl.ru:8000/check_mail_code.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Можно добавить дополнительные действия по успешной верификации
+          handleFinalRegistration(); // Вызываем функцию для окончательной регистрации
+        } else {
+          alert("Регистрация не удалась. Пожалуйста, попробуйте снова.");
+        }
+      })
+      .catch((error) => {
+        console.error("Ошибка:", error);
+        alert(
+          "Произошла ошибка при регистрации. Пожалуйста, попробуйте позже."
+        );
+      });
+  };
+
+  const handleFinalRegistration = () => {
     const userData = {
       email: email,
       username: username,
@@ -197,7 +221,7 @@ function Reg() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          window.location.href = "/login";
+          navigate("/login"); // Переход на страницу логина после успешной регистрации
         } else {
           alert("Регистрация не удалась. Пожалуйста, попробуйте снова.");
         }
