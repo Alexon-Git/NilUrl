@@ -628,30 +628,30 @@ const CreatingLink = ({ onClose }) => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <div
-                  className={`tag-popup-container ${
-                    isPopupActive ? "" : "active"
-                  }`}
-                >
-                  {tags.map((tag, index) => (
-                    <div
-                      className="tag-object"
-                      key={index}
-                      onClick={() => handleTagClick(tag)}
-                    >
-                      <p
-                        className="tag-info"
-                        style={{
-                          backgroundColor: tag.bgColor,
-                          color: tag.textColor,
-                        }}
-                      >
-                        {tag.text}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                <div className={`tag-popup-container ${isPopupActive ? "" : "active"}`}>
+    {tags.length === 0 ? (
+      <p className="popup-message">Список тегов пуст</p>
+    ) : (
+      tags.map((tag, index) => (
+        <div
+          className="tag-object"
+          key={index}
+          onClick={() => handleTagClick(tag)}
+        >
+          <p
+            className="tag-info"
+            style={{
+              backgroundColor: tag.bgColor,
+              color: tag.textColor,
+            }}
+          >
+            {tag.text}
+          </p>
+        </div>
+      ))
+    )}
+  </div>
+</div>
             </div>
           </div>
           <div className="link__functional">
