@@ -10,7 +10,7 @@ const Overlay = ({ children, onClose }) => {
 
   return (
     <div className="overlay" onClick={handleClickOutside}>
-      {children}
+      {React.cloneElement(children, { onClose })}
     </div>
   );
 };

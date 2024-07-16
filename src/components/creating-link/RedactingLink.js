@@ -12,9 +12,10 @@ import {
   UpgradeToProPopup,
 } from "../../components";
 
-const RedactingLink = ({ pathS, pathL }) => {
+const RedactingLink = ({ pathS, pathL}) => {
   const navigate = useNavigate();
   const [isPopupActive, setIsPopupActive] = useState(false);
+ // const [isPopupVisible, setIsPopupVisible] = useState(true);
 
   const handleIconClick = () => {
     console.log('Icon clicked. Previous state:', isPopupActive);
@@ -389,12 +390,16 @@ const RedactingLink = ({ pathS, pathL }) => {
     if (validateInput()) {
       const linkData = collectLinkData();
       sendLinkDataToServer(linkData);
+    //  setIsPopupVisible(false);
+     // onClose();
     }
   };
 
   const handleCreateLinkKeyDown = (event) => {
     if (event.key === "Enter") {
       handleCreateLink();
+      event.preventDefault(); // Prevent default form submission behavior
+      document.querySelector(".create__link__button").click();
     }
   };
 
@@ -506,6 +511,7 @@ const handleTagClick = (tag) => {
       return <div>Страница обновляется до актуальных данных...</div>;
   }
   return (
+  //  isPopupVisible && (
     <div className="creating__link">
       <div className="creating__link__header">
         <span className="header__svg">
@@ -754,6 +760,7 @@ const handleTagClick = (tag) => {
         </button>
       </div>
     </div>
+ // )
   );
 };
 

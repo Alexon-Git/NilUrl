@@ -14,7 +14,7 @@ import {
   UpgradeToProPopup,
 } from "../../components";
 
-const CreatingLink = () => {
+const CreatingLink = ({ onClose }) => {
   const { isPremium } = usePremium();
 
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ const CreatingLink = () => {
 
   const [faviconSVG, setFaviconSVG] = useState(null);
   const [isPopupActive, setIsPopupActive] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(true);
 
   const handleIconClick = () => {
     console.log('Icon clicked. Previous state:', isPopupActive);
@@ -387,12 +388,16 @@ const CreatingLink = () => {
     if (isValid) {
       const linkData = collectLinkData();
       sendLinkDataToServer(linkData);
+      setIsPopupVisible(false); // Close the popup
+      onClose();
     }
   };
 
   const handleCreateLinkKeyDown = (event) => {
     if (event.key === "Enter") {
       handleCreateLink();
+      event.preventDefault(); // Prevent default form submission behavior
+      document.querySelector(".create__link__button").click();
     }
   };
 
@@ -426,6 +431,7 @@ const handleTagClick = (tag) => {
 };
 
   return (
+    isPopupVisible && (
     <div className="creating__link">
       <div className="creating__link__header">
         <span className="header__svg">
@@ -675,7 +681,7 @@ const handleTagClick = (tag) => {
         </button>
       </div>
     </div>
-  );
+  ));
 };
 
 const CommentComponent = () => {

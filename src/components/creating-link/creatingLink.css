@@ -68,12 +68,12 @@
   top: 100%;
   right: 0;
   transition: height 0.3s ease;
-  height: 0;
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: white;
-  height: 200px;
-  width: 364px;
+  max-height: 200px;
+  min-height: auto;
+  width: 180px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 6px;
