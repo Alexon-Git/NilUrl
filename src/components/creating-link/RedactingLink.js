@@ -77,19 +77,34 @@ const RedactingLink = ({ pathS, pathL}) => {
     }
   };
 
-  const fetchTags = async () => {
-    const response = await fetch('https://nilurl.ru:8000/get_tag.php', {
-      method: 'POST',
-      credentials: 'include', 
-      headers: {
-        'Content-Type': 'application/json'
-        
-      },
-     
-    });
-    const data = await response.json();
-    return data.tags; 
-  };
+  useEffect(() => {
+    const fetchTags = async () => {
+      const response = await fetch("https://nilurl.ru:8000/get_tag.php", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+
+      
+      const filteredTags = data.tags
+      .filter(tag => tag.text !== "")
+      .reduce((acc, current) => {
+        const x = acc.find(item => item.text === current.text);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+        }, []);
+
+      setTags(filteredTags);
+    };
+
+    fetchTags();
+  }, []);
 
 
 
@@ -489,14 +504,7 @@ const RedactingLink = ({ pathS, pathL}) => {
     fetchData();
   }, [pathS]);
 
-  const [tags, setTags] = useState([
-    { text: "Название тега", textColor: '#000000', bgColor: '#ff3fff' },
-    { text: "Название тега много много много тега тега тега тега тега тега тега", textColor: '#f45fff', bgColor: '#0000ff' },
-    { text: "Название тега", textColor: '#ff0000', bgColor: '#00ff00' },
-    { text: "Название тега", textColor: '#00d000', bgColor: '#ffd1ff' },
-    { text: "Название тега", textColor: '#2f15ff', bgColor: '#07d0ff' },
-    { text: "Название тега", textColor: '#ff6000', bgColor: '#01ff00' }
-  ]);
+  const [tags, setTags] = useState([]);
 ///////////////
 
 const handleTagClick = (tag) => {
