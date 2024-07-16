@@ -99,7 +99,6 @@ const categories = [
   }, [sortOption, data]);
 
   const columns = [
-    { label: "По умолчанию", value: 0 },
     { label: "Алфавит ↓", value: 1 },
     { label: "Алфавит ↑", value: 2 },
     { label: "По кликам ↓", value: 3 },
