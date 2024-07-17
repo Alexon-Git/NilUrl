@@ -15,6 +15,8 @@ function Reg() {
   const [verificationCode, setVerificationCode] = useState("");
   const [isVerificationSent, setIsVerificationSent] = useState(false);
   const [serverVerificationCode, setServerVerificationCode] = useState("");
+  const [timer, setTimer] = useState(0);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
     const access_token = getCookie("access_token");
@@ -22,6 +24,20 @@ function Reg() {
       navigate("/links");
     }
   }, []);
+
+  useEffect(() => {
+    if (timer > 0) {
+        const countdown = setInterval(() => {
+            setTimer((prev) => prev - 1);
+        }, 1000);
+        setIsButtonDisabled(true);
+        return () => clearInterval(countdown);
+    } else {
+        setIsButtonDisabled(false);
+    }
+}, [timer]);
+
+
 
   const getCookie = (name: string) => {
     const cookieArray = document.cookie.split(";");
@@ -145,6 +161,7 @@ function Reg() {
       });
   };
 
+
   const sendVerificationCode = () => {
     const userData = {
       email: email,
@@ -162,6 +179,7 @@ function Reg() {
       .then((data) => {
         if (data.success) {
           setIsVerificationSent(true);
+          setTimer(60); // Set the timer for 60 seconds
         } else {
           alert("Не удалось отправить проверочный код. Пожалуйста, попробуйте снова.");
         }
@@ -172,7 +190,11 @@ function Reg() {
           "Произошла ошибка при отправке проверочного кода. Пожалуйста, попробуйте позже."
         );
       });
-  };
+};
+  const resendVerificationCode = () => {
+    sendVerificationCode();
+    setTimer(60);
+};
 
   const verifyCodeAndRegister = () => {
     const userData = {
@@ -221,9 +243,12 @@ function Reg() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          alert(
+            "Успешная регистрация."
+          );
           navigate("/login"); // Переход на страницу логина после успешной регистрации
         } else {
-          alert("Регистрация не удалась. Пожалуйста, попробуйте снова.");
+          alert("Неверный код, попробуйте снова");
         }
       })
       .catch((error) => {
@@ -348,6 +373,14 @@ function Reg() {
                   value={verificationCode}
                   onChange={onVerificationCodeChange}
                 />
+                <button
+                  onClick={resendVerificationCode}
+                  type="button"
+                  className="b3"
+                  disabled={isButtonDisabled}
+                >
+                  {isButtonDisabled ? `Отправить повторно (${timer} сек)` : 'Отправить повторно'}
+                </button>
               </form>
               <button
                 onClick={verifyCodeAndRegister}
@@ -378,4 +411,4 @@ function Reg() {
   );
 }
 
-export default Reg;
+export default Reg; 
