@@ -290,8 +290,7 @@ const CreatingLink = ({ onClose }) => {
       if (result.status === "success") {
         setPopupMessage("Ссылка успешно создана!");
         setAlertPopupVisibility(true);
-        
-        // window.location.reload();
+        window.location.reload();
       } else {
         const message = result.message || "Произошла ошибка при создании ссылки.";
         setPopupMessage(message);
