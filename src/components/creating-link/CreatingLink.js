@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
 import axios from "axios";
+import PropTypes from 'prop-types';
 import CryptoJS from "crypto-js";
 import { usePremium } from "../../LogicComp/DataProvider";
 import { useNavigate } from "react-router-dom";
@@ -34,10 +35,6 @@ const CreatingLink = ({ onClose }) => {
   const [popupMessage, setPopupMessage] = useState(''); // Состояние для текста попапа
   const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); // Состояние для отображения попапа
   const [isPopupVisible, setIsPopupVisible] = useState(true);
-
-  const [inputTextError, setInputTextError] = useState(false);
-  const [shortUrlError, setShortUrlError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleIconClick = () => {
     console.log("Icon clicked. Previous state:", isPopupActive);
@@ -130,103 +127,120 @@ const CreatingLink = ({ onClose }) => {
     const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
     const shortUrlPattern = /[A-Za-z0-9]{3,}$/;
     const noSpecialCharsPattern = /^[A-Za-z0-9]+$/;
-    const urlError =
-      "Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.";
+    const urlErrorText = "Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.";
     const shortUrlErrorText = "Короткая ссылка должна содержать минимум 3 символа.";
-    const specialCharsError =
-      "Короткая ссылка не должна содержать специальных символов.";
-    const tagLengthError = "Название тэга должно быть не более 15 символов.";
-    const commentLengthError = "Комментарий должен быть не более 500 символов.";
-    const utmLengthError = "Каждое поле UTM должно быть не более 50 символов.";
-    const iosUrlError = "iOS URL должен быть действительной ссылкой.";
-    const androidUrlError = "Android URL должен быть действительной ссылкой.";
-    const bannedWordsError = "Ваша ссылка содержит недопустимые слова.";
+    const specialCharsErrorText = "Короткая ссылка не должна содержать специальных символов.";
+    const tagLengthErrorText = "Название тэга должно быть не более 15 символов.";
+    const commentLengthErrorText = "Комментарий должен быть не более 500 символов.";
+    const utmLengthErrorText = "Каждое поле UTM должно быть не более 50 символов.";
+    const iosUrlErrorText = "iOS URL должен быть действительной ссылкой.";
+    const androidUrlErrorText = "Android URL должен быть действительной ссылкой.";
+    const bannedWordsErrorText = "Ваша ссылка содержит недопустимые слова.";
 
-        // Сброс состояний ошибок перед валидацией
-        setInputTextError('');
-        setShortUrlError('');
-    
-        if (!inputText || !shortUrl) {
-          setInputTextError("Поля ссылок обязательны для заполнения.");
-          setShortUrlError("Поля ссылок обязательны для заполнения.");
-          return false;
-        }
-    
-        if (!urlPattern.test(inputText)) {
-          setInputTextError(urlError);
-          return false;
-        }
-    
-        if (!noSpecialCharsPattern.test(shortUrl.replace(""))) {
-          setShortUrlError(specialCharsError);
-          return false;
-        }
-    
-        if (!shortUrlPattern.test(shortUrl)) {
-          setShortUrlError(shortUrlErrorText);
-          return false;
-        }
+    // Reset error states before validation
+    setInputTextError('');
+    setShortUrlError('');
+    setTagError('');
+    setCommentError('');
+    setUtmError('');
+    setIosUrlError('');
+    setAndroidUrlError('');
+    setBannedWordsError('');
+    setErrorMessage('');
+
+    if (!inputText || !shortUrl) {
+        setInputTextError("Поля ссылок обязательны для заполнения.");
+        setShortUrlError("Поля ссылок обязательны для заполнения.");
+        return false;
+    }
+
+    if (!urlPattern.test(inputText)) {
+        setInputTextError(urlErrorText);
+        return false;
+    }
+
+    if (!noSpecialCharsPattern.test(shortUrl.replace("", ""))) {
+        setShortUrlError(specialCharsErrorText);
+        return false;
+    }
+
+    if (!shortUrlPattern.test(shortUrl)) {
+        setShortUrlError(shortUrlErrorText);
+        return false;
+    }
 
     try {
-      const response = await fetch("https://nilurl.ru:8000/check_swear", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: shortUrl }),
-      });
-      const data = await response.json();
+        const response = await fetch("https://nilurl.ru:8000/check_swear", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text: shortUrl }),
+        });
+        const data = await response.json();
 
-      if (data.profanity) {
-        alert(bannedWordsError);
-        return false;
-      }
+        if (data.profanity) {
+            setBannedWordsError(bannedWordsErrorText);
+            return false;
+        }
     } catch (error) {
-      console.error("Error checking profanity:", error);
+        console.error("Error checking profanity:", error);
     }
 
     if (tagValue.length > 15) {
-      alert(tagLengthError);
-      return false;
+        setTagError(tagLengthErrorText);
+        return false;
     }
 
     const commentInput = getCommentData();
     if (commentInput && commentInput.length > 500) {
-      alert(commentLengthError);
-      return false;
+        setCommentError(commentLengthErrorText);
+        return false;
     }
 
     const utmData = getUTMData();
     for (const key in utmData) {
-      if (utmData[key].length > 50) {
-        alert(utmLengthError);
+        if (utmData[key].length > 50) {
+            setUtmError(utmLengthErrorText);
+            return false;
+        }
+    }
+
+    if (
+        toggles.find((toggle) => toggle.id === "ios").checked &&
+        !urlPattern.test(getIOSData())
+    ) {
+        setIosUrlError(iosUrlErrorText);
         return false;
-      }
     }
 
     if (
-      toggles.find((toggle) => toggle.id === "ios").checked &&
-      !urlPattern.test(getIOSData())
+        toggles.find((toggle) => toggle.id === "android").checked &&
+        !urlPattern.test(getAndroidData())
     ) {
-      alert(iosUrlError);
-      return false;
-    }
-
-    if (
-      toggles.find((toggle) => toggle.id === "android").checked &&
-      !urlPattern.test(getAndroidData())
-    ) {
-      alert(androidUrlError);
-      return false;
+        setAndroidUrlError(androidUrlErrorText);
+        return false;
     }
 
     return true;
-  };
+};
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [inputText, setInputText] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [tagValue, setTagValue] = useState("");
+  
+  const [inputTextError, setInputTextError] = useState(false);
+  const [shortUrlError, setShortUrlError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [tagError, setTagError] = useState('');
+  const [commentError, setCommentError] = useState('');
+  const [utmError, setUtmError] = useState('');
+  const [iosUrlError, setIosUrlError] = useState('');
+  const [androidUrlError, setAndroidUrlError] = useState('');
+  const [bannedWordsError, setBannedWordsError] = useState('');
+  
   const [tagColors, setTagColors] = useState({
     svgColor: "#000000",
     color: "rgba(229, 228, 226, 1)",
@@ -236,7 +250,7 @@ const CreatingLink = ({ onClose }) => {
       id: "comment",
       title: "Комментарий",
       checked: false,
-      info: <CommentComponent />,
+      info: <CommentComponent commentError={commentError}/>,
     },
     { id: "utm", title: "UTM-метка", checked: false, info: <UTMInputs /> },
     {
@@ -572,7 +586,7 @@ const CreatingLink = ({ onClose }) => {
               <div className="input__container-short">
                 <span className="static-text">https://nilurl.ru/</span>
                 <input
-                  className="link-input-short"
+                  className={shortUrlError ? 'link-input-short input-error' : 'link-input-short'}
                   type="text"
                   placeholder="Ffv3cv"
                   value={shortUrl}
@@ -592,7 +606,7 @@ const CreatingLink = ({ onClose }) => {
                   backgroundColor: tagColors.color,
                   borderLeft: "1px solid transparent",
                   borderRight: "1px solid rgba(154, 154, 154, 0.5)",
-                  borderRadius: "6px 0 0 6px",
+                  borderRadius: "4px 0 0 4px",
                 }}
               >
                 <svg
@@ -622,7 +636,7 @@ const CreatingLink = ({ onClose }) => {
                 </div>
               )}
               <input
-                className="link-input png"
+                className={tagError ? 'link-input png input-error' : "link-input png"}
                 type="text"
                 placeholder="Название тега"
                 value={tagValue}
@@ -679,6 +693,7 @@ const CreatingLink = ({ onClose }) => {
   </div>
 </div>
             </div>
+            {tagError && <span className="error-message-link">{tagError}</span>}
           </div>
           <div className="link__functional">
             <p className="link__functional-title">Функционал</p>
@@ -763,9 +778,10 @@ const CreatingLink = ({ onClose }) => {
   );
 };
 
-const CommentComponent = () => {
+const CommentComponent = ({ commentError }) => {
   const textAreaRef = useRef(null);
   const [val, setVal] = useState("");
+
   const handleChange = (e) => {
     setVal(e.target.value);
   };
@@ -775,17 +791,22 @@ const CommentComponent = () => {
     textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
   }, [val]);
 
+  CommentComponent.propTypes = {
+    commentError: PropTypes.string, // Ensure commentError is a string
+  };
+
   return (
     <div className="w-screen min-h-screen bg-neutral-950 flex justify-center items-center">
       <div className="text-neutral-200 bg-neutral-800 p-2 w-full max-w-[30rem] rounded flex flex-col space-y-2">
         <textarea
-          className="p-1 bg-neutral-700 outline-none rounded border border-gray-300 custom-textarea text-neutral-300"
+          className={commentError ? 'p-1 bg-neutral-700 outline-none rounded border border-gray-300 custom-textarea text-neutral-300 input-error' : 'p-1 bg-neutral-700 outline-none rounded border border-gray-300 custom-textarea text-neutral-300'}
           placeholder="Добавить комментарий"
           value={val}
           onChange={handleChange}
           rows="2"
           ref={textAreaRef}
         ></textarea>
+        {commentError && <span className="error-message-link">{commentError}</span>}
       </div>
     </div>
   );
