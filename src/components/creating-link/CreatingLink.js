@@ -15,6 +15,7 @@ import {
   UpgradeToProPopup,
   AlertPopup,
 } from "../../components";
+import { TbBoxMargin } from "react-icons/tb";
 
 const CreatingLink = () => {
   const { isPremium } = usePremium();
@@ -271,6 +272,16 @@ const CreatingLink = () => {
       info: <AndroidComponent />,
     },
   ]);
+
+  useEffect(() => {
+    setToggles((prevToggles) =>
+      prevToggles.map((toggle) =>
+        toggle.id === "comment"
+          ? { ...toggle, info: <CommentComponent commentError={commentError}/> }
+          : toggle
+      )
+    );
+  }, [commentError]);
 
   const sendLinkDataToServer = async (data) => {
     try {
@@ -789,7 +800,7 @@ const CommentComponent = ({ commentError }) => {
 
   return (
     <div className="w-screen min-h-screen bg-neutral-950 flex justify-center items-center">
-      <div className="text-neutral-200 bg-neutral-800 p-2 w-full max-w-[30rem] rounded flex flex-col space-y-2">
+      <div className="text-neutral-200 bg-neutral-800 p-2 w-full max-w-[30rem] rounded flex flex-col space-y-2" style={{ marginBottom: '10px' }}>
         <textarea
           className={commentError ? 'p-1 bg-neutral-700 outline-none rounded border border-gray-300 custom-textarea text-neutral-300 input-error' : 'p-1 bg-neutral-700 outline-none rounded border border-gray-300 custom-textarea text-neutral-300'}
           placeholder="Добавить комментарий"
