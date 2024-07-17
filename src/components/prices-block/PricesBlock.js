@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./pricesBlock.css";
-import { BackImage, Privilege, BuyButton, Slider,FreeButton  } from "../../components";
+import { BackImage, Privilege, BuyButton, Slider, FreeButton } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { MAINPAGE_ROUTE,LOGINPAGE_ROUTE } from "../../LogicComp/utils/Const";
+import { MAINPAGE_ROUTE, LOGINPAGE_ROUTE } from "../../LogicComp/utils/Const";
 
 const PricesBlock = () => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState([false, false, false]);
+  const [registeredUsers, setRegisteredUsers] = useState(0);
+
+  useEffect(() => {
+    fetch('https://nilurl.ru:8000/get_users_count.php')
+      .then(response => response.json())
+      .then(data => setRegisteredUsers(data.user_count))
+      .catch(error => console.error('Error fetching user count:', error));
+  }, []);
 
   const handleMouseEnter = (index) => {
     const updatedHovered = [...isHovered];
@@ -25,10 +33,10 @@ const PricesBlock = () => {
   };
 
   const handleBuyButtonClick = () => {
-    alert("Функция оплаты отключена на данный момент, воспользуйтесь бесплатной подпиской.")
+    alert("Функция оплаты отключена на данный момент, воспользуйтесь бесплатной подпиской.");
   };
+
   const priceBlocks = [
-    
     {
       title: "Профессиональный",
       description: "Для стартапов и малого бизнеса",
@@ -60,6 +68,7 @@ const PricesBlock = () => {
       ],
     },
   ];
+
   const FreeBlocks = [
     {
       title: "Бесплатно",
@@ -71,8 +80,8 @@ const PricesBlock = () => {
         "30 дней сохранения аналитики",
       ],
     },
-    
   ];
+
   return (
     <div className="background">
       <main className="prices wrapper">
@@ -89,9 +98,8 @@ const PricesBlock = () => {
           <span className="gradient__text">Сверхдоступные</span>
           <span className="black__text">цены</span>
         </div>
-        <Slider initialRegisteredUsers={11000} />
+        <Slider initialRegisteredUsers={registeredUsers} />
         <div className="prices__block">
-          
           {FreeBlocks.map((block, index) => (
             <div className="prices__block-item" key={index}>
               <p className="block__item__title">{block.title}</p>
@@ -119,10 +127,9 @@ const PricesBlock = () => {
               )}
               <div className="button__wrapper">
                 <FreeButton
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={() => handleMouseLeave(index)}
                   onClick={handleFreeButtonClick}
-
                 >
                   Купить подписку
                 </FreeButton>
@@ -156,8 +163,8 @@ const PricesBlock = () => {
               )}
               <div className="button__wrapper">
                 <BuyButton
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={() => handleMouseLeave(index)}
                   onClick={handleBuyButtonClick}
                 >
                   Купить подписку
