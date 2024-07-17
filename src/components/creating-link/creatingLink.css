@@ -82,6 +82,21 @@
   box-sizing: border-box;
 }
 
+.error-message-link {
+  padding-top: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(220, 38, 38, 0.8);
+  text-align: left;
+  display: block;
+}
+
+.input-error {
+  border-color: rgb(220, 38, 38, 0.8);
+  color: rgb(220, 38, 38, 0.8);
+  border: 1px solid;
+}
+
 .tag-popup-container.active {
   display: none;
 }

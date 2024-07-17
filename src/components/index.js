@@ -15,6 +15,7 @@ import ColorPickerGfg from "./qr-component/ColorPicker";
 import BuyButton from "./buttons/buy-button";
 import FreeButton from "./buttons/free-button";
 import UpgradeToProPopup from "./popups/UpgradeToProPopup";
+import AlertPopup from "./popups/AlertPopup";
 import HeaderLinksPage from "./Global/HeaderLinksPage";
 import SortButtonGP from "./buttons/SortButtonAdd";
 
@@ -47,6 +48,7 @@ export {
   BuyButton,
   FreeButton,
   UpgradeToProPopup,
+  AlertPopup,
   Overlay,
   HeaderLinksPage,
   SortButtonGP,

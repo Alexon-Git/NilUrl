@@ -12,6 +12,7 @@ import {
   Calendar,
   TagList,
   UpgradeToProPopup,
+  AlertPopup,
 } from "../../components";
 
 const CreatingLink = ({ onClose }) => {
@@ -30,7 +31,13 @@ const CreatingLink = ({ onClose }) => {
   const [faviconSVG, setFaviconSVG] = useState(null);
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [isNewPopupActive, setIsNewPopupActive] = useState(false);
+  const [popupMessage, setPopupMessage] = useState(''); // Состояние для текста попапа
+  const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); // Состояние для отображения попапа
   const [isPopupVisible, setIsPopupVisible] = useState(true);
+
+  const [inputTextError, setInputTextError] = useState(false);
+  const [shortUrlError, setShortUrlError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleIconClick = () => {
     console.log("Icon clicked. Previous state:", isPopupActive);
@@ -125,7 +132,7 @@ const CreatingLink = ({ onClose }) => {
     const noSpecialCharsPattern = /^[A-Za-z0-9]+$/;
     const urlError =
       "Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.";
-    const shortUrlError = "Короткая ссылка должна содержать минимум 3 символа.";
+    const shortUrlErrorText = "Короткая ссылка должна содержать минимум 3 символа.";
     const specialCharsError =
       "Короткая ссылка не должна содержать специальных символов.";
     const tagLengthError = "Название тэга должно быть не более 15 символов.";
@@ -135,24 +142,30 @@ const CreatingLink = ({ onClose }) => {
     const androidUrlError = "Android URL должен быть действительной ссылкой.";
     const bannedWordsError = "Ваша ссылка содержит недопустимые слова.";
 
-    if (!inputText || !shortUrl) {
-      alert("Поля ваша ссылка и короткая ссылка обязательны для заполнения.");
-      return false;
-    }
-
-    if (!urlPattern.test(inputText)) {
-      alert(urlError);
-      return false;
-    }
-    if (!noSpecialCharsPattern.test(shortUrl.replace(""))) {
-      alert(specialCharsError);
-      return false;
-    }
-
-    if (!shortUrlPattern.test(shortUrl)) {
-      alert(shortUrlError);
-      return false;
-    }
+        // Сброс состояний ошибок перед валидацией
+        setInputTextError('');
+        setShortUrlError('');
+    
+        if (!inputText || !shortUrl) {
+          setInputTextError("Поля ссылок обязательны для заполнения.");
+          setShortUrlError("Поля ссылок обязательны для заполнения.");
+          return false;
+        }
+    
+        if (!urlPattern.test(inputText)) {
+          setInputTextError(urlError);
+          return false;
+        }
+    
+        if (!noSpecialCharsPattern.test(shortUrl.replace(""))) {
+          setShortUrlError(specialCharsError);
+          return false;
+        }
+    
+        if (!shortUrlPattern.test(shortUrl)) {
+          setShortUrlError(shortUrlErrorText);
+          return false;
+        }
 
     try {
       const response = await fetch("https://nilurl.ru:8000/check_swear", {
@@ -248,6 +261,7 @@ const CreatingLink = ({ onClose }) => {
 
   const sendLinkDataToServer = async (data) => {
     try {
+      const data = { inputText, shortUrl };
       const response = await fetch("https://nilurl.ru:8000/post_link.php", {
         method: "POST",
         headers: {
@@ -260,14 +274,19 @@ const CreatingLink = ({ onClose }) => {
       const result = await response.json();
 
       if (result.status === "success") {
-        alert("Ссылка успешно создана!");
-        window.location.reload();
+        setPopupMessage("Ссылка успешно создана!");
+        setAlertPopupVisibility(true);
+        // Примерно также можно обновить состояние или выполнить другие действия
+        // window.location.reload();
       } else {
-        const message = result.message;
-        alert(message);
+        const message = result.message || "Произошла ошибка при создании ссылки.";
+        setPopupMessage(message);
+        setAlertPopupVisibility(true);
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Ошибка при отправке данных на сервер:", error);
+      setPopupMessage("Произошла ошибка при отправке данных на сервер.");
+      setAlertPopupVisibility(true);
     }
   };
 
@@ -385,6 +404,11 @@ const CreatingLink = ({ onClose }) => {
     setIsNewPopupActive(false);
   };
 
+  const handleClosePopup = () => {
+    setAlertPopupVisibility(false);
+    setPopupMessage('');
+  };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -488,7 +512,7 @@ const CreatingLink = ({ onClose }) => {
             <div className="link__input-title">Ваша ссылка</div>
             <div className="input__container">
               <input
-                className="link-input"
+                className={inputTextError ? 'link-input input-error' : 'link-input'}
                 type="text"
                 placeholder="https://app.dub.co/aleksandr-vysochenko"
                 value={inputText}
@@ -498,6 +522,7 @@ const CreatingLink = ({ onClose }) => {
                 }}
               />
             </div>
+            {inputTextError && <span className="error-message-link">{inputTextError}</span>}
           </div>
           <div className="link__input">
             <div className="link__input-title">Короткая ссылка</div>
@@ -555,6 +580,7 @@ const CreatingLink = ({ onClose }) => {
                 />
               </div>
             </div>
+            {shortUrlError && <span className="error-message-link">{shortUrlError}</span>}
           </div>
           <div className="link__input">
             <div className="link__input-title">Тег ссылки</div>
@@ -729,6 +755,9 @@ const CreatingLink = ({ onClose }) => {
             Создать ссылку
           </button>
         </div>
+        {isAlertPopupVisible && (
+        <AlertPopup onClose={handleClosePopup} message={popupMessage} />
+      )}
       </div>
     )
   );
