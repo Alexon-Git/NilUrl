@@ -16,7 +16,7 @@ import {
   AlertPopup,
 } from "../../components";
 
-const CreatingLink = ({ onClose }) => {
+const CreatingLink = () => {
   const { isPremium } = usePremium();
 
   const navigate = useNavigate();
@@ -34,7 +34,6 @@ const CreatingLink = ({ onClose }) => {
   const [isNewPopupActive, setIsNewPopupActive] = useState(false);
   const [popupMessage, setPopupMessage] = useState(''); // Состояние для текста попапа
   const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); // Состояние для отображения попапа
-  const [isPopupVisible, setIsPopupVisible] = useState(true);
 
   const handleIconClick = () => {
     console.log("Icon clicked. Previous state:", isPopupActive);
@@ -456,16 +455,12 @@ const CreatingLink = ({ onClose }) => {
     if (isValid) {
       const linkData = collectLinkData();
       sendLinkDataToServer(linkData);
-      setIsPopupVisible(false); // Close the popup
-      onClose();
     }
   };
 
   const handleCreateLinkKeyDown = (event) => {
     if (event.key === "Enter") {
       handleCreateLink();
-      event.preventDefault(); // Prevent default form submission behavior
-      document.querySelector(".create__link__button").click();
     }
   };
 
@@ -498,7 +493,6 @@ const CreatingLink = ({ onClose }) => {
   };
 
   return (
-    isPopupVisible && (
       <div className="creating__link">
         <div className="creating__link__header">
           <span className="header__svg">
@@ -773,7 +767,6 @@ const CreatingLink = ({ onClose }) => {
         <AlertPopup onClose={handleClosePopup} message={popupMessage} />
       )}
       </div>
-    )
   );
 };
 
