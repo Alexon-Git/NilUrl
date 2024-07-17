@@ -23,9 +23,7 @@
 
 .left-image {
   position: absolute;
-  left: 0;
-  top: 51%;
-  transform: translateY(-50%);
+  left: 1px;
 }
 
 .right-image {
@@ -48,7 +46,7 @@
 .svg__infinity,
 .input__icon {
   width: 35px;
-  height: 36px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,6 +78,21 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 10001;
   box-sizing: border-box;
+}
+
+.error-message-link {
+  padding-top: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(220, 38, 38, 0.8);
+  text-align: left;
+  display: block;
+}
+
+.input-error {
+  border-color: rgb(220, 38, 38, 0.8);
+  color: rgb(220, 38, 38, 0.8);
+  border: 1px solid;
 }
 
 .tag-popup-container.active {

@@ -697,7 +697,7 @@ const RedactingLink = ({ pathS, pathL }) => {
                 backgroundColor: tagColors.color,
                 borderLeft: "1px solid transparent",
                 borderRight: "1px solid rgba(154, 154, 154, 0.5)",
-                borderRadius: "6px 0 0 6px",
+                borderRadius: "4px 0 0 4px",
               }}
             >
               <svg
