@@ -3,7 +3,6 @@ import "./creatingLink.css";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
 import { PRICEPAGE_ROUTE, FAQ_ROUTE } from "../../LogicComp/utils/Const";
 import { usePremium } from "../../LogicComp/DataProvider";
 import {
