@@ -3,7 +3,7 @@ import "./creatingLink.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
+import { PRICEPAGE_ROUTE, FAQ_ROUTE } from "../../LogicComp/utils/Const";
 import { usePremium } from "../../LogicComp/DataProvider";
 import {
   FAQ,
@@ -553,12 +553,6 @@ const RedactingLink = ({ pathS, pathL }) => {
     console.log("Скрыть подсказку");
   };
 
-  const handleIconClickFAQ = () => {
-    console.log("Открыть popup");
-    // Логика для открытия popup, например, изменение состояния
-    setIsNewPopupActive(!isNewPopupActive);
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -907,7 +901,9 @@ const RedactingLink = ({ pathS, pathL }) => {
                     alt="Подсказка:"
                     onMouseOver={handleMouseOver}
                     onMouseOut={handleMouseOut}
-                    onClick={handleIconClickFAQ} // Добавляем обработчик события onClick
+                    onClick={() => {
+                      navigate(FAQ_ROUTE);
+                    }}
                   ></img>
                 </span>
                 {isNewPopupActive && (
