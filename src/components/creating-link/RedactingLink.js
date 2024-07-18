@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
 import axios from "axios";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
 import { usePremium } from "../../LogicComp/DataProvider";
@@ -158,14 +159,8 @@ const RedactingLink = ({ pathS, pathL }) => {
 
   const validateInput = async () => {
     const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
-    const shortUrlPattern = /[A-Za-z0-9]{3,}$/;
-    const noSpecialCharsPattern = /^[A-Za-z0-9]+$/;
     const urlErrorText =
       "Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.";
-    const shortUrlErrorText =
-      "Короткая ссылка должна содержать минимум 3 символа.";
-    const specialCharsErrorText =
-      "Короткая ссылка не должна содержать специальных символов.";
     const tagLengthErrorText =
       "Название тэга должно быть не более 15 символов.";
     const commentLengthErrorText =
@@ -175,11 +170,9 @@ const RedactingLink = ({ pathS, pathL }) => {
     const iosUrlErrorText = "iOS URL должен быть действительной ссылкой.";
     const androidUrlErrorText =
       "Android URL должен быть действительной ссылкой.";
-    const bannedWordsErrorText = "Ваша ссылка содержит недопустимые слова.";
 
     // Reset error states before validation
     setInputTextError("");
-    setShortUrlError("");
     setTagError("");
     setCommentError("");
     setUtmError("");
@@ -188,43 +181,14 @@ const RedactingLink = ({ pathS, pathL }) => {
     setBannedWordsError("");
     setErrorMessage("");
 
-    if (!inputText || !shortUrl) {
+    if (!inputText) {
       setInputTextError("Поля ссылок обязательны для заполнения.");
-      setShortUrlError("Поля ссылок обязательны для заполнения.");
       return false;
     }
 
     if (!urlPattern.test(inputText)) {
       setInputTextError(urlErrorText);
       return false;
-    }
-
-    if (!noSpecialCharsPattern.test(shortUrl.replace("", ""))) {
-      setShortUrlError(specialCharsErrorText);
-      return false;
-    }
-
-    if (!shortUrlPattern.test(shortUrl)) {
-      setShortUrlError(shortUrlErrorText);
-      return false;
-    }
-
-    try {
-      const response = await fetch("https://nilurl.ru:8000/check_swear", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: shortUrl }),
-      });
-      const data = await response.json();
-
-      if (data.profanity) {
-        setBannedWordsError(bannedWordsErrorText);
-        return false;
-      }
-    } catch (error) {
-      console.error("Error checking profanity:", error);
     }
 
     if (tagValue.length > 15) {
@@ -525,12 +489,11 @@ const RedactingLink = ({ pathS, pathL }) => {
     setInputText(newText);
   };
 
-  const handleCreateLink = () => {
-    if (validateInput()) {
+  const handleCreateLink = async () => {
+    const isValid = await validateInput();
+    if (isValid) {
       const linkData = collectLinkData();
       sendLinkDataToServer(linkData);
-      //  setIsPopupVisible(false);
-      // onClose();
     }
   };
 
@@ -1013,6 +976,9 @@ const CommentComponent = ({ initialComment, commentError }) => {
     textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
   }, [val]);
 
+  CommentComponent.propTypes = {
+    commentError: PropTypes.string, // Ensure commentError is a string
+  };
   return (
     <div className="w-screen min-h-screen bg-neutral-950 flex justify-center items-center">
       <div className="text-neutral-200 bg-neutral-800 p-2 w-full max-w-[30rem] rounded flex flex-col space-y-2">
