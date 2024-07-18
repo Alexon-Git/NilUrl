@@ -17,6 +17,9 @@ function Reg() {
   const [serverVerificationCode, setServerVerificationCode] = useState("");
   const [timer, setTimer] = useState(0);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [popupMessage, setPopupMessage] = useState(""); 
+  const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); 
+  const [currentError, setCurrentError] = useState<string | null>(null);
 
   useEffect(() => {
     const access_token = getCookie("access_token");
@@ -36,8 +39,6 @@ function Reg() {
         setIsButtonDisabled(false);
     }
 }, [timer]);
-
-
 
   const getCookie = (name: string) => {
     const cookieArray = document.cookie.split(";");
@@ -82,53 +83,51 @@ function Reg() {
 
   const onButtonClick = () => {
     if (!email) {
-      alert("Пожалуйста, введите адрес электронной почты.");
+      setCurrentError("Пожалуйста, введите адрес электронной почты.");
       return;
     }
 
     if (!username) {
-      alert("Пожалуйста, введите имя пользователя.");
+      setCurrentError("Пожалуйста, введите имя пользователя.");
       return;
     }
 
     if (!password) {
-      alert("Пожалуйста, введите пароль.");
+      setCurrentError("Пожалуйста, введите пароль.");
       return;
     }
 
     if (!passwordSec) {
-      alert("Пожалуйста, введите подтверждение пароля.");
+      setCurrentError("Пожалуйста, введите подтверждение пароля.");
       return;
     }
 
     if (!isValidEmail(email)) {
-      alert("Пожалуйста, введите действительный адрес электронной почты.");
+      setCurrentError("Пожалуйста, введите действительный адрес электронной почты.");
       return;
     }
 
     if (!isValidUsername(username)) {
-      alert("Имя пользователя не должно содержать специальных символов.");
+      setCurrentError("Имя пользователя не должно содержать специальных символов.");
       return;
     }
 
     if (username.length < 3) {
-      alert("Имя пользователя должно быть не менее 3 символов.");
+      setCurrentError("Имя пользователя должно быть не менее 3 символов.");
       return;
     }
 
     if (password.length < 6) {
-      alert("Пароль должен содержать минимум 6 символов.");
+      setCurrentError("Пароль должен содержать минимум 6 символов.");
       return;
     }
 
     if (password !== passwordSec) {
-      if (ref.current !== null) {
-        ref.current.style.color = "red";
-        ref.current.innerText = "Не совпадают пароли";
-      }
+      setCurrentError("Не совпадают пароли.");
       return;
     }
 
+    setCurrentError(null);
     handleRegistration();
   };
 
@@ -150,17 +149,16 @@ function Reg() {
         if (data.success) {
           sendVerificationCode();
         } else {
-          alert("Email или имя пользователя уже заняты.");
+          setCurrentError("Email или имя пользователя уже заняты.");
         }
       })
       .catch((error) => {
         console.error("Ошибка:", error);
-        alert(
+        setCurrentError(
           "Произошла ошибка при проверке уникальности данных. Пожалуйста, попробуйте позже."
         );
       });
   };
-
 
   const sendVerificationCode = () => {
     const userData = {
@@ -181,20 +179,21 @@ function Reg() {
           setIsVerificationSent(true);
           setTimer(60); // Set the timer for 60 seconds
         } else {
-          alert("Не удалось отправить проверочный код. Пожалуйста, попробуйте снова.");
+          setCurrentError("Не удалось отправить проверочный код. Пожалуйста, попробуйте снова.");
         }
       })
       .catch((error) => {
         console.error("Ошибка:", error);
-        alert(
+        setCurrentError(
           "Произошла ошибка при отправке проверочного кода. Пожалуйста, попробуйте позже."
         );
       });
-};
+  };
+
   const resendVerificationCode = () => {
     sendVerificationCode();
     setTimer(60);
-};
+  };
 
   const verifyCodeAndRegister = () => {
     const userData = {
@@ -212,15 +211,14 @@ function Reg() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          // Можно добавить дополнительные действия по успешной верификации
           handleFinalRegistration(); // Вызываем функцию для окончательной регистрации
         } else {
-          alert("Регистрация не удалась. Пожалуйста, попробуйте снова.");
+          setCurrentError("Регистрация не удалась. Пожалуйста, попробуйте снова.");
         }
       })
       .catch((error) => {
         console.error("Ошибка:", error);
-        alert(
+        setCurrentError(
           "Произошла ошибка при регистрации. Пожалуйста, попробуйте позже."
         );
       });
@@ -243,17 +241,16 @@ function Reg() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          alert(
-            "Успешная регистрация."
-          );
+          setPopupMessage("Успешная регистрация.");
+          setAlertPopupVisibility(true);
           navigate("/login"); // Переход на страницу логина после успешной регистрации
         } else {
-          alert("Неверный код, попробуйте снова");
+          setCurrentError("Неверный код, попробуйте снова");
         }
       })
       .catch((error) => {
         console.error("Ошибка:", error);
-        alert(
+        setCurrentError(
           "Произошла ошибка при регистрации. Пожалуйста, попробуйте позже."
         );
       });
@@ -286,6 +283,7 @@ function Reg() {
           <p className="p1">Начните создавать короткие ссылки.</p>
         </div>
         <div className="d3_2">
+          {currentError && <div className="error-message-link">{currentError}</div>}
           {!isVerificationSent ? (
             <>
               <form className="f3_1">
@@ -411,4 +409,4 @@ function Reg() {
   );
 }
 
-export default Reg; 
+export default Reg;
