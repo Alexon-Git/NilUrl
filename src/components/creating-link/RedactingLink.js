@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./creatingLink.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
 import { usePremium } from "../../LogicComp/DataProvider";
 import {
@@ -529,8 +530,6 @@ const RedactingLink = ({ pathS, pathL }) => {
     if (validateInput()) {
       const linkData = collectLinkData();
       sendLinkDataToServer(linkData);
-      //  setIsPopupVisible(false);
-      // onClose();
     }
   };
 
@@ -701,7 +700,6 @@ const RedactingLink = ({ pathS, pathL }) => {
     return <div>Страница обновляется до актуальных данных...</div>;
   }
   return (
-    //  isPopupVisible && (
     <div className="creating__link">
       <div className="creating__link__header">
         <span className="header__svg">
@@ -997,7 +995,6 @@ const RedactingLink = ({ pathS, pathL }) => {
         </button>
       </div>
     </div>
-    // )
   );
 };
 
@@ -1012,6 +1009,10 @@ const CommentComponent = ({ initialComment, commentError }) => {
     textAreaRef.current.style.height = "auto";
     textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
   }, [val]);
+
+  CommentComponent.propTypes = {
+    commentError: PropTypes.string, // Ensure commentError is a string
+  };
 
   return (
     <div className="w-screen min-h-screen bg-neutral-950 flex justify-center items-center">
@@ -1196,6 +1197,10 @@ const UTMInputs = ({ initialUTM, utmError }) => {
       )}
     </div>
   );
+};
+
+UTMInputs.propTypes = {
+  utmError: PropTypes.string, // Убедитесь, что utmError является строкой
 };
 
 const IOSComponent = ({ initialURL, iosUrlError }) => {
