@@ -3,6 +3,7 @@ import "./settings-form.css";
 import { DeleteAccountModal, Overlay } from "../../components";
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
+import AlertPopup from "../popups/AlertPopup";
 
 const SettingsForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,12 @@ const SettingsForm = () => {
   });
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const [popupMessage, setPopupMessage] = useState(""); 
+  const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); 
+  const [errors, setErrors] = useState({
+    username: "",
+    email: "",
+  });
 
   useEffect(() => {
     const accessToken = Cookies.get('access_token');
@@ -52,19 +59,27 @@ const SettingsForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let isValid = true;
+    let newErrors = { username: "", email: "" };
 
     if (!validateEmail(formData.email)) {
-      alert('Email должен быть действительным.');
-      return;
+      newErrors.email = 'Email должен быть действительным.';
+      isValid = false;
     }
 
     if (formData.username.length < 3) {
-      alert('Имя пользователя должно быть не менее 3 символов.');
-      return;
+      newErrors.username = 'Имя пользователя должно быть не менее 3 символов.';
+      isValid = false;
     }
 
     if (containsSpecialCharacters(formData.username)) {
-      alert('Имя пользователя не должно содержать специальных символов.');
+      newErrors.username = 'Имя пользователя не должно содержать специальных символов.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    if (!isValid) {
       return;
     }
 
@@ -79,17 +94,20 @@ const SettingsForm = () => {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          alert('Изменения сохранены успешно.');
+          setPopupMessage("Изменения сохранены успешно.");
+          setAlertPopupVisibility(true);
           Cookies.set('access_token', data.access_token, { expires: 1 });
           localStorage.setItem('refresh_token', data.refresh_token);
         } else {
           const text = data.message;
           window.location.reload();
-          alert(text);
+          setPopupMessage(text);
+          setAlertPopupVisibility(true);
         }
       })
       .catch(error => {
-        alert('Ошибка при выполнении запроса.');
+        setPopupMessage("Ошибка при выполнении запроса.");
+        setAlertPopupVisibility(true);
         console.error('Error:', error);
       });
   };
@@ -101,6 +119,7 @@ const SettingsForm = () => {
       name: "username",
       value: formData.username,
       maxLength: 32,
+      error: errors.username,
     },
     {
       title: "Ваш email",
@@ -108,6 +127,7 @@ const SettingsForm = () => {
       name: "email",
       value: formData.email,
       maxLength: undefined,
+      error: errors.email,
     },
   ];
 
@@ -127,7 +147,9 @@ const SettingsForm = () => {
                 <p className="title">{item.title}</p>
                 <p className="description">{item.description}</p>
                 <input
-                  className="input"
+                  className={
+                    item.error ? "input input-error" : "input"
+                  }
                   type="text"
                   placeholder={item.value}
                   name={item.name}
@@ -135,6 +157,9 @@ const SettingsForm = () => {
                   maxLength={item.maxLength}
                   onChange={handleChange}
                 />
+                {item.error && (
+                  <span className="error-message-link">{item.error}</span>
+                )}
                 <div className="settings__controls__form-footer">
                   <p className="description">
                     {item.name === "username"
