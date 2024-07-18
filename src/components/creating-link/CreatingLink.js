@@ -621,7 +621,7 @@ const CreatingLink = () => {
               <span className="static-text">https://nilurl.ru/</span>
               <input
                 className={
-                  shortUrlError
+                  shortUrlError || bannedWordsError
                     ? "link-input-short input-error"
                     : "link-input-short"
                 }
@@ -634,6 +634,9 @@ const CreatingLink = () => {
           </div>
           {shortUrlError && (
             <span className="error-message-link">{shortUrlError}</span>
+          )}
+          {bannedWordsError && (
+            <span className="error-message-link">{bannedWordsError}</span>
           )}
         </div>
         <div className="link__input">
