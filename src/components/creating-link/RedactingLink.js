@@ -10,12 +10,15 @@ import {
   Calendar,
   TagList,
   UpgradeToProPopup,
+  AlertPopup,
 } from "../../components";
 
 const RedactingLink = ({ pathS, pathL }) => {
   const navigate = useNavigate();
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [isNewPopupActive, setIsNewPopupActive] = useState(false);
+  const [popupMessage, setPopupMessage] = useState(""); // Состояние для текста попапа
+  const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); // Состояние для отображения попапа
   // const [isPopupVisible, setIsPopupVisible] = useState(true);
 
   const handleIconClick = () => {
@@ -133,14 +136,16 @@ const RedactingLink = ({ pathS, pathL }) => {
       const result = await response.json();
 
       if (result.status === "success") {
-        alert("Ссылка удалена успешно!");
+        setPopupMessage("Ссылка успешно удалена!");
+        setAlertPopupVisibility(true);
         window.location.reload();
       } else {
         alert(result.message);
       }
     } catch (error) {
       console.error("Ошибка:", error);
-      alert("Возникла ошибка при удалении ссылки.");
+      setPopupMessage("Возникла ошибка при удалении ссылки!");
+      setAlertPopupVisibility(true);
     }
   };
 
@@ -151,59 +156,93 @@ const RedactingLink = ({ pathS, pathL }) => {
     android: false,
   });
 
-  const validateInput = () => {
+  const validateInput = async () => {
     const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
-    const shortUrlPattern = /^https:\/\/nilurl\.ru\/[A-Za-z0-9]{3,}$/;
+    const shortUrlPattern = /[A-Za-z0-9]{3,}$/;
     const noSpecialCharsPattern = /^[A-Za-z0-9]+$/;
-    const urlError =
+    const urlErrorText =
       "Некорректный формат ссылки. Ваша ссылка должна начинаться с http:// или https://.";
-    const shortUrlError =
-      "Короткая ссылка должна начинаться с https://nilurl.ru/ и содержать минимум 3 символа после https://nilurl.ru/.";
-    const specialCharsError =
+    const shortUrlErrorText =
+      "Короткая ссылка должна содержать минимум 3 символа.";
+    const specialCharsErrorText =
       "Короткая ссылка не должна содержать специальных символов.";
-    const tagLengthError = "Название тэга должно быть не более 15 символов.";
-    const commentLengthError = "Комментарий должен быть не более 500 символов.";
-    const utmLengthError = "Каждое поле UTM должно быть не более 50 символов.";
-    const iosUrlError = "iOS URL должен быть действительной ссылкой.";
-    const androidUrlError = "Android URL должен быть действительной ссылкой.";
+    const tagLengthErrorText =
+      "Название тэга должно быть не более 15 символов.";
+    const commentLengthErrorText =
+      "Комментарий должен быть не более 500 символов.";
+    const utmLengthErrorText =
+      "Каждое поле UTM должно быть не более 50 символов.";
+    const iosUrlErrorText = "iOS URL должен быть действительной ссылкой.";
+    const androidUrlErrorText =
+      "Android URL должен быть действительной ссылкой.";
+    const bannedWordsErrorText = "Ваша ссылка содержит недопустимые слова.";
+
+    // Reset error states before validation
+    setInputTextError("");
+    setShortUrlError("");
+    setTagError("");
+    setCommentError("");
+    setUtmError("");
+    setIosUrlError("");
+    setAndroidUrlError("");
+    setBannedWordsError("");
+    setErrorMessage("");
 
     if (!inputText || !shortUrl) {
-      alert("Поля ваша ссылка и короткая ссылка обязательны для заполнения.");
+      setInputTextError("Поля ссылок обязательны для заполнения.");
+      setShortUrlError("Поля ссылок обязательны для заполнения.");
       return false;
     }
 
     if (!urlPattern.test(inputText)) {
-      alert(urlError);
+      setInputTextError(urlErrorText);
+      return false;
+    }
+
+    if (!noSpecialCharsPattern.test(shortUrl.replace("", ""))) {
+      setShortUrlError(specialCharsErrorText);
       return false;
     }
 
     if (!shortUrlPattern.test(shortUrl)) {
-      alert(shortUrlError);
+      setShortUrlError(shortUrlErrorText);
       return false;
     }
 
-    if (
-      !noSpecialCharsPattern.test(shortUrl.replace("https://nilurl.ru/", ""))
-    ) {
-      alert(specialCharsError);
-      return false;
+    try {
+      const response = await fetch("https://nilurl.ru:8000/check_swear", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: shortUrl }),
+      });
+      const data = await response.json();
+
+      if (data.profanity) {
+        setBannedWordsError(bannedWordsErrorText);
+        return false;
+      }
+    } catch (error) {
+      console.error("Error checking profanity:", error);
     }
 
     if (tagValue.length > 15) {
-      alert(tagLengthError);
+      setTagError(tagLengthErrorText);
       return false;
     }
 
     const commentInput = getCommentData();
     if (commentInput && commentInput.length > 500) {
-      alert(commentLengthError);
+      setCommentError(commentLengthErrorText);
       return false;
     }
 
-    const utmData = getUTMData();
+    const utmData = getUTMData(); // Получаем данные UTM
+    // Проверяем данные UTM и устанавливаем ошибку при необходимости
     for (const key in utmData) {
       if (utmData[key].length > 50) {
-        alert(utmLengthError);
+        setUtmError(utmLengthErrorText);
         return false;
       }
     }
@@ -212,7 +251,7 @@ const RedactingLink = ({ pathS, pathL }) => {
       toggles.find((toggle) => toggle.id === "ios").checked &&
       !urlPattern.test(getIOSData())
     ) {
-      alert(iosUrlError);
+      setIosUrlError(iosUrlErrorText);
       return false;
     }
 
@@ -220,17 +259,29 @@ const RedactingLink = ({ pathS, pathL }) => {
       toggles.find((toggle) => toggle.id === "android").checked &&
       !urlPattern.test(getAndroidData())
     ) {
-      alert(androidUrlError);
+      setAndroidUrlError(androidUrlErrorText);
       return false;
     }
 
     return true;
   };
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [inputText, setInputText] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [tagValue, setTagValue] = useState("");
+
+  const [inputTextError, setInputTextError] = useState(false);
+  const [shortUrlError, setShortUrlError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [tagError, setTagError] = useState("");
+  const [commentError, setCommentError] = useState("");
+  const [utmError, setUtmError] = useState("");
+  const [iosUrlError, setIosUrlError] = useState("");
+  const [androidUrlError, setAndroidUrlError] = useState("");
+  const [bannedWordsError, setBannedWordsError] = useState("");
+
   const [tagColors, setTagColors] = useState({
     svgColor: "black",
     color: "transparent",
@@ -240,9 +291,14 @@ const RedactingLink = ({ pathS, pathL }) => {
       id: "comment",
       title: "Комментарий",
       checked: true,
-      info: <CommentComponent />,
+      info: <CommentComponent commentError={commentError} />,
     },
-    { id: "utm", title: "UTM-метка", checked: true, info: <UTMInputs /> },
+    {
+      id: "utm",
+      title: "UTM-метка",
+      checked: true,
+      info: <UTMInputs utmError={utmError} />,
+    },
     {
       id: "date",
       title: "Дата окончания",
@@ -253,15 +309,62 @@ const RedactingLink = ({ pathS, pathL }) => {
       id: "ios",
       title: "iOS Targeting",
       checked: true,
-      info: <IOSComponent />,
+      info: <IOSComponent iosUrlError={iosUrlError} />,
     },
     {
       id: "android",
       title: "Android Targeting",
       checked: true,
-      info: <AndroidComponent />,
+      info: <AndroidComponent androidUrlError={androidUrlError}/>,
     },
   ]);
+
+  useEffect(() => {
+    setToggles((prevToggles) =>
+      prevToggles.map((toggle) =>
+        toggle.id === "comment"
+          ? {
+              ...toggle,
+              info: <CommentComponent commentError={commentError} />,
+            }
+          : toggle
+      )
+    );
+  }, [commentError]);
+
+  useEffect(() => {
+    setToggles((prevToggles) =>
+      prevToggles.map((toggle) =>
+        toggle.id === "utm"
+          ? { ...toggle, info: <UTMInputs utmError={utmError} /> }
+          : toggle
+      )
+    );
+  }, [utmError]);
+
+  useEffect(() => {
+    setToggles((prevToggles) =>
+      prevToggles.map((toggle) => {
+        if (toggle.id === "ios") {
+          return { ...toggle, info: <IOSComponent iosUrlError={iosUrlError} /> };
+        } else {
+          return toggle;
+        }
+      })
+    );
+  }, [iosUrlError]);
+  
+  useEffect(() => {
+    setToggles((prevToggles) =>
+      prevToggles.map((toggle) => {
+        if (toggle.id === "android") {
+          return { ...toggle, info: <AndroidComponent androidUrlError={androidUrlError} /> };
+        } else {
+          return toggle;
+        }
+      })
+    );
+  }, [androidUrlError]);
 
   const sendLinkDataToServer = async (data) => {
     try {
@@ -277,11 +380,13 @@ const RedactingLink = ({ pathS, pathL }) => {
       const result = await response.json();
 
       if (result.status === "success") {
-        alert("Данные успешно изменены!");
+        setPopupMessage("Данные успешно изменены!");
+        setAlertPopupVisibility(true);
         window.location.reload();
       } else {
         const message = result.message;
-        alert(message);
+        setPopupMessage(message);
+        setAlertPopupVisibility(true);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -560,7 +665,8 @@ const RedactingLink = ({ pathS, pathL }) => {
           );
         } else {
           const text = data.message;
-          alert(text);
+          setPopupMessage(text);
+          setAlertPopupVisibility(true);
           setTimeout(() => {
             window.location.reload();
           }, 1000);
@@ -622,7 +728,9 @@ const RedactingLink = ({ pathS, pathL }) => {
           <div className="link__input-title">Ваша ссылка</div>
           <div className="input__container">
             <input
-              className="link-input"
+              className={
+                inputTextError ? "link-input input-error" : "link-input"
+              }
               type="text"
               placeholder="https://app.dub.co/aleksandr-vysochenko"
               value={inputText}
@@ -632,6 +740,9 @@ const RedactingLink = ({ pathS, pathL }) => {
               }}
             />
           </div>
+          {inputTextError && (
+            <span className="error-message-link">{inputTextError}</span>
+          )}
         </div>
         <div className="link__input">
           <div className="link__input-title">Короткая ссылка</div>
@@ -727,7 +838,9 @@ const RedactingLink = ({ pathS, pathL }) => {
               </div>
             )}
             <input
-              className="link-input png"
+              className={
+                tagError ? "link-input png input-error" : "link-input png"
+              }
               type="text"
               placeholder="Название тега"
               value={tagValue}
@@ -782,6 +895,7 @@ const RedactingLink = ({ pathS, pathL }) => {
               </div>
             </div>
           </div>
+          {tagError && <span className="error-message-link">{tagError}</span>}
         </div>
         <div className="link__functional">
           <p className="link__functional-title">Функционал</p>
@@ -887,7 +1001,7 @@ const RedactingLink = ({ pathS, pathL }) => {
   );
 };
 
-const CommentComponent = ({ initialComment }) => {
+const CommentComponent = ({ initialComment, commentError }) => {
   const textAreaRef = useRef(null);
   const [val, setVal] = useState(initialComment);
   const handleChange = (e) => {
@@ -903,19 +1017,26 @@ const CommentComponent = ({ initialComment }) => {
     <div className="w-screen min-h-screen bg-neutral-950 flex justify-center items-center">
       <div className="text-neutral-200 bg-neutral-800 p-2 w-full max-w-[30rem] rounded flex flex-col space-y-2">
         <textarea
-          className="p-1 bg-neutral-700 outline-none rounded border border-gray-300 custom-textarea text-neutral-300"
+          className={
+            commentError
+              ? "p-1 bg-neutral-700 outline-none rounded border border-gray-300 custom-textarea text-neutral-300 input-error"
+              : "p-1 bg-neutral-700 outline-none rounded border border-gray-300 custom-textarea text-neutral-300"
+          }
           placeholder="Добавить комментарий"
           value={val}
           onChange={handleChange}
           rows="2"
           ref={textAreaRef}
         ></textarea>
+        {commentError && (
+          <span className="error-message-link">{commentError}</span>
+        )}
       </div>
     </div>
   );
 };
 
-const UTMInputs = ({ initialUTM }) => {
+const UTMInputs = ({ initialUTM, utmError }) => {
   const [utmReferral, setUtmReferral] = useState("");
   const [utmSource, setUtmSource] = useState("");
   const [utmMedium, setUtmMedium] = useState("");
@@ -1068,11 +1189,16 @@ const UTMInputs = ({ initialUTM }) => {
           onChange={handleCheckboxChange(setUtmIOC)}
         />
       </div>
+      {utmError && (
+        <span className="error-message-link" style={{ marginBottom: "10px" }}>
+          {utmError}
+        </span>
+      )}
     </div>
   );
 };
 
-const IOSComponent = ({ initialURL }) => {
+const IOSComponent = ({ initialURL, iosUrlError }) => {
   const [inputValue_IOS, setInputValue_IOS] = useState(initialURL);
 
   const handleInputChange = (event) => {
@@ -1080,17 +1206,22 @@ const IOSComponent = ({ initialURL }) => {
   };
 
   return (
+    <>
     <input
-      className="ios-input"
+    className={iosUrlError ? "ios-input input-error" : "ios-input"}
       type="text"
       placeholder="https://apps.apple.com/app/18362974"
       value={inputValue_IOS}
       onChange={handleInputChange}
     />
+    {iosUrlError && (
+      <span className="error-message-link">{iosUrlError}</span>
+    )}
+    </>
   );
 };
 
-const AndroidComponent = ({ initialURL }) => {
+const AndroidComponent = ({ initialURL, androidUrlError }) => {
   const [inputValue_android, setInputValue_android] = useState(initialURL);
 
   const handleInputChange = (event) => {
@@ -1098,13 +1229,18 @@ const AndroidComponent = ({ initialURL }) => {
   };
 
   return (
+    <>
     <input
-      className="android-input"
+    className={androidUrlError ? "android-input input-error" : "android-input"}
       type="text"
       placeholder="https://play.google.com/store/apps/details?id=18362974"
       value={inputValue_android}
       onChange={handleInputChange}
     />
+    {androidUrlError && (
+      <span className="error-message-link">{androidUrlError}</span>
+    )}
+    </>
   );
 };
 

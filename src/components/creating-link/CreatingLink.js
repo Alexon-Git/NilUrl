@@ -276,13 +276,13 @@ const CreatingLink = () => {
       id: "ios",
       title: "iOS Targeting",
       checked: false,
-      info: <IOSComponent />,
+      info: <IOSComponent iosUrlError={iosUrlError} />,
     },
     {
       id: "android",
       title: "Android Targeting",
       checked: false,
-      info: <AndroidComponent />,
+      info: <AndroidComponent androidUrlError={androidUrlError}/>,
     },
   ]);
 
@@ -308,6 +308,30 @@ const CreatingLink = () => {
       )
     );
   }, [utmError]);
+
+  useEffect(() => {
+    setToggles((prevToggles) =>
+      prevToggles.map((toggle) => {
+        if (toggle.id === "ios") {
+          return { ...toggle, info: <IOSComponent iosUrlError={iosUrlError} /> };
+        } else {
+          return toggle;
+        }
+      })
+    );
+  }, [iosUrlError]);
+  
+  useEffect(() => {
+    setToggles((prevToggles) =>
+      prevToggles.map((toggle) => {
+        if (toggle.id === "android") {
+          return { ...toggle, info: <AndroidComponent androidUrlError={androidUrlError} /> };
+        } else {
+          return toggle;
+        }
+      })
+    );
+  }, [androidUrlError]);
 
   const sendLinkDataToServer = async (data) => {
     try {
@@ -984,7 +1008,7 @@ UTMInputs.propTypes = {
   utmError: PropTypes.string, // Убедитесь, что utmError является строкой
 };
 
-const IOSComponent = () => {
+const IOSComponent = ({ iosUrlError }) => {
   const [inputValue_IOS, setInputValue_IOS] = useState("");
 
   const handleInputChange = (event) => {
@@ -992,17 +1016,22 @@ const IOSComponent = () => {
   };
 
   return (
-    <input
-      className="ios-input"
-      type="text"
-      placeholder="https://apps.apple.com/app/18362974"
-      value={inputValue_IOS}
-      onChange={handleInputChange}
-    />
+    <div>
+      <input
+        className={iosUrlError ? "ios-input input-error" : "ios-input"}
+        type="text"
+        placeholder="https://apps.apple.com/app/18362974"
+        value={inputValue_IOS}
+        onChange={handleInputChange}
+      />
+      {iosUrlError && (
+        <span className="error-message-link">{iosUrlError}</span>
+      )}
+    </div>
   );
 };
 
-const AndroidComponent = () => {
+const AndroidComponent = ({ androidUrlError }) => {
   const [inputValue_android, setInputValue_android] = useState("");
 
   const handleInputChange = (event) => {
@@ -1010,13 +1039,18 @@ const AndroidComponent = () => {
   };
 
   return (
-    <input
-      className="android-input"
-      type="text"
-      placeholder="https://play.google.com/store/apps/details?id=18362974"
-      value={inputValue_android}
-      onChange={handleInputChange}
-    />
+    <div>
+      <input
+        className={androidUrlError ? "android-input input-error" : "android-input"}
+        type="text"
+        placeholder="https://play.google.com/store/apps/details?id=18362974"
+        value={inputValue_android}
+        onChange={handleInputChange}
+      />
+      {androidUrlError && (
+        <span className="error-message-link">{androidUrlError}</span>
+      )}
+    </div>
   );
 };
 

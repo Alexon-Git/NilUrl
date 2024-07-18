@@ -13,7 +13,7 @@ const AlertPopup = ({ onClose, message }) => {
   return (
     <div className="popup-overlay" onClick={handleClickOutside}>
       <div className="popup-container" ref={popupRef}>
-        <p className="popup-message">
+        <p className="popup-message-not-margin">
           {message}
         </p>
       </div>

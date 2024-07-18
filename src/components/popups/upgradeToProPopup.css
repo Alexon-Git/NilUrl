@@ -35,6 +35,13 @@
   text-align: center;
 }
 
+.popup-message-not-margin {
+  font-family: "Helvetica Neue Cyr";
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+}
+
 .popup-button {
   padding: 10px 15px;
   border-radius: 10px;
