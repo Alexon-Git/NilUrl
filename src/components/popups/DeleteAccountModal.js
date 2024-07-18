@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./deleteAccountModal.css";
 import Cookies from 'js-cookie';
+import AlertPopup from "../popups/AlertPopup";
 import { useNavigate } from "react-router-dom";
 
 
 const DeleteAccountModal = ({ onClose }) => {
+  const [popupMessage, setPopupMessage] = useState(""); 
+  const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); 
   const navigate = useNavigate();
   const handleDeleteAccount = () => {
     fetch('http://localhost:8000/delete_account.php', {
@@ -18,18 +21,21 @@ const DeleteAccountModal = ({ onClose }) => {
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        alert('Ваш аккаунт успешно удален.');
+        setPopupMessage("Ваш аккаунт успешно удален.");
+        setAlertPopupVisibility(true);
         // Очищаем куки и localStorage
         Cookies.remove('access_token');
         localStorage.removeItem('refresh_token');
         
         navigate('/login');
       } else {
-        alert('Ошибка при удалении аккаунта.');
+        setPopupMessage("Ошибка при удалении аккаунта.");
+        setAlertPopupVisibility(true);
       }
     })
     .catch(error => {
-      alert('Ошибка при выполнении запроса.');
+      setPopupMessage("Ошибка при выполнении запроса.");
+      setAlertPopupVisibility(true);
       console.error('Error:', error);
     });
   };

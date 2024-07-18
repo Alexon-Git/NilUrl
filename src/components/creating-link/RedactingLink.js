@@ -3,7 +3,8 @@ import "./creatingLink.css";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
+import PropTypes from "prop-types";
+import { PRICEPAGE_ROUTE, FAQ_ROUTE } from "../../LogicComp/utils/Const";
 import { usePremium } from "../../LogicComp/DataProvider";
 import {
   FAQ,
@@ -517,12 +518,6 @@ const RedactingLink = ({ pathS, pathL }) => {
     console.log("Скрыть подсказку");
   };
 
-  const handleIconClickFAQ = () => {
-    console.log("Открыть popup");
-    // Логика для открытия popup, например, изменение состояния
-    setIsNewPopupActive(!isNewPopupActive);
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -664,7 +659,6 @@ const RedactingLink = ({ pathS, pathL }) => {
     return <div>Страница обновляется до актуальных данных...</div>;
   }
   return (
-    //  isPopupVisible && (
     <div className="creating__link">
       <div className="creating__link__header">
         <span className="header__svg">
@@ -872,7 +866,9 @@ const RedactingLink = ({ pathS, pathL }) => {
                     alt="Подсказка:"
                     onMouseOver={handleMouseOver}
                     onMouseOut={handleMouseOut}
-                    onClick={handleIconClickFAQ} // Добавляем обработчик события onClick
+                    onClick={() => {
+                      navigate(FAQ_ROUTE);
+                    }}
                   ></img>
                 </span>
                 {isNewPopupActive && (
@@ -960,7 +956,6 @@ const RedactingLink = ({ pathS, pathL }) => {
         </button>
       </div>
     </div>
-    // )
   );
 };
 
@@ -1162,6 +1157,10 @@ const UTMInputs = ({ initialUTM, utmError }) => {
       )}
     </div>
   );
+};
+
+UTMInputs.propTypes = {
+  utmError: PropTypes.string, // Убедитесь, что utmError является строкой
 };
 
 const IOSComponent = ({ initialURL, iosUrlError }) => {

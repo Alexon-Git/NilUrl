@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import CryptoJS from "crypto-js";
 import { usePremium } from "../../LogicComp/DataProvider";
 import { useNavigate } from "react-router-dom";
-import { PRICEPAGE_ROUTE } from "../../LogicComp/utils/Const";
+import { PRICEPAGE_ROUTE, FAQ_ROUTE } from "../../LogicComp/utils/Const";
 
 import {
   FAQ,
@@ -537,12 +537,6 @@ const CreatingLink = () => {
     console.log("Скрыть подсказку");
   };
 
-  const handleIconClickFAQ = () => {
-    console.log("Открыть popup");
-    // Логика для открытия popup, например, изменение состояния
-    setIsNewPopupActive(!isNewPopupActive);
-  };
-
   ////////
   const [tags, setTags] = useState([]);
   ///////////////
@@ -778,7 +772,9 @@ const CreatingLink = () => {
                     alt="Подсказка:"
                     onMouseOver={handleMouseOver}
                     onMouseOut={handleMouseOut}
-                    onClick={handleIconClickFAQ} // Добавляем обработчик события onClick
+                    onClick={() => {
+                      navigate(FAQ_ROUTE);
+                    }}
                   ></img>
                 </span>
                 {isNewPopupActive && (

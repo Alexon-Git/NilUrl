@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./pricesBlock.css";
 import { BackImage, Privilege, BuyButton, Slider, FreeButton } from "../../components";
 import { useNavigate } from "react-router-dom";
+import AlertPopup from "../popups/AlertPopup";
 import { MAINPAGE_ROUTE, LOGINPAGE_ROUTE } from "../../LogicComp/utils/Const";
 
 const PricesBlock = () => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState([false, false, false]);
   const [registeredUsers, setRegisteredUsers] = useState(0);
+  const [popupMessage, setPopupMessage] = useState(""); 
+  const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); 
 
   useEffect(() => {
     fetch('https://nilurl.ru:8000/get_users_count.php')
@@ -33,7 +36,8 @@ const PricesBlock = () => {
   };
 
   const handleBuyButtonClick = () => {
-    alert("Функция оплаты отключена на данный момент, воспользуйтесь бесплатной подпиской.");
+    setPopupMessage("Функция оплаты отключена на данный момент, воспользуйтесь бесплатной подпиской.");
+    setAlertPopupVisibility(true);
   };
 
   const priceBlocks = [
