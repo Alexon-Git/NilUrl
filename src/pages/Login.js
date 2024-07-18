@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { REGPAGE_ROUTE, MAINPAGE_ROUTE } from "../LogicComp/utils/Const";
 import { useState } from "react";
-import {BackImage} from "../components"
+import { BackImage } from "../components";
 import { Helmet } from 'react-helmet';
 import AlertPopup from "../../src/components/popups/AlertPopup";
 
@@ -13,6 +13,10 @@ function Log() {
   const [password, setPassword] = useState("");
   const [popupMessage, setPopupMessage] = useState(""); 
   const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); 
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
 
   useEffect(() => {
     const access_token = getCookie("access_token");
@@ -52,24 +56,33 @@ function Log() {
   };
 
   const handleLogin = () => {
+    let newErrors = { email: "", password: "" };
+    let isValid = true;
+
     if (!email) {
-      alert("Пожалуйста, введите адрес электронной почты.");
-            return;
+      newErrors.email = "Пожалуйста, введите адрес электронной почты.";
+      isValid = false;
     }
 
     if (!password) {
-      alert("Пожалуйста, введите пароль.");
-            return;
+      newErrors.password = "Пожалуйста, введите пароль.";
+      isValid = false;
     }
 
-    if (!isValidEmail(email)) {
-      alert("Пожалуйста, введите действительный адрес электронной почты.");
-            return;
+    if (email && !isValidEmail(email)) {
+      newErrors.email = "Пожалуйста, введите действительный адрес электронной почты.";
+      isValid = false;
     }
 
-    if (password.length < 6) {
-      alert("Пароль должен содержать минимум 6 символов.");
-            return;
+    if (password && password.length < 6) {
+      newErrors.password = "Пароль должен содержать минимум 6 символов.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    if (!isValid) {
+      return;
     }
 
     fetch("https://nilurl.ru:8000/check_loginData.php", {
@@ -86,8 +99,9 @@ function Log() {
           setCookie("access_token", response.access_token, 1);
           navigate("/links");
         } else {
-          alert("Неправильный email или пароль");
-                  }
+          setPopupMessage("Неправильный email или пароль");
+          setAlertPopupVisibility(true);
+        }
       })
       .catch((error) => {
         setPopupMessage("Ошибка при входе в систему. Пожалуйста, попробуйте позже.");
@@ -96,15 +110,11 @@ function Log() {
   };
 
   return (
-          
     <div className="d1">
-          <Helmet>
-            <title>Авторизация</title>
-          </Helmet>
-      <div
-        className="d2_1"
-        style={{ background: "linear-gradient(225deg, #e25186, #6059ff)" }}
-      >
+      <Helmet>
+        <title>Авторизация</title>
+      </Helmet>
+      <div className="d2_1" style={{ background: "linear-gradient(225deg, #e25186, #6059ff)" }}>
         <div className="slider-thumb"></div>
       </div>
       <div className="d2_2">
@@ -113,7 +123,7 @@ function Log() {
             <img
               src={BackImage}
               alt="Назад"
-              onClick={() => {navigate(MAINPAGE_ROUTE);}}
+              onClick={() => { navigate(MAINPAGE_ROUTE); }}
               style={{ width: '90px', height: 'auto' }}
             />
           </span>
@@ -128,7 +138,7 @@ function Log() {
           <p className="p1">Войдите, чтобы начать творить!</p>
         </div>
         <div className="d3_2">
-          <form className="f3_1">
+          <form className="f3_1" onSubmit={(e) => e.preventDefault()}>
             <input
               type="text"
               data-t="field:input-login"
@@ -137,15 +147,16 @@ function Log() {
               autoCorrect="off"
               autoCapitalize="off"
               autoComplete="username"
-              className="in3_1"
+              className={errors.email ? "in3_1 input-error" : "in3_1"}
               id="passp-field-login"
               name="login"
               placeholder="Электронная почта"
               value={email}
               onChange={onEmailChange}
             />
+            {errors.email && <span className="error-message-link">{errors.email}</span>}
           </form>
-          <form className="f3_2">
+          <form className="f3_2" onSubmit={(e) => e.preventDefault()}>
             <input
               type="password"
               data-t="field:input-login"
@@ -154,13 +165,14 @@ function Log() {
               autoCorrect="off"
               autoCapitalize="off"
               autoComplete="current-password"
-              className="in3_1"
+              className={errors.password ? "in3_1 input-error" : "in3_1"}
               id="passp-field-login"
               name="login"
               placeholder="Пароль"
               value={password}
               onChange={onPassChange}
             />
+            {errors.password && <span className="error-message-link">{errors.password}</span>}
           </form>
           <div style={{ display: "flex" }}>
             <button type="button" className="b3" onClick={handleLogin}>
