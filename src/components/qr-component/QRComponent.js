@@ -37,7 +37,6 @@ function QRComponent({pathS}) {
         qrCanvas.toBlob((blob) => {
             const item = new ClipboardItem({ "image/png": blob });
             navigator.clipboard.write([item]);
-            alert("QR code copied to clipboard!");
         }, "image/png");
     };
     img.src = url;

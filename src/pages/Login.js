@@ -5,11 +5,14 @@ import { REGPAGE_ROUTE, MAINPAGE_ROUTE } from "../LogicComp/utils/Const";
 import { useState } from "react";
 import {BackImage} from "../components"
 import { Helmet } from 'react-helmet';
+import AlertPopup from "../../src/components/popups/AlertPopup";
 
 function Log() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [popupMessage, setPopupMessage] = useState(""); 
+  const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); 
 
   useEffect(() => {
     const access_token = getCookie("access_token");
@@ -51,22 +54,22 @@ function Log() {
   const handleLogin = () => {
     if (!email) {
       alert("Пожалуйста, введите адрес электронной почты.");
-      return;
+            return;
     }
 
     if (!password) {
       alert("Пожалуйста, введите пароль.");
-      return;
+            return;
     }
 
     if (!isValidEmail(email)) {
       alert("Пожалуйста, введите действительный адрес электронной почты.");
-      return;
+            return;
     }
 
     if (password.length < 6) {
       alert("Пароль должен содержать минимум 6 символов.");
-      return;
+            return;
     }
 
     fetch("https://nilurl.ru:8000/check_loginData.php", {
@@ -84,10 +87,11 @@ function Log() {
           navigate("/links");
         } else {
           alert("Неправильный email или пароль");
-        }
+                  }
       })
       .catch((error) => {
-        alert("Ошибка при входе в систему. Пожалуйста, попробуйте позже.");
+        setPopupMessage("Ошибка при входе в систему. Пожалуйста, попробуйте позже.");
+        setAlertPopupVisibility(true);
       });
   };
 
