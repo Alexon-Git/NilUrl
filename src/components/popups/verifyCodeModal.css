@@ -1,0 +1,103 @@
+.modal {
+  position: absolute;
+  width: 80%;
+  max-width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.button-exit {
+  position: fixed;
+  display: grid;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: initial;
+  border: max(1px, 0.0625rem) solid #0000;
+  border-radius: 0.375rem;
+  transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: color, background-color, border-color;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.button-exit:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.button-exit:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.code-input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button.red {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.button.resend {
+  background-color: #5bc0de;
+  color: #fff;
+}
+
+.error-message {
+  color: red;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
