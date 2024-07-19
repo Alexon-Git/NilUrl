@@ -99,13 +99,13 @@ function Log() {
           setCookie("access_token", response.access_token, 1);
           navigate("/links");
         } else {
-          setPopupMessage("Неправильный email или пароль");
-          setAlertPopupVisibility(true);
+          newErrors.email = "Неправильный email или пароль";
+          isValid = false;
         }
       })
       .catch((error) => {
-        setPopupMessage("Ошибка при входе в систему. Пожалуйста, попробуйте позже.");
-        setAlertPopupVisibility(true);
+        newErrors.email = "Ошибка при входе в систему. Пожалуйста, попробуйте позже.";
+          isValid = false;
       });
   };
 
