@@ -131,6 +131,11 @@ const SettingsForm = () => {
     },
   ];
 
+  const handleClosePopup = () => {
+    setAlertPopupVisibility(false);
+    setPopupMessage("");
+  };
+
   return (
     <div className="main">
       <div className="title__container">
@@ -194,6 +199,9 @@ const SettingsForm = () => {
           </Overlay>
         )}
       </div>
+      {isAlertPopupVisible && (
+        <AlertPopup onClose={handleClosePopup} message={popupMessage} />
+      )}
     </div>
   );
 };

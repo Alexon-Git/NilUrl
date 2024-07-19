@@ -9,6 +9,11 @@ const CreateLinkNew = ({ highestKey, userStatus }) => {
   const [popupMessage, setPopupMessage] = useState(""); 
   const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); 
 
+  const handleClosePopup = () => {
+    setAlertPopupVisibility(false);
+    setPopupMessage("");
+  };
+
   const click = () => {
     if (userStatus === "free" && highestKey >= 15) {
       setPopupMessage(
@@ -37,6 +42,9 @@ const CreateLinkNew = ({ highestKey, userStatus }) => {
           <div className="CrLinkNewButtonText">Создать ссылку</div>
         </div>
       </div>
+      {isAlertPopupVisible && (
+        <AlertPopup onClose={handleClosePopup} message={popupMessage} />
+      )}
     </div>
   );
 };

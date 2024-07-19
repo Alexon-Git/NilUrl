@@ -35,6 +35,11 @@ const PricesBlock = () => {
     navigate(LOGINPAGE_ROUTE);
   };
 
+  const handleClosePopup = () => {
+    setAlertPopupVisibility(false);
+    setPopupMessage("");
+  };
+
   const handleBuyButtonClick = () => {
     setPopupMessage("Функция оплаты отключена на данный момент, воспользуйтесь бесплатной подпиской.");
     setAlertPopupVisibility(true);
@@ -178,6 +183,9 @@ const PricesBlock = () => {
           ))}
         </div>
       </main>
+      {isAlertPopupVisible && (
+        <AlertPopup onClose={handleClosePopup} message={popupMessage} />
+      )}
     </div>
   );
 };

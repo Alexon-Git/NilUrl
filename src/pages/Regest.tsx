@@ -2,7 +2,7 @@ import "./Regest.css";
 import { useNavigate } from "react-router-dom";
 import { LOGINPAGE_ROUTE, MAINPAGE_ROUTE } from "../LogicComp/utils/Const";
 import { useRef, useState, useEffect } from "react";
-import { BackImage } from "../components";
+import { BackImage, AlertPopup } from "../components";
 import { Helmet } from 'react-helmet';
 
 function Reg() {
@@ -256,6 +256,11 @@ function Reg() {
       });
   };
 
+  const handleClosePopup = () => {
+    setAlertPopupVisibility(false);
+    setPopupMessage("");
+  };
+
   return (
     <div className="d1">
       <Helmet>
@@ -405,6 +410,9 @@ function Reg() {
           </p>
         </div>
       </div>
+      {isAlertPopupVisible && (
+        <AlertPopup onClose={handleClosePopup} message={popupMessage} />
+      )}
     </div>
   );
 }

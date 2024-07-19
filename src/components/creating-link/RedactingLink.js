@@ -150,6 +150,11 @@ const RedactingLink = ({ pathS, pathL }) => {
     }
   };
 
+  const handleClosePopup = () => {
+    setAlertPopupVisibility(false);
+    setPopupMessage("");
+  };
+
   const [showPopups, setShowPopups] = useState({
     utm: false,
     date: false,
@@ -954,6 +959,9 @@ const RedactingLink = ({ pathS, pathL }) => {
           Сохранить
         </button>
       </div>
+      {isAlertPopupVisible && (
+        <AlertPopup onClose={handleClosePopup} message={popupMessage} />
+      )}
     </div>
   );
 };
