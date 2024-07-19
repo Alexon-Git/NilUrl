@@ -99,13 +99,18 @@ function Log() {
           setCookie("access_token", response.access_token, 1);
           navigate("/links");
         } else {
-          newErrors.email = "Неправильный email или пароль";
+          setErrors({
+            email: "Неправильный email или пароль",
+            password: ""
+          });
           isValid = false;
         }
       })
       .catch((error) => {
-        newErrors.email = "Ошибка при входе в систему. Пожалуйста, попробуйте позже.";
-          isValid = false;
+        setErrors({
+          email: "Ошибка при входе в систему. Пожалуйста, попробуйте позже.",
+          password: ""
+        });
       });
   };
 
