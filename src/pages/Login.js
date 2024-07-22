@@ -209,7 +209,7 @@ function Log() {
           setPopupMessage("Ваш пароль был отправлен на почту.");
           setAlertPopupVisibility(true);
           setTimeout(() => {
-            navigate('/login');
+            window.location.reload();
           }, 3000);
         } else {
           setErrors({
@@ -240,7 +240,7 @@ function Log() {
           setPopupMessage("Ваш аккаунт успешно разморожен.");
           setAlertPopupVisibility(true);
           setTimeout(() => {
-            navigate('/login');
+            window.location.reload();
           }, 3000);
         } else {
           setErrors({
@@ -418,6 +418,17 @@ function Log() {
                 </a>
                 .
               </p>
+              <p className="p3_1">
+                Забыли пароль?&nbsp;
+                <a
+                  className="a3_2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setIsRecoveryMode(true)}
+                >
+                  Восстановить
+                </a>
+                .
+                </p>
             </>
           )}
         </div>
