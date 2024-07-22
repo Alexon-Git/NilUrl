@@ -22,39 +22,38 @@ const LinkPageMainPart = () => {
       setLoading(false);
     }, 15000);
 
-    const accessToken = Cookies.get('access_token');
-    if (accessToken) {
-      const decodedToken = jwtDecode(accessToken);
-      const userId = decodedToken.user_id;
-      fetch(`https://nilurl.ru:8000/get_links.php?user_id=${userId}`)
-        .then(response => response.json())
-        .then(async data => {
-          if (data && data.length > 0) {
-            const linksWithSvg = await Promise.all(data.map(async (link, index) => {
-              const svgPath = await fetchFavicon(link.base_url);
-              return {
-                key: index + 1,
-                Data: link.date_now,
-                SvgPath: svgPath,
-                pathS: `nilurl.ru/${link.code_url}`,
-                pathL: link.base_url,
-                UTM: link.utm,
-                Android: !!link.android,
-                IOS: !!link.ios,
-                clicks: link.clicks,
-                svgColor: link.tag_svgcolor,
-                backgrounds: link.tag_backgrounds,
-                tagValue: link.tag || "Без тэга", 
-                timer_flag: link.timer_flag,
-                tag_flag: link.tag_flag,
-              };
-            }));
-            setLinks(linksWithSvg);
-          }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-    }
-
+   
+      fetch('https://nilurl.ru:8000/get_links.php', {
+        method: 'GET',
+        credentials: 'include', 
+      })
+      .then(response => response.json())
+      .then(async data => {
+        if (data && data.length > 0) {
+          const linksWithSvg = await Promise.all(data.map(async (link, index) => {
+            const svgPath = await fetchFavicon(link.base_url);
+            return {
+              key: index + 1,
+              Data: link.date_now,
+              SvgPath: svgPath,
+              pathS: `nilurl.ru/${link.code_url}`,
+              pathL: link.base_url,
+              UTM: link.utm,
+              Android: !!link.android,
+              IOS: !!link.ios,
+              clicks: link.clicks,
+              svgColor: link.tag_svgcolor,
+              backgrounds: link.tag_backgrounds,
+              tagValue: link.tag || "Без тэга", 
+              timer_flag: link.timer_flag,
+              tag_flag: link.tag_flag,
+            };
+          }));
+          setLinks(linksWithSvg);
+        }
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  
     return () => clearTimeout(timer);
   }, []);
 
