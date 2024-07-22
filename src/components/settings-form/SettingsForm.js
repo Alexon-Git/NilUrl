@@ -175,129 +175,134 @@ const SettingsForm = () => {
           </div>
           <form className="settings__controls__form" onSubmit={handleSubmit}>
             {formItems.map((item, index) => (
-              <div>
-              <div className="settings__controls__form-item" key={index}>
-                <p className="title">{item.title}</p>
-                <p className="description">{item.description}</p>
-                <input
-                  className={item.error ? "input input-error" : "input"}
-                  type="text"
-                  placeholder={item.value}
-                  name={item.name}
-                  value={item.value}
-                  maxLength={item.maxLength}
-                  onChange={handleChange}
-                />
-                {item.error && (
-                  <span className="error-message-link">{item.error}</span>
-                )}
-              </div>
-                              <div className="settings__controls__form-footer">
-                              <p className="description">
-                                {item.name === "username"
-                                  ? "Не менее 3 символов и не более 32 символов"
-                                  : "Email должен быть действительным"}
-                              </p>
-                              <button className="button" type="submit">
-                                Сохранить
-                              </button>
-                            </div>
-                            </div>
-            ))}
-            <div>
-            <div className="settings__controls__form-item">
-              <p className="title">Фотография профиля</p>
-              <label
-                htmlFor="profile-picture-upload"
-                className="profile-picture-upload"
-              >
-                <input
-                  id="profile-picture-upload"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  style={{ display: "none" }}
-                />
-                <div className="profile-picture-preview">
-                  {profilePicture ? (
-                    <img src={profilePicture} alt="Profile" />
-                  ) : (
-                    <svg
-                      width="100"
-                      height="100"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M12.12 12.78C12.05 12.77 11.96 12.77 11.88 12.78C10.12 12.72 8.71997 11.28 8.71997 9.50998C8.71997 7.69998 10.18 6.22998 12 6.22998C13.81 6.22998 15.28 7.69998 15.28 9.50998C15.27 11.28 13.88 12.72 12.12 12.78Z"
-                        stroke="#292D32"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M18.74 19.3801C16.96 21.0101 14.6 22.0001 12 22.0001C9.40001 22.0001 7.04001 21.0101 5.26001 19.3801C5.36001 18.4401 5.96001 17.5201 7.03001 16.8001C9.77001 14.9801 14.25 14.9801 16.97 16.8001C18.04 17.5201 18.64 18.4401 18.74 19.3801Z"
-                        stroke="#292D32"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                        stroke="#292D32"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+              <div key={index}>
+                <div className="settings__controls__form-item">
+                  <p className="title">{item.title}</p>
+                  <p className="description">{item.description}</p>
+                  <input
+                    className={item.error ? "input input-error" : "input"}
+                    type="text"
+                    placeholder={item.value}
+                    name={item.name}
+                    value={item.value}
+                    maxLength={item.maxLength}
+                    onChange={handleChange}
+                  />
+                  {item.error && (
+                    <span className="error-message-link">{item.error}</span>
                   )}
                 </div>
-              </label>
-              {profilePictureError && (
-                  <span className="error-message-link">
-                    {profilePictureError}
-                  </span>
-                )}
+                <div className="settings__controls__form-footer">
+                  <p className="description">
+                    {item.name === "username"
+                      ? "Не менее 3 символов и не более 32 символов"
+                      : "Email должен быть действительным"}
+                  </p>
+                  <button className="button" type="submit">
+                    Сохранить
+                  </button>
+                </div>
+              </div>
+            ))}
+            <div>
+              <div className="settings__controls__form-item">
+                <p className="title">Фотография профиля</p>
+                <p className="description">Загрузите изображение профиля</p>
+                <label
+                  htmlFor="profile-picture-upload"
+                  className="profile-picture-upload"
+                >
+                  <input
+                    id="profile-picture-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{ display: "none" }}
+                  />
+                  <div className="profile-picture-preview">
+                    {profilePicture ? (
+                      <img src={profilePicture} alt="Profile" />
+                    ) : (
+                      <svg
+                        width="100"
+                        height="100"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                            <path
+                              d="M12.12 12.78C12.05 12.77 11.96 12.77 11.88 12.78C10.12 12.72 8.71997 11.28 8.71997 9.50998C8.71997 7.69998 10.18 6.22998 12 6.22998C13.81 6.22998 15.28 7.69998 15.28 9.50998C15.27 11.28 13.88 12.72 12.12 12.78Z"
+                              stroke="#292D32"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M18.74 19.3801C16.96 21.0101 14.6 22.0001 12 22.0001C9.40001 22.0001 7.04001 21.0101 5.26001 19.3801C5.36001 18.4401 5.96001 17.5201 7.03001 16.8001C9.77001 14.9801 14.25 14.9801 16.97 16.8001C18.04 17.5201 18.64 18.4401 18.74 19.3801Z"
+                              stroke="#292D32"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                              stroke="#292D32"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        )}
+                      </div>
+                    </label>
+                    {profilePictureError && (
+                      <span className="error-message-link">
+                        {profilePictureError}
+                      </span>
+                    )}
+                  </div>
+                  <div className="settings__controls__form-footer">
+                    <p className="description">
+                      Принимаемые типы файлов: .png, .jpg. Максимальный размер
+                      файла: 2 МБ.
+                    </p>
+                    <button className="button" type="submit">
+                      Сохранить
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <div className="settings__controls__form-item redborder">
+                    <p className="title">Удалить аккаунт</p>
+                    <p className="description">
+                      Учетная запись и все связанные с ней ссылки будут
+                      полностью удалены
+                    </p>
+                  </div>
+                  <div className="settings__controls__form-footer redborder__footer">
+                    <p className="description"></p>
+                    <button
+                      className="button red"
+                      onClick={handleDeleteModalOpen}
+                    >
+                      Удалить аккаунт
+                    </button>
+                  </div>
+                </div>
+              </form>
+              {message && <div className="message">{message}</div>}
             </div>
-            <div className="settings__controls__form-footer">
-                <p className="description">
-                  Загрузите изображение профиля (макс. 2МБ)
-                </p>
-                <button className="button" type="submit">
-                  Сохранить
-                </button>
-              </div>
-              </div>
-              <div>
-            <div className="settings__controls__form-item redborder">
-              <p className="title">Удалить аккаунт</p>
-              <p className="description">
-                Учетная запись и все связанные с ней ссылки будут полностью
-                удалены
-              </p>
-            </div>
-            <div className="settings__controls__form-footer redborder__footer">
-                <p className="description"></p>
-                <button className="button red" onClick={handleDeleteModalOpen}>
-                  Удалить аккаунт
-                </button>
-              </div>
-              </div>
-          </form>
-          {message && <div className="message">{message}</div>}
+            {isDeleteModalOpen && (
+              <Overlay onClose={handleDeleteModalClose}>
+                <DeleteAccountModal onClose={handleDeleteModalClose} />
+              </Overlay>
+            )}
+          </div>
+          {isAlertPopupVisible && (
+            <AlertPopup onClose={handleClosePopup} message={popupMessage} />
+          )}
         </div>
-        {isDeleteModalOpen && (
-          <Overlay onClose={handleDeleteModalClose}>
-            <DeleteAccountModal onClose={handleDeleteModalClose} />
-          </Overlay>
-        )}
-      </div>
-      {isAlertPopupVisible && (
-        <AlertPopup onClose={handleClosePopup} message={popupMessage} />
-      )}
-    </div>
-  );
-};
+      );
+    };
 
-export default SettingsForm;
+    export default SettingsForm;

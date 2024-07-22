@@ -16,17 +16,16 @@
 }
 .CentreHeaderLinksPageC {
   display: inline-flex;
+  width: 100%;
   align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   gap: 25px;
 }
 .CentreHeaderLinksPageT {
   cursor: pointer;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
+  padding: 6px;
+  margin: 6px;
 }
 .SVGCircleLP {
   width: 32px;
