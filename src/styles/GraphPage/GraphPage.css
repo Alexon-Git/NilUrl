@@ -139,3 +139,22 @@
     display: flex;
 
 }
+
+.Options-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  @media (max-width: 900px) {
+    .Options-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+@media (max-width: 600px) {
+    .LinkAndPeriod {
+      flex-direction: column; /* Переводим элементы в колонну */
+      gap: 20px; /* Добавляем промежуток между элементами */
+    }
+  }
