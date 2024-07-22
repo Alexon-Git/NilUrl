@@ -30,7 +30,7 @@ const TopRefs = () => {
                     }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
                 {links.map((link, index) => (
-                    <div key={index} style={{ marginBottom: "15px", display: "flex", justifyContent: "space-between" }}>
+                   <div key={index} style={{ marginBottom: "15px", display: "flex", justifyContent: "space-between", padding: "0 15px" }}>
                         <div style={{ display: "flex" }}>
                             <svg style={{ marginRight: "10px" }} width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_421_18)">
