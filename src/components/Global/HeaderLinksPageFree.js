@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import {
   LINKSPAGE_ROUTE,
   SETTINGPAGE_ROUTE,
+  FAQ_ROUTE,
 } from "../../LogicComp/utils/Const";
 const HeaderLinksPage = () => {
   const [username, setUsername] = useState("");
@@ -122,7 +123,9 @@ const HeaderLinksPage = () => {
             <div className="header-popup">
               <p
                 className="header_button-exit"
-                onClick={handleLogout}
+                onClick={() => {
+                  navigator(FAQ_ROUTE);
+                }}
                 style={{ marginBottom: "15px" }}
               >
                 <svg
