@@ -20,10 +20,11 @@ function Log() {
   const [popupMessage, setPopupMessage] = useState("");
   const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false);
   const [errors, setErrors] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
+    verificationCode: '',
+    recoveryEmail: ''
   });
-
   useEffect(() => {
     const access_token = getCookie("access_token");
     if (access_token) {
@@ -70,6 +71,9 @@ function Log() {
 
   const onVerificationCodeChange = (event) => {
     setVerificationCode(event.target.value);
+  };
+  const onRecoveryEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const isValidEmail = (email) => {
@@ -155,18 +159,22 @@ function Log() {
         } else {
           setErrors({
             email: "Не удалось отправить проверочный код. Пожалуйста, попробуйте снова.",
-            password: ""
+            password: "",
+            verificationCode: "",
+            recoveryEmail: ""
           });
         }
       })
       .catch((error) => {
         setErrors({
           email: "Произошла ошибка при отправке проверочного кода. Пожалуйста, попробуйте позже.",
-          password: ""
+          password: "",
+          verificationCode: "",
+          recoveryEmail: ""
         });
       });
   };
-
+  
   const sendAccountUnlockCode = () => {
     fetch("https://nilurl.ru:8000/send_unlock_code.php", {
       method: "POST",
@@ -183,18 +191,22 @@ function Log() {
         } else {
           setErrors({
             email: "Не удалось отправить код разблокировки. Пожалуйста, попробуйте снова.",
-            password: ""
+            password: "",
+            verificationCode: "",
+            recoveryEmail: "Не удалось отправить код разблокировки. Пожалуйста, попробуйте снова."
           });
         }
       })
       .catch((error) => {
         setErrors({
           email: "Произошла ошибка при отправке кода разблокировки. Пожалуйста, попробуйте позже.",
-          password: ""
+          password: "",
+          verificationCode: "",
+          recoveryEmail: ""
         });
       });
   };
-
+  
   const verifyCodeAndRecover = () => {
     fetch("https://nilurl.ru:8000/verify_recovery_code.php", {
       method: "POST",
@@ -213,19 +225,23 @@ function Log() {
           }, 3000);
         } else {
           setErrors({
-            email: "Неверный проверочный код. Пожалуйста, попробуйте снова.",
-            password: ""
+            email: "",
+            password: "",
+            verificationCode: "Неверный проверочный код. Пожалуйста, попробуйте снова.",
+            recoveryEmail: ""
           });
         }
       })
       .catch((error) => {
         setErrors({
-          email: "Произошла ошибка при проверке проверочного кода. Пожалуйста, попробуйте позже.",
-          password: ""
+          email: "",
+          password: "",
+          verificationCode: "Произошла ошибка при проверке проверочного кода. Пожалуйста, попробуйте позже.",
+          recoveryEmail: ""
         });
       });
   };
-
+  
   const verifyUnlockCodeAndUnfreeze = () => {
     fetch("https://nilurl.ru:8000/verify_unlock_code.php", {
       method: "POST",
@@ -237,22 +253,26 @@ function Log() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setPopupMessage("Ваш аккаунт успешно разморожен.");
+          setPopupMessage("Ваш аккаунт был разблокирован.");
           setAlertPopupVisibility(true);
           setTimeout(() => {
             window.location.reload();
           }, 3000);
         } else {
           setErrors({
-            email: "Неверный код разблокировки. Пожалуйста, попробуйте снова.",
-            password: ""
+            email: "",
+            password: "",
+            verificationCode: "Неверный код разблокировки. Пожалуйста, попробуйте снова.",
+            recoveryEmail: ""
           });
         }
       })
       .catch((error) => {
         setErrors({
-          email: "Произошла ошибка при проверке кода разблокировки. Пожалуйста, попробуйте позже.",
-          password: ""
+          email: "",
+          password: "",
+          verificationCode: "Произошла ошибка при проверке кода разблокировки. Пожалуйста, попробуйте позже.",
+          recoveryEmail: ""
         });
       });
   };
@@ -287,80 +307,83 @@ function Log() {
           <p className="p1">Войдите, чтобы начать творить!</p>
         </div>
         <div className="d3_2">
-          {isAccountUnlockMode ? (
-            <>
-              <p className="p1">Ваш аккаунт был заморожен. Введите код разблокировки, отправленный на вашу почту.</p>
-              <form className="f3_2" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="text"
-                  data-t="field:input-verification"
-                  dir="ltr"
-                  aria-invalid="false"
-                  className="in3_1"
-                  id="passp-field-verification"
-                  name="verification"
-                  placeholder="Код разблокировки"
-                  value={verificationCode}
-                  onChange={onVerificationCodeChange}
-                />
-                <button onClick={sendAccountUnlockCode} type="button" className="b3" disabled={isButtonDisabled}>
-                  {isButtonDisabled ? `Отправить повторно (${timer} сек)` : 'Отправить повторно'}
-                </button>
-              </form>
-              <button type="button" className="b3" onClick={verifyUnlockCodeAndUnfreeze}>
-                <p className="p2">Подтвердить</p>
+            {isAccountUnlockMode ? (
+          <>
+            <p className="p1">Ваш аккаунт был заморожен. Введите код разблокировки, отправленный на вашу почту.</p>
+            <form className="f3_2" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="text"
+                data-t="field:input-verification"
+                dir="ltr"
+                aria-invalid="false"
+                className={errors.verificationCode ? 'in3_1 input-error' : 'in3_1'}
+                id="passp-field-verification"
+                name="verification"
+                placeholder="Код разблокировки"
+                value={verificationCode}
+                onChange={onVerificationCodeChange}
+              />
+              {errors.verificationCode && <span className="error-message-link">{errors.verificationCode}</span>}
+              <button onClick={sendAccountUnlockCode} type="button" className="b3" disabled={isButtonDisabled}>
+                {isButtonDisabled ? `Отправить повторно (${timer} сек)` : 'Отправить повторно'}
               </button>
-            </>
-          ) : isRecoveryMode ? (
-            <>
-              {isVerificationSent ? (
-                <>
-                  <p className="p1">Пожалуйста, введите проверочный код, отправленный на вашу почту.</p>
-                  <form className="f3_2" onSubmit={(e) => e.preventDefault()}>
-                    <input
-                      type="text"
-                      data-t="field:input-verification"
-                      dir="ltr"
-                      aria-invalid="false"
-                      className="in3_1"
-                      id="passp-field-verification"
-                      name="verification"
-                      placeholder="Проверочный код"
-                      value={verificationCode}
-                      onChange={onVerificationCodeChange}
-                    />
-                    <button onClick={sendVerificationCode} type="button" className="b3" disabled={isButtonDisabled}>
-                      {isButtonDisabled ? `Отправить повторно (${timer} сек)` : 'Отправить повторно'}
-                    </button>
-                  </form>
-                  <button type="button" className="b3" onClick={verifyCodeAndRecover}>
-                    <p className="p2">Подтвердить</p>
+            </form>
+            <button type="button" className="b3" onClick={verifyUnlockCodeAndUnfreeze}>
+              <p className="p2">Подтвердить</p>
+            </button>
+          </>
+        ) : isRecoveryMode ? (
+          <>
+            {isVerificationSent ? (
+              <>
+                <p className="p1">Пожалуйста, введите проверочный код, отправленный на вашу почту.</p>
+                <form className="f3_2" onSubmit={(e) => e.preventDefault()}>
+                  <input
+                    type="text"
+                    data-t="field:input-verification"
+                    dir="ltr"
+                    aria-invalid="false"
+                    className={errors.verificationCode ? 'in3_1 input-error' : 'in3_1'}
+                    id="passp-field-verification"
+                    name="verification"
+                    placeholder="Проверочный код"
+                    value={verificationCode}
+                    onChange={onVerificationCodeChange}
+                  />
+                  {errors.verificationCode && <span className="error-message-link">{errors.verificationCode}</span>}
+                  <button onClick={sendVerificationCode} type="button" className="b3" disabled={isButtonDisabled}>
+                    {isButtonDisabled ? `Отправить повторно (${timer} сек)` : 'Отправить повторно'}
                   </button>
-                </>
-              ) : (
-                <>
-                  <p className="p1">Пожалуйста, введите ваш email для восстановления пароля.</p>
-                  <form className="f3_1" onSubmit={(e) => e.preventDefault()}>
-                    <input
-                      type="text"
-                      data-t="field:input-recovery"
-                      dir="ltr"
-                      aria-invalid="false"
-                      className="in3_1"
-                      id="passp-field-recovery"
-                      name="recovery"
-                      placeholder="Электронная почта"
-                      value={email}
-                      onChange={onEmailChange}
-                    />
-                  </form>
-                  <button type="button" className="b3" onClick={sendVerificationCode}>
-                    <p className="p2">Отправить код</p>
-                  </button>
-                </>
-              )}
-            </>
-          ) : (
+                </form>
+                <button type="button" className="b3" onClick={verifyCodeAndRecover}>
+                  <p className="p2">Подтвердить</p>
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="p1">Пожалуйста, введите ваш email для восстановления пароля.</p>
+                <form className="f3_1" onSubmit={(e) => e.preventDefault()}>
+                  <input
+                    type="text"
+                    data-t="field:input-recovery"
+                    dir="ltr"
+                    aria-invalid="false"
+                    className={errors.recoveryEmail ? 'in3_1 input-error' : 'in3_1'}
+                    id="passp-field-recovery"
+                    name="recovery"
+                    placeholder="Электронная почта"
+                    value={email}
+                    onChange={onRecoveryEmailChange}
+                  />
+                  {errors.recoveryEmail && <span className="error-message-link">{errors.recoveryEmail}</span>}
+                </form>
+                <button type="button" className="b3" onClick={sendVerificationCode}>
+                  <p className="p2">Отправить код</p>
+                </button>
+              </>
+            )}
+          </>
+        ) : (
             <>
               <form className="f3_1" onSubmit={(e) => e.preventDefault()}>
                 <input
