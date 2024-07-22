@@ -10,7 +10,7 @@ const VerifyCodeModal = ({ onClose, onSuccess }) => {
   useEffect(() => {
     if (isResendDisabled) {
       const countdown = setInterval(() => {
-        setTimer(prevTimer => prevTimer - 1);
+        setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
 
       if (timer === 0) {
@@ -23,49 +23,49 @@ const VerifyCodeModal = ({ onClose, onSuccess }) => {
   }, [timer, isResendDisabled]);
 
   const handleVerification = () => {
-    fetch('https://nilurl.ru:8000/verify_delete_account_code.php', {
-      method: 'POST',
+    fetch("https://nilurl.ru:8000/verify_delete_account_code.php", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      credentials: 'include',
+      credentials: "include",
       body: JSON.stringify({ code: verificationCode }),
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        onSuccess(data.message); 
-      } else {
-        setError(data.message || "Неверный код подтверждения.");
-      }
-    })
-    .catch(error => {
-      setError("Ошибка при выполнении запроса.");
-      console.error('Error:', error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          onSuccess(data.message);
+        } else {
+          setError(data.message || "Неверный код подтверждения.");
+        }
+      })
+      .catch((error) => {
+        setError("Ошибка при выполнении запроса.");
+        console.error("Error:", error);
+      });
   };
 
   const handleResendCode = () => {
-    fetch('https://nilurl.ru:8000/send_delete_account_code.php', {
-      method: 'POST',
+    fetch("https://nilurl.ru:8000/send_delete_account_code.php", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      credentials: 'include',
+      credentials: "include",
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        setTimer(60);
-        setIsResendDisabled(true);
-      } else {
-        setError("Ошибка при повторной отправке кода подтверждения.");
-      }
-    })
-    .catch(error => {
-      setError("Ошибка при выполнении запроса.");
-      console.error('Error:', error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setTimer(60);
+          setIsResendDisabled(true);
+        } else {
+          setError("Ошибка при повторной отправке кода подтверждения.");
+        }
+      })
+      .catch((error) => {
+        setError("Ошибка при выполнении запроса.");
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -73,7 +73,8 @@ const VerifyCodeModal = ({ onClose, onSuccess }) => {
       <div className="modal-content-verify">
         <p className="title-verify">Введите код подтверждения</p>
         <p className="description-verify">
-          Код подтверждения был отправлен на вашу электронную почту. Пожалуйста, введите его ниже.
+          Код подтверждения был отправлен на вашу электронную почту. Пожалуйста,
+          введите его ниже.
         </p>
         <input
           type="text"
@@ -81,7 +82,18 @@ const VerifyCodeModal = ({ onClose, onSuccess }) => {
           onChange={(e) => setVerificationCode(e.target.value)}
           className="code-input-verify"
         />
-        {error && <p className="error-message-link">{error}</p>}
+        {error && (
+          <p
+            style={{
+              paddingTop: "0px",
+              marginBottom: "20px",
+              marginTop: "0px",
+            }}
+            className="error-message-link"
+          >
+            {error}
+          </p>
+        )}
         <div className="modal-buttons-verify">
           <button className="button-verify red" onClick={handleVerification}>
             Подтвердить
@@ -91,7 +103,9 @@ const VerifyCodeModal = ({ onClose, onSuccess }) => {
             onClick={handleResendCode}
             disabled={isResendDisabled}
           >
-            {isResendDisabled ? `Повторная отправка (${timer}s)` : "Повторная отправка"}
+            {isResendDisabled
+              ? `Повторная отправка (${timer}s)`
+              : "Повторная отправка"}
           </button>
         </div>
       </div>
