@@ -50,3 +50,10 @@
     cursor: pointer;
     overflow: visible;
 }
+
+@media (max-width: 768px) {
+
+  .MainContainerTagsUI {
+      margin-right: 0; /* "Создать ссылку" прижат к правому краю */
+  }
+}

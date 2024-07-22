@@ -13,7 +13,6 @@
     text-align: center;
 }
 .TopContainer{
-    height: 10%;
     position: relative;
 }
 .FakeDivLP{
@@ -22,9 +21,11 @@
 }
 .RightTopCont{
     margin-top: 25px;
+    margin-bottom: 25px;
     display: inline-flex;
     float: right;
     width: 100%;
+    gap: 20px;
     justify-content: space-between
 }
 .MainContainer{
@@ -47,4 +48,26 @@
     width: 100%;
     height: 100%;
     overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .RightTopCont {
+        display: flex;
+        justify-content: space-between; /* Первые два элемента по краям */
+        flex-wrap: wrap; /* Позволяет элементам переноситься на следующую строку */
+    }
+
+    .RightTopCont > *:nth-child(3) {
+        margin-left: auto; /* "Создать ссылку" прижат к правому краю */
+    }
+}
+
+/* Медиа-запрос для экранов шириной меньше 550 пикселей */
+@media (max-width: 549px) {
+    .RightTopCont {
+        display: flex;
+        align-items: center; /* Выравнивание по центру горизонтально */
+        justify-content: center; /* Выравнивание по центру вертикально */
+        gap: 15px; /* Отступы между элементами */
+    }
 }

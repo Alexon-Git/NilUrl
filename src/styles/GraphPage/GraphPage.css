@@ -147,20 +147,34 @@
   
   @media (max-width: 900px) {
     .Options-container {
-      flex-direction: column;
-      gap: 20px;
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 20px;
+      }
+
+    .TOPREFGP{
+        width: 80%;
+    }
+
+    .AddressesInGP, .DevicesInGP {
+        width: 80%;
     }
   }
 
 @media (max-width: 600px) {
     .LinkAndPeriod {
-      flex-direction: column; /* Переводим элементы в колонну */
-      gap: 20px; /* Добавляем промежуток между элементами */
+      flex-direction: column; 
+      gap: 20px; 
     }
 
     .AddressesInGP, .DevicesInGP {
         width: 100%;
     }
 
+    .TOPREFGP{
+        width: 100%;
+    }
 
   }
