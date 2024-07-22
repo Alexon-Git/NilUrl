@@ -45,3 +45,10 @@
   margin-left: auto;
 }
   
+@media (max-width: 530px) {
+  .AddHeader {
+    flex-direction: column; /* Переводит элементы в столбик */
+    align-items: flex-start; /* Выравнивает элементы по началу контейнера по горизонтали */
+    gap: 10px; /* Добавляет промежуток между элементами */
+  }
+}
