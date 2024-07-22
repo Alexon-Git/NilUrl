@@ -8,67 +8,45 @@ import {
   SETTINGPAGE_ROUTE,
   FAQ_ROUTE,
 } from "../../LogicComp/utils/Const";
+
 const HeaderLinksPage = () => {
   const [username, setUsername] = useState("");
   const [usernameInitial, setUsernameInitial] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
   const navigator = useNavigate();
+
   const handleLogout = () => {
     Cookies.remove("access_token");
     window.location.reload();
   };
 
+  const handleTogglePopup = () => {
+    setShowPopup(prevState => !prevState);
+  };
+
   useEffect(() => {
     const accessToken = Cookies.get("access_token");
     if (accessToken) {
-      const decodedToken = jwtDecode(accessToken);
-      setUsername(decodedToken.username);
-      setUsernameInitial(decodedToken.username.charAt(0));
+      try {
+        const decodedToken = jwtDecode(accessToken);
+        setUsername(decodedToken.username);
+        setUsernameInitial(decodedToken.username.charAt(0));
+      } catch (error) {
+        console.error("Token decoding failed:", error);
+      }
     }
   }, []);
 
-  const [showPopup, setShowPopup] = useState(false);
-
-  const handleTogglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
   return (
     <div style={{ borderBottom: "1px solid #E5E7EB" }}>
-      <div className="HeaderLinksPageC wrapper">
+      <div className="wrapper">
+      <div className="HeaderLinksPageC">
         <div className="leftUserLogo">
           <div
             className="header-right-status"
-            onClick={() => {
-              navigator("/price");
-            }}
+            onClick={() => navigator("/price")}
           >
             Free
-          </div>
-        </div>
-        <div className="CentreHeaderLinksPageC">
-          <div
-            onClick={() => {
-              navigator(SETTINGPAGE_ROUTE);
-            }}
-            className="CentreHeaderLinksPageT"
-          >
-            Настройки
-          </div>
-          <div
-            onClick={() => {
-              navigator(LINKSPAGE_ROUTE);
-            }}
-            className="CentreHeaderLinksPageT"
-          >
-            Ссылки
-          </div>
-          <div
-            onClick={() => {
-              navigator("/Graph");
-            }}
-            className="CentreHeaderLinksPageT"
-          >
-            Аналитика
           </div>
         </div>
         <div
@@ -123,9 +101,7 @@ const HeaderLinksPage = () => {
             <div className="header-popup">
               <p
                 className="header_button-exit"
-                onClick={() => {
-                  navigator(FAQ_ROUTE);
-                }}
+                onClick={() => navigator(FAQ_ROUTE)}
                 style={{ marginBottom: "15px" }}
               >
                 <svg
@@ -167,8 +143,30 @@ const HeaderLinksPage = () => {
           )}
         </div>
       </div>
+      <div className="CentreHeaderLinksPageC">
+          <div
+            onClick={() => navigator(SETTINGPAGE_ROUTE)}
+            className="CentreHeaderLinksPageT"
+          >
+            Настройки
+          </div>
+          <div
+            onClick={() => navigator(LINKSPAGE_ROUTE)}
+            className="CentreHeaderLinksPageT"
+          >
+            Ссылки
+          </div>
+          <div
+            onClick={() => navigator("/Graph")}
+            className="CentreHeaderLinksPageT"
+          >
+            Аналитика
+          </div>
+        </div>
+    </div>
     </div>
   );
+  
 };
 
 export default HeaderLinksPage;

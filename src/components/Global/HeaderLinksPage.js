@@ -35,7 +35,8 @@ const HeaderLinksPage = () => {
 
   return (
     <div style={{ borderBottom: "1px solid #E5E7EB" }}>
-      <div className="HeaderLinksPageC wrapper">
+      <div className="wrapper">
+      <div className="HeaderLinksPageC">
         <div className="leftUserLogo">
           <div
             className="header-right-status-pro"
@@ -44,32 +45,6 @@ const HeaderLinksPage = () => {
             }}
           >
             Pro
-          </div>
-        </div>
-        <div className="CentreHeaderLinksPageC">
-          <div
-            onClick={() => {
-              navigator(SETTINGPAGE_ROUTE);
-            }}
-            className="CentreHeaderLinksPageT"
-          >
-            Настройки
-          </div>
-          <div
-            onClick={() => {
-              navigator(LINKSPAGE_ROUTE);
-            }}
-            className="CentreHeaderLinksPageT"
-          >
-            Ссылки
-          </div>
-          <div
-            onClick={() => {
-              navigator("/Graph");
-            }}
-            className="CentreHeaderLinksPageT"
-          >
-            Аналитика
           </div>
         </div>
         <div
@@ -168,6 +143,33 @@ const HeaderLinksPage = () => {
           )}
         </div>
       </div>
+      <div className="CentreHeaderLinksPageC">
+          <div
+            onClick={() => {
+              navigator(SETTINGPAGE_ROUTE);
+            }}
+            className="CentreHeaderLinksPageT"
+          >
+            Настройки
+          </div>
+          <div
+            onClick={() => {
+              navigator(LINKSPAGE_ROUTE);
+            }}
+            className="CentreHeaderLinksPageT"
+          >
+            Ссылки
+          </div>
+          <div
+            onClick={() => {
+              navigator("/Graph");
+            }}
+            className="CentreHeaderLinksPageT"
+          >
+            Аналитика
+          </div>
+        </div>
+    </div>
     </div>
   );
 };

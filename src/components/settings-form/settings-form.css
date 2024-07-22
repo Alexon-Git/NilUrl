@@ -33,7 +33,7 @@
 .settings__controls {
   display: flex;
   justify-content: space-between;
-  padding: 70px 100px;
+  flex-direction: initial;
 }
 
 .settings__controls__menu {
@@ -45,7 +45,7 @@
 }
 
 .settings__controls__menu-item {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   color: #000;
 }
@@ -61,7 +61,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: calc(100%);
+  width: 100%;
   padding: 40px;
   border: 1px solid #e5e7eb;
   border-radius: 8px 8px 0 0;
@@ -77,7 +77,7 @@
 }
 
 .description {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   color: #6b7280;
 }
@@ -86,17 +86,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 65px;
-  width: calc(100%);
+  width: 100%;
   box-sizing: border-box;
-  padding: 0 40px;
+  padding: 10px 20px;
   border: 1px solid #e5e7eb;
   border-radius: 0 0 8px 8px;
   background-color: rgb(241, 241, 242);
+  gap: 20px;
 }
 
 .redborder {
-  height: 126px;
   border: 1px solid #dc2626;
 }
 
@@ -144,13 +143,12 @@
 }
 
 .input {
-  height: 30px;
+  height: 40px;
   width: 50%;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 6px;
   border: 1px solid #d1d5db;
-
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   text-align: left;
   box-sizing: border-box;
@@ -162,8 +160,8 @@
 
 .profile-picture-upload {
   display: inline-block;
-  width: 100px; 
-  height: 100px;
+  width: 80px; 
+  height: 80px;
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
@@ -171,7 +169,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .profile-picture-preview {
@@ -192,4 +190,30 @@
 
 .profile-picture-preview img {
   object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .settings__controls {
+    flex-direction: column; /* Change flex direction to column */
+    padding: 30px 0; /* Padding for screens smaller than or equal to 768px */
+  }
+
+  .settings__controls__menu {
+    width: 100%; /* Make the menu take full width */
+    margin-bottom: 20px; /* Add some space below the menu */
+  }
+
+  .settings__controls__form {
+    width: 100%; /* Make the form take full width */
+  }
+
+  .input {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) {
+  .settings__controls {
+    padding: 30px 70px; /* Padding for screens larger than 768px */
+  }
 }
