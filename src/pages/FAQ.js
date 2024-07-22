@@ -374,30 +374,8 @@ const FAQ = () => {
             }`}
             onClick={() => setIsSidebarVisible(!isSidebarVisible)}
           >
-            <svg width="28px" height="28px" viewBox="-1 -1 64 64" version="1.1">
-              <g
-                id="Page-1"
-                stroke="none"
-                stroke-width="1"
-                fill="none"
-                fill-rule="evenodd"
-              >
-                <g
-                  id="Button-circle-arrow-right"
-                  stroke="#6B6C6E"
-                  stroke-width="2"
-                >
-                  <circle id="Oval" cx="31" cy="31" r="31"></circle>
-                  <path d="M31,5 C45.4,5 57,16.6 57,31" id="Shape"></path>
-                  <path d="M31,57 C16.6,57 5,45.4 5,31" id="Shape"></path>
-                  <path
-                    d="M31,37 L31,42.3 C31,42.7 31.3,43 31.7,43 L47.2,32.9 C47.6,32.6 47.9,31.8 47.9,31.5 L47.9,31.5 C47.9,31.5 47.6,30.3 47.2,30 L31.7,19.8 C31.3,19.8 31,20.1 31,20.5 L31,25.8"
-                    id="Shape"
-                  ></path>
-                  <path d="M33.9,26.1 L21,26.1" id="Shape"></path>
-                  <path d="M33.9,37.1 L21,37.1" id="Shape"></path>
-                </g>
-              </g>
+            <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
           <h2>Часто задаваемые вопросы</h2>
@@ -406,7 +384,7 @@ const FAQ = () => {
               <li
                 key={index}
                 className={expandedIndex === index ? "active" : ""}
-                onClick={() => handleQuestionClick(index)} // Используем новый обработчик
+                onClick={() => handleQuestionClick(index)} 
                 data-tooltip={question}
               >
                 {question}

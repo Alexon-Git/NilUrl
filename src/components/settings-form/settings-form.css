@@ -181,16 +181,18 @@
   position: relative; /* Ensure positioning context */
 }
 
-.profile-picture-preview img,
-.profile-picture-preview svg {
+.profile-picture-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover; 
 }
 
-.profile-picture-preview img {
-  object-fit: cover;
+.profile-picture-preview svg {
+  width: 40%;
+  height: 40%;
+  object-fit: cover; 
 }
+
 
 @media (max-width: 768px) {
   .settings__controls {

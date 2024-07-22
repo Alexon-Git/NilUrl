@@ -8,7 +8,6 @@
     overflow: hidden;
   }
   .MPContainerGP {
-    margin-left: 30px;
     margin-bottom: 30px;
      
 }
@@ -157,4 +156,10 @@
       flex-direction: column; /* Переводим элементы в колонну */
       gap: 20px; /* Добавляем промежуток между элементами */
     }
+
+    .AddressesInGP, .DevicesInGP {
+        width: 100%;
+    }
+
+
   }

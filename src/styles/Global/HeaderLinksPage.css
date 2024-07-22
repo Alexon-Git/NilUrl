@@ -124,3 +124,9 @@
   right: 0;
   z-index: 1200;
 }
+
+.CentreHeaderLinksPageT.active-link {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 10px; /* Adjust this value to move the underline */
+}
