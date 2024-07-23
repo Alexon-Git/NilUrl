@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./verifyCodeModal.css";
+import Cookies from "js-cookie";
 
-const VerifyCodeModalEmail = ({ onClose, onSuccess }) => {
+const VerifyCodeModalEmail = ({ onClose, onSuccess, email }) => {
   const [verificationCode, setVerificationCode] = useState("");
   const [error, setError] = useState("");
   const [timer, setTimer] = useState(60);
@@ -29,11 +30,17 @@ const VerifyCodeModalEmail = ({ onClose, onSuccess }) => {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ code: verificationCode }),
+      body: JSON.stringify({ code: verificationCode, email }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          if (data.access_token) {
+            Cookies.set("access_token", data.access_token, { expires: 1 });
+          }
+          if (data.refresh_token) {
+            localStorage.setItem("refresh_token", data.refresh_token);
+          }
           onSuccess(data.message);
         } else {
           setError(data.message || "Неверный код подтверждения.");

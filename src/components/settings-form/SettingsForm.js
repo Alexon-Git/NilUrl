@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./settings-form.css";
-import { DeleteAccountModal, Overlay, VerifyCodeModal } from "../../components";
+import { DeleteAccountModal, Overlay} from "../../components";
 import VerifyCodeModalEmail from "../popups/VerifyCodeModalEmail";
 import Cookies from "js-cookie";
 import {jwtDecode} from "jwt-decode";
@@ -102,13 +102,35 @@ const SettingsForm = () => {
     if (!isValid) {
       return;
     }
-
+    const formDataToSend = new FormData();
     if (name === "email") {
-      setVerifyCodeVisibility(true);
+      const Send_data = JSON.stringify({ email_new: formData.email }); 
+      fetch("https://nilurl.ru:8000/send_update_email_code.php", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: Send_data,
+      })
+      .then(response => response.json())
+        .then((data) => {
+          if (data.success) {
+            setVerifyCodeVisibility(true);
+          } else {
+            setPopupMessage(data.message || "Ошибка при отправке кода подтверждения.");
+            setAlertPopupVisibility(true);
+          }
+        })
+        .catch((error) => {
+          setPopupMessage("Ошибка при выполнении запроса.");
+          setAlertPopupVisibility(true);
+          console.error("Error:", error);
+        });
       return;
     }
 
-    const formDataToSend = new FormData();
+    
     if (name === "username") {
       formDataToSend.append("username", formData.username);
     } else if (profilePicture) {
@@ -145,41 +167,7 @@ const SettingsForm = () => {
       });
   };
 
-  const handleEmailUpdate = (verificationCode) => {
-    fetch("https://nilurl.ru:8000/update_email.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        email: formData.email,
-        code: verificationCode,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setPopupMessage("Email изменен успешно.");
-          setAlertPopupVisibility(true);
-          setVerifyCodeVisibility(false);
-          if (data.access_token) {
-            Cookies.set("access_token", data.access_token, { expires: 1 });
-          }
-          if (data.refresh_token) {
-            localStorage.setItem("refresh_token", data.refresh_token);
-          }
-        } else {
-          setPopupMessage(data.message);
-          setAlertPopupVisibility(true);
-        }
-      })
-      .catch((error) => {
-        setPopupMessage("Ошибка при выполнении запроса.");
-        setAlertPopupVisibility(true);
-        console.error("Error:", error);
-      });
-  };
+  
 
   const formItems = [
     {
@@ -277,9 +265,9 @@ const SettingsForm = () => {
                   </div>
                 </label>
                 {profilePictureError && (
-                   <span className="error-message-link">
-                   {profilePictureError}
-                 </span>
+                  <span className="error-message-link">
+                  {profilePictureError}
+                </span>
                 )}
               </div>
               <div className="settings__controls__form-footer">
@@ -321,9 +309,15 @@ const SettingsForm = () => {
         {isVerifyCodeVisible && (
           <Overlay onClose={() => setVerifyCodeVisibility(false)}>
             <VerifyCodeModalEmail
-              onClose={() => setVerifyCodeVisibility(false)}
-              onSuccess={handleEmailUpdate}
-            />
+            onClose={() => setVerifyCodeVisibility(false)}
+            onSuccess={(message) => {
+              setPopupMessage(message || "Email изменен успешно.");
+              setAlertPopupVisibility(true);
+              setVerifyCodeVisibility(false);
+              
+            }}
+            email={formData.email}
+          />
           </Overlay>
         )}
         {isAlertPopupVisible && (
