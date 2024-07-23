@@ -143,7 +143,20 @@ function Log() {
       });
   };
 
+  
+  
   const sendVerificationCode = () => {
+    if (!isValidEmail(email)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Введите действительный адрес электронной почты.",
+        password: "",
+        verificationCode: "",
+        recoveryEmail: "Введите действительный адрес электронной почты"
+      }));
+      return;
+    }
+    
     fetch("https://nilurl.ru:8000/send_recovery_code.php", {
       method: "POST",
       headers: {
@@ -157,21 +170,23 @@ function Log() {
           setIsVerificationSent(true);
           setTimer(60);
         } else {
-          setErrors({
+          setErrors((prevErrors) => ({
+            ...prevErrors,
             email: "Не удалось отправить проверочный код. Пожалуйста, попробуйте снова.",
             password: "",
             verificationCode: "",
-            recoveryEmail: ""
-          });
+            recoveryEmail: data.message
+          }));
         }
       })
       .catch((error) => {
-        setErrors({
+        setErrors((prevErrors) => ({
+          ...prevErrors,
           email: "Произошла ошибка при отправке проверочного кода. Пожалуйста, попробуйте позже.",
           password: "",
           verificationCode: "",
-          recoveryEmail: ""
-        });
+          recoveryEmail: "Произошла ошибка при отправке проверочного кода. Пожалуйста, попробуйте позже."
+        }));
       });
   };
   

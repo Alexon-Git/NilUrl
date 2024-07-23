@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./settings-form.css";
 import { DeleteAccountModal, Overlay } from "../../components";
 import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import AlertPopup from "../popups/AlertPopup";
 
 const SettingsForm = () => {
@@ -56,7 +56,7 @@ const SettingsForm = () => {
       }
 
       setProfilePictureError(""); // Clear error
-      setProfilePicture(URL.createObjectURL(file));
+      setProfilePicture(file);
     }
   };
 
@@ -81,22 +81,17 @@ const SettingsForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { name } = e.target.dataset;
     let isValid = true;
     let newErrors = { username: "", email: "" };
 
-    if (!validateEmail(formData.email)) {
+    if (name === "username" && (formData.username.length < 3 || containsSpecialCharacters(formData.username))) {
+      newErrors.username = "Имя пользователя должно быть не менее 3 символов и не должно содержать специальных символов.";
+      isValid = false;
+    }
+
+    if (name === "email" && !validateEmail(formData.email)) {
       newErrors.email = "Email должен быть действительным.";
-      isValid = false;
-    }
-
-    if (formData.username.length < 3) {
-      newErrors.username = "Имя пользователя должно быть не менее 3 символов.";
-      isValid = false;
-    }
-
-    if (containsSpecialCharacters(formData.username)) {
-      newErrors.username =
-        "Имя пользователя не должно содержать специальных символов.";
       isValid = false;
     }
 
@@ -107,13 +102,19 @@ const SettingsForm = () => {
     }
 
     const formDataToSend = new FormData();
-    formDataToSend.append("username", formData.username);
-    formDataToSend.append("email", formData.email);
-    if (profilePicture) {
+    if (name === "username") {
+      formDataToSend.append("username", formData.username);
+    } else if (name === "email") {
+      formDataToSend.append("email", formData.email);
+    } else if (profilePicture) {
       formDataToSend.append("profile_picture", profilePicture);
     }
 
-    fetch("https://nilurl.ru:8000/update_user_data.php", {
+    const endpoint = name === "username" ? "update_username.php" :
+                     name === "email" ? "update_email.php" :
+                     "update_profile_picture.php";
+
+    fetch(`https://nilurl.ru:8000/${endpoint}`, {
       method: "POST",
       body: formDataToSend,
       credentials: "include",
@@ -123,12 +124,14 @@ const SettingsForm = () => {
         if (data.success) {
           setPopupMessage("Изменения сохранены успешно.");
           setAlertPopupVisibility(true);
-          Cookies.set("access_token", data.access_token, { expires: 1 });
-          localStorage.setItem("refresh_token", data.refresh_token);
+          if (data.access_token) {
+            Cookies.set("access_token", data.access_token, { expires: 1 });
+          }
+          if (data.refresh_token) {
+            localStorage.setItem("refresh_token", data.refresh_token);
+          }
         } else {
-          const text = data.message;
-          window.location.reload();
-          setPopupMessage(text);
+          setPopupMessage(data.message);
           setAlertPopupVisibility(true);
         }
       })
@@ -173,7 +176,7 @@ const SettingsForm = () => {
           <div className="settings__controls__menu">
             <div className="settings__controls__menu-item">Основные</div>
           </div>
-          <form className="settings__controls__form" onSubmit={handleSubmit}>
+          <form className="settings__controls__form">
             {formItems.map((item, index) => (
               <div key={index}>
                 <div className="settings__controls__form-item">
@@ -182,7 +185,7 @@ const SettingsForm = () => {
                   <input
                     className={item.error ? "input input-error" : "input"}
                     type="text"
-                    placeholder={item.value}
+                    placeholder={item.placeholder}
                     name={item.name}
                     value={item.value}
                     maxLength={item.maxLength}
@@ -195,10 +198,15 @@ const SettingsForm = () => {
                 <div className="settings__controls__form-footer">
                   <p className="description">
                     {item.name === "username"
-                      ? "Не менее 3 символов и не более 32 символов"
-                      : "Email должен быть действительным"}
+                      ? "Не менее 3 символов и не более 32 символов."
+                      : "Email должен быть действительным."}
                   </p>
-                  <button className="button" type="submit">
+                  <button
+                    className="button"
+                    type="submit"
+                    data-name={item.name}
+                    onClick={handleSubmit}
+                  >
                     Сохранить
                   </button>
                 </div>
@@ -220,62 +228,67 @@ const SettingsForm = () => {
                     style={{ display: "none" }}
                   />
                   <div className="profile-picture-preview">
-  {profilePicture ? (
-    <img src={profilePicture} alt="Profile" />
-  ) : (
-    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m409.785156 278.5-153.785156 153.785156-153.785156-153.785156 28.285156-28.285156 105.5 105.5v-355.714844h40v355.714844l105.5-105.5zm102.214844 193.5h-512v40h512zm0 0"/></svg>
-  )}
-</div>
-
-                    </label>
-                    {profilePictureError && (
-                      <span className="error-message-link">
-                        {profilePictureError}
-                      </span>
+                    {profilePicture ? (
+                      <img src={URL.createObjectURL(profilePicture)} alt="Profile" />
+                    ) : (
+                      <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m409.785156 278.5-153.785156 153.785156-153.785156-153.785156 28.285156-28.285156 105.5 105.5v-355.714844h40v355.714844l105.5-105.5zm102.214844 193.5h-512v40h512zm0 0"/>
+                      </svg>
                     )}
                   </div>
-                  <div className="settings__controls__form-footer">
-                    <p className="description">
-                      Принимаемые типы файлов: .png, .jpg. Максимальный размер
-                      файла: 2 МБ.
-                    </p>
-                    <button className="button" type="submit">
-                      Сохранить
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <div className="settings__controls__form-item redborder">
-                    <p className="title">Удалить аккаунт</p>
-                    <p className="description">
-                      Учетная запись и все связанные с ней ссылки будут
-                      полностью удалены
-                    </p>
-                  </div>
-                  <div className="settings__controls__form-footer redborder__footer">
-                    <p className="description"></p>
-                    <button
-                      className="button red"
-                      onClick={handleDeleteModalOpen}
-                    >
-                      Удалить аккаунт
-                    </button>
-                  </div>
-                </div>
-              </form>
-              {message && <div className="message">{message}</div>}
+                </label>
+                {profilePictureError && (
+                  <span className="error-message-link">
+                    {profilePictureError}
+                  </span>
+                )}
+              </div>
+              <div className="settings__controls__form-footer">
+                <p className="description">
+                  Принимаемые типы файлов: .png, .jpg. Максимальный размер файла: 2 МБ.
+                </p>
+                <button
+                  className="button"
+                  type="submit"
+                  data-name="profile_picture"
+                  onClick={handleSubmit}
+                >
+                  Сохранить
+                </button>
+              </div>
             </div>
-            {isDeleteModalOpen && (
-              <Overlay onClose={handleDeleteModalClose}>
-                <DeleteAccountModal onClose={handleDeleteModalClose} />
-              </Overlay>
-            )}
-          </div>
-          {isAlertPopupVisible && (
-            <AlertPopup onClose={handleClosePopup} message={popupMessage} />
-          )}
+            <div>
+              <div className="settings__controls__form-item redborder">
+                <p className="title">Удалить аккаунт</p>
+                <p className="description">
+                  Учетная запись и все связанные с ней ссылки будут
+                  полностью удалены
+                </p>
+              </div>
+              <div className="settings__controls__form-footer redborder__footer">
+                <p className="description"></p>
+                <button
+                  className="button red"
+                  onClick={handleDeleteModalOpen}
+                >
+                  Удалить аккаунт
+                </button>
+              </div>
+            </div>
+          </form>
+          {message && <div className="message">{message}</div>}
         </div>
-      );
-    };
+        {isDeleteModalOpen && (
+          <Overlay onClose={handleDeleteModalClose}>
+            <DeleteAccountModal onClose={handleDeleteModalClose} />
+          </Overlay>
+        )}
+        {isAlertPopupVisible && (
+          <AlertPopup onClose={handleClosePopup} message={popupMessage} />
+        )}
+      </div>
+    </div>
+  );
+};
 
-    export default SettingsForm;
+export default SettingsForm;
