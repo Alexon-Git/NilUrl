@@ -1,165 +1,253 @@
-.MainVideoCompContainer{
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    height: 350px;
-
+.MainVideoCompContainer {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
 }
 
-.StrongFunctionText{
-    width: 875px;
-    height: 180px;
-    text-align: center;
-    font-weight: 900;
-    font-size: 56px;
+.StrongFunctionText {
+  width: 875px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 56px;
 }
-.GradintVordMP{
-    display: inline-block;
-    background-image: linear-gradient(#6A11CB,#2575FC);
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
+.GradintVordMP {
+  display: inline-block;
+  background-image: linear-gradient(#6a11cb, #2575fc);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 @keyframes Anime {
-    from{
-        height: 0;
-    }
-    to{
-        height: 100%;
-    }
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
 }
-.divForAnimation{
-    animation-name: Anime;
-    animation-duration: 2s;
-
-
+.divForAnimation {
+  animation-name: Anime;
+  animation-duration: 2s;
 }
-.podAcordion{
-    margin-top: 20px;
-    width: 80%;
-    font-weight: 400;
-    font-size: 14px;
-    font-family: Roboto;
-    color: #6B7280;
-    /*animation-name: Anime;*/
-    /*animation-duration: 2s;*/
-    transition: max-height 1s;
+.podAcordion {
+  margin-top: 20px;
+  width: 80%;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: Roboto;
+  color: #6b7280;
+  /*animation-name: Anime;*/
+  /*animation-duration: 2s;*/
+  transition: max-height 1s;
 }
-.MoreButtonMP:hover{
-    background-color: transparent;
-    transition: all 0.3s ease;
-    color: black;
-    cursor: pointer;
+.MoreButtonMP:hover {
+  background-color: transparent;
+  transition: all 0.3s ease;
+  color: black;
+  cursor: pointer;
 }
-@media (min-width: 500px) and (max-width: 1500px){
-    .videoPlusAccordions{
+@media (max-width: 1500px) {
+  .videoPlusAccordions {
     display: flex;
     height: 540px;
-    border: 1px solid #E5E7EB;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
-        background-color: white;
-    }
+    background-color: white;
+  }
 
-    .svgVideoCompAccord{
-        margin-left: 2%;
-    }
-    .PodVieoA{
-        margin-left: 3%;
-    }
-    .podAcordion{
-        margin-left: 3%;
-    }
-    .MoreButtonMP{
-        background-color: black;
-        color: white;
-        margin-top: 15px;
-        margin-left: 3%;
-        width: 112px;
-        height: 34px;
-        border: 1px solid black;
-        border-radius: 10px;
-    }
+  .svgVideoCompAccord {
+    margin-left: 20px;
+  }
+  .PodVieoA {
+    margin-left: 3%;
+  }
+  .podAcordion {
+    margin-left: 3%;
+  }
+  .MoreButtonMP {
+    background-color: black;
+    color: white;
+    margin-top: 15px;
+    margin-left: 3%;
+    width: 112px;
+    height: 34px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
 }
 
-@media (min-width: 1500px) and (max-width: 3000px){
-    .videoPlusAccordions{
-        display: flex;
-        height: 640px;
-        border-radius: 12px;
-        background-color: white;
-        box-shadow: 10px -50px 94px 1px #C7C7C733 inset;
-
-
-    }
-    .PodVieoA{
-        margin-left: 3%;
-    }
-    .svgVideoCompAccord{
-        margin-left: 10%;
-    }
-    .podAcordion{
-        width: 60%;
-        margin-left: 10%;
-    }
-    .MoreButtonMP{
-        background-color: black;
-        color: white;
-        margin-top: 15px;
-        margin-left: 10%;
-        width: 112px;
-        height: 34px;
-        border: 1px solid black;
-        border-radius: 10px;
-    }
-}
-
-.AccordionsMP{
-
-    overflow: hidden;
-    height: 80%;
-    width: 60%;
-    display: inline-block;
-    margin-top: 5%;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none;
-}
-.Video{
-
-    border-radius: 50px;
-    margin-top: 70px;
-    width: 60%;
-    height: 80%;
-}
-.AccordionMP{
-    border-bottom: 1px solid #E5E7EB;
-    margin-top: 10%;
-    padding-bottom: 10%;
-    cursor: pointer;
+@media (min-width: 1500px) and (max-width: 3000px) {
+  .videoPlusAccordions {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    height: 640px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 10px -50px 94px 1px #c7c7c733 inset;
+  }
+  .PodVieoA {
+    margin-left: 3%;
+  }
+  .svgVideoCompAccord {
+    margin-left: 20px;
+  }
+  .podAcordion {
+    width: 60%;
+    margin-left: 10%;
+  }
+  .MoreButtonMP {
+    background-color: black;
+    color: white;
+    margin-top: 15px;
+    margin-left: 10%;
+    width: 112px;
+    height: 34px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
 }
-.PodVieoA{
 
-    font-weight: 600;
-    font-size: 17px;
+.AccordionsMP {
+  overflow: hidden;
+  height: 80%;
+  width: 60%;
+  display: inline-block;
+  margin-top: 5%;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+.Video {
+  border-radius: 50px;
+  margin-top: 70px;
+  width: 60%;
+  height: 80%;
+}
+.AccordionMP {
+  border-bottom: 1px solid #e5e7eb;
+  margin-top: 50px;
+  padding-bottom: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.PodVieoA {
+  font-weight: 600;
+  font-size: 17px;
 }
 
-.podAcordionHide{
-    display: none;
+.podAcordionHide {
+  display: none;
 }
 
-.menu{
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    max-height: 0;
-    transition: max-height 0.15s ease-out;
-    overflow: hidden;
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  max-height: 0;
+  transition: max-height 0.15s ease-out;
+  overflow: hidden;
 }
 
+.video-main {
+  margin: 50px;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(243.11deg, #90c8e9 11.56%, #c4dff2 100%);
+  border-radius: 51px;
+}
+
+@media (max-width: 1050px) {
+  .videoPlusAccordions {
+    flex-direction: column; /* Изменить направление на колонну */
+    height: auto; /* Установить высоту автоматически для контейнера */
+  }
+
+  .AccordionsMP {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .video-main {
+    width: auto;
+    margin: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+
+    .StrongFunctionText,
+    .Sverdostup,
+    .GradientMP,
+    .Clients {
+        font-size: 50px;
+    }
+  }
+
+  @media (max-width: 800px) {
+
+    .StrongFunctionText,
+    .Sverdostup,
+    .GradientMP,
+    .Clients {
+        font-size: 45px;
+    }
+
+  }
+
+  @media (max-width: 750px) {
+
+    .StrongFunctionText,
+    .Sverdostup,
+    .GradientMP,
+    .Clients {
+        font-size: 40px;
+    }
+
+  }
+
+  @media (max-width: 650px) {
+
+    .StrongFunctionText,
+    .Sverdostup,
+    .GradientMP,
+    .Clients {
+        font-size: 35px;
+    }
+
+  }
+
+  @media (max-width: 580px) {
+
+    .StrongFunctionText,
+    .Sverdostup,
+    .GradientMP,
+    .Clients {
+        font-size: 30px;
+    }
+
+  }
+
+  @media (max-width: 430px) {
+
+    .PodVieoA {
+        font-size: 15px;
+    }
+
+  }
+
+  @media (max-width: 380px) {
+
+    .PodVieoA {
+        font-size: 13px;
+    }
+
+  }

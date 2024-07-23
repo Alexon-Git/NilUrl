@@ -3,6 +3,11 @@ import "./errorPage.css";
 import { Helmet } from "react-helmet";
 
 const ErrorPage = () => {
+
+  const handleBack = () => {
+    window.history.back();
+  };
+
   return (
     <div className="error-404">
         <Helmet>
@@ -11,8 +16,13 @@ const ErrorPage = () => {
         <div className="error-text">
           <h1 className="error-code">404</h1>
           <p className="error-message">
-            Упс... страница не найдена. Возможно, ссылка была удалена.
+            Упс... страница не найдена.<br />
+            Возможно, ссылка была удалена.
           </p>
+            
+          <button className="button9" onClick={handleBack}>
+      Вернуться
+    </button>
         </div>
       </div>
   );

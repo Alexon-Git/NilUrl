@@ -9,10 +9,11 @@
 }
 
 .error-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
+  height: 100vh; /* Высота контейнера для центрирования по вертикали (можно изменить) */
 }
 
 .error-code {
@@ -30,6 +31,7 @@
   line-height: 1;
   margin-top: 0;
   text-align: center;
+  max-width: 80%;
 }
 
 /* Media queries for better control on different screen sizes */
@@ -58,4 +60,30 @@
   .error-message {
     font-size: 6vw;
   }
+}
+
+.button9 {
+  padding: 0.5vw 1.5vw;
+  background: #fff;
+  border-radius: 9999px;
+  border: 1px solid #000; /* Добавлена толщина границы */
+  color: #000;
+  font-size: 2vw;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s linear, background-color 0.3s linear; /* Переход для цветов */
+}
+
+.button9:hover {
+  color: #fff; /* Цвет текста при наведении */
+  background-color: #000; /* Цвет фона при наведении */
+}
+
+.button9:active {
+  top: 2px;
+  box-shadow: none;
+}
+
+.button9:focus {
+  outline: none;
 }

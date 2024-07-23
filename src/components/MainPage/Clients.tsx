@@ -3,9 +3,9 @@ import "../../styles/MainPage/Clients.css"
 
 const Clients = () => {
     return (
-        <div className='wrapper'  style={{paddingBottom:"50px" }}>
+        <div style={{paddingBottom:"50px" }}>
             <div className="Clients">
-                НАС ВЫБИРАЮТ
+                Нас выбирают
             </div>
             <div className="RowsPicsMP">
                 <img src={process.env.PUBLIC_URL + '/ClientsRow.png'} className="PicsMPClients"/>

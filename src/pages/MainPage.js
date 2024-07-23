@@ -27,11 +27,13 @@ const MainPage = () => {
             <title>Основная страница</title>
           </Helmet>
             <NoLoginHeader/>
-            <div className='mp-background'>                
+            <div className='mp-background'>        
+            <div className='wrapper'>      
                 <FirstContainerMainPage />
                 <VideoComp />
                 <PriceMp />
                 <Clients />
+                </div>  
             </div>
             <FooterMP/>
         </div>
