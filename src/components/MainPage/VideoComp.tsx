@@ -113,7 +113,7 @@ const VideoComp = () => {
   const [youtubeID] = useState("Tbeud0H_gGw");
 
   return (
-    <div className="wrapper">
+    <div>
       <div className="MainVideoCompContainer">
         <div className="StrongFunctionText">
           <div className="GradintVordMP">Мощные</div> функции для{" "}
@@ -356,17 +356,7 @@ const VideoComp = () => {
                     </iframe>
     </div>  */} 
     <div
-  style={{
-    margin: "50px",
-    width: "80%",
-    height: "80%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background:
-    "linear-gradient(243.11deg, #90C8E9 11.56%, #C4DFF2 100%)",
-    borderRadius: "51px",
-  }}
+    className="video-main"
 >
   <img
     src={imageSrc}

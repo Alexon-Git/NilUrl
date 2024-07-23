@@ -1,41 +1,71 @@
-.MaxWidthContainer{
- border-top: 1px solid #DDDDDD;
+.ShortLink {
+  font-weight: 900;
+  text-align: center;
+  padding-top: 50px;
 }
 
-.ShortLink{
-    font-weight: 900;
-    font-size: 56px;
-    line-height: 60px;
-    text-align: center;
-    padding-top: 5%;
+.GradientMP {
+  background-image: linear-gradient(#6a11cb, #2575fc);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 56px;
+}
+.NilUrlOpisanie {
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 30px;
+}
+.ButtonsBuyOrTry {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 15px; 
+    margin-top: 30px;
+  }
 
+.LinksMPContainer {
+  margin-top: 20px;
+  text-align: center;
+}
+.LinksMPContainer {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
 }
 
-.GradientMP{
-    margin-top: 10px;
-    background-image: linear-gradient(#6A11CB,#2575FC);
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
+@media (max-width: 900px) {
+  .GradientMP {
+    font-size: 50px;
+  }
 }
-.NilUrlOpisanie{
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 60px;
-    text-align: center;
-    margin-top: 3%;
-    line-height: 28px;
+
+@media (max-width: 800px) {
+  .GradientMP {
+    font-size: 45px;
+  }
 }
-.ButtonsBuyOrTry{
-    text-align: center;
-    margin-top: 5%;
+
+@media (max-width: 750px) {
+  .GradientMP {
+    font-size: 40px;
+  }
 }
-.LinksMPContainer{
-    margin-top: 20px;
-    text-align: center;
+
+@media (max-width: 650px) {
+  .GradientMP {
+    font-size: 35px;
+  }
 }
-.LinksMPContainer{
-    margin-top: 100px;
-    display: flex;
-    justify-content: center;
+
+@media (max-width: 580px) {
+  .GradientMP {
+    font-size: 30px;
+  }
+
+  .ButtonsBuyOrTry {
+    flex-direction: column; /* Вертикальное расположение элементов */
+  }
+
 }

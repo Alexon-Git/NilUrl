@@ -41,6 +41,8 @@
     align-items: center;
     border: solid 1px #E5E7EB;
     border-radius: 6px;
+    justify-content: space-between;
+
 }
 .LogoAndTextLinksMap{
     margin-left: 10px;
@@ -110,3 +112,4 @@
     border: solid 1px #E5E7EB;
     border-radius: 6px;
 }
+

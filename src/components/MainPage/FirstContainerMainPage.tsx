@@ -4,9 +4,7 @@ import "../../styles/MainPage/ButtonBuyOrTry.css"
 import LinksMainPageView from "./LinksMainPageView";
 import {LINKSPAGE_ROUTE, PRICEPAGE_ROUTE} from "../../LogicComp/utils/Const";
 import {useNavigate} from "react-router-dom";
-import ButtonNil from "../Global/ButtonNil";
-import BuyButtonBedarev from "../Global/BuyButtonBedarev";
-import {BuyButton} from "../index";
+import {BuyButton, FreeButton} from "../index";
 
 
 const FirstContainerMainPage = () => {
@@ -30,7 +28,7 @@ const FirstContainerMainPage = () => {
         <div>
             <div className="MaxWidthContainer">
                 <div className="ShortLink">
-                    <div>Короткие ссылки со</div>
+                    <div className='Clients'>Короткие ссылки со</div>
                     <div className="GradientMP">
                     Сверхспособностями
                     </div>
@@ -51,14 +49,15 @@ const FirstContainerMainPage = () => {
                     Купить подписку
                 </BuyButton>
                 </div>
-                <button className="TryButton" onClick={()=>navigate(LINKSPAGE_ROUTE)}>
-                    <span>
-                        Попробовать бесплатно
-                    </span>
-                </button>
-
+                <div onClick={()=>{navigate(LINKSPAGE_ROUTE)}} style={{display:"inline-flex"}}>
+                <FreeButton
+                    onClick = {handleBuyButtonClick}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                </FreeButton>
+                </div>
             </div>
-
             <div className="LinksMPContainer">
                 <LinksMainPageView/>
             </div>
