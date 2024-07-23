@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./settings-form.css";
-import { DeleteAccountModal, Overlay } from "../../components";
+import { DeleteAccountModal, Overlay, VerifyCodeModal } from "../../components";
+import VerifyCodeModalEmail from "../popups/VerifyCodeModalEmail";
 import Cookies from "js-cookie";
 import {jwtDecode} from "jwt-decode";
 import AlertPopup from "../popups/AlertPopup";
@@ -13,6 +14,7 @@ const SettingsForm = () => {
   const [profilePicture, setProfilePicture] = useState(null); // State for profile picture
   const [profilePictureError, setProfilePictureError] = useState(""); // State for file errors
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isVerifyCodeVisible, setVerifyCodeVisibility] = useState(false);
   const [message, setMessage] = useState("");
   const [popupMessage, setPopupMessage] = useState("");
   const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false);
@@ -101,18 +103,19 @@ const SettingsForm = () => {
       return;
     }
 
+    if (name === "email") {
+      setVerifyCodeVisibility(true);
+      return;
+    }
+
     const formDataToSend = new FormData();
     if (name === "username") {
       formDataToSend.append("username", formData.username);
-    } else if (name === "email") {
-      formDataToSend.append("email", formData.email);
     } else if (profilePicture) {
       formDataToSend.append("profile_picture", profilePicture);
     }
 
-    const endpoint = name === "username" ? "update_username.php" :
-                     name === "email" ? "update_email.php" :
-                     "update_profile_picture.php";
+    const endpoint = name === "username" ? "update_username.php" : "update_profile_picture.php";
 
     fetch(`https://nilurl.ru:8000/${endpoint}`, {
       method: "POST",
@@ -124,6 +127,42 @@ const SettingsForm = () => {
         if (data.success) {
           setPopupMessage("Изменения сохранены успешно.");
           setAlertPopupVisibility(true);
+          if (data.access_token) {
+            Cookies.set("access_token", data.access_token, { expires: 1 });
+          }
+          if (data.refresh_token) {
+            localStorage.setItem("refresh_token", data.refresh_token);
+          }
+        } else {
+          setPopupMessage(data.message);
+          setAlertPopupVisibility(true);
+        }
+      })
+      .catch((error) => {
+        setPopupMessage("Ошибка при выполнении запроса.");
+        setAlertPopupVisibility(true);
+        console.error("Error:", error);
+      });
+  };
+
+  const handleEmailUpdate = (verificationCode) => {
+    fetch("https://nilurl.ru:8000/update_email.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        email: formData.email,
+        code: verificationCode,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setPopupMessage("Email изменен успешно.");
+          setAlertPopupVisibility(true);
+          setVerifyCodeVisibility(false);
           if (data.access_token) {
             Cookies.set("access_token", data.access_token, { expires: 1 });
           }
@@ -238,9 +277,9 @@ const SettingsForm = () => {
                   </div>
                 </label>
                 {profilePictureError && (
-                  <span className="error-message-link">
-                    {profilePictureError}
-                  </span>
+                   <span className="error-message-link">
+                   {profilePictureError}
+                 </span>
                 )}
               </div>
               <div className="settings__controls__form-footer">
@@ -261,16 +300,12 @@ const SettingsForm = () => {
               <div className="settings__controls__form-item redborder">
                 <p className="title">Удалить аккаунт</p>
                 <p className="description">
-                  Учетная запись и все связанные с ней ссылки будут
-                  полностью удалены
+                  Учетная запись и все связанные с ней ссылки будут полностью удалены
                 </p>
               </div>
               <div className="settings__controls__form-footer redborder__footer">
                 <p className="description"></p>
-                <button
-                  className="button red"
-                  onClick={handleDeleteModalOpen}
-                >
+                <button className="button red" onClick={handleDeleteModalOpen}>
                   Удалить аккаунт
                 </button>
               </div>
@@ -281,6 +316,14 @@ const SettingsForm = () => {
         {isDeleteModalOpen && (
           <Overlay onClose={handleDeleteModalClose}>
             <DeleteAccountModal onClose={handleDeleteModalClose} />
+          </Overlay>
+        )}
+        {isVerifyCodeVisible && (
+          <Overlay onClose={() => setVerifyCodeVisibility(false)}>
+            <VerifyCodeModalEmail
+              onClose={() => setVerifyCodeVisibility(false)}
+              onSuccess={handleEmailUpdate}
+            />
           </Overlay>
         )}
         {isAlertPopupVisible && (
