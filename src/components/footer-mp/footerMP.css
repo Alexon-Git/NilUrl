@@ -1,29 +1,27 @@
 .NewFooterMainContainer {
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: 30px 0;
     position: relative;
     font-family: "Roboto";
 }
 
 .NewFooterContainer {
     display: flex;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
 }
 
-.NewFirstFooter {
-    display: inline-block;
-}
-
-.NewSecondFooter {
-    margin-left: 15%;
-    vertical-align: top;
-    display: inline-block;
-}
-
+.NewFirstFooter,
+.NewSecondFooter,
 .NewThirdFooter {
-    margin-left: 10%;
-    vertical-align: top;
-    display: inline-block;
+    flex: 1;
+    min-width: 200px; /* Adjust as needed */
+    margin-bottom: 30px;
+}
+
+.NewSecondFooter,
+.NewThirdFooter {
+    margin-left: 0; /* Reset margin for responsive design */
 }
 
 .NewTextBoldFooter {
@@ -47,6 +45,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.NewCopyright p {
+    margin-bottom: 10px; /* Adjust for spacing on smaller screens */
 }
 
 .NewSocialIcons {
@@ -54,11 +59,11 @@
 }
 
 .NewSocialIcons svg {
-    margin-right: 30px;
+    margin-right: 15px; /* Adjust for spacing */
 }
 
 .NewFooterContent {
-    width: 310px;
+    width: 100%; /* Adjust to full width on small screens */
     line-height: 20px;
     color: #6B7280;
     font-weight: 400;
@@ -69,23 +74,22 @@
 }
 
 @media (max-width: 1000px) {
-    .NewFooterContainer {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-    .NewSecondFooter {
-        margin-left: 10%;
-    }
+
+    .NewFirstFooter,
+    .NewSecondFooter,
     .NewThirdFooter {
-        margin-left: 5%;
+        margin-left: 0; /* Reset margin for responsive design */
+        margin-bottom: 20px;
     }
-    .NewCopyright {
-        padding-left: 30px;
-        padding-right: 30px;
+
+    .NewCopyright p {
+        margin-bottom: 10px; /* Adjust for spacing on smaller screens */
+    }
+
+    .NewSocialIcons svg {
+        margin-right: 15px; /* Adjust for spacing */
     }
 }
-
-
 
 .wrapper {
     max-width: 1440px;
@@ -98,3 +102,35 @@
         max-width: none;
     }
 }
+
+:root {
+    --img-width: 230px;
+    --img-height: 31px;
+  }
+  
+  .NewCopyright__logo img {
+    cursor: pointer;
+    width: var(--img-width);
+    height: var(--img-height);
+  }
+  
+  @media (max-width: 600px) {
+    .NewCopyright__logo img {
+      width: calc(var(--img-width) * 0.95); /* Уменьшение на 5% */
+      height: calc(var(--img-height) * 0.95);
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .NewCopyright__logo img {
+      width: calc(var(--img-width) * 0.90); /* Еще на 5% от начального размера */
+      height: calc(var(--img-height) * 0.90);
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .NewCopyright__logo img {
+      width: calc(var(--img-width) * 0.85); /* Еще на 5% от начального размера */
+      height: calc(var(--img-height) * 0.85);
+    }
+  }

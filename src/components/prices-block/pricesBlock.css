@@ -21,6 +21,12 @@
   font-weight: 900;
   line-height: 60px;
   margin-top: 30px;
+  text-align: center; /* Center text horizontally */
+  flex-wrap: wrap; /* Allow wrapping */
+}
+
+.gradient__text, .black__text {
+  display: inline-block;
 }
 
 .gradient__text {
@@ -36,6 +42,8 @@
 
 .prices__block {
   display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  justify-content: center; /* Center items horizontally */
   margin-top: 100px;
   gap: 20px;
   font-weight: 700;
@@ -48,12 +56,14 @@
   padding: 20px;
   border: 1px solid #bbbbbb;
   border-radius: 20px;
-  flex: 1;
+  flex: 1 1 350px; /* Minimum width of 350px, allow flex grow and shrink */
+  max-width: calc(33.33% - 40px); /* Ensuring three items per row with gap */
   background-color: #fff;
   box-shadow: 0px 4px 100px 0px #00000040;
   border: 2px solid transparent;
   border-radius: 20px;
   display: inline-block;
+  box-sizing: border-box;
 }
 
 .prices__block-item:hover {
@@ -63,17 +73,72 @@
   display: inline-block;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1300px) {
+  .prices__block-item {
+    min-width: 350px; /* Minimum width of 350px */
+    max-width: 450px; /* Full width on smaller screens */
+    padding: 20px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .prices {
+    padding: 50px 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .prices__title {
+    display: block;
+  }
+
+  .gradient__text, .black__text {
+    display: block;
+    text-align: center; /* Center text within each block */
+  }
+
   .prices__block {
-    flex-direction: column;
-    align-items: center;
+    justify-content: center; /* Center items horizontally on smaller screens */
+  }
+}
+
+@media (max-width:650px) {
+  .prices__title {
+    font-size: 45px;
+  }
+}
+
+@media (max-width:550px) {
+  .prices__title {
+    font-size: 42px;
+  }
+}
+
+@media (max-width:450px) {
+  .prices__title {
+    font-size: 40px;
+  }
+}
+
+@media (max-width:400px) {
+  .prices__title {
+    font-size: 35px;
   }
 
   .prices__block-item {
-    padding: 30px;
-    min-width: 335px;
-    width: 100%;
-    max-height: 100%;
+    min-width: 320px; 
+  }
+}
+
+@media (max-width:320px) {
+  .prices__title {
+    font-size: 31px;
+  }
+
+  .prices__block-item {
+    min-width: 320px; /* Minimum width of 350px */
+    max-width: 450px; /* Full width on smaller screens */
+    padding: 10px;
   }
 }
 
