@@ -1,7 +1,8 @@
 .InputForLinksMP{
     background-color: white;
     display: flex;
-    width: 509px;
+    max-width: 509px;
+    width: 100%;
     border: 1px solid #E5E7EB;
     height: 38px;
     border-radius: 6px;
@@ -22,9 +23,8 @@
 }
 .VvodMPLinks{
     display: flex;
-    margin-right: 5px;
     width: 40px;
-    height: 26px;
+    height: 100%;
     border-radius: 4px;
     align-items: center;
     background-color: white;
@@ -94,8 +94,7 @@
     padding-top: 5px;
     margin-top: 20px;
     color: #6B7280;
-    width: 509px;
-    height: 66px;
+    width: 100%;
     font-weight: 400;
     font-size: 14px;
     border: 1px solid #E5E7EB;
@@ -113,3 +112,30 @@
     border-radius: 6px;
 }
 
+@media (max-width: 600px) {
+    .LinksMapOneContainer,
+    .ButtonsContainerLinksMap,
+    .CLicksTextANum,
+    .InfoMapLinks,
+    .containerNoContentMP {
+        width: 100%;
+        height: auto;
+    }
+
+    .LinksMPContainer {
+        text-align:left;
+    }
+
+    .ButtonsContainerLinksMap {
+        margin-left: 0;
+        line-height: 35px;
+
+
+    }
+
+    .ButtonCircleCopyAndShare,
+    .countOfViewLinksMap {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+}

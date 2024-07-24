@@ -25,10 +25,14 @@
     margin-top: 30px;
   }
 
-.LinksMPContainer {
-  margin-top: 20px;
-  text-align: center;
-}
+  .LinksMPContainer {
+    margin-top: 20px;
+    text-align: center;
+    max-width: 511px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 .LinksMPContainer {
   margin-top: 100px;
   display: flex;

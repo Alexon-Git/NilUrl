@@ -59,11 +59,9 @@ const LinksMainPageView = () => {
                 ))}
             </div>
             <div className="InfoMapLinks">
-                <div style={{ height: "51px", width: "418px", textAlign: "left", paddingLeft: "15px" }}>
                     Хотите запросить свои ссылки,
                     отредактировать их или посмотреть их аналитику?
                     Создайте бесплатную учетную запись на NilUrl
-                </div>
             </div>
         </div>
     );
