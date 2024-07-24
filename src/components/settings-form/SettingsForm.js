@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./settings-form.css";
-import { DeleteAccountModal, Overlay } from "../../components";
+import { DeleteAccountModal, Overlay} from "../../components";
+import VerifyCodeModalEmail from "../popups/VerifyCodeModalEmail";
 import Cookies from "js-cookie";
 import {jwtDecode} from "jwt-decode";
 import AlertPopup from "../popups/AlertPopup";
@@ -13,6 +14,7 @@ const SettingsForm = () => {
   const [profilePicture, setProfilePicture] = useState(null); // State for profile picture
   const [profilePictureError, setProfilePictureError] = useState(""); // State for file errors
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isVerifyCodeVisible, setVerifyCodeVisibility] = useState(false);
   const [message, setMessage] = useState("");
   const [popupMessage, setPopupMessage] = useState("");
   const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false);
@@ -100,19 +102,42 @@ const SettingsForm = () => {
     if (!isValid) {
       return;
     }
-
     const formDataToSend = new FormData();
+    if (name === "email") {
+      const Send_data = JSON.stringify({ email_new: formData.email }); 
+      fetch("https://nilurl.ru:8000/send_update_email_code.php", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: Send_data,
+      })
+      .then(response => response.json())
+        .then((data) => {
+          if (data.success) {
+            setVerifyCodeVisibility(true);
+          } else {
+            setPopupMessage(data.message || "Ошибка при отправке кода подтверждения.");
+            setAlertPopupVisibility(true);
+          }
+        })
+        .catch((error) => {
+          setPopupMessage("Ошибка при выполнении запроса.");
+          setAlertPopupVisibility(true);
+          console.error("Error:", error);
+        });
+      return;
+    }
+
+    
     if (name === "username") {
       formDataToSend.append("username", formData.username);
-    } else if (name === "email") {
-      formDataToSend.append("email", formData.email);
     } else if (profilePicture) {
       formDataToSend.append("profile_picture", profilePicture);
     }
 
-    const endpoint = name === "username" ? "update_username.php" :
-                     name === "email" ? "update_email.php" :
-                     "update_profile_picture.php";
+    const endpoint = name === "username" ? "update_username.php" : "update_profile_picture.php";
 
     fetch(`https://nilurl.ru:8000/${endpoint}`, {
       method: "POST",
@@ -141,6 +166,8 @@ const SettingsForm = () => {
         console.error("Error:", error);
       });
   };
+
+  
 
   const formItems = [
     {
@@ -239,8 +266,8 @@ const SettingsForm = () => {
                 </label>
                 {profilePictureError && (
                   <span className="error-message-link">
-                    {profilePictureError}
-                  </span>
+                  {profilePictureError}
+                </span>
                 )}
               </div>
               <div className="settings__controls__form-footer">
@@ -261,16 +288,12 @@ const SettingsForm = () => {
               <div className="settings__controls__form-item redborder">
                 <p className="title">Удалить аккаунт</p>
                 <p className="description">
-                  Учетная запись и все связанные с ней ссылки будут
-                  полностью удалены
+                  Учетная запись и все связанные с ней ссылки будут полностью удалены
                 </p>
               </div>
               <div className="settings__controls__form-footer redborder__footer">
                 <p className="description"></p>
-                <button
-                  className="button red"
-                  onClick={handleDeleteModalOpen}
-                >
+                <button className="button red" onClick={handleDeleteModalOpen}>
                   Удалить аккаунт
                 </button>
               </div>
@@ -281,6 +304,20 @@ const SettingsForm = () => {
         {isDeleteModalOpen && (
           <Overlay onClose={handleDeleteModalClose}>
             <DeleteAccountModal onClose={handleDeleteModalClose} />
+          </Overlay>
+        )}
+        {isVerifyCodeVisible && (
+          <Overlay onClose={() => setVerifyCodeVisibility(false)}>
+            <VerifyCodeModalEmail
+            onClose={() => setVerifyCodeVisibility(false)}
+            onSuccess={(message) => {
+              setPopupMessage(message || "Email изменен успешно.");
+              setAlertPopupVisibility(true);
+              setVerifyCodeVisibility(false);
+              
+            }}
+            email={formData.email}
+          />
           </Overlay>
         )}
         {isAlertPopupVisible && (
