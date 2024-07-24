@@ -99,7 +99,7 @@ const HeaderLinksPage = () => {
           >
             <div className="UserLogoWord" onClick={handleTogglePopup}>
             {userSVG ? (
-                  <img src={userSVG} alt="User SVG" style={{ width: '30px', height: '30px' }} />
+                  <img className="image-container-logo" src={userSVG} alt="User SVG" style={{ width: '30px', height: '30px' }} />
                 ) : (
               <svg
                 width="30"

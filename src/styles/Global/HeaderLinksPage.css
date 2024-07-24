@@ -130,3 +130,19 @@
   text-decoration: underline;
   text-underline-offset: 10px; /* Adjust this value to move the underline */
 }
+
+.image-container-logo img {
+    border-radius: 50%;
+  }
+
+  .image-container-logo::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: 50%;
+    background: linear-gradient(135deg, #634CEC, #FE35AF);
+    z-index: -1; /* Ensure it stays behind the image */
+  }
