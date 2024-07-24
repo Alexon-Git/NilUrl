@@ -131,7 +131,7 @@
   text-underline-offset: 10px; /* Adjust this value to move the underline */
 }
 
-.image-container-logo img {
+.image-container-logo {
     border-radius: 50%;
   }
 
