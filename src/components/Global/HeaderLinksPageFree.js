@@ -10,6 +10,7 @@ import {
 } from "../../LogicComp/utils/Const";
 
 const HeaderLinksPage = () => {
+  const [userSVG, setUserSVG] = useState(null);
   const [username, setUsername] = useState("");
   const [usernameInitial, setUsernameInitial] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -32,6 +33,21 @@ const HeaderLinksPage = () => {
         const decodedToken = jwtDecode(accessToken);
         setUsername(decodedToken.username);
         setUsernameInitial(decodedToken.username.charAt(0));
+        
+        fetch('https://nilurl.ru:8000/get_user_svg.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include', 
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.svg) {
+              setUserSVG(data.svg);
+            }
+          })
+          .catch(error => console.error('Error fetching SVG:', error));
       } catch (error) {
         console.error("Token decoding failed:", error);
       }
@@ -74,6 +90,9 @@ const HeaderLinksPage = () => {
             style={{ display: "flex", gap: "30px", alignItems: "center" }}
           >
             <div className="UserLogoWord" onClick={handleTogglePopup}>
+            {userSVG ? (
+                  <img src={userSVG} alt="User SVG" style={{ width: '30px', height: '30px' }} />
+                ) : (
               <svg
                 width="30"
                 height="30"
@@ -116,6 +135,7 @@ const HeaderLinksPage = () => {
                   </clipPath>
                 </defs>
               </svg>
+              )}
             </div>
             {showPopup && (
               <div className="header-popup">
