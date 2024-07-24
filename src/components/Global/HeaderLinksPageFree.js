@@ -33,18 +33,24 @@ const HeaderLinksPage = () => {
         const decodedToken = jwtDecode(accessToken);
         setUsername(decodedToken.username);
         setUsernameInitial(decodedToken.username.charAt(0));
-        
+  
         fetch('https://nilurl.ru:8000/get_user_svg.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          credentials: 'include', 
+          credentials: 'include',
         })
           .then(response => response.json())
           .then(data => {
-            if (data.svg) {
-              setUserSVG(data.svg);
+            if (data.success) {
+              if (data.svg) {
+                setUserSVG(data.svg);
+              } else {
+                console.error('SVG path is null.');
+              }
+            } else {
+              console.error(data.message || 'Failed to fetch SVG.');
             }
           })
           .catch(error => console.error('Error fetching SVG:', error));
