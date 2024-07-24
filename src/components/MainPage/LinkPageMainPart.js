@@ -158,7 +158,6 @@ const LinkPageMainPart = () => {
             <CreateLinkNew userStatus={userStatus} highestKey={highestKey} /> 
           </div>
         </div>
-        <div className="MainContainer">
           <div className="LinksContainer">
             {filteredLinks.length > 0 ? (
               filteredLinks.map((link, index) => (
@@ -187,7 +186,6 @@ const LinkPageMainPart = () => {
               )
             )}
           </div>
-        </div>
       </div>
     </div>
   );
