@@ -133,6 +133,12 @@
 
 .image-container-logo {
     border-radius: 50%;
+    border: 1px solid #FE35AF;
+  }
+
+  .image-container-logo-free {
+    border-radius: 50%;
+    border: 1px solid #000000;
   }
 
   .image-container-logo::before {
