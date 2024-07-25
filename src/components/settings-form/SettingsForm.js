@@ -89,7 +89,7 @@ const SettingsForm = () => {
     e.preventDefault();
     const { name } = e.target.dataset;
     let isValid = true;
-    let newErrors = { username: "", email: "" };
+    let newErrors = { username: "", email: "", password: "" };
 
     if (name === "username" && (formData.username.length < 3 || containsSpecialCharacters(formData.username))) {
       newErrors.username = "Имя пользователя должно быть не менее 3 символов и не должно содержать специальных символов.";
@@ -100,7 +100,10 @@ const SettingsForm = () => {
       newErrors.email = "Email должен быть действительным.";
       isValid = false;
     }
-
+    if (name === "password" && (!formData.password || formData.password.length < 6)) {
+      newErrors.password = "Пароль должен быть не менее 6 символов.";
+      isValid = false;
+    }
     setErrors(newErrors);
 
     if (!isValid) {
@@ -270,7 +273,7 @@ const SettingsForm = () => {
                     : item.name === "email"
                     ? "Email должен быть действительным."
                     : item.name === "password"
-                    ? "После ввода текущего пароля будет открыто окно для изменения."
+                    ? "Пароль должен быть не меньше 6 и не более 40 символов."
                     : ""}
                   </p>
                   <button
