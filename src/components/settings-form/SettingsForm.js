@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./settings-form.css";
 import { DeleteAccountModal, Overlay} from "../../components";
 import VerifyCodeModalEmail from "../popups/VerifyCodeModalEmail";
+import VerifyCodeModalPassword from "../popups/VerifyCodeModalPassword.js";
 import Cookies from "js-cookie";
 import {jwtDecode} from "jwt-decode";
 import AlertPopup from "../popups/AlertPopup";
@@ -10,17 +11,20 @@ const SettingsForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
+    password: "",
   });
   const [profilePicture, setProfilePicture] = useState(null); // State for profile picture
   const [profilePictureError, setProfilePictureError] = useState(""); // State for file errors
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isVerifyCodeVisible, setVerifyCodeVisibility] = useState(false);
+  const [isVerifyCodeVisiblePass, setVerifyCodeVisiblePass] = useState(false);
   const [message, setMessage] = useState("");
   const [popupMessage, setPopupMessage] = useState("");
   const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false);
   const [errors, setErrors] = useState({
     username: "",
     email: "",
+    password: "",
   });
 
   useEffect(() => {
@@ -130,6 +134,32 @@ const SettingsForm = () => {
       return;
     }
 
+    if (name === "password") {
+      const Send_data = JSON.stringify({ email_new: formData.email }); 
+      fetch("https://nilurl.ru:8000/send_update_password_code.php", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: Send_data,
+      })
+      .then(response => response.json())
+        .then((data) => {
+          if (data.success) {
+            setVerifyCodeVisiblePass(true);
+          } else {
+            setPopupMessage(data.message || "Ошибка при отправке кода подтверждения.");
+            setAlertPopupVisibility(true);
+          }
+        })
+        .catch((error) => {
+          setPopupMessage("Ошибка при выполнении запроса.");
+          setAlertPopupVisibility(true);
+          console.error("Error:", error);
+        });
+      return;
+    }
     
     if (name === "username") {
       formDataToSend.append("username", formData.username);
@@ -172,6 +202,7 @@ const SettingsForm = () => {
   const formItems = [
     {
       title: "Ваше имя пользователя",
+      type: "text",
       description: "Оно будет отображаться в 'Nil'",
       name: "username",
       value: formData.username,
@@ -181,10 +212,20 @@ const SettingsForm = () => {
     {
       title: "Ваш email",
       description: "Введите вашу электронную почту",
+      type: "text",
       name: "email",
       value: formData.email,
       maxLength: undefined,
       error: errors.email,
+    },
+    {
+      title: "Смена пароля",
+      description: "Введите новый пароль",
+      type: "password",
+      name: "password",
+      value: formData.password,
+      maxLength: 40,
+      error: errors.password,
     },
   ];
 
@@ -211,7 +252,7 @@ const SettingsForm = () => {
                   <p className="description">{item.description}</p>
                   <input
                     className={item.error ? "input input-error" : "input"}
-                    type="text"
+                    type= {item.type}
                     placeholder={item.placeholder}
                     name={item.name}
                     value={item.value}
@@ -224,9 +265,13 @@ const SettingsForm = () => {
                 </div>
                 <div className="settings__controls__form-footer">
                   <p className="description">
-                    {item.name === "username"
-                      ? "Не менее 3 символов и не более 32 символов."
-                      : "Email должен быть действительным."}
+                  {item.name === "username"
+                    ? "Не менее 3 символов и не более 32 символов."
+                    : item.name === "email"
+                    ? "Email должен быть действительным."
+                    : item.name === "password"
+                    ? "После ввода текущего пароля будет открыто окно для изменения."
+                    : ""}
                   </p>
                   <button
                     className="button"
@@ -317,6 +362,20 @@ const SettingsForm = () => {
               
             }}
             email={formData.email}
+          />
+          </Overlay>
+        )}
+        {isVerifyCodeVisiblePass && (
+          <Overlay onClose={() => setVerifyCodeVisiblePass(false)}>
+            <VerifyCodeModalPassword
+            onClose={() => setVerifyCodeVisiblePass(false)}
+            onSuccess={(message) => {
+              setPopupMessage(message || "Пароль изменен успешно.");
+              setAlertPopupVisibility(true);
+              setVerifyCodeVisiblePass(false);
+              
+            }}
+            password={formData.password}
           />
           </Overlay>
         )}
