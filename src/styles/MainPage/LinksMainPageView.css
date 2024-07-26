@@ -46,6 +46,7 @@
 }
 .LogoAndTextLinksMap{
     margin-left: 10px;
+    display: flex;
 }
 .SmallAndLargeLink{
     width: 150px;
@@ -59,7 +60,7 @@
 }
 .ButtonsContainerLinksMap{
     margin-left: 55px;
-    display: inline-block;
+    display: flex;
     vertical-align: top;
 }
 .ButtonCircleCopyAndShare{
@@ -91,7 +92,7 @@
     margin-left: 12px;
 }
 .InfoMapLinks{
-    padding-top: 5px;
+    padding: 5px;
     margin-top: 20px;
     color: #6B7280;
     width: 100%;
@@ -127,15 +128,24 @@
     }
 
     .ButtonsContainerLinksMap {
-        margin-left: 0;
-        line-height: 35px;
-
-
+        margin-left: 10px;
     }
 
     .ButtonCircleCopyAndShare,
     .countOfViewLinksMap {
         margin-left: 0;
         margin-right: 15px;
+    }
+
+    .LinksMapOneContainer {
+        display: block;
+        position: relative;
+    }
+
+    .TriDotMenu {
+        position: absolute;
+        right: 10px; /* 10 пикселей от правого края родителя */
+        top: 50%; /* Позиционируем верхнюю границу элемента по центру высоты родителя */
+        transform: translateY(-50%); /* Сдвигаем элемент на 50% его высоты вверх, чтобы выровнять по центру */
     }
 }

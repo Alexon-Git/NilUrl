@@ -29,6 +29,7 @@ const LinksMap: React.FC<LinksMapInt> = ({ clicks, path, imageURL }: LinksMapInt
                         <a href={path} style={{ color: "#1E40AF", fontWeight: "600", fontSize: "16px" }}>{path}</a><br />
                         <a style={{ fontWeight: "400", fontSize: "13.56px", color: "#6B7280" }}>{path}</a>
                     </div>
+                    </div>
                     <div className="ButtonsContainerLinksMap">
                         <button className="ButtonCircleCopyAndShare">
                             <svg style={{verticalAlign:"Middle"}} width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +65,6 @@ const LinksMap: React.FC<LinksMapInt> = ({ clicks, path, imageURL }: LinksMapInt
                                 <div className="CLicksTextANum">{clicks} clicks</div>
                             </div>
                         </button>
-                    </div>
                 </div>
                 <div className="TriDotMenu">
                     <button style={{border:"none",backgroundColor:"white"}}>
@@ -80,18 +80,19 @@ const LinksMap: React.FC<LinksMapInt> = ({ clicks, path, imageURL }: LinksMapInt
             :
         (
             <div className="LinksMapOneContainer" style={{ width: "100%" }}>
-                <div className="LogoAndTextLinksMap" style={{ display: "flex" }}>
+                <div className="LogoAndTextLinksMap">
                     <Skeleton circle={true} width={30} height={35} />
                     <div className="SmallAndLargeLink">
                         <Skeleton width={165.59} height={20} />
                         <Skeleton width={134.1} height={15} />
                     </div>
-                    <div className="ButtonsContainerLinksMap" style={{ display: "flex" }}>
-                        <Skeleton className='ButtonCircleCopyAndShare' circle={true} width={28} height={28} style={{ marginRight: '8px' }} />
-                        <Skeleton className='ButtonCircleCopyAndShare' circle={true} width={28} height={28} style={{ marginRight: '8px' }} />
+                    </div>
+                    <div className="ButtonsContainerLinksMap">
+                        <Skeleton className='ButtonCircleCopyAndShare' circle={true} width={28} height={28} />
+                        <Skeleton className='ButtonCircleCopyAndShare' circle={true} width={28} height={28} />
                         <Skeleton className='countOfViewLinksMap' width={92} height={24} style={{ marginTop: '5px' }} />
                     </div>
-                </div>
+
                 <div className="TriDotMenu">
                     <button style={{ border: "none", backgroundColor: "white" }}>
                         <Skeleton width={20} height={20} />
