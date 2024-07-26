@@ -45,6 +45,25 @@
   margin-left: auto;
 }
   
+.ToggleViewButton {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ToggleViewButton.active {
+  background-color: #28a745; /* Цвет для активного состояния */
+}
+
+.ToggleViewButton:hover {
+  background-color: #0056b3;
+}
+
 @media (max-width: 530px) {
   .AddHeader {
     flex-direction: column; /* Переводит элементы в столбик */
