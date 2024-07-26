@@ -1,14 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import QRCodeGenerator from "./QRCodeGenerator";
 import { QRImage, Toggle, ColorPickerGfg } from "../../components";
 import "./qrComponent.css";
 
-function QRComponent({pathS}) {
-  
+function QRComponent({ pathS }) {
   const [showLogo, setShowLogo] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [borderColor, setBorderColor] = useState("#000000");
   const qrRef = useRef(null);
+  const colorPickerRef = useRef(null); 
+
   const toggleEditing = () => {
     setIsEditing(!isEditing);
   };
@@ -28,21 +29,21 @@ function QRComponent({pathS}) {
     const url = DOMURL.createObjectURL(svg);
 
     img.onload = () => {
-        const qrCanvas = document.createElement("canvas");
-        const ctx = qrCanvas.getContext("2d");
-        qrCanvas.width = 500; // Set width to 500px
-        qrCanvas.height = 500; // Set height to 500px
-        ctx.drawImage(img, 0, 0, 500, 500); // Draw image scaled to 500x500
+      const qrCanvas = document.createElement("canvas");
+      const ctx = qrCanvas.getContext("2d");
+      qrCanvas.width = 500; // Set width to 500px
+      qrCanvas.height = 500; // Set height to 500px
+      ctx.drawImage(img, 0, 0, 500, 500); // Draw image scaled to 500x500
 
-        qrCanvas.toBlob((blob) => {
-            const item = new ClipboardItem({ "image/png": blob });
-            navigator.clipboard.write([item]);
-        }, "image/png");
+      qrCanvas.toBlob((blob) => {
+        const item = new ClipboardItem({ "image/png": blob });
+        navigator.clipboard.write([item]);
+      }, "image/png");
     };
     img.src = url;
-};
+  };
 
-const downloadQRCode = () => {
+  const downloadQRCode = () => {
     const qrSvg = qrRef.current.querySelector("svg");
     const serializer = new XMLSerializer();
     let svgStr = serializer.serializeToString(qrSvg);
@@ -53,22 +54,28 @@ const downloadQRCode = () => {
     const url = DOMURL.createObjectURL(svg);
 
     img.onload = () => {
-        const qrCanvas = document.createElement("canvas");
-        const ctx = qrCanvas.getContext("2d");
-        qrCanvas.width = 500; // Set width to 500px
-        qrCanvas.height = 500; // Set height to 500px
-        ctx.drawImage(img, 0, 0, 500, 500); // Draw image scaled to 500x500
+      const qrCanvas = document.createElement("canvas");
+      const ctx = qrCanvas.getContext("2d");
+      qrCanvas.width = 500; // Set width to 500px
+      qrCanvas.height = 500; // Set height to 500px
+      ctx.drawImage(img, 0, 0, 500, 500); // Draw image scaled to 500x500
 
-        // Download QR code as PNG
-        const link = document.createElement("a");
-        link.href = qrCanvas.toDataURL("image/png");
-        link.download = pathS +".png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      // Download QR code as PNG
+      const link = document.createElement("a");
+      link.href = qrCanvas.toDataURL("image/png");
+      link.download = pathS + ".png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     };
     img.src = url;
-};
+  };
+
+  useEffect(() => {
+    if (isEditing && colorPickerRef.current) {
+      colorPickerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [isEditing]);
 
   return (
     <div className="creating__qr">
@@ -138,10 +145,12 @@ const downloadQRCode = () => {
             </div>
             <div className="toggle-logo">
               <p className="editing-title">Цвет</p>
-              <ColorPickerGfg
-                initialColor={borderColor}
-                onColorChange={handleColorChange}
-              />
+              <div ref={colorPickerRef}>
+                <ColorPickerGfg
+                  initialColor={borderColor}
+                  onColorChange={handleColorChange}
+                />
+              </div>
             </div>
           </div>
         )}
