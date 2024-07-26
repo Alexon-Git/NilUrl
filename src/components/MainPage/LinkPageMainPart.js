@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import TagsColumn from "../LinksPage/TagsColumn";
+import { LinksNotFound } from '..';
 
 const LinkPageMainPart = () => {
   const [links, setLinks] = useState([]);
@@ -182,7 +183,10 @@ const LinkPageMainPart = () => {
               loading ? (
                 <div>Загрузка...</div>
               ) : (
-                <div>Ссылки не найдены. Пожалуйста, перезагрузите страницу.</div>
+                <div className='links-not-found'>
+                  <p> Ссылок не найдено</p>
+                  <img src={LinksNotFound} alt=""></img>
+                </div>
               )
             )}
           </div>

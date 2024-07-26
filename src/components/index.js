@@ -30,6 +30,7 @@ import Privilege from "../img/privilege.svg";
 import FooterLogo from "../img/footer-logo.svg";
 import FAQ from "../img/faq.svg";
 import QRImage from "../img/qr-image.svg";
+import LinksNotFound from "../img/links-not-found.png"
 
 export {
   SettingsForm,
@@ -62,4 +63,5 @@ export {
   FooterLogo,
   FAQ,
   QRImage,
+  LinksNotFound,
 };

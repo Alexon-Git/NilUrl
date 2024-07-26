@@ -1,73 +1,86 @@
 .lp-background {
-    background-image: url(./../../img/background-image.svg);
-    background-color: rgba(202,196,176, 0.2);  
-    background-repeat: repeat;
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px solid rgba(221, 221, 221, 1);
-    overflow: hidden;
-  }
+  background-image: url(./../../img/background-image.svg);
+  background-color: rgba(202, 196, 176, 0.2);
+  background-repeat: repeat;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid rgba(221, 221, 221, 1);
+  overflow: hidden;
+}
 
-.LinkPageMainPart{
-    height: calc(100vh - (65px + 65px));
-    text-align: center;
+.LinkPageMainPart {
+  height: calc(100vh - (65px + 65px));
+  text-align: center;
 }
-.TopContainer{
-    position: relative;
+.TopContainer {
+  position: relative;
 }
-.FakeDivLP{
-    width: 0%;
-    display: inline-block;
+.FakeDivLP {
+  width: 0%;
+  display: inline-block;
 }
-.RightTopCont{
-    margin-top: 25px;
-    margin-bottom: 25px;
-    display: inline-flex;
-    float: right;
-    width: 100%;
-    gap: 20px;
-    justify-content: space-between
+.RightTopCont {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: inline-flex;
+  float: right;
+  width: 100%;
+  gap: 20px;
+  justify-content: space-between;
 }
-.MainContainer{
-    padding-top: 25px;
-    position: relative;
-    height: 80%;
+.MainContainer {
+  padding-top: 25px;
+  position: relative;
+  height: 80%;
 }
-.FilerContainer{
-    border-radius: 10px;
-    float: left;
-    width: 30%;
-    height: auto;
-    background-color: white;
-    display: inline-block;
+.FilerContainer {
+  border-radius: 10px;
+  float: left;
+  width: 30%;
+  height: auto;
+  background-color: white;
+  display: inline-block;
 }
-.LinksContainer{
-    border-radius: 10px;
-    float: right;
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
+.LinksContainer {
+  border-radius: 10px;
+  float: right;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.links-not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  padding: 50px;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
-    .RightTopCont {
-        display: flex;
-        justify-content: space-between; /* Первые два элемента по краям */
-        flex-wrap: wrap; /* Позволяет элементам переноситься на следующую строку */
-    }
+  .RightTopCont {
+    display: flex;
+    justify-content: space-between; /* Первые два элемента по краям */
+    flex-wrap: wrap; /* Позволяет элементам переноситься на следующую строку */
+  }
 
-    .RightTopCont > *:nth-child(3) {
-        margin-left: auto; /* "Создать ссылку" прижат к правому краю */
-    }
+  .RightTopCont > *:nth-child(3) {
+    margin-left: auto; /* "Создать ссылку" прижат к правому краю */
+  }
 }
 
 /* Медиа-запрос для экранов шириной меньше 550 пикселей */
 @media (max-width: 549px) {
-    .RightTopCont {
-        display: flex;
-        align-items: center; /* Выравнивание по центру горизонтально */
-        justify-content: center; /* Выравнивание по центру вертикально */
-        gap: 15px; /* Отступы между элементами */
-    }
+  .RightTopCont {
+    display: flex;
+    align-items: center; /* Выравнивание по центру горизонтально */
+    justify-content: center; /* Выравнивание по центру вертикально */
+    gap: 15px; /* Отступы между элементами */
+  }
 }
