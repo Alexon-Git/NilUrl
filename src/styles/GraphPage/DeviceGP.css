@@ -3,13 +3,12 @@
   margin-top: 20px;
   padding-left: 30px;
   padding-right: 30px;
-  
 }
 .MapGPRow {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px; 
+  gap: 10px;
 }
 .AddHeader {
   justify-content: space-between;
@@ -44,14 +43,18 @@
   padding-left: 30px;
   margin-left: auto;
 }
-  
+
 .ToggleViewButton {
   background-color: white;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 5px;
   padding: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  transform: translateY(2px);
+  box-shadow: 0 2px 8px 0 #0000001a;
+  height: auto;
+  width: auto;
 }
 
 .ToggleViewButton.active {
@@ -59,6 +62,8 @@
 }
 
 .ToggleViewIcon {
+  display: flex;
+  align-items: center;
   fill: none;
   stroke: #000;
 }

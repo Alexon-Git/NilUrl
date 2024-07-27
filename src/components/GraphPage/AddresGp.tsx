@@ -4,7 +4,7 @@ import MapGP from "./MapGP";
 import { DateFromServInterface } from "../../LogicComp/GPFakeData";
 import SortButtonAdd from "../buttons/SortButtonAdd";
 import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, ChartOptions } from 'chart.js';
 
 // Регистрация необходимых компонентов Chart.js
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
@@ -144,9 +144,10 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
   };
 
   // Настройки для анимации диаграммы
-  const options = {
+  const options: ChartOptions<"pie"> = {
     animation: {
       duration: 500, // Устанавливаем длительность анимации на 500 миллисекунд
+      easing: 'easeOutQuart', // Настраиваем функцию easing
     },
   };
 
@@ -161,8 +162,8 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
             onClick={() => setFlag(!flag)}
           >
             <svg
-              width="24"
-              height="24"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
