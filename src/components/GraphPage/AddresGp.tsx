@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/GraphPage/DeviceGP.css";
 import MapGP from "./MapGP";
 import { DateFromServInterface } from "../../LogicComp/GPFakeData";
@@ -24,7 +24,6 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
   const [data, setData] = useState<DualData[]>([]);
   const [Countries, setCountries] = useState<DualData[]>([]);
   const [City, setCity] = useState<DualData[]>([]);
-  const [countryCode, setCountryCode] = useState<string>("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sortOption, setSortOption] = useState(0);
 
@@ -111,12 +110,15 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
 
   // Обработка данных для круговой диаграммы
   const processPieData = (data: DualData[]) => {
-    // Сортируем данные по количеству кликов
-    const sortedData = [...data].sort((a, b) => b.clicks - a.clicks);
+    const totalClicks = data.reduce((sum, item) => sum + item.clicks, 0);
+    const minDegree = 15; // Минимальная степень для показа сегмента
+    const minClicks = (minDegree / 360) * totalClicks;
     
-    // Ограничиваем количество элементов до 6
-    const topData = sortedData.slice(0, 5);
-    const otherData = sortedData.slice(5);
+    const sortedData = [...data].sort((a, b) => b.clicks - a.clicks);
+
+    // Фильтруем данные, оставляя только те, что больше минимальной степени
+    const topData = sortedData.filter(item => item.clicks >= minClicks);
+    const otherData = sortedData.filter(item => item.clicks < minClicks);
 
     // Объединяем оставшиеся элементы в одну категорию "Другое"
     if (otherData.length > 0) {
@@ -138,7 +140,13 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
         '#F4B400', // Google Yellow
         '#0F9D58', // Google Green
         '#AB47BC', // Google Purple
-        '#00ACC1'  // Google Cyan
+        '#00ACC1', // Google Cyan
+        '#FF5733', // Example additional color 1
+        '#FFC300', // Example additional color 2
+        '#DAF7A6', // Example additional color 3
+        '#FF8C00', // Example additional color 4
+        '#E67E22', // Example additional color 5
+        '#2ECC71'  // Example additional color 6
       ],
     }],
   };
@@ -147,7 +155,7 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
   const options: ChartOptions<"pie"> = {
     animations: {
       tension: {
-        duration: 500, // Устанавливаем длительность анимации на 500 миллисекунд
+        duration: 20, // Устанавливаем длительность анимации на 500 миллисекунд
         easing: 'easeOutQuart', // Настраиваем функцию easing
         from: 1,
         to: 0,
