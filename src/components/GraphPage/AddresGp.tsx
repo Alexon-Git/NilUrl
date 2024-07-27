@@ -109,13 +109,45 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
     { label: "По кликам ↑", value: 4 },
   ];
 
+  // Обработка данных для круговой диаграммы
+  const processPieData = (data: DualData[]) => {
+    // Сортируем данные по количеству кликов
+    const sortedData = [...data].sort((a, b) => b.clicks - a.clicks);
+    
+    // Ограничиваем количество элементов до 6
+    const topData = sortedData.slice(0, 5);
+    const otherData = sortedData.slice(5);
+
+    // Объединяем оставшиеся элементы в одну категорию "Другое"
+    if (otherData.length > 0) {
+      const otherClicks = otherData.reduce((sum, item) => sum + item.clicks, 0);
+      topData.push({ country: "Другое", clicks: otherClicks, country_code: "" });
+    }
+
+    return topData;
+  };
+
   // Данные для круговой диаграммы
   const pieData = {
-    labels: data.map(d => d.country),
+    labels: processPieData(data).map(d => d.country),
     datasets: [{
-      data: data.map(d => d.clicks),
-      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+      data: processPieData(data).map(d => d.clicks),
+      backgroundColor: [
+        '#4285F4', // Google Blue
+        '#DB4437', // Google Red
+        '#F4B400', // Google Yellow
+        '#0F9D58', // Google Green
+        '#AB47BC', // Google Purple
+        '#00ACC1'  // Google Cyan
+      ],
     }],
+  };
+
+  // Настройки для анимации диаграммы
+  const options = {
+    animation: {
+      duration: 500, // Устанавливаем длительность анимации на 500 миллисекунд
+    },
   };
 
   return (
@@ -124,6 +156,22 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
         <div className="FontSizeTextGPDev">
           <span>Адреса</span>
           <SortButtonAdd columns={columns} setSortOption={setSortOption} />
+          <button
+            className={`ToggleViewButton ${flag ? 'active' : ''}`}
+            onClick={() => setFlag(!flag)}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={`ToggleViewIcon ${flag ? 'active' : ''}`}
+            >
+              <path d="M21 10C21 6.13401 17.866 3 14 3V10H21Z" stroke={flag ? "#FFFFFF" : "#000000"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M11 21C15.4183 21 19 17.4183 19 13H11V5C6.58172 5 3 8.58172 3 13C3 17.4183 6.58172 21 11 21Z" stroke={flag ? "#FFFFFF" : "#000000"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
         </div>
         <div className="DeviceSwapDev">
           <button className="NavigationButtonDev" onClick={handlePrev}>
@@ -133,17 +181,11 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
           <button className="NavigationButtonDev" onClick={handleNext}>
             ➡
           </button>
-          <button
-            className={`ToggleViewButton ${flag ? 'active' : ''}`}
-            onClick={() => setFlag(!flag)}
-          >
-            {flag ? 'Показать список' : 'Показать диаграмму'}
-          </button>
         </div>
       </div>
       <div style={{ height: "300px", overflowY: "auto", marginTop: "25px" }}>
         {flag ? (
-          <Pie data={pieData} />
+          <Pie data={pieData} options={options} />
         ) : (
           data.map((value, index) => (
             <div key={index}>
