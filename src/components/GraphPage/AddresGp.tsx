@@ -146,7 +146,7 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
   // Настройки для анимации диаграммы
   const options: ChartOptions<"pie"> = {
     animation: {
-      duration: 500, // Устанавливаем длительность анимации на 500 миллисекунд
+      duration: 100, // Устанавливаем длительность анимации на 500 миллисекунд
       easing: 'easeOutQuart', // Настраиваем функцию easing
     },
   };
