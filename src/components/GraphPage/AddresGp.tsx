@@ -151,16 +151,25 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
     }],
   };
 
-  // Настройки для анимации диаграммы
+  // Pie chart options
   const options: ChartOptions<"pie"> = {
     animations: {
-      tension: {
-        duration: 20, // Устанавливаем длительность анимации на 500 миллисекунд
-        easing: 'easeOutQuart', // Настраиваем функцию easing
-        from: 1,
-        to: 0,
-        loop: false
-      }
+      color: {
+        duration: 300, // Animation duration for color changes
+        easing: 'easeOutQuart', // Easing function
+      },
+      resize: {
+        duration: 300, // Animation duration for resizing
+        easing: 'easeOutQuart', // Easing function
+      },
+      rotation: {
+        duration: 300, // Animation duration for rotation
+        easing: 'easeOutQuart', // Easing function
+      },
+      tooltip: {
+        duration: 300, // Animation duration for tooltips
+        easing: 'easeOutQuart', // Easing function
+      },
     },
   };
 
