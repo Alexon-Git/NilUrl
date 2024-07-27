@@ -9,6 +9,7 @@ import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, ChartOptions } fr
 // Регистрация необходимых компонентов Chart.js
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
+
 interface AddresGpInt {
   Dates: DateFromServInterface[];
 }
@@ -153,22 +154,26 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
 
   // Pie chart options
   const options: ChartOptions<"pie"> = {
+    animation: {
+      duration: 100, // Длительность анимации
+      easing: 'easeOutQuart', // Функция easing
+    },
     animations: {
       color: {
-        duration: 300, // Animation duration for color changes
-        easing: 'easeOutQuart', // Easing function
+        duration: 100, // Длительность анимации цвета
+        easing: 'easeOutQuart', // Функция easing
       },
       resize: {
-        duration: 300, // Animation duration for resizing
-        easing: 'easeOutQuart', // Easing function
+        duration: 100, // Длительность анимации изменения размера
+        easing: 'easeOutQuart', // Функция easing
       },
       rotation: {
-        duration: 300, // Animation duration for rotation
-        easing: 'easeOutQuart', // Easing function
+        duration: 100, // Длительность анимации вращения
+        easing: 'easeOutQuart', // Функция easing
       },
       tooltip: {
-        duration: 300, // Animation duration for tooltips
-        easing: 'easeOutQuart', // Easing function
+        duration: 100, // Длительность анимации всплывающих подсказок
+        easing: 'easeOutQuart', // Функция easing
       },
     },
   };

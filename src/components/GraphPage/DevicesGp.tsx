@@ -166,26 +166,30 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
   };
 
   // Pie chart options
- const options: ChartOptions<"pie"> = {
-  animations: {
-    color: {
-      duration: 300, // Animation duration for color changes
-      easing: 'easeOutQuart', // Easing function
+  const options: ChartOptions<"pie"> = {
+    animation: {
+      duration: 100, // Длительность анимации
+      easing: 'easeOutQuart', // Функция easing
     },
-    resize: {
-      duration: 300, // Animation duration for resizing
-      easing: 'easeOutQuart', // Easing function
+    animations: {
+      color: {
+        duration: 100, // Длительность анимации цвета
+        easing: 'easeOutQuart', // Функция easing
+      },
+      resize: {
+        duration: 100, // Длительность анимации изменения размера
+        easing: 'easeOutQuart', // Функция easing
+      },
+      rotation: {
+        duration: 100, // Длительность анимации вращения
+        easing: 'easeOutQuart', // Функция easing
+      },
+      tooltip: {
+        duration: 100, // Длительность анимации всплывающих подсказок
+        easing: 'easeOutQuart', // Функция easing
+      },
     },
-    rotation: {
-      duration: 300, // Animation duration for rotation
-      easing: 'easeOutQuart', // Easing function
-    },
-    tooltip: {
-      duration: 300, // Animation duration for tooltips
-      easing: 'easeOutQuart', // Easing function
-    },
-  },
-};
+  };
 
   return (
     <div className="AddressCountryDev">
