@@ -66,6 +66,7 @@
     height: max-content;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .GPPeriod{
     height: 50px;

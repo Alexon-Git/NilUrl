@@ -194,7 +194,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
                         </a>
                         <div className="CLicksTextANum"  onClick={() => navigate(GRAPHPAGE_ROUTE, { state: { pathS } })}>{clicks} clicks</div>
                     </div>
-                    <div onClick={()=>{setLinkChangeFlag(true)}} style={{height:"max-content",marginLeft:"10px",marginRight:"20px", display:"flex",alignItems:"center"}}>
+                    <div onClick={()=>{setLinkChangeFlag(true)}} style={{height:"max-content",marginLeft:"10px",marginRight:"20px", display:"flex",alignItems:"center", cursor: "pointer"}}>
                         <svg width="23" height="22" viewBox="0 0 23 22" fill="#808080" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.3667 11.25C11.3667 12.2625 10.5459 13.0833 9.53335 13.0833C8.5208 13.0833 7.70001 12.2625 7.70001 11.25C7.70001 10.2374 8.5208 9.41666 9.53335 9.41666C10.5459 9.41666 11.3667 10.2374 11.3667 11.25Z" stroke="#808080" stroke-width="1.28" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M11.3667 17.6667C11.3667 18.6792 10.5459 19.5 9.53335 19.5C8.5208 19.5 7.70001 18.6792 7.70001 17.6667C7.70001 16.6541 8.5208 15.8333 9.53335 15.8333C10.5459 15.8333 11.3667 16.6541 11.3667 17.6667Z" stroke="#808080" stroke-width="1.28" stroke-linecap="round" stroke-linejoin="round"/>

@@ -168,25 +168,25 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
   // Pie chart options
   const options: ChartOptions<"pie"> = {
     animation: {
-      duration: 100, // Длительность анимации
-      easing: 'easeOutQuart', // Функция easing
+      duration: 100, // Длительность общей анимации
+      easing: 'easeOutQuart', // Функция easing для общей анимации
     },
     animations: {
       color: {
-        duration: 100, // Длительность анимации цвета
-        easing: 'easeOutQuart', // Функция easing
+        duration: 100, // Длительность анимации изменения цвета
+        easing: 'easeOutQuart', // Функция easing для анимации цвета
       },
       resize: {
         duration: 100, // Длительность анимации изменения размера
-        easing: 'easeOutQuart', // Функция easing
+        easing: 'easeOutQuart', // Функция easing для анимации изменения размера
       },
       rotation: {
         duration: 100, // Длительность анимации вращения
-        easing: 'easeOutQuart', // Функция easing
+        easing: 'easeOutQuart', // Функция easing для анимации вращения
       },
       tooltip: {
         duration: 100, // Длительность анимации всплывающих подсказок
-        easing: 'easeOutQuart', // Функция easing
+        easing: 'easeOutQuart', // Функция easing для анимации всплывающих подсказок
       },
     },
   };
@@ -224,7 +224,7 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
           </button>
         </div>
       </div>
-      <div style={{ height: "300px", overflowY: "auto", marginTop: "25px" }}>
+      <div style={{ height: "300px", overflowY: "auto", overflowX: "hidden", marginTop: "25px" }}>
         {flag ? (
           <Pie data={pieData} options={options} />
         ) : (

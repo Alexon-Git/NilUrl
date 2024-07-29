@@ -8,7 +8,7 @@ interface twoIcInter{
 
 const OneIcon:React.FC<twoIcInter> = ({UTM,Android,IOS}:twoIcInter) => {
     return (
-        <div style={{paddingRight:"15px"}}>
+        <div style={{marginRight:"15px", cursor: "pointer"}}>
             { UTM &&
                 <div style={{backgroundColor:"#F3F4F6",borderRadius:"9999px",width:"26px",
                     height:"26px",fontSize:"9px",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"700",color:"black"}}>

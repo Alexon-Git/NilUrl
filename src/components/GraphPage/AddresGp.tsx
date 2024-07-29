@@ -211,7 +211,7 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
           </button>
         </div>
       </div>
-      <div style={{ height: "300px", overflowY: "auto", marginTop: "25px" }}>
+      <div style={{ height: "300px", overflowY: "auto", overflowX: "hidden", marginTop: "25px" }}>
         {flag ? (
           <Pie data={pieData} options={options} />
         ) : (

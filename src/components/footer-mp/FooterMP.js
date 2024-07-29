@@ -9,7 +9,7 @@ const FooterMp = () => {
   };
 
   const handleVkClick = () => {
-    window.open('https://vk.ru/nil_agency', '_blank');
+    window.open('https://vk.com/nil_it', '_blank');
   };
 
   const handleImgClick = () => {

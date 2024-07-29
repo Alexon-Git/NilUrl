@@ -8,6 +8,7 @@
     width: 200px;
     margin-right: 70px;
     height: 47px;
+    cursor: pointer;
 }
 .ULTagsColumn{
     z-index: 2;
