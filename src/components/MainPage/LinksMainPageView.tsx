@@ -6,8 +6,8 @@ import LinksMap from "./LinksMap";
 const LinksMainPageView = () => {
     const [arr, setArr] = useState(LinksPropTest);
     const [inputValue, setInputValue] = useState("https://nilurl.ru/login_page");
-    const text = ["По данной ссылке можно войти в сервис", "По данной ссылке можно зарегистрироваться", "По данной ссылке можно зайти на страницу покупок"];
-    const values = ["Зарегистрируйтесь в сервисе и создавайте свои ссылки", "https://nilurl.ru/registration_page", "https://nilurl.ru/price_page"];
+    const text = ["Вход в NilUrl", "Регистрация в NilUrl", "Информация о действующих подписках"];
+    const values = ["Зарегистрируйтесь и создавайте свои ссылки", "https://nilurl.ru/registration_page", "https://nilurl.ru/price_page"];
     const [currentIndex, setCurrentIndex] = useState(0);
     const [clickCount, setClickCount] = useState(0);
 
