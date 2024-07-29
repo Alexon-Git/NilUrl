@@ -5,23 +5,47 @@ import LinksMap from "./LinksMap";
 
 const LinksMainPageView = () => {
     const [arr, setArr] = useState(LinksPropTest);
-    const [inputValue, setInputValue] = useState("https://nilurl.ru/login");
-    const values = ["https://nilurl.ru/login", "https://nilurl.ru/registration", "https://nilurl.ru/price"];
+    const [inputValue, setInputValue] = useState("https://nilurl.ru/login_page");
+    const text = ["По данной ссылке можно войти в сервис", "По данной ссылке можно зарегистрироваться", "По данной ссылке можно зайти на страницу покупок"];
+    const values = ["Зарегистрируйтесь в сервисе и создавайте свои ссылки", "https://nilurl.ru/registration_page", "https://nilurl.ru/price_page"];
     const [currentIndex, setCurrentIndex] = useState(0);
     const [clickCount, setClickCount] = useState(0);
 
-    const click = () => {
+    const fetchClickCounts = async () => {
+        try {
+            const response = await fetch('https://nilurl.ru:8000/getClicks.php');
+            const data = await response.json();
+            console.log('Fetched data:', data); // Логируем данные для проверки
+            return data;
+        } catch (error) {
+            console.error('Error fetching click counts:', error);
+            return {};
+        }
+    };
+
+    const click = async () => {
         if (clickCount < 4) {
+            const clickData = await fetchClickCounts();
             const arrTemp = [...arr];
             const obj: LinksIntMap = {
                 imageURL: "/NILLogo.png",
                 path: inputValue,
-                clicksCount: 0
+                clicksCount: -1,
+                text: text[currentIndex]
             };
 
             arrTemp.splice(1, 0, obj);
             arrTemp.pop();
-            setArr(arrTemp);
+
+            // Update the clicksCount for each URL
+            const updatedArr = arrTemp.map(el => {
+                const pathKey = el.path.split('/').pop();
+                return {
+                    ...el,
+                    clicksCount: pathKey && clickData[pathKey] ? clickData[pathKey] : -1
+                };
+            });
+            setArr(updatedArr);
 
             // Update input value to the next in the list
             const nextIndex = (currentIndex + 1) % values.length;
@@ -32,7 +56,7 @@ const LinksMainPageView = () => {
 
             // Check if it's the 4th click and navigate to /price
             if (clickCount === 3) {
-                window.location.href = "https://nilurl.ru/price";
+                window.location.href = "https://nilurl.ru/registration";
             }
         }
     };
@@ -55,13 +79,13 @@ const LinksMainPageView = () => {
             </div>
             <div>
                 {arr.map((el, index) => (
-                    <LinksMap key={index} path={el.path} imageURL={el.imageURL} clicks={el.clicksCount} />
+                    <LinksMap key={index} path={el.path} imageURL={el.imageURL} clicks={el.clicksCount} text={el.text} />
                 ))}
             </div>
             <div className="InfoMapLinks">
-                    Хотите запросить свои ссылки,
-                    отредактировать их или посмотреть их аналитику?
-                    Создайте бесплатную учетную запись на NilUrl
+                Хотите запросить свои ссылки,
+                отредактировать их или посмотреть их аналитику?
+                Создайте бесплатную учетную запись на NilUrl
             </div>
         </div>
     );

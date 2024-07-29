@@ -6,10 +6,11 @@ import "../../styles/MainPage/LinksMainPageView.css";
 interface LinksMapInt {
     imageURL: string,
     path: string,
-    clicks: number;
+    clicks: number,
+    text:string;
 }
 
-const LinksMap: React.FC<LinksMapInt> = ({ clicks, path, imageURL }: LinksMapInt) => {
+const LinksMap: React.FC<LinksMapInt> = ({ clicks, path, imageURL, text }: LinksMapInt) => {
     return (
         clicks !== -1 ? (
             <div className="LinksMapOneContainer" style={{ width: "100%" }}>
@@ -27,7 +28,7 @@ const LinksMap: React.FC<LinksMapInt> = ({ clicks, path, imageURL }: LinksMapInt
                     </svg>
                     <div className="SmallAndLargeLink">
                         <a href={path} style={{ color: "#1E40AF", fontWeight: "600", fontSize: "16px" }}>{path}</a><br />
-                        <a style={{ fontWeight: "400", fontSize: "13.56px", color: "#6B7280" }}>{path}</a>
+                        <a style={{ fontWeight: "600", fontSize: "13.56px", color: "#6B7280" }}>{text}</a>
                     </div>
                     </div>
                     <div className="ButtonsContainerLinksMap">

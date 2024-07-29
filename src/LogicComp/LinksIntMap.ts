@@ -1,13 +1,14 @@
 export interface LinksIntMap{
     imageURL: string,
     path:string,
-    clicksCount:number
+    clicksCount:number,
+    text:string
 }
 
 export const LinksPropTest: LinksIntMap[] = [
-    {imageURL:"/NILLogo.png",path:"http://nilurl.ru/register",clicksCount:5},
-    {imageURL:"/NILLogo.png",path:"http://nilurl.ru/login",clicksCount:-1},
-    {imageURL:"/NILLogo.png",path:"http://nilurl.ru/price",clicksCount:-1},
-    {imageURL:"/NILLogo.png",path:"http://nilurl.ru/register",clicksCount:-1}
+    {imageURL:"/NILLogo.png",path:"https://nilurl.ru/FAQ_page",clicksCount:5,text:"Эта ссылка для страницы помощи"},
+    {imageURL:"",path:"",clicksCount:-1,text:""},
+    {imageURL:"/NILLogo.png",path:"",clicksCount:-1,text:""},
+    {imageURL:"/NILLogo.png",path:"",clicksCount:-1,text:""}
 ]
 
