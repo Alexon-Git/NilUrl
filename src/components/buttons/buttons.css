@@ -14,41 +14,39 @@
   transition: padding-right 0.5s;
   cursor: pointer;
 }
-#free {
-  background-color: hsl(0, 0%, 0%); 
-}
+
+
+
 #free:hover:after {
-  background-color: rgb(0, 250, 62);
-}
-.loader:after {
-  content: "";
-  position: absolute;
+  background-color: rgba(5, 0, 249, 1); 
 }
 
 .loader:after {
+  content: "";
+  position: absolute;
   width: 12px; 
   height: 12px; 
-  background-color: #fff; 
-  top: 50%; 
-  transform: translateY(-50%);
-  left: 14px; 
+  background-color: #fff;
   border-radius: 50%;
   transition: all 0.5s;
 }
 
 .loader:hover:after {
+  width: 100%; 
+  height: 100%; 
+  top: 0;
+  left: 0;
   background-color: rgba(5, 0, 249, 1); 
-  width: 227px; 
-  height: 48px; 
-  inset: 50% 0 0 0; 
   border-radius: 14px;
 }
 
 .loader:not(:hover):after {
   width: 12px; 
   height: 12px; 
-  inset: -14px 110 110 -14px; 
-  border-radius: 14px;
+  left: 14px; 
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
 }
 
 .loader span {

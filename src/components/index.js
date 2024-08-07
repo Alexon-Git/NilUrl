@@ -27,7 +27,6 @@ import Underscore from "../img/underscore.svg";
 
 import BackImage from "../img/back.svg";
 import Privilege from "../img/privilege.svg";
-import FooterLogo from "../img/footer-logo.svg";
 import FAQ from "../img/faq.svg";
 import QRImage from "../img/qr-image.svg";
 import LinksNotFound from "../img/links-not-found.png"
@@ -60,7 +59,6 @@ export {
   Underscore,
   BackImage,
   Privilege,
-  FooterLogo,
   FAQ,
   QRImage,
   LinksNotFound,

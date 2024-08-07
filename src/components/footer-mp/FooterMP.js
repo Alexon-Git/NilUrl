@@ -1,6 +1,5 @@
 import React from "react";
 import "./footerMP.css";
-import { FooterLogo } from "../../components";
 
 const FooterMp = () => {
 
@@ -74,7 +73,7 @@ const FooterMp = () => {
             </p>
             <div className="NewSocialIcons">
               <svg
-                style={{ marginRight: "30px", cursor: "pointer" }}
+                style={{ marginRight: "15px", cursor: "pointer" }}
                 width="30"
                 height="30"
                 viewBox="0 0 30 30"
@@ -127,9 +126,6 @@ const FooterMp = () => {
       </div>
       <div className="NewCopyright">
         <p className="NewDefaultTextFooter">© 2024 NilURL</p>
-        <span className="NewCopyright__logo">
-          <img src={FooterLogo} style={{ cursor: "pointer" }} alt="Site developed by Nil" onClick={handleImgClick}></img>
-        </span>
       </div>
     </div>
   );
