@@ -124,12 +124,7 @@ body {
 .d2_2 {
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    font-feature-settings: normal;
-    font-variation-settings: normal;
     line-height: inherit;
-    --font-satoshi: "__satoshi_7dbc08", "__satoshi_Fallback_7dbc08";
-    --font-inter: "__Inter_e66fe9", "__Inter_Fallback_e66fe9";
     box-sizing: border-box;
     border: 0 solid #e5e7eb;
     --tw-border-spacing-x: 0;
@@ -213,12 +208,7 @@ body {
 .d3_2 {
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    font-feature-settings: normal;
-    font-variation-settings: normal;
     line-height: inherit;
-    --font-satoshi: "__satoshi_7dbc08", "__satoshi_Fallback_7dbc08";
-    --font-inter: "__Inter_e66fe9", "__Inter_Fallback_e66fe9";
     --tw-border-opacity: 1;
     box-sizing: border-box;
     border: 0 solid #e5e7eb;
@@ -249,13 +239,8 @@ body {
     padding-right: 2rem;
 }
 .b3 {
-    font-family: inherit;
-    font-feature-settings: inherit;
-    font-variation-settings: inherit;
-    font-weight: inherit;
     margin: 0;
     margin-top: 12px;
-    margin-right: 12px;
     padding: 0;
     text-transform: none;
     cursor: pointer;
@@ -283,10 +268,6 @@ body {
     transition-duration: 0.15s;
 }
 .b3_2{
-    font-family: inherit;
-    font-feature-settings: inherit;
-    font-variation-settings: inherit;
-    font-weight: inherit;
     margin: 0;
     margin-top: 12px;
     padding: 0;
@@ -336,13 +317,11 @@ body {
 }
 .in3_1 {
     --file-grid-tile-min-width: 272px;
-    --font-family-ui: "Inter", sans-serif;
     --editor-banner-height: 0px;
     --toolbar-unread-dot-top: 10px;
     --cookie-banner-persistent-message-bottom-margin: 0;
     unicode-bidi: isolate;
     margin: 0;
-    font: inherit;
     vertical-align: inherit;
     outline: none;
     letter-spacing: inherit;
@@ -350,7 +329,6 @@ body {
     cursor: auto;
     padding: 0 6px;
     background-color: var(--color-bg, white);
-    font-family: Whyte, sans-serif !important;
     color: var(--color-text, #282828);
     display: block;
     width: 100%;
@@ -364,10 +342,6 @@ body {
     line-height: normal;
 }
 .b4 {
-    font-family: inherit;
-    font-feature-settings: inherit;
-    font-variation-settings: inherit;
-    font-weight: inherit;
     margin: 0;
     padding: 0;
     text-transform: none;
@@ -403,10 +377,6 @@ body {
     margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }
 .b5 {
-    font-family: inherit;
-    font-feature-settings: inherit;
-    font-variation-settings: inherit;
-    font-weight: inherit;
     margin: 0;
     padding: 0;
     text-transform: none;
@@ -452,25 +422,6 @@ body {
     margin-left: 5px;
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
-    font-family:
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        Segoe UI,
-        Roboto,
-        Helvetica Neue,
-        Arial,
-        Noto Sans,
-        sans-serif,
-        Apple Color Emoji,
-        Segoe UI Emoji,
-        Segoe UI Symbol,
-        Noto Color Emoji;
-    font-feature-settings: normal;
-    font-variation-settings: normal;
-    --font-satoshi: "__satoshi_7dbc08", "__satoshi_Fallback_7dbc08";
-    --font-inter: "__Inter_e66fe9", "__Inter_Fallback_e66fe9";
     --tw-border-opacity: 1;
     --tw-bg-opacity: 1;
     text-align: center;

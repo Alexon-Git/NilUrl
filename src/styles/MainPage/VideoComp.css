@@ -36,7 +36,6 @@
   width: 80%;
   font-weight: 400;
   font-size: 14px;
-  font-family: Roboto;
   color: #6b7280;
   /*animation-name: Anime;*/
   /*animation-duration: 2s;*/
@@ -49,14 +48,6 @@
   cursor: pointer;
 }
 @media (max-width: 1500px) {
-  .videoPlusAccordions {
-    display: flex;
-    height: 540px;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    background-color: white;
-  }
-
   .svgVideoCompAccord {
     margin-left: 20px;
   }
@@ -78,10 +69,9 @@
   }
 }
 
-@media (min-width: 1500px) and (max-width: 3000px) {
+@media (max-width: 3000px) {
   .videoPlusAccordions {
     display: flex;
-    height: 640px;
     border-radius: 12px;
     background-color: white;
     box-shadow: 10px -50px 94px 1px #c7c7c733 inset;
@@ -113,7 +103,6 @@
   height: 80%;
   width: 60%;
   display: inline-block;
-  margin-top: 5%;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -136,6 +125,16 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.AccordionMPLast {
+  margin-top: 50px;
+  padding-bottom: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .PodVieoA {
   font-weight: 600;
   font-size: 17px;
@@ -155,9 +154,10 @@
 }
 
 .video-main {
+  width: 100%; /* или конкретная ширина, если нужна */
+  max-width: 560px; /* макс. ширина плеера */
+  height: 315px; /* высота плеера */
   margin: 50px;
-  width: 80%;
-  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -165,7 +165,13 @@
   border-radius: 51px;
 }
 
-@media (max-width: 1050px) {
+.video-main iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit; /* чтобы iframe не выходил за границы */
+}
+
+@media (max-width: 1200px) {
   .videoPlusAccordions {
     flex-direction: column; /* Изменить направление на колонну */
     height: auto; /* Установить высоту автоматически для контейнера */

@@ -1,7 +1,7 @@
 .NewFooterMainContainer {
     padding: 30px 0;
     position: relative;
-    font-family: "Roboto";
+    font-family: "Helvetica Neue Cyr";
 }
 
 .NewFooterContainer {
@@ -70,7 +70,7 @@
     font-size: 14px;
     margin-top: 20px;
     margin-bottom: 30px;
-    font-family: "Roboto";
+    font-family: "Helvetica Neue Cyr";
 }
 
 @media (max-width: 1000px) {

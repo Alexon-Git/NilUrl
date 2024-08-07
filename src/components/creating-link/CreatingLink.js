@@ -19,7 +19,6 @@ import { TbBoxMargin } from "react-icons/tb";
 
 const CreatingLink = () => {
   const { isPremium } = usePremium();
-
   const navigate = useNavigate();
   const [isPro, setIsPro] = useState(isPremium);
   const [activePopupId, setActivePopupId] = useState(null);

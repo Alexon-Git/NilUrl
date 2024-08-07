@@ -25,7 +25,7 @@ const FirstContainerMainPage = () => {
         setIsHovered(updatedHovered);
     };
     return (
-        <div>
+        <div className="MainCenterContainer">
             <div className="MaxWidthContainer">
                 <div className="ShortLink">
                     <div className='Clients'>Короткие ссылки со</div>
@@ -36,7 +36,6 @@ const FirstContainerMainPage = () => {
             </div>
                 <div className="NilUrlOpisanie">
                     NilUrl - это инфраструктура управления ссылками с открытым
-                    <br></br>
                     исходным кодом для современных маркетинговых команд
                 </div>
             <div className="ButtonsBuyOrTry">

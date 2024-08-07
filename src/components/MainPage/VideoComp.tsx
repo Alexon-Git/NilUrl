@@ -6,10 +6,12 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useNavigate } from 'react-router-dom';
 import "../../styles/MainPage/VideoComp.css";
 import Arrow from "./arrow";
 import { useCustomRefHook } from "../../hooks/RefHook";
 import YouTube from "react-youtube";
+import { FAQ_ROUTE } from "../../LogicComp/utils/Const";
 
 const VideoComp = () => {
   const opts = {
@@ -20,7 +22,7 @@ const VideoComp = () => {
       autoplay: 1,
     },
   };
-
+  const navigate = useNavigate();
   const videoRef = useCustomRefHook<HTMLIFrameElement>(null);
   const firstAcc = useCustomRefHook<HTMLUListElement>(null);
   const secondAcc = useCustomRefHook<HTMLUListElement>(null);
@@ -167,7 +169,7 @@ const VideoComp = () => {
                           и реферере.
                         </div>
                       </div>
-                      <button className="MoreButtonMP">Подробнее</button>
+                      <button className="MoreButtonMP" onClick={() => {navigate(FAQ_ROUTE)}}>Подробнее</button>
                     </div>
                   </div>
                 </li>
@@ -284,7 +286,7 @@ const VideoComp = () => {
                           и реферере.
                         </div>
                       </div>
-                      <button className="MoreButtonMP">Подробнее</button>
+                      <button className="MoreButtonMP" onClick={() => {navigate(FAQ_ROUTE)}}>Подробнее</button>
                     </div>
                   </div>
                 </li>
@@ -292,7 +294,7 @@ const VideoComp = () => {
             </div>
           </div>
 
-          <div className="AccordionMP" onClick={() => setViewFunc(2)}>
+          <div className="AccordionMPLast" onClick={() => setViewFunc(2)}>
             <svg
               className="svgVideoCompAccord"
               width="20"
@@ -338,7 +340,7 @@ const VideoComp = () => {
                           и реферере.
                         </div>
                       </div>
-                      <button className="MoreButtonMP">Подробнее</button>
+                      <button className="MoreButtonMP" onClick={() => {navigate(FAQ_ROUTE)}}>Подробнее</button>
                     </div>
                   </div>
                 </li>
