@@ -139,7 +139,7 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
 
 
                                 </div>
-                                <div onClick={()=>{setQrFlag(true)}} className="blockForCopySVG" style={{display:"flex",marginLeft:"5px"}}>
+                                <div onClick={()=>{setQrFlag(true)}} className="blockForCopySVG" style={{display:"flex",marginLeft:"10px"}}>
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect x="0.700012" width="24" height="24" rx="12" fill="#F3F4F6"/>
                                         <path d="M9.78335 6.75H8.03335C7.71118 6.75 7.45001 7.01117 7.45001 7.33333V9.08333C7.45001 9.4055 7.71118 9.66667 8.03335 9.66667H9.78335C10.1055 9.66667 10.3667 9.4055 10.3667 9.08333V7.33333C10.3667 7.01117 10.1055 6.75 9.78335 6.75Z" stroke="#374151" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
@@ -156,6 +156,11 @@ const LinksMapNew:React.FC<LinksMapInt> = ({Data,SvgPath,pathS,pathL,UTM,Android
                                         <path d="M12.7 17.25V16.6667" stroke="#374151" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
 
+                                </div>
+                                <div className="blockForCopySVG" style={{display:"flex",marginLeft:"10px"}}>
+                                <svg fill="#000000" width="800px" height="800px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1662.178 0v1359.964h-648.703l-560.154 560.154v-560.154H0V0h1662.178ZM1511.07 151.107H151.107v1057.75h453.321v346.488l346.489-346.488h560.154V151.107ZM906.794 755.55v117.53H453.32V755.55h453.473Zm302.063-302.365v117.529H453.32V453.185h755.536Z" fill-rule="evenodd"/>
+</svg>
                                 </div>
                             </div>
                         </div>
