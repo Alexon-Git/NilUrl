@@ -36,6 +36,7 @@ const RedactingLink = ({ pathS, pathL }) => {
       .catch((error) => {
         console.error("Error fetching favicon:", error);
         setFaviconLoadError(true);
+        setFaviconSVG(false);
       });
   }, [pathL]);
 
@@ -715,7 +716,10 @@ const RedactingLink = ({ pathS, pathL }) => {
                   height="35"
                   src={faviconSVG}
                   alt="Favicon"
-                  onError={() => setFaviconLoadError(true)}
+                  onError={() => {
+                    setFaviconLoadError(true);
+                    setFaviconSVG(false);
+                  }}
                 />
               ) : (
                 <svg

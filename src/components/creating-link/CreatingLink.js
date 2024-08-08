@@ -599,7 +599,10 @@ const CreatingLink = () => {
                   height="35"
                   src={faviconSVG}
                   alt="Favicon"
-                  onError={() => setFaviconLoadError(true)}
+                  onError={() => {
+                    setFaviconLoadError(true);
+                    setFaviconSVG(false);
+                  }}
                 />
               ) : (
                 <svg
