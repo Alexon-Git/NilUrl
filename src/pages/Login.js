@@ -315,9 +315,9 @@ function Log() {
               style={{ width: '90px', height: 'auto' }}
             />
           </span>
-          <a href="https://nil-agency.ru" className="a3_1">
-            <img src={`${process.env.PUBLIC_URL}/NilLogo.svg`} width={40} alt="NIL Logo" />
-          </a>
+          <div className="a3_1" onClick={() => navigate(MAINPAGE_ROUTE)}>
+            <img src={`${process.env.PUBLIC_URL}/NilLogo.svg`} width={40} alt="NIL Logo" style={{ cursor: 'pointer' }} />
+          </div>
           <h3 className="h3">Вход в NILUrl</h3>
           <p className="p1">Войдите, чтобы начать творить!</p>
         </div>

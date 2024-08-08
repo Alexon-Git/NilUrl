@@ -181,7 +181,10 @@ const LinkPageMainPart = () => {
               ))
             ) : (
               loading ? (
-                <div>Загрузка...</div>
+                <div className='links-not-found-loading'>
+                  <p> Загрузка...</p>
+                  <div className="loading-ring"></div>
+                </div>
               ) : (
                 <div className='links-not-found'>
                   <p> Ссылок не найдено</p>

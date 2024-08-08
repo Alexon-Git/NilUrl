@@ -1,60 +1,60 @@
-.MainContainerTagsUI{
-    display: inline-flex;
-    align-items: center;
-    background-color: white;
-    box-shadow: 0px 2px 8px 0px #8607071a;
-    border: none;
-    border-radius: 0.5em;
-    width: 200px;
-    margin-right: 70px;
-    height: 47px;
-    cursor: pointer;
+.MainContainerTagsUI {
+  display: inline-flex;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 2px 8px 0px #8607071a;
+  border: none;
+  border-radius: 0.5em;
+  width: 200px;
+  margin-right: 70px;
+  height: 47px;
+  cursor: pointer;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
-.ULTagsColumn{
-    z-index: 2;
-    width: 200px;
-    position: absolute;
-    background-color: white;
-    border-radius: 0.5em;
-    box-shadow: 5px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    margin-top: 10px;
-    padding-left: 0px;
-    max-height: 0px;
-    overflow: hidden;
+.ULTagsColumn {
+  z-index: 2;
+  width: 200px;
+  position: absolute;
+  background-color: white;
+  border-radius: 0.5em;
+  box-shadow: 5px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  margin-top: 10px;
+  padding-left: 0px;
+  max-height: 0px;
+  overflow: hidden;
 }
-.LiTagsColumn{
-    justify-content: space-between;
-    border-radius: 0.5em;
-    display: flex;
-    align-items: center;
-    list-style-type: none;
-    font-size: 16px;
-    width: 180px;
-    height: 40px;
-    margin: 10px
+.LiTagsColumn {
+  justify-content: space-between;
+  border-radius: 0.5em;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  font-size: 16px;
+  width: 180px;
+  height: 40px;
+  margin: 10px;
 }
-.LiTagsColumn div{
- 
+.LiTagsColumn div {
 }
 @keyframes wave {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
+  0% {
+    transform: translateX(-100%);
   }
-.LiTagsColumn:hover{
-    order-radius: 0.5em;
-    transition: background-color 0.1s ease-in;
-    background-color: #e0e0e086;
-    cursor: pointer;
-    overflow: visible;
+  100% {
+    transform: translateX(100%);
+  }
+}
+.LiTagsColumn:hover {
+  order-radius: 0.5em;
+  transition: background-color 0.1s ease-in;
+  background-color: #e0e0e086;
+  cursor: pointer;
+  overflow: visible;
 }
 
 @media (max-width: 768px) {
-
   .MainContainerTagsUI {
-      margin-right: 0; /* "Создать ссылку" прижат к правому краю */
+    margin-right: 0; /* "Создать ссылку" прижат к правому краю */
   }
 }
