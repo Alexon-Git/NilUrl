@@ -109,3 +109,21 @@
     gap: 15px; /* Отступы между элементами */
   }
 }
+
+.LinksContainer::-webkit-scrollbar {
+  width: var(--scroll-size);
+  background: none;
+}
+
+.LinksContainer::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+
+.LinksContainer::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+  border-radius: var(--scroll-radius);
+}
+
+.LinksContainer::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(var(--scroll-thumb-color-rgb, 85, 85, 85), 0.8);
+}
