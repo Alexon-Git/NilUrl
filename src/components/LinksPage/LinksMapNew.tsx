@@ -309,18 +309,7 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
                 className="blockForCopySVG"
                 style={{ display: "flex", marginLeft: "10px" }}
               >
-                <svg
-                  fill="#374151" 
-                  width="25" 
-                  height="24"
-                  viewBox="0 0 25 24" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1662.178 0v1359.964h-648.703l-560.154 560.154v-560.154H0V0h1662.178ZM1511.07 151.107H151.107v1057.75h453.321v346.488l346.489-346.488h560.154V151.107ZM906.794 755.55v117.53H453.32V755.55h453.473Zm302.063-302.365v117.529H453.32V453.185h755.536Z"
-                    fill-rule="evenodd"
-                  />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M2 6a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7.667a1 1 0 0 0-.6.2L3.6 21.8A1 1 0 0 1 2 21V6zm5 0a1 1 0 0 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H7z" clip-rule="evenodd"/></svg>
               </div>
             </div>
           </div>
@@ -393,7 +382,7 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
             className="CLicksTextANum"
             onClick={() => navigate(GRAPHPAGE_ROUTE, { state: { pathS } })}
           >
-            {clicks} clicks
+            {clicks}
           </div>
         </div>
         <div
