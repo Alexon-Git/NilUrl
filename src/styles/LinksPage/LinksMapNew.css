@@ -2,6 +2,8 @@
     position: relative;
     align-items: center;
     display: flex;
+    border: 1px solid;
+    border-color: #e5e7eb;
     border-radius: 10px;
     margin-top: 10px;
     width: 100%;
