@@ -268,14 +268,13 @@ function Reg() {
       </Helmet>
       <div
         className="d2_1"
-        style={{ background: "linear-gradient(225deg, #e25186, #6059ff)" }}
       >
         <div className="slider-thumb"></div>
       </div>
       <div className="d2_2">
         <div className="d3_1">
           <span className="button__login-back">
-            <img src={BackImage} alt="Назад" onClick={() => { navigate(MAINPAGE_ROUTE); }} style={{ width: '90px', height: 'auto' }} />
+            <img src={BackImage} alt="Назад" onClick={() => navigate(MAINPAGE_ROUTE)}/>
           </span>
           <a href="https://nil-agency.ru" className="a3_1">
             <img
@@ -413,6 +412,13 @@ function Reg() {
       {isAlertPopupVisible && (
         <AlertPopup onClose={handleClosePopup} message={popupMessage} />
       )}
+      <div className="reg_footer">
+      <p>© 2024 NilUrl</p>
+      <div className="reg_footer-links">
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Пользовательское соглашение</a>
+      </div>
+      </div>
     </div>
   );
 }

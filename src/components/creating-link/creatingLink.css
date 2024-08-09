@@ -325,8 +325,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-gutter: stable both-edges;
-  background-image: url(./../../img/background-image.svg);
-  background-repeat: repeat;
+  background-color: rgba(249, 250, 251, .8);
 }
 
 .tag-popup-container::-webkit-scrollbar {

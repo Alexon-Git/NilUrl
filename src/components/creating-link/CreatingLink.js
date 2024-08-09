@@ -281,7 +281,7 @@ const CreatingLink = () => {
       id: "android",
       title: "Android Targeting",
       checked: false,
-      info: <AndroidComponent androidUrlError={androidUrlError}/>,
+      info: <AndroidComponent androidUrlError={androidUrlError} />,
     },
   ]);
 
@@ -312,19 +312,25 @@ const CreatingLink = () => {
     setToggles((prevToggles) =>
       prevToggles.map((toggle) => {
         if (toggle.id === "ios") {
-          return { ...toggle, info: <IOSComponent iosUrlError={iosUrlError} /> };
+          return {
+            ...toggle,
+            info: <IOSComponent iosUrlError={iosUrlError} />,
+          };
         } else {
           return toggle;
         }
       })
     );
   }, [iosUrlError]);
-  
+
   useEffect(() => {
     setToggles((prevToggles) =>
       prevToggles.map((toggle) => {
         if (toggle.id === "android") {
-          return { ...toggle, info: <AndroidComponent androidUrlError={androidUrlError} /> };
+          return {
+            ...toggle,
+            info: <AndroidComponent androidUrlError={androidUrlError} />,
+          };
         } else {
           return toggle;
         }
@@ -772,10 +778,25 @@ const CreatingLink = () => {
                     onMouseOver={handleMouseOver}
                     onMouseOut={handleMouseOut}
                     onClick={() => {
-                      navigate(FAQ_ROUTE);
+                      window.open(FAQ_ROUTE, "_blank");
                     }}
                   ></img>
                 </span>
+                {!isPro && (
+  toggles
+    .filter(toggle => toggle.id !== 'comment') 
+    .some(toggle => 
+      !toggle.checked &&
+      (toggle.id === 'utm' || toggle.id === 'date' || toggle.id === 'ios' || toggle.id === 'android')
+    ) && (
+    <span className="header__svg additional-svg">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown ">
+        <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/>
+        <path d="M5 21h14"/>
+      </svg>
+    </span>
+  )
+)}
                 {isNewPopupActive && (
                   <UpgradeToProPopup onClose={() => closeNewPopup(toggle.id)}>
                     <p className="popup-message">
@@ -1019,9 +1040,7 @@ const IOSComponent = ({ iosUrlError }) => {
         value={inputValue_IOS}
         onChange={handleInputChange}
       />
-      {iosUrlError && (
-        <span className="error-message-link">{iosUrlError}</span>
-      )}
+      {iosUrlError && <span className="error-message-link">{iosUrlError}</span>}
     </div>
   );
 };
@@ -1036,7 +1055,9 @@ const AndroidComponent = ({ androidUrlError }) => {
   return (
     <div>
       <input
-        className={androidUrlError ? "android-input input-error" : "android-input"}
+        className={
+          androidUrlError ? "android-input input-error" : "android-input"
+        }
         type="text"
         placeholder="https://play.google.com/store/apps/details?id=18362974"
         value={inputValue_android}

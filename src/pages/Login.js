@@ -302,7 +302,7 @@ function Log() {
       <Helmet>
         <title>Авторизация</title>
       </Helmet>
-      <div className="d2_1" style={{ background: 'linear-gradient(225deg, #e25186, #6059ff)' }}>
+      <div className="d2_1" >
         <div className="slider-thumb"></div>
       </div>
       <div className="d2_2">
@@ -312,10 +312,9 @@ function Log() {
               src={BackImage}
               alt="Назад"
               onClick={() => navigate(MAINPAGE_ROUTE)}
-              style={{ width: '90px', height: 'auto' }}
             />
           </span>
-          <div className="a3_1" onClick={() => navigate(MAINPAGE_ROUTE)}>
+          <div className="a3_1">
             <img src={`${process.env.PUBLIC_URL}/NilLogo.svg`} width={40} alt="NIL Logo" style={{ cursor: 'pointer' }} />
           </div>
           <h3 className="h3">Вход в NILUrl</h3>
@@ -464,6 +463,13 @@ function Log() {
         </div>
       </div>
       {isAlertPopupVisible && <AlertPopup onClose={handleClosePopup} message={popupMessage} />}
+      <div className="reg_footer">
+      <p>© 2024 NilUrl</p>
+      <div className="reg_footer-links">
+        <a href="#">Политика конфиденциальности</a>
+        <a href="#">Пользовательское соглашение</a>
+      </div>
+      </div>
     </div>
   );
 };

@@ -82,6 +82,7 @@ body {
     justify-content: center;
     padding: 120px 24px 160px 24px;
     pointer-events: none;
+    background-color: rgba(226, 228, 229, 0.8);
 }
 .d2_1_1 {
     width: 100vw;
@@ -139,8 +140,6 @@ body {
     --tw-ring-offset-width: 0px;
     --tw-ring-offset-color: #fff;
     --tw-ring-color: rgba(59, 130, 246, 0.5);
-    --tw-ring-offset-shadow: 0 0 #0000;
-    --tw-ring-shadow: 0 0 #0000;
     position: relative;
     z-index: 10;
     height: -moz-fit-content;
@@ -148,10 +147,8 @@ body {
     width: 90%;
     max-width: 28rem;
     overflow: hidden;
+    border: 1px solid rgba(221, 221, 221, 1);;
     border-radius: 1rem;
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
 }
 
 .d3_1 {
@@ -221,10 +218,6 @@ body {
     --tw-ring-offset-width: 0px;
     --tw-ring-offset-color: #fff;
     --tw-ring-color: rgba(59, 130, 246, 0.5);
-    --tw-ring-offset-shadow: 0 0 #0000;
-    --tw-ring-shadow: 0 0 #0000;
-    --tw-shadow: 0 0 #0000;
-    --tw-shadow-colored: 0 0 #0000;
     display: flex;
     flex-direction: column;
     --tw-bg-opacity: 1;
@@ -436,10 +429,6 @@ body {
     --tw-ring-offset-width: 0px;
     --tw-ring-offset-color: #fff;
     --tw-ring-color: rgba(59, 130, 246, 0.5);
-    --tw-ring-offset-shadow: 0 0 #0000;
-    --tw-ring-shadow: 0 0 #0000;
-    --tw-shadow: 0 0 #0000;
-    --tw-shadow-colored: 0 0 #0000;
     text-decoration: inherit;
     font-weight: 600;
     --tw-text-opacity: 1;
@@ -452,4 +441,27 @@ body {
 .button__login-back {
 margin-right: auto;
 cursor: pointer;
+}
+
+.reg_footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+    color: rgb(75, 85, 99);
+    font-size: 12px;
+    opacity: var(--tw-text-opacity, 1);
+}
+
+.reg_footer-links {
+    margin-top: 10px; /* Space between the © text and the links */
+    font-size: 12px;
+}
+
+.reg_footer-links a {
+    color: rgb(75, 85, 99);
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 0 10px; /* Space between the links */
 }

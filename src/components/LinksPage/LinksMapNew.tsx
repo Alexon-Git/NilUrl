@@ -60,6 +60,7 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
   };
   const [flagTimer, setFlagTimer] = useState(timer_flag);
   const [flagTag, setFlagTag] = useState(tag_flag);
+  const [isCommentPopupVisible, setIsCommentPopupVisible] = useState(false);
   const [copied, setCopied] = useState(false);
   function delayedFunc() {
     setCopied(false);
@@ -305,25 +306,39 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
                   />
                 </svg>
               </div>
-              <div
-                className="blockForCopySVG"
-                style={{ display: "flex", marginLeft: "10px" }}
-              >
-                <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M2 6a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7.667a1 1 0 0 0-.6.2L3.6 21.8A1 1 0 0 1 2 21V6zm5 0a1 1 0 0 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H7z" clip-rule="evenodd"/></svg>
-                <rect
-                    x="0.700012"
-                    width="24"
-                    height="24"
-                    rx="12"
-                    fill="#F3F4F6"
-                  />
-              </div>
+              <div 
+      className="blockForCopySVG" 
+      style={{ display: "flex", marginLeft: "10px", position: "relative" }}
+      onMouseEnter={() => setIsCommentPopupVisible(true)}
+      onMouseLeave={() => setIsCommentPopupVisible(false)}
+    >
+      <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+        <path 
+          fill="#374151" 
+          fillRule="evenodd" 
+          d="M2 6a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7.667a1 1 0 0 0-.6.2L3.6 21.8A1 1 0 0 1 2 21V6zm5 0a1 1 0 0 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H7z" 
+          clipRule="evenodd"
+        />
+      </svg>
+      <rect
+        x="0.700012"
+        width="24"
+        height="24"
+        rx="12"
+        fill="#F3F4F6"
+      />
+      {isCommentPopupVisible && (
+        <div className="comment-popup">
+          Ваш текст или компонент
+        </div>
+      )}
+    </div>
             </div>
           </div>
         </div>
         <div ref={ref} className="LinksDateBottom">
           <div style={{ fontWeight: 400, fontSize: "14px" }}>{Data}</div>
-          <div style={{ marginLeft: "10px", fontWeight: 700 }}>{pathL}</div>
+          <div style={{ marginLeft: "10px", fontWeight: 500 }}>{pathL}</div>
           <div className="BlurAbsolute"></div>
         </div>
       </div>

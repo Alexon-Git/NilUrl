@@ -7,7 +7,7 @@ function Log() {
     const navigate = useNavigate();
     return (
         <div className="d1">
-            <div className="d2_1" style={{background: "linear-gradient(225deg, #e25186, #6059ff)"}}>
+            <div className="d2_1">
                 <div className="slider-thumb"></div>
             </div>
             <div className="d2_2">
@@ -42,7 +42,7 @@ function Log() {
                 </div>
             </div>
         </div>
-    );
+    ); 
 }
 
 export default Log;

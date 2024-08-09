@@ -871,7 +871,7 @@ const RedactingLink = ({ pathS, pathL }) => {
                     onMouseOver={handleMouseOver}
                     onMouseOut={handleMouseOut}
                     onClick={() => {
-                      navigate(FAQ_ROUTE);
+                      window.open(FAQ_ROUTE, '_blank');
                     }}
                   ></img>
                 </span>
