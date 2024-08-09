@@ -40,6 +40,7 @@ const LinkPageMainPart = () => {
               pathS: `nilurl.ru/${link.code_url}`,
               pathL: link.base_url,
               UTM: link.utm,
+              commentary: link.commentary,
               Android: !!link.android,
               IOS: !!link.ios,
               clicks: link.clicks,
@@ -170,6 +171,7 @@ const LinkPageMainPart = () => {
                   pathL={link.pathL}
                   UTM={link.UTM}
                   Android={link.Android}
+                  commentary={link.commentary}
                   IOS={link.IOS}
                   clicks={link.clicks}
                   svgColor={link.svgColor}

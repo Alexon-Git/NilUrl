@@ -17,6 +17,7 @@ interface LinksMapInt {
   UTM: boolean;
   Android: boolean;
   IOS: boolean;
+  commentary: string;
   clicks: number;
   svgColor: string;
   backgrounds: string;
@@ -33,6 +34,7 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
   UTM,
   Android,
   IOS,
+  commentary,
   clicks,
   svgColor,
   backgrounds,
@@ -322,7 +324,7 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
       />
       {isCommentPopupVisible && (
         <div className="comment-popup">
-          Ваш текст или компонент
+          {commentary}
         </div>
       )}
     </div>
