@@ -286,4 +286,4 @@ const GraphPage = () => {
     );
   }
 }
-export default transition(GraphPage);
+export default GraphPage;

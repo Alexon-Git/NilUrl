@@ -41,4 +41,4 @@ const SettingsPage = () => {
   );
 };
 
-export default transition(SettingsPage);
+export default SettingsPage;
