@@ -9,10 +9,11 @@ fs.readFile(filePath, 'utf8', (err, data) => {
     return;
   }
 
-  // Заменяем <title> и добавляем мета-теги
+  // Заменяем <title> и добавляем мета-теги, включая utf-8
   const updatedContent = data.replace(
     /<title>.*<\/title>/,
-    `<title>NilUrl - Аналитика и сокращение ваших ссылок</title>
+    `<meta charset="utf-8">
+    <title>NilUrl - Аналитика и сокращение ваших ссылок</title>
     <meta name="description" content="NilUrl предоставляет мощную аналитику ваших ссылок, включая информацию о геолокации, устройстве, браузере и реферере." />
     <meta name="keywords" content="анализ ссылок, сокращение ссылок, геолокация, устройство, браузер, реферер" />
     <meta name="yandex-verification" content="69602e98dddc0155" />
