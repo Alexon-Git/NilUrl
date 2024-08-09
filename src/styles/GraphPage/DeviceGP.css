@@ -29,6 +29,14 @@
   margin-left: auto; /* Pushes the buttons to the right */
 }
 
+.FontSizeTextGPDevRefs {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  gap: 10px;
+}
+
 .NavigationButtonDev {
   background: none;
   border: none;
@@ -52,6 +60,7 @@
 .CategoryItem.selected {
   color: #000000; /* Black for selected category */
   text-decoration: underline; /* Underline for selected category */
+  text-underline-offset: 5px;
 }
 
 .DeviceSwapDev {

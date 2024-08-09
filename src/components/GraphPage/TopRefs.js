@@ -20,7 +20,7 @@ const TopRefs = () => {
     return (
         <div className="AddressCountryDev">
             <div className="AddHeader" style={{ marginBottom: "30px" }}>
-                <div className="FontSizeTextGPDev">
+                <div className="FontSizeTextGPDevRefs">
                     <span>Топовые URL-Адреса</span>
                 </div>
             </div>
