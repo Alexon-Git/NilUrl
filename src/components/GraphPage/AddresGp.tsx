@@ -179,57 +179,58 @@ const AddresGp = ({ Dates }: AddresGpInt) => {
   };
 
   return (
-    <div className="AddressCountryDev">
-      <div className="AddHeader">
-        <div className="FontSizeTextGPDev">
-          <span>Адреса</span>
-          <SortButtonAdd columns={columns} setSortOption={setSortOption} />
-          <button
-            className={`ToggleViewButton ${flag ? 'active' : ''}`}
-            onClick={() => setFlag(!flag)}
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className={`ToggleViewIcon ${flag ? 'active' : ''}`}
+      <div className="AddressCountryDev">
+        <div className="AddHeader">
+          <div className="CategoryDev">
+            {categories.map((category, index) => (
+              <div
+                key={index}
+                className={`CategoryItem ${currentIndex === index ? 'selected' : ''}`}
+                onClick={() => setCurrentIndex(index)}
+              >
+                {category.name}
+              </div>
+            ))}
+          </div>
+          <div className="FontSizeTextGPDev">
+            <SortButtonAdd columns={columns} setSortOption={setSortOption} />
+            <button
+              className={`ToggleViewButton ${flag ? 'active' : ''}`}
+              onClick={() => setFlag(!flag)}
             >
-              <path d="M21 10C21 6.13401 17.866 3 14 3V10H21Z" stroke={flag ? "#FFFFFF" : "#000000"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M11 21C15.4183 21 19 17.4183 19 13H11V5C6.58172 5 3 8.58172 3 13C3 17.4183 6.58172 21 11 21Z" stroke={flag ? "#FFFFFF" : "#000000"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className={`ToggleViewIcon ${flag ? 'active' : ''}`}
+              >
+                <path d="M21 10C21 6.13401 17.866 3 14 3V10H21Z" stroke={flag ? "#FFFFFF" : "#000000"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M11 21C15.4183 21 19 17.4183 19 13H11V5C6.58172 5 3 8.58172 3 13C3 17.4183 6.58172 21 11 21Z" stroke={flag ? "#FFFFFF" : "#000000"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
-        <div className="DeviceSwapDev">
-          <button className="NavigationButtonDev" onClick={handlePrev}>
-            ⬅
-          </button>
-          <div className="CategoryDev">{categories[currentIndex].name}</div>
-          <button className="NavigationButtonDev" onClick={handleNext}>
-            ➡
-          </button>
+        <div style={{ height: "300px", overflowY: "auto", overflowX: "hidden", marginTop: "25px" }}>
+          {flag ? (
+            <Pie data={pieData} options={options} />
+          ) : (
+            data.map((value, index) => (
+              <div key={index}>
+                <MapGP
+                  name={value.country}
+                  clickCount={value.clicks}
+                  SVG={"qwe"}
+                  category={categories[currentIndex].name}
+                  country_code={value.country_code}
+                />
+              </div>
+            ))
+          )}
         </div>
       </div>
-      <div style={{ height: "300px", overflowY: "auto", overflowX: "hidden", marginTop: "25px" }}>
-        {flag ? (
-          <Pie data={pieData} options={options} />
-        ) : (
-          data.map((value, index) => (
-            <div key={index}>
-              <MapGP
-                name={value.country}
-                clickCount={value.clicks}
-                SVG={"qwe"}
-                category={categories[currentIndex].name}
-                country_code={value.country_code}
-              />
-            </div>
-          ))
-        )}
-      </div>
-    </div>
-  );
+    );
 };
 
 export default AddresGp;

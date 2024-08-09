@@ -4,17 +4,21 @@
   padding-left: 30px;
   padding-right: 30px;
 }
+
 .MapGPRow {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
 }
+
 .AddHeader {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  display: flex;
   width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .FontSizeTextGPDev {
@@ -22,7 +26,8 @@
   align-items: center;
   font-size: 20px;
   font-weight: 700;
-  gap: 15px;
+  gap: 10px; /* Updated gap for alignment */
+  margin-left: auto; /* Pushes the buttons to the right */
 }
 
 .NavigationButtonDev {
@@ -33,15 +38,30 @@
 }
 
 .CategoryDev {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Gap between categories */
+  align-items: center;
+}
+
+.CategoryItem {
+  color: #6c757d; /* Dark gray for unselected categories */
+  text-decoration: none; /* No underline for unselected categories */
+  cursor: pointer; /* Pointer cursor for clickable items */
+}
+
+.CategoryItem.selected {
+  color: #000000; /* Black for selected category */
+  text-decoration: underline; /* Underline for selected category */
 }
 
 .DeviceSwapDev {
-  width: 170px;
+  width: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding-left: 30px;
   margin-left: auto;
+  gap: 10px; /* Gap between buttons */
 }
 
 .ToggleViewButton {

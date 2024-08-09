@@ -195,7 +195,6 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
     <div className="AddressCountryDev">
       <div className="AddHeader">
         <div className="FontSizeTextGPDev">
-          <span>Устройства</span>
           <SortButtonDev columns={columns} setSortOption={setSortOption} />
           <button
             className={`ToggleViewButton ${flag ? 'active' : ''}`}
@@ -215,13 +214,17 @@ const DevicesGp = ({ Dates }: AddresGpInt) => {
           </button>
         </div>
         <div className="DeviceSwapDev">
-          <button className="NavigationButtonDev" onClick={handlePrev}>
-            ⬅
-          </button>
-          <div className="CategoryDev">{categories[currentIndex].name}</div>
-          <button className="NavigationButtonDev" onClick={handleNext}>
-            ➡
-          </button>
+          <div className="CategoryDev">
+            {categories.map((category, index) => (
+              <span
+                key={index}
+                className={`CategoryItem ${currentIndex === index ? 'selected' : ''}`}
+                onClick={() => setCurrentIndex(index)}
+              >
+                {category.name}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
       <div style={{ height: "300px", overflowY: "auto", overflowX: "hidden", marginTop: "25px" }}>

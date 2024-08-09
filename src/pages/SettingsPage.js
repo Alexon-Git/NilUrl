@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { SettingsForm, HeaderLinksPage } from "../components";
 import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree";
-import transition from "../LogicComp/Transition";
 import useAuth from "../pages/useAuth";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';

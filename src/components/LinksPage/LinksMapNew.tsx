@@ -312,14 +312,7 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
       onMouseEnter={() => setIsCommentPopupVisible(true)}
       onMouseLeave={() => setIsCommentPopupVisible(false)}
     >
-      <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-        <path 
-          fill="#374151" 
-          fillRule="evenodd" 
-          d="M2 6a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7.667a1 1 0 0 0-.6.2L3.6 21.8A1 1 0 0 1 2 21V6zm5 0a1 1 0 0 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H7z" 
-          clipRule="evenodd"
-        />
-      </svg>
+      <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" className="size-3.5"><g fill="currentColor"><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="5.75" x2="9" y1="11.25" y2="11.25"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="5.75" x2="12.25" y1="8.25" y2="8.25"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="5.75" x2="12.25" y1="5.25" y2="5.25"/><rect height="14.5" width="12.5" fill="none" rx="2" ry="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x="2.75" y="1.75"/></g></svg>
       <rect
         x="0.700012"
         width="24"
