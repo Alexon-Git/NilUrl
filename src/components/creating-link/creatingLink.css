@@ -164,12 +164,12 @@
 .functional__item {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .functional__item-title {
   font-size: 14px;
   font-weight: 400;
-  padding-right: 10px;
 }
 
 .functional__item-faq {
@@ -421,4 +421,20 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+}
+
+.is-pro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  gap: 5px;
+  padding: 2px 5px;
+  /* height: 16px; */
+  /* width: 50px; */
+  background-color: #F3F4F6;
+  color: rgba(107, 114, 128);
+  font-size: 11px;
+  border-radius: 12px;
+  border: 1px solid #D1D5DB;
 }

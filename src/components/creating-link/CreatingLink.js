@@ -770,7 +770,7 @@ const CreatingLink = () => {
         </div>
         <div className="link__functional">
           <p className="link__functional-title">Функционал</p>
-          {toggles.map((toggle) => (
+          {toggles.map((toggle, index) => (
             <div className="link__functional-item" key={toggle.id}>
               <div className="functional__item">
                 <p className="functional__item-title">{toggle.title}</p>
@@ -785,21 +785,37 @@ const CreatingLink = () => {
                     }}
                   ></img>
                 </span>
-                {!isPro && (
-  toggles
-    .filter(toggle => toggle.id !== 'comment') 
-    .some(toggle => 
-      !toggle.checked &&
-      (toggle.id === 'utm' || toggle.id === 'date' || toggle.id === 'ios' || toggle.id === 'android')
-    ) && (
-    <span className="header__svg additional-svg">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crown ">
-        <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/>
-        <path d="M5 21h14"/>
-      </svg>
-    </span>
-  )
-)}
+                {!isPro &&
+                  index > 0 && // Check if index is greater than 0
+                  toggles
+                    .filter((toggle) => toggle.id !== "comment")
+                    .some(
+                      (toggle) =>
+                        !toggle.checked &&
+                        (toggle.id === "utm" ||
+                          toggle.id === "date" ||
+                          toggle.id === "ios" ||
+                          toggle.id === "android")
+                    ) && (
+                    <div className="is-pro">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-crown"
+                      >
+                        <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z" />
+                        <path d="M5 21h14" />
+                      </svg>
+                      PRO
+                    </div>
+                  )}
                 {isNewPopupActive && (
                   <UpgradeToProPopup onClose={() => closeNewPopup(toggle.id)}>
                     <p className="popup-message">
