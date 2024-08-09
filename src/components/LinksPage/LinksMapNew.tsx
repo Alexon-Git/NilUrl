@@ -306,26 +306,54 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
                   />
                 </svg>
               </div>
-              <div 
-      className="blockForCopySVG" 
-      style={{ display: "flex", marginLeft: "10px", position: "relative" }}
-      onMouseEnter={() => setIsCommentPopupVisible(true)}
-      onMouseLeave={() => setIsCommentPopupVisible(false)}
-    >
-      <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" className="size-3.5"><g fill="currentColor"><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="5.75" x2="9" y1="11.25" y2="11.25"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="5.75" x2="12.25" y1="8.25" y2="8.25"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="5.75" x2="12.25" y1="5.25" y2="5.25"/><rect height="14.5" width="12.5" fill="none" rx="2" ry="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x="2.75" y="1.75"/></g></svg>
-      <rect
-        x="0.700012"
-        width="24"
-        height="24"
-        rx="12"
-        fill="#F3F4F6"
-      />
-      {isCommentPopupVisible && (
-        <div className="comment-popup">
-          Ваш текст или компонент
-        </div>
-      )}
-    </div>
+              <div
+                className="blockForCopySVG"
+                style={{
+                  display: "flex",
+                  marginLeft: "10px",
+                  position: "relative",
+                }}
+                onMouseEnter={() => setIsCommentPopupVisible(true)}
+                onMouseLeave={() => setIsCommentPopupVisible(false)}
+              >
+                <svg
+                  height="18"
+                  width="18"
+                  viewBox="0 0 18 18"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-3.5"
+                >
+                  <g
+                    fill="none"
+                    stroke="#374151"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                  >
+                    <line x1="5.75" x2="9" y1="11.25" y2="11.25" />
+                    <line x1="5.75" x2="12.25" y1="8.25" y2="8.25" />
+                    <line x1="5.75" x2="12.25" y1="5.25" y2="5.25" />
+                    <rect
+                      height="14.5"
+                      width="12.5"
+                      rx="2"
+                      ry="2"
+                      x="2.75"
+                      y="1.75"
+                    />
+                  </g>
+                </svg>
+                <rect
+                  x="0.700012"
+                  width="24"
+                  height="24"
+                  rx="12"
+                  fill="#F3F4F6"
+                />
+                {isCommentPopupVisible && (
+                  <div className="comment-popup">Ваш текст или компонент</div>
+                )}
+              </div>
             </div>
           </div>
         </div>
