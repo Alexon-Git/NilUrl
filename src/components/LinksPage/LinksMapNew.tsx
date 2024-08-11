@@ -169,7 +169,7 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
         <div className="LinksDateTop">
           <div style={{ float: "left" }}>
             <div className="ShortLinkLPMP">{pathS}</div>
-            <div style={{ display: "inline-flex", marginLeft: "5px" }}>
+            <div style={{ display: "inline-flex", marginLeft: "5px", position: "absolute", top: "10px" }}>
               <div
                 className="blockForCopySVG"
                 style={{ display: "flex", marginLeft: "10px" }}
@@ -362,8 +362,8 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
           </div>
         </div>
         <div ref={ref} className="LinksDateBottom">
-          <div style={{ fontWeight: 400, fontSize: "14px" }}>{Data}</div>
-          <div style={{ marginLeft: "10px", fontWeight: 500 }}>{pathL}</div>
+        <div style={{ marginRight: "10px", fontWeight: 500 }}>{pathL}</div>
+        <div style={{ fontWeight: 400, fontSize: "14px", color: "rgba(156, 163, 175, 1)" }}>{Data}</div>
           <div className="BlurAbsolute"></div>
         </div>
       </div>

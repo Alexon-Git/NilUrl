@@ -128,9 +128,10 @@ const TagsColumn = ({ updateSelectedTags, links, selectedTags }) => {
                 backgroundColor: tag.backgrounds,
                 borderLeft: "10px solid transparent",
                 borderRight: "14px solid transparent",
-                borderRadius: "0px 6px 6px 0px",
+                borderRadius: "6px",
                 position: "relative",
                 zIndex: 1,
+                padding: "4px 0",
               }}
             >
               <div style={{ color: tag.svgColor }}>{tag.name}</div>
@@ -142,7 +143,7 @@ const TagsColumn = ({ updateSelectedTags, links, selectedTags }) => {
                 t.name === tag.name &&
                 t.svgColor === tag.svgColor &&
                 t.backgrounds === tag.backgrounds
-            ) && <div style={{ marginRight: "12px" }}>+</div>}
+            ) && <div>+</div>}
           </li>
         ))}
       </ul>

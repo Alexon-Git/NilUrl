@@ -127,15 +127,10 @@
 }
 .BlurAbsolute{
     position: absolute;
-    top: 20%;
-    right: -7%;
-    width: 80px; height:16px;
-    /*backdrop-filter: blur(64px);*/
-    /*mask: linear-gradient(*/
-    /*        to right,*/
-    /*        rgba(0, 0, 0, 0) 1%,*/
-    /*        rgba(0, 0, 0, 1) 100%*/
-    /*);*/
+    top: -20%;
+    right: -25%;
+    width: 80px; 
+    height:25px;
     background: linear-gradient(to right, rgba(255, 255, 255, 0),rgb(255,255,255,99%), rgb(255, 255, 255));
 }
 
@@ -155,4 +150,14 @@
   
   .blockForCopySVG:hover .comment-popup {
     display: block; 
+  }
+
+  @media (max-width: 600px) {
+    .SVGCOntLP {
+      display: none;
+    }
+  
+    .rightmainCLMP {
+      margin-left: auto;
+    }
   }
