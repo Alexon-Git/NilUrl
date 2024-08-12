@@ -22,7 +22,7 @@ const LinkPageMainPart = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 15000);
+    }, 3000);
 
     fetch("https://nilurl.ru:8000/get_links.php", {
       method: "GET",
@@ -190,15 +190,9 @@ const LinkPageMainPart = () => {
     <div className="lp-background">
       <div className="LinkPageMainPart wrapper">
         <div className="TopContainer">
-          <div className="FakeDivLP"></div>
-          <div className="RightTopCont">
-            <div className="page__title">Ссылки</div>
-            <SortNew sortLinks={sortLinks} />
-            <TagsColumn
-              updateSelectedTags={updateSelectedTags}
-              links={links}
-              selectedTags={selectedTags}
-            />
+          <div className="buttons-container">
+            <div className="page-links__title">Ссылки</div>
+            <div className="RightTopCont">
             <div className="search-container">
               <svg
                 width="20px"
@@ -224,7 +218,14 @@ const LinkPageMainPart = () => {
                 className="search-input"
               />
             </div>
+            <SortNew sortLinks={sortLinks} />
+            <TagsColumn
+              updateSelectedTags={updateSelectedTags}
+              links={links}
+              selectedTags={selectedTags}
+            />
             <CreateLinkNew userStatus={userStatus} highestKey={highestKey} />
+            </div>
           </div>
         </div>
         <div className="LinksContainer">

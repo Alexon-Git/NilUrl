@@ -1,3 +1,8 @@
+.TagsUIContainer {
+   width: auto;
+   position: relative;
+}
+
 .MainContainerTagsUI {
   display: inline-flex;
   align-items: center;
@@ -5,15 +10,16 @@
   border: 1px solid #e5e7eb;
   border-radius: 0.5em;
   width: 200px;
-  height: 47px;
+  height: 40px;
   font-size: 14px;
   cursor: pointer;
   padding: 0 15px;
   box-sizing: border-box;
+  gap: 15px;
 }
 .ULTagsColumn {
   z-index: 2;
-  width: 200px;
+  width: 100%;
   position: absolute;
   background-color: white;
   border-radius: 0.5em;
@@ -51,4 +57,26 @@
   background-color: #e0e0e086;
   cursor: pointer;
   overflow: visible;
+}
+
+@media (max-width: 1100px) {
+
+  .TagsUIContainer {
+    flex: 1;
+  }
+
+.MainContainerTagsUI {
+    width: 100%
+  }
+
+  .ULTagsColumn {
+    right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .MainContainerTagsUI {
+      text-indent: -9999px; /* Скрывает текст кнопки */
+      gap: 7.5px;
+  }
 }

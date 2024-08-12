@@ -140,7 +140,8 @@
 .CentreHeaderLinksPageT.active-link {
   font-weight: 600;
   text-decoration: underline;
-  text-underline-offset: 10px; /* Adjust this value to move the underline */
+  text-underline-offset: 13px;
+  text-decoration-thickness: 2px;
 }
 
 .image-container-logo {

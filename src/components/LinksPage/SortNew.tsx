@@ -14,7 +14,7 @@ const SortNew: React.FC<SortNewProps> = ({ sortLinks }) => {
   const [flagsToGalka, setFlagToGalka] = useState(new Array(6).fill(null));
   const [isDrop, setIsDrop] = useState(false);
   const [rule, setRule] = useState(false);
-  const [period, setPeriod] = useState("Сортировать по");
+  const [period, setPeriod] = useState("Сортировать");
   const clickToGalki = (prop: number) => {
     let arr = new Array(6).fill(null);
     arr.map((value, index) => {
@@ -66,7 +66,6 @@ const SortNew: React.FC<SortNewProps> = ({ sortLinks }) => {
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            style={{ marginRight: "15px" }}
           >
             <path
               d="M4 16L13 16"

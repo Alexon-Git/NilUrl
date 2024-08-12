@@ -19,12 +19,14 @@ p, input, textarea {
 
 .page__title {
   text-align: left;
-  width: 100%;
   font-size: 24px;
   font-weight: 600;
   color: #000;
-  margin-bottom: 0;
+  margin: 0;
   margin-top: 50px;
+  height: 40px;
+    display: flex;
+    align-items: flex-end;
 }
 
 .slide-in {

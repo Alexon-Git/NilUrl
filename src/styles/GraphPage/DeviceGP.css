@@ -61,6 +61,7 @@
   color: #000000; /* Black for selected category */
   text-decoration: underline; /* Underline for selected category */
   text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
 }
 
 .DeviceSwapDev {
