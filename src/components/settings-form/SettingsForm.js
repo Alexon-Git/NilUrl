@@ -6,6 +6,7 @@ import VerifyCodeModalPassword from "../popups/VerifyCodeModalPassword.js";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import AlertPopup from "../popups/AlertPopup";
+import Compressor from "compressorjs";
 
 const SettingsForm = () => {
   const [formData, setFormData] = useState({
@@ -49,20 +50,38 @@ const SettingsForm = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const validFormats = ["image/jpeg", "image/png"];
-    const maxSize = 2 * 1024 * 1024; // 2 MB
-
+  
     if (file) {
       if (!validFormats.includes(file.type)) {
-        setProfilePictureError("Только файлы .png и .jpg разрешены.");
+        setProfilePictureError("Принимаемые типы файлов: .png, .jpg.");
         return;
       }
-      if (file.size > maxSize) {
-        setProfilePictureError("Файл не должен превышать 2 МБ.");
-        return;
+  
+      // Сжимаем изображение, если его размер больше 500 КБ
+      if (file.size > 500 * 1024) {
+        new Compressor(file, {
+          quality: 0.8, 
+          maxWidth: 1920, 
+          maxHeight: 1080, 
+          success(compressedFile) {
+            if (compressedFile.size > 500 * 1024) {
+              setProfilePictureError(
+                "Не удалось загрузить данное изображение."
+              );
+            } else {
+              setProfilePictureError(""); // Очищаем ошибку
+              setProfilePicture(compressedFile);
+            }
+          },
+          error(err) {
+            setProfilePictureError("Ошибка при загрузке данного изображения.");
+            console.error(err.message);
+          },
+        });
+      } else {
+        setProfilePictureError(""); 
+        setProfilePicture(file);
       }
-
-      setProfilePictureError(""); // Clear error
-      setProfilePicture(file);
     }
   };
 
@@ -334,8 +353,7 @@ const SettingsForm = () => {
               </div>
               <div className="settings__controls__form-footer">
                 <p className="description">
-                  Принимаемые типы файлов: .png, .jpg. Максимальный размер
-                  файла: 2 МБ.
+                  Принимаемые типы файлов: .png, .jpg.
                 </p>
                 <button
                   className="button"

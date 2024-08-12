@@ -12,6 +12,7 @@
     "bad-words": "^3.0.4",
     "chart.js": "^4.4.3",
     "chartjs-plugin-datalabels": "^2.2.0",
+    "compressorjs": "^1.2.1",
     "cookie": "^0.6.0",
     "crypto-js": "^4.2.0",
     "favicon-fetch": "^1.0.0",
