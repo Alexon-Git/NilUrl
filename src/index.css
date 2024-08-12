@@ -17,6 +17,16 @@ p, input, textarea {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue Cyr", sans-serif;
 }
 
+.page__title {
+  text-align: left;
+  width: 100%;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 0;
+  margin-top: 50px;
+}
+
 .slide-in {
   position: fixed;
   top: 0;

@@ -3,49 +3,16 @@
 }
 
 .sf-background {
-  background-color: rgba(249, 250, 251, .8);
+  background-color: rgba(249, 250, 251, 0.8);
   width: 100%;
   height: 100%;
-  border-bottom: 1px solid rgba(221, 221, 221, 1);
   overflow: hidden;
-}
-
-.title__container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px;
-  width: 100vw;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: #fff;
-}
-
-.settings__title {
-  text-align: center;
-  width: 100%;
-  font-size: 24px;
-  font-weight: 400;
-  color: #4b5563;
 }
 
 .settings__controls {
   display: flex;
-  justify-content: space-between;
-  flex-direction: initial;
-}
-
-.settings__controls__menu {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.settings__controls__menu-item {
-  font-size: 18px;
-  font-weight: 600;
-  color: #000;
+  flex-direction: column; /* Располагаем элементы в колонну */
+  gap: 10px; /* Добавляем гэп между элементами */
 }
 
 .settings__controls__form {
@@ -113,13 +80,13 @@
   font-weight: 400;
   letter-spacing: 0em;
   text-align: center;
-  color: #4b5563; 
+  color: #4b5563;
   background-color: #dee0e3;
 }
 
 .button:hover {
-  background-color: #cdcecf; 
-  border-color: #9ca3af; 
+  background-color: #cdcecf;
+  border-color: #9ca3af;
 }
 
 .button:active {
@@ -152,18 +119,14 @@
   box-sizing: border-box;
 }
 
-.wrapper-title {
-  max-width: 1440px;
-}
-
 .profile-picture-upload {
   display: inline-block;
-  width: 80px; 
+  width: 80px;
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  background-color: #f0f0f0; 
+  background-color: #f0f0f0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,26 +145,16 @@
 .profile-picture-preview img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 .profile-picture-preview svg {
   width: 40%;
   height: 40%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
-
 @media (max-width: 768px) {
-  .settings__controls {
-    flex-direction: column; /* Change flex direction to column */
-    padding: 30px 0; /* Padding for screens smaller than or equal to 768px */
-  }
-
-  .settings__controls__menu {
-    width: 100%; /* Make the menu take full width */
-    margin-bottom: 20px; /* Add some space below the menu */
-  }
 
   .settings__controls__form {
     width: 100%; /* Make the form take full width */
@@ -209,11 +162,5 @@
 
   .input {
     width: 100%;
-  }
-}
-
-@media (min-width: 769px) {
-  .settings__controls {
-    padding: 30px 70px; /* Padding for screens larger than 768px */
   }
 }

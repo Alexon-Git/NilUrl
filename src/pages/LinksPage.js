@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import TopLinks from "../components/LinksPage/TopLinks";
 import LinkPageMainPart from "../components/MainPage/LinkPageMainPart";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
 import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree"; 
@@ -46,7 +45,6 @@ const LinksPage = () => {
             <title>Ссылки</title>
             </Helmet>
             {userStatus === 'free' ? <HeaderLinksPageFree /> : <HeaderLinksPage />}
-            <TopLinks />
             <LinkPageMainPart />
         </div>
     );

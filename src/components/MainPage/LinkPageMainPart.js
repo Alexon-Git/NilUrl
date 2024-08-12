@@ -192,6 +192,7 @@ const LinkPageMainPart = () => {
         <div className="TopContainer">
           <div className="FakeDivLP"></div>
           <div className="RightTopCont">
+            <div className="page__title">Ссылки</div>
             <SortNew sortLinks={sortLinks} />
             <TagsColumn
               updateSelectedTags={updateSelectedTags}

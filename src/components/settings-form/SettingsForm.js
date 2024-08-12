@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./settings-form.css";
-import { DeleteAccountModal, Overlay} from "../../components";
+import { DeleteAccountModal, Overlay } from "../../components";
 import VerifyCodeModalEmail from "../popups/VerifyCodeModalEmail";
 import VerifyCodeModalPassword from "../popups/VerifyCodeModalPassword.js";
 import Cookies from "js-cookie";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import AlertPopup from "../popups/AlertPopup";
 
 const SettingsForm = () => {
@@ -91,8 +91,13 @@ const SettingsForm = () => {
     let isValid = true;
     let newErrors = { username: "", email: "", password: "" };
 
-    if (name === "username" && (formData.username.length < 3 || containsSpecialCharacters(formData.username))) {
-      newErrors.username = "Имя пользователя должно быть не менее 3 символов и не должно содержать специальных символов.";
+    if (
+      name === "username" &&
+      (formData.username.length < 3 ||
+        containsSpecialCharacters(formData.username))
+    ) {
+      newErrors.username =
+        "Имя пользователя должно быть не менее 3 символов и не должно содержать специальных символов.";
       isValid = false;
     }
 
@@ -100,7 +105,10 @@ const SettingsForm = () => {
       newErrors.email = "Email должен быть действительным.";
       isValid = false;
     }
-    if (name === "password" && (!formData.password || formData.password.length < 6)) {
+    if (
+      name === "password" &&
+      (!formData.password || formData.password.length < 6)
+    ) {
       newErrors.password = "Пароль должен быть не менее 6 символов.";
       isValid = false;
     }
@@ -111,21 +119,23 @@ const SettingsForm = () => {
     }
     const formDataToSend = new FormData();
     if (name === "email") {
-      const Send_data = JSON.stringify({ email_new: formData.email }); 
+      const Send_data = JSON.stringify({ email_new: formData.email });
       fetch("https://nilurl.ru:8000/send_update_email_code.php", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: Send_data,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: Send_data,
       })
-      .then(response => response.json())
+        .then((response) => response.json())
         .then((data) => {
           if (data.success) {
             setVerifyCodeVisibility(true);
           } else {
-            setPopupMessage(data.message || "Ошибка при отправке кода подтверждения.");
+            setPopupMessage(
+              data.message || "Ошибка при отправке кода подтверждения."
+            );
             setAlertPopupVisibility(true);
           }
         })
@@ -138,21 +148,23 @@ const SettingsForm = () => {
     }
 
     if (name === "password") {
-      const Send_data = JSON.stringify({ email_new: formData.email }); 
+      const Send_data = JSON.stringify({ email_new: formData.email });
       fetch("https://nilurl.ru:8000/send_update_password_code.php", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: Send_data,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: Send_data,
       })
-      .then(response => response.json())
+        .then((response) => response.json())
         .then((data) => {
           if (data.success) {
             setVerifyCodeVisiblePass(true);
           } else {
-            setPopupMessage(data.message || "Ошибка при отправке кода подтверждения.");
+            setPopupMessage(
+              data.message || "Ошибка при отправке кода подтверждения."
+            );
             setAlertPopupVisibility(true);
           }
         })
@@ -163,14 +175,17 @@ const SettingsForm = () => {
         });
       return;
     }
-    
+
     if (name === "username") {
       formDataToSend.append("username", formData.username);
     } else if (profilePicture) {
       formDataToSend.append("profile_picture", profilePicture);
     }
 
-    const endpoint = name === "username" ? "update_username.php" : "update_profile_picture.php";
+    const endpoint =
+      name === "username"
+        ? "update_username.php"
+        : "update_profile_picture.php";
 
     fetch(`https://nilurl.ru:8000/${endpoint}`, {
       method: "POST",
@@ -199,8 +214,6 @@ const SettingsForm = () => {
         console.error("Error:", error);
       });
   };
-
-  
 
   const formItems = [
     {
@@ -239,14 +252,9 @@ const SettingsForm = () => {
 
   return (
     <div className="main">
-      <div className="title__container">
-        <h4 className="settings__title wrapper-title">Настройки</h4>
-      </div>
       <div className="sf-background">
         <div className="settings__controls wrapper">
-          <div className="settings__controls__menu">
-            <div className="settings__controls__menu-item">Основные</div>
-          </div>
+        <h4 className="page__title">Настройки</h4>
           <form className="settings__controls__form">
             {formItems.map((item, index) => (
               <div key={index}>
@@ -255,7 +263,7 @@ const SettingsForm = () => {
                   <p className="description">{item.description}</p>
                   <input
                     className={item.error ? "input input-error" : "input"}
-                    type= {item.type}
+                    type={item.type}
                     placeholder={item.placeholder}
                     name={item.name}
                     value={item.value}
@@ -268,13 +276,13 @@ const SettingsForm = () => {
                 </div>
                 <div className="settings__controls__form-footer">
                   <p className="description">
-                  {item.name === "username"
-                    ? "Не менее 3 символов и не более 32 символов."
-                    : item.name === "email"
-                    ? "Email должен быть действительным."
-                    : item.name === "password"
-                    ? "Пароль должен быть не меньше 6 и не более 40 символов."
-                    : ""}
+                    {item.name === "username"
+                      ? "Не менее 3 символов и не более 32 символов."
+                      : item.name === "email"
+                      ? "Email должен быть действительным."
+                      : item.name === "password"
+                      ? "Пароль должен быть не меньше 6 и не более 40 символов."
+                      : ""}
                   </p>
                   <button
                     className="button"
@@ -304,23 +312,30 @@ const SettingsForm = () => {
                   />
                   <div className="profile-picture-preview">
                     {profilePicture ? (
-                      <img src={URL.createObjectURL(profilePicture)} alt="Profile" />
+                      <img
+                        src={URL.createObjectURL(profilePicture)}
+                        alt="Profile"
+                      />
                     ) : (
-                      <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                        <path d="m409.785156 278.5-153.785156 153.785156-153.785156-153.785156 28.285156-28.285156 105.5 105.5v-355.714844h40v355.714844l105.5-105.5zm102.214844 193.5h-512v40h512zm0 0"/>
+                      <svg
+                        viewBox="0 0 512 512"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="m409.785156 278.5-153.785156 153.785156-153.785156-153.785156 28.285156-28.285156 105.5 105.5v-355.714844h40v355.714844l105.5-105.5zm102.214844 193.5h-512v40h512zm0 0" />
                       </svg>
                     )}
                   </div>
                 </label>
                 {profilePictureError && (
                   <span className="error-message-link">
-                  {profilePictureError}
-                </span>
+                    {profilePictureError}
+                  </span>
                 )}
               </div>
               <div className="settings__controls__form-footer">
                 <p className="description">
-                  Принимаемые типы файлов: .png, .jpg. Максимальный размер файла: 2 МБ.
+                  Принимаемые типы файлов: .png, .jpg. Максимальный размер
+                  файла: 2 МБ.
                 </p>
                 <button
                   className="button"
@@ -336,7 +351,8 @@ const SettingsForm = () => {
               <div className="settings__controls__form-item redborder">
                 <p className="title">Удалить аккаунт</p>
                 <p className="description">
-                  Учетная запись и все связанные с ней ссылки будут полностью удалены
+                  Учетная запись и все связанные с ней ссылки будут полностью
+                  удалены
                 </p>
               </div>
               <div className="settings__controls__form-footer redborder__footer">
@@ -357,29 +373,27 @@ const SettingsForm = () => {
         {isVerifyCodeVisible && (
           <Overlay onClose={() => setVerifyCodeVisibility(false)}>
             <VerifyCodeModalEmail
-            onClose={() => setVerifyCodeVisibility(false)}
-            onSuccess={(message) => {
-              setPopupMessage(message || "Email изменен успешно.");
-              setAlertPopupVisibility(true);
-              setVerifyCodeVisibility(false);
-              
-            }}
-            email={formData.email}
-          />
+              onClose={() => setVerifyCodeVisibility(false)}
+              onSuccess={(message) => {
+                setPopupMessage(message || "Email изменен успешно.");
+                setAlertPopupVisibility(true);
+                setVerifyCodeVisibility(false);
+              }}
+              email={formData.email}
+            />
           </Overlay>
         )}
         {isVerifyCodeVisiblePass && (
           <Overlay onClose={() => setVerifyCodeVisiblePass(false)}>
             <VerifyCodeModalPassword
-            onClose={() => setVerifyCodeVisiblePass(false)}
-            onSuccess={(message) => {
-              setPopupMessage(message || "Пароль изменен успешно.");
-              setAlertPopupVisibility(true);
-              setVerifyCodeVisiblePass(false);
-              
-            }}
-            password={formData.password}
-          />
+              onClose={() => setVerifyCodeVisiblePass(false)}
+              onSuccess={(message) => {
+                setPopupMessage(message || "Пароль изменен успешно.");
+                setAlertPopupVisibility(true);
+                setVerifyCodeVisiblePass(false);
+              }}
+              password={formData.password}
+            />
           </Overlay>
         )}
         {isAlertPopupVisible && (
