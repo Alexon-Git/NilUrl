@@ -395,6 +395,7 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
             backgroundColor: "#F3F4F6",
             borderRadius: "6px",
             marginLeft: "20px",
+            cursor: "pointer",
           }}
         >
           <a style={{ float: "left", paddingTop: "5px" }}>
