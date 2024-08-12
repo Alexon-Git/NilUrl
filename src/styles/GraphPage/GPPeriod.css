@@ -1,17 +1,16 @@
 .dropdownGraph{
-    width:240px;
     height: 357px;
     border-radius:0.5em;
+    position: relative;
 }
 .SVGinPeriodTop{
     margin-left:auto;
     rotate: 90deg;
 }
-.ButtonToDrop {
+.ButtonToDropAn {
     border: 1px solid #ccc;
     background-color: white;
-    width: 240px;
-    height: 47px;
+    height: 40px;
     border-radius: 0.5em;
     padding: 0 15px;
 }
@@ -21,7 +20,7 @@
     display: flex;
     align-items: center;
     list-style-type: none;
-    font-size:16px;
+    font-size:14px;
     width: 220px;
     height: 40px;
     margin:10px;
@@ -60,9 +59,19 @@
     max-height: 0px;
     overflow: hidden;
 }
-.buttonGPPDrop{
+.buttonGPPDropAn{
     display: flex;
     align-items: center;
     font-size: 14px;
+    gap: 15px;
 }
 
+@media (max-width: 600px) {
+    .buttonGPPDropAn {
+        gap: 7.5px;
+    }
+
+    .ButtonToDropAn {
+        padding: 0 7.5px;
+    }
+}

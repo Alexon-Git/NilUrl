@@ -52,9 +52,9 @@ const GpPeriod = ({ChangePeriodFunc}:GpPeriodInterface) => {
     }
     return (
         <div className="dropdownGraph">
-            <button className="ButtonToDrop" onClick={(e)=>{clickShowUL();}}>
-                <div className="buttonGPPDrop">
-                    <svg style={{marginRight:"15px"}} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button className="ButtonToDropAn" onClick={(e)=>{clickShowUL();}}>
+                <div className="buttonGPPDropAn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_330_84)">
                             <path d="M5.00065 3.99984V0.666504M11.6673 3.99984V0.666504M14.334 11.3332V14.3332H2.33398V12.3332M14.2427 5.6665H2.23532M0.333984 12.1665V12.3332H12.2673L12.3673 12.1665L12.5233 11.8392C13.7154 9.33364 14.334 6.59385 14.334 3.81917V2.33317H2.33398V3.75184C2.33401 6.54796 1.70588 9.30837 0.495984 11.8292L0.333984 12.1665Z" stroke="#2F2F2F"/>
                         </g>

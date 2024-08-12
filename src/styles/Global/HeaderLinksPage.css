@@ -126,7 +126,6 @@
 }
 
 .header-popup {
-  width: 120px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 1);
   border: 1px solid #e5e7eb;
@@ -145,15 +144,11 @@
 }
 
 .image-container-logo {
-  border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #fe35af;
 }
 
 .image-container-logo-free {
-  border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #000000;
 }
 
 .image-container-logo::before {

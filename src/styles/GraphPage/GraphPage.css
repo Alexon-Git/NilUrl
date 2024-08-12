@@ -66,7 +66,7 @@
     justify-content: center;
 }
 .GPPeriod{
-    height: 50px;
+    height: 40px;
     float:right;
 }
 .countOfViewsPeriod{
@@ -162,8 +162,7 @@
 
 @media (max-width: 600px) {
     .LinkAndPeriod {
-      flex-direction: column; 
-      gap: 20px; 
+      gap: 10px; 
     }
 
     .AddressesInGP, .DevicesInGP {
