@@ -87,7 +87,7 @@
     max-width: 1200px;
     height: 760px;
     border-radius: 10px;
-    box-shadow: 0px 4px 40px 0px #0000001A;
+    border: 1px solid #e5e7eb;
 }
 
 .OptionsInGP{
@@ -98,7 +98,7 @@
     background-color: white;
     width: 48%;
     height: 400px;
-    box-shadow: 0px 4px 40px 0px #0000001A;
+    border: 1px solid #e5e7eb;
     border-radius: 10px;
 }
 .DevicesInGP{
@@ -106,14 +106,14 @@
     margin-left: 0%;
     width: 48%;
     height: 400px;
-    box-shadow: 0px 4px 40px 0px #0000001A;
+    border: 1px solid #e5e7eb;
     border-radius: 10px;
 }
 .REFSGP{
     background-color: white;
     width: 48%;
     height: 260px;
-    box-shadow: 0px 4px 40px 0px #0000001A;
+    border: 1px solid #e5e7eb;
     border-radius: 10px;
 }
 .TOPREFGP{
@@ -121,7 +121,7 @@
     margin: 0 auto;
     width: 48%;
     height: 400px;
-    box-shadow: 0px 4px 40px 0px #0000001A;
+    border: 1px solid #e5e7eb;
     border-radius: 10px;
 }
 .REFNAMERefsGP{

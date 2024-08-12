@@ -285,7 +285,35 @@ const LinksMap: React.FC<LinksMapInt> = ({
 
       <div className="TriDotMenu">
         <button style={{ border: "none", backgroundColor: "white" }}>
-          <Skeleton width={20} height={20} />
+        <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.0003 10.8334C10.4606 10.8334 10.8337 10.4603 10.8337 10C10.8337 9.53978 10.4606 9.16669 10.0003 9.16669C9.54009 9.16669 9.16699 9.53978 9.16699 10C9.16699 10.4603 9.54009 10.8334 10.0003 10.8334Z"
+              stroke="#6B7280"
+              stroke-width="1.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M10.0003 4.99998C10.4606 4.99998 10.8337 4.62688 10.8337 4.16665C10.8337 3.70641 10.4606 3.33331 10.0003 3.33331C9.54009 3.33331 9.16699 3.70641 9.16699 4.16665C9.16699 4.62688 9.54009 4.99998 10.0003 4.99998Z"
+              stroke="#6B7280"
+              stroke-width="1.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M10.0003 16.6667C10.4606 16.6667 10.8337 16.2936 10.8337 15.8333C10.8337 15.3731 10.4606 15 10.0003 15C9.54009 15 9.16699 15.3731 9.16699 15.8333C9.16699 16.2936 9.54009 16.6667 10.0003 16.6667Z"
+              stroke="#6B7280"
+              stroke-width="1.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </button>
       </div>
     </div>

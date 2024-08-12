@@ -95,7 +95,6 @@
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
   z-index: 1;
-  box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.1);
   gap: 20px;
 }
 

@@ -49,21 +49,7 @@ const TagsColumn = ({ updateSelectedTags, links, selectedTags }) => {
   return (
     <div>
       <div className="MainContainerTagsUI" onClick={clickShowTags}>
-        <svg
-          style={{ marginRight: "15px" }}
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10 12H2M14 4H2M11.3333 8H2"
-            stroke="black"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+          <svg style={{ marginRight: "15px" }} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag h-4 w-4" data-state="closed"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
         Тэг
         <svg
           ref={refToStrelochka}

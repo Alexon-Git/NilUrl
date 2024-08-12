@@ -75,7 +75,6 @@
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 10001;
   box-sizing: border-box;
 }
@@ -358,7 +357,6 @@
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
   z-index: 1;
-  box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.1);
 }
 
 .delete__link {

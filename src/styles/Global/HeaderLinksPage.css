@@ -54,6 +54,17 @@
   align-items: center;
   cursor: pointer;
 }
+.UserLogoWordPro {
+  position: relative;
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  background-color: #d1d5db;
+  border-radius: 9999px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 .AbsoluteDoteUserLogo {
   position: absolute;
   width: 10px;
@@ -71,22 +82,26 @@
   line-height: 20px;
   cursor: pointer;
   margin: 0;
-  display: flex; 
-  align-items:baseline;
+  display: flex;
+  align-items: baseline;
 
-  gap: 10px;   
+  gap: 10px;
 }
- 
 
 .header-right-status {
-  background: linear-gradient(90deg, #646463 -6.92%, #000000 50.38%, #646463 107.69%);
+  background: linear-gradient(
+    90deg,
+    #646463 -6.92%,
+    #000000 50.38%,
+    #646463 107.69%
+  );
   width: 65px;
   height: 30px;
   border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 30px;
@@ -95,14 +110,14 @@
 }
 
 .header-right-status-pro {
-  background: linear-gradient(90deg, #624CEB 0%, #FF35AE 100%);
+  background: linear-gradient(90deg, #624ceb 0%, #ff35ae 100%);
   width: 65px;
   height: 30px;
   border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 30px;
@@ -110,17 +125,14 @@
   cursor: pointer;
 }
 
-
-
-
 .header-popup {
   width: 120px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.6);
+  border: 1px solid #e5e7eb;
   position: absolute;
   top: 65px;
-  padding: 15px 10px; 
+  padding: 15px 10px;
   right: 0;
   z-index: 1200;
 }
@@ -132,23 +144,40 @@
 }
 
 .image-container-logo {
-    border-radius: 50%;
-    border: 1px solid #FE35AF;
-  }
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #fe35af;
+}
 
-  .image-container-logo-free {
-    border-radius: 50%;
-    border: 1px solid #000000;
-  }
+.image-container-logo-free {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #000000;
+}
 
-  .image-container-logo::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    border-radius: 50%;
-    background: linear-gradient(135deg, #634CEC, #FE35AF);
-    z-index: -1; /* Ensure it stays behind the image */
+.image-container-logo::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #634cec, #fe35af);
+  z-index: -1; /* Ensure it stays behind the image */
+}
+
+.header-gradient-text {
+  cursor: pointer;
+  background: linear-gradient(45deg, #4a00e0, #8e2de2); /* градиентный цвет */
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 12px;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .header-gradient-text {
+    display: none;
   }
+}

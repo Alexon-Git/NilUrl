@@ -7,7 +7,7 @@
     text-align:center;
     text-decoration:none;
     background: white;
-    box-shadow: 0 0 3px gray;
+    border: 1px solid #e5e7eb;
     font-size:20px;
     font-weight:bold;
 }

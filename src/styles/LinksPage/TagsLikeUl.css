@@ -2,12 +2,11 @@
   display: inline-flex;
   align-items: center;
   background-color: white;
-  box-shadow: 0px 2px 8px 0px #8607071a;
-  border: none;
+  border: 1px solid #e5e7eb;
   border-radius: 0.5em;
   width: 200px;
-  margin-right: 70px;
   height: 47px;
+  font-size: 14px;
   cursor: pointer;
   padding: 0 15px;
   box-sizing: border-box;
@@ -52,10 +51,4 @@
   background-color: #e0e0e086;
   cursor: pointer;
   overflow: visible;
-}
-
-@media (max-width: 768px) {
-  .MainContainerTagsUI {
-    margin-right: 0; /* "Создать ссылку" прижат к правому краю */
-  }
 }

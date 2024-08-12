@@ -7,9 +7,7 @@
     rotate: 90deg;
 }
 .ButtonToDrop{
-
-    box-shadow: 0px 2px 8px 0px #0000001A;
-    border: none;
+    border: 1px solid #e5e7eb;
     background-color: white;
     width: 240px;
     height: 47px;
@@ -35,7 +33,7 @@
     display: flex;
     align-items: center;
     list-style-type: none;
-    font-size:16px;
+    font-size:14px;
     width: 220px;
     height: 40px;
     margin:10px;
