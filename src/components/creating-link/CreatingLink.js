@@ -32,6 +32,7 @@ const CreatingLink = () => {
   const [faviconSVG, setFaviconSVG] = useState(null);
   const [isPopupActive, setIsPopupActive] = useState(false);
   const [isNewPopupActive, setIsNewPopupActive] = useState(false);
+  const [isLinkPopupActive, setIsLinkPopupActive] = useState(false);
   const [popupMessage, setPopupMessage] = useState(""); // Состояние для текста попапа
   const [isAlertPopupVisible, setAlertPopupVisibility] = useState(false); // Состояние для отображения попапа
 
@@ -495,6 +496,18 @@ const CreatingLink = () => {
     setIsHovered(false);
   };
 
+  const handleInputShortLinkChange = (e) => {
+    if (!isPro) {
+      setIsLinkPopupActive(true);
+    } else {
+      setShortUrl(e.target.value);
+    }
+  };
+
+  const closeShortLinkPopup = () => {
+    setIsLinkPopupActive(false);
+  };
+
   const handleLongUrlChange = async (event) => {
     const newText = event.target.value;
     setInputText(newText);
@@ -646,16 +659,30 @@ const CreatingLink = () => {
             <div className="input__container-short">
               <span className="static-text">https://nilurl.ru/</span>
               <input
-                className={
-                  shortUrlError || bannedWordsError
-                    ? "link-input-short input-error"
-                    : "link-input-short"
-                }
-                type="text"
-                placeholder="Ffv3cv"
-                value={shortUrl}
-                onChange={(e) => setShortUrl(e.target.value)}
-              />
+        className={
+          shortUrlError || bannedWordsError
+            ? "link-input-short input-error"
+            : "link-input-short"
+        }
+        type="text"
+        placeholder="Ffv3cv"
+        value={shortUrl}
+        onChange={handleInputShortLinkChange}
+      />
+
+      {isLinkPopupActive && (
+        <UpgradeToProPopup onClose={closePopup}>
+          <p className="popup-message">
+            Редактирование коротких ссылок, а также другая более детальная их настройка доступны только PRO-пользователям
+          </p>
+          <button
+            className="popup-button"
+            onClick={() => navigate(PRICEPAGE_ROUTE)}
+          >
+            Обновиться до Pro
+          </button>
+        </UpgradeToProPopup>
+      )}
             </div>
           </div>
           {shortUrlError && (

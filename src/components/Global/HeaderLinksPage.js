@@ -64,7 +64,7 @@ const HeaderLinksPage = () => {
     <div style={{ borderBottom: "1px solid #E5E7EB" }}>
       <div className="wrapper">
         <div className="HeaderLinksPageC">
-          <div className="HeaderMainPageLogoCentr">
+          <div className="HeaderMainPageLogoCentr" onClick={()=>navigator("/price")}>
             <svg
               width="100"
               height="28"
@@ -170,11 +170,10 @@ const HeaderLinksPage = () => {
                   onClick={() => {
                     navigator(FAQ_ROUTE);
                   }}
-                  style={{ marginBottom: "15px" }}
                 >
                   <svg
-                    width="10"
-                    height="10"
+                    width="14"
+                    height="14"
                     viewBox="0 0 10 10"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -196,11 +195,10 @@ const HeaderLinksPage = () => {
                 >
                   <p
                     className="header_button-exit"
-                    style={{ marginBottom: "15px" }}
                   >
                     <svg
-                      width="10"
-                      height="10"
+                      width="14"
+                      height="14"
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -254,8 +252,8 @@ const HeaderLinksPage = () => {
                 </a>
                 <p className="header_button-exit" onClick={handleLogout}>
                   <svg
-                    width="8"
-                    height="9"
+                    width="14"
+                    height="14"
                     viewBox="0 0 8 9"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
