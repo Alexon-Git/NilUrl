@@ -58,8 +58,7 @@
   flex: 1 1 350px; /* Minimum width of 350px, allow flex grow and shrink */
   max-width: calc(33.33% - 40px); /* Ensuring three items per row with gap */
   background-color: #fff;
-  box-shadow: 0px 4px 100px 0px #00000040;
-  border: 2px solid transparent;
+  border: 2px solid #e5e7eb;
   border-radius: 20px;
   display: inline-block;
   box-sizing: border-box;

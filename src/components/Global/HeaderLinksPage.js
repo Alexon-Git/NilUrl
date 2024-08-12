@@ -64,7 +64,7 @@ const HeaderLinksPage = () => {
     <div style={{ borderBottom: "1px solid #E5E7EB" }}>
       <div className="wrapper">
         <div className="HeaderLinksPageC">
-          <div className="HeaderMainPageLogoCentr" onClick={()=>navigator("/price")}>
+          <div className="HeaderMainPageLogoCentr">
             <svg
               width="100"
               height="28"

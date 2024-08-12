@@ -52,6 +52,7 @@ const SortNew: React.FC<SortNewProps> = ({ sortLinks }) => {
     }
   };
   return (
+    <div className="button-sort-container">
     <div className="dropdownGraphLinks">
       <button
         className="ButtonToDrop"
@@ -110,6 +111,7 @@ const SortNew: React.FC<SortNewProps> = ({ sortLinks }) => {
           </svg>
         </div>
       </button>
+      </div>
       <ul className="ULDP" ref={refToUL}>
         <li
           className="LIDP"
@@ -131,7 +133,7 @@ const SortNew: React.FC<SortNewProps> = ({ sortLinks }) => {
             </svg>
         </div>
           {flagsToGalka[0] && (
-            <div style={{ marginLeft: "auto", marginRight: "5px" }}>
+            <div style={{ marginLeft: "auto" }}>
               <svg
                 width="16"
                 height="16"
@@ -193,7 +195,7 @@ const SortNew: React.FC<SortNewProps> = ({ sortLinks }) => {
             </svg>
           </div>
           {flagsToGalka[1] && (
-            <div style={{ marginLeft: "auto", marginRight: "5px" }}>
+            <div style={{ marginLeft: "auto" }}>
               <svg
                 width="16"
                 height="16"
@@ -256,7 +258,7 @@ const SortNew: React.FC<SortNewProps> = ({ sortLinks }) => {
             </svg>
           </div>
           {flagsToGalka[2] && (
-            <div style={{ marginLeft: "auto", marginRight: "5px" }}>
+            <div style={{ marginLeft: "auto" }}>
               <svg
                 width="16"
                 height="16"
@@ -318,7 +320,7 @@ const SortNew: React.FC<SortNewProps> = ({ sortLinks }) => {
             </svg>
           </div>
           {flagsToGalka[3] && (
-            <div style={{ marginLeft: "auto", marginRight: "5px" }}>
+            <div style={{ marginLeft: "auto" }}>
               <svg
                 width="16"
                 height="16"
