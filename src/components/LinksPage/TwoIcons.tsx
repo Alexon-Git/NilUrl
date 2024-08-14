@@ -12,7 +12,7 @@ const TwoIcons:React.FC<twoIcInter> = ({UTM,Android,IOS}:twoIcInter) => {
         <div style={{height:"100%",paddingRight:"15px"}}>
             { UTM &&
                 <div style={{backgroundColor:"#F3F4F6",borderRadius:"9999px",width:"26px",
-                    height:"26px",fontSize:"9px",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"700",color:"black"}}>
+                    height:"26px",fontSize:"9px",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"700",color:"black", cursor:"auto" }}>
                     UTM
                 </div>
             }
@@ -21,7 +21,7 @@ const TwoIcons:React.FC<twoIcInter> = ({UTM,Android,IOS}:twoIcInter) => {
                 IOS &&
                 <div>
                     <div style={{backgroundColor:"#F3F4F6",borderRadius:"9999px",width:"26px",
-                        height:"26px",fontSize:"10px",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"600",color:"black"}}>
+                        height:"26px",fontSize:"10px",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"600",color:"black", cursor:"auto" }}>
                         IOS
                     </div>
                 </div>
@@ -30,7 +30,7 @@ const TwoIcons:React.FC<twoIcInter> = ({UTM,Android,IOS}:twoIcInter) => {
                 Android &&
                 <div>
                     <div style={{backgroundColor:"#F3F4F6",borderRadius:"9999px",width:"26px",
-                        height:"26px",fontSize:"10px",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"600",color:"black"}}>
+                        height:"26px",fontSize:"10px",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"600",color:"black", cursor:"auto" }}>
                         <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.05 4.77502C10.8422 4.77502 10.643 4.85755 10.4961 5.00446C10.3492 5.15136 10.2667 5.35059 10.2667 5.55834V9.10834C10.2667 9.31609 10.3492 9.51534 10.4961 9.66226C10.643 9.80917 10.8422 9.89167 11.05 9.89167C11.2577 9.89167 11.457 9.80917 11.6039 9.66226C11.7508 9.51534 11.8333 9.31609 11.8333 9.10834V5.55834C11.8333 5.35059 11.7508 5.15136 11.6039 5.00446C11.457 4.85755 11.2577 4.77502 11.05 4.77502Z" fill="black" stroke="black" stroke-width="0.00064"/>
                             <path d="M0.95002 4.77502C0.74227 4.77502 0.54302 4.85755 0.39612 5.00446C0.24922 5.15136 0.166687 5.35059 0.166687 5.55834V9.10834C0.166687 9.31609 0.24922 9.51534 0.39612 9.66226C0.54302 9.80917 0.74227 9.89167 0.95002 9.89167C1.15777 9.89167 1.35702 9.80917 1.50392 9.66226C1.65082 9.51534 1.73335 9.31609 1.73335 9.10834V5.55834C1.73335 5.35059 1.65082 5.15136 1.50392 5.00446C1.35702 4.85755 1.15777 4.77502 0.95002 4.77502Z" fill="black" stroke="black" stroke-width="0.00064"/>

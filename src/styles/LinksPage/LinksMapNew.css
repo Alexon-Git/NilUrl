@@ -185,6 +185,12 @@
   .CLicksTextANum {
     display: none;
     color: #374151;
+    font-size: 14px;
+  }
+
+  .stats-button {
+    width: 26px;
+    border-radius: 50%;
   }
 
   .ShortLinkBtn {
