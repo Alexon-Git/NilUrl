@@ -365,7 +365,6 @@ const VideoComp = () => {
     alt=""
     style={{
         width: "70%",
-        height: "80%",
     }}
   />
 </div> 

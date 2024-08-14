@@ -55,8 +55,7 @@
   padding-right: 65px;
   overflow-y: auto;
   overflow-x: hidden;
-  background-image: url(./../../img/background-image.svg);
-  background-repeat: repeat;
+  background-color: #f9fafbcc;
 }
 
 .edit-button {

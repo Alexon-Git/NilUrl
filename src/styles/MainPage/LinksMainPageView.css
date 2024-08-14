@@ -17,6 +17,8 @@
     width: 80%;
     border: none;
     font-family: "Helvetica Neue Cyr";
+    font-size: .875rem;
+    line-height: 1.25rem;
     color: #6B7280;
 }
 .svgLinksMP{
@@ -32,7 +34,7 @@
     border-radius: 4px;
     align-items: center;
     background-color: white;
-    border: 1px solid #E5E7EB;
+    border: none;
 }
 .LinksMapOneContainer{
     background-color: white;

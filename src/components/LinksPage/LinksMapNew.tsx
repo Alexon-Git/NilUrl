@@ -311,12 +311,16 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
               <div
                 className="blockForCopySVG"
                 style={{
-                  display: "flex",
+                  display: commentary.trim() ? "flex" : "none", // Проверка на наличие символов
                   marginLeft: "10px",
                   position: "relative",
                 }}
-                onMouseEnter={() => setIsCommentPopupVisible(true)}
-                onMouseLeave={() => setIsCommentPopupVisible(false)}
+                onMouseEnter={() =>
+                  commentary.trim() && setIsCommentPopupVisible(true)
+                }
+                onMouseLeave={() =>
+                  commentary.trim() && setIsCommentPopupVisible(false)
+                }
               >
                 <svg
                   height="18"
@@ -328,9 +332,9 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
                   <g
                     fill="none"
                     stroke="#374151"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                   >
                     <line x1="5.75" x2="9" y1="11.25" y2="11.25" />
                     <line x1="5.75" x2="12.25" y1="8.25" y2="8.25" />
@@ -352,18 +356,24 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
                   rx="12"
                   fill="#F3F4F6"
                 />
-                {isCommentPopupVisible && (
-                          <div className="comment-popup">
-                          {commentary}
-                        </div>
+                {isCommentPopupVisible && commentary.trim() && (
+                  <div className="comment-popup">{commentary}</div>
                 )}
               </div>
             </div>
           </div>
         </div>
         <div ref={ref} className="LinksDateBottom">
-        <div style={{ marginRight: "10px", fontWeight: 500 }}>{pathL}</div>
-        <div style={{ fontWeight: 400, fontSize: "14px", color: "rgba(156, 163, 175, 1)" }}>{Data}</div>
+          <div style={{ marginRight: "10px", fontWeight: 500 }}>{pathL}</div>
+          <div
+            style={{
+              fontWeight: 400,
+              fontSize: "14px",
+              color: "rgba(156, 163, 175, 1)",
+            }}
+          >
+            {Data}
+          </div>
           <div className="BlurAbsolute"></div>
         </div>
       </div>

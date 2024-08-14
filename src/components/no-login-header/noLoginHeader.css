@@ -4,16 +4,17 @@
   align-items: center;
   height: 60px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-family: "Helvetica Neue Cyr";
 }
 
 .prices-button {
   padding: 5px 10px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 500;
-  line-height: 28px;
 }
 
 .no-login-header-right {
@@ -27,14 +28,15 @@
 }
 
 .registration-button {
-  padding: 5px 15px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  padding: 0.375rem 1rem;
   background: #000;
   border: 0;
   border-radius: 9999px;
   color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 28px;
+
   cursor: pointer;
   font-family: "Helvetica Neue Cyr";
 }
