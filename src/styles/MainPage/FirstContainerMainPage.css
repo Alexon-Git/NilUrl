@@ -9,85 +9,61 @@
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: 56px;
+  line-height: 1.15;
+  font-size: 3.75rem;
 }
 .NilUrlOpisanie {
   font-weight: 400;
-  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 1.25rem;
   width: 70%;
+  max-width: 600px;
+  min-width: 350px;
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 .ButtonsBuyOrTry {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 15px; 
-    margin-top: 30px;
-  }
-
-  .LinksMPContainer {
-    margin-top: 20px;
-    text-align: center;
-    max-width: 511px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-.MainCenterContainer {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    flex-direction: column;    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 1.25rem;
 }
 
 .LinksMPContainer {
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
+  margin-top: 2.5rem;
+  text-align: center;
+  max-width: 511px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-@media (max-width: 900px) {
-  .GradientMP {
-    font-size: 50px;
-  }
-
-  .NilUrlOpisanie  {
-    font-size: 18px;
-  }
+.MainCenterContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 @media (max-width: 800px) {
   .GradientMP {
-    font-size: 45px;
+    font-size: 2.25rem;
   }
-  .NilUrlOpisanie  {
-    font-size: 16px;
+
+  .NilUrlOpisanie {
+    font-size: inherit;
+    font-weight: inherit;
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 450px) {
   .GradientMP {
-    font-size: 40px;
-  }
-  .NilUrlOpisanie  {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 650px) {
-  .GradientMP {
-    font-size: 35px;
-  }
-}
-
-@media (max-width: 580px) {
-  .GradientMP {
-    font-size: 30px;
+    font-size: 1.75rem;
   }
 
-  .ButtonsBuyOrTry {
-    flex-direction: column; /* Вертикальное расположение элементов */
+  .NilUrlOpisanie {
+    font-size: 0.9rem;
   }
-
 }

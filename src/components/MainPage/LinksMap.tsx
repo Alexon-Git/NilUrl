@@ -210,7 +210,7 @@ const LinksMap: React.FC<LinksMapInt> = ({
                 />
               </svg>
             </a>
-            <div className="CLicksTextANum">{clicks} clicks</div>
+            <div className="CLicksTextANumMain">{clicks} clicks</div>
           </div>
         </button>
       </div>

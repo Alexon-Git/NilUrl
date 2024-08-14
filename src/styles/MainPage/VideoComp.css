@@ -9,7 +9,8 @@
   width: 875px;
   text-align: center;
   font-weight: 900;
-  font-size: 56px;
+  line-height: 1.15;
+  font-size: 3.75rem;
 }
 .GradintVordMP {
   display: inline-block;
@@ -184,76 +185,18 @@
 
   .video-main {
     width: auto;
-    margin: 20px;
+    margin: 20px auto;
   }
 }
 
-@media (max-width: 900px) {
-
-    .StrongFunctionText,
-    .Sverdostup,
-    .GradientMP,
-    .Clients {
-        font-size: 50px;
-    }
+@media (max-width: 800px) {
+  .StrongFunctionText {
+    font-size: 2.25rem;
   }
+}
 
-  @media (max-width: 800px) {
-
-    .StrongFunctionText,
-    .Sverdostup,
-    .GradientMP,
-    .Clients {
-        font-size: 45px;
-    }
-
+@media (max-width: 450px) {
+  .StrongFunctionText {
+    font-size: 1.75rem;
   }
-
-  @media (max-width: 750px) {
-
-    .StrongFunctionText,
-    .Sverdostup,
-    .GradientMP,
-    .Clients {
-        font-size: 40px;
-    }
-
-  }
-
-  @media (max-width: 650px) {
-
-    .StrongFunctionText,
-    .Sverdostup,
-    .GradientMP,
-    .Clients {
-        font-size: 35px;
-    }
-
-  }
-
-  @media (max-width: 580px) {
-
-    .StrongFunctionText,
-    .Sverdostup,
-    .GradientMP,
-    .Clients {
-        font-size: 30px;
-    }
-
-  }
-
-  @media (max-width: 430px) {
-
-    .PodVieoA {
-        font-size: 15px;
-    }
-
-  }
-
-  @media (max-width: 380px) {
-
-    .PodVieoA {
-        font-size: 13px;
-    }
-
-  }
+}

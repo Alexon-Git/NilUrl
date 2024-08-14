@@ -67,7 +67,8 @@
     line-height: 20px;
     color: #6B7280;
     font-weight: 400;
-    font-size: 14px;
+    font-size: .875rem;
+    line-height: 1.25rem;
     margin-top: 20px;
     margin-bottom: 30px;
     font-family: "Helvetica Neue Cyr";

@@ -1,15 +1,27 @@
-.Clients{
-    margin-top: 50px;
-    font-weight: 900;
-    font-size: 56px;
-    text-align: center;
-    
+.Clients {
+  margin-top: 50px;
+  font-weight: 900;
+  line-height: 1.15;
+  font-size: 3.75rem;
+  text-align: center;
 }
-.PicsMPClients{
-    width: 100%;
+.PicsMPClients {
+  width: 100%;
 }
-.RowsPicsMP{
-    margin-top: 50px;
-    overflow: hidden;
+.RowsPicsMP {
+  margin-top: 50px;
+  overflow: hidden;
+}
 
-}
+@media (max-width: 800px) {
+    .Clients {
+        font-size: 2.25rem;
+    }
+  }
+  
+  @media (max-width: 450px) {
+    .Clients {
+      font-size: 1.75rem;
+    }
+  }
+  
