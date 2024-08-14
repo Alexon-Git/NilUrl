@@ -20,6 +20,7 @@
 .ULTagsColumn {
   z-index: 2;
   width: 100%;
+  min-width: 220px;
   position: absolute;
   background-color: white;
   border-radius: 0.5em;
@@ -67,10 +68,6 @@
 
 .MainContainerTagsUI {
     width: 100%
-  }
-
-  .ULTagsColumn {
-    right: 0;
   }
 }
 

@@ -2,6 +2,7 @@
     height: 357px;
     border-radius:0.5em;
     position: relative;
+    min-width: 220px;
 }
 .SVGinPeriodTop{
     margin-left:auto;

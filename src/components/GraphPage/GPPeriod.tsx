@@ -26,30 +26,31 @@ const GpPeriod = ({ChangePeriodFunc}:GpPeriodInterface) => {
         ChangePeriodFunc(prop)
         setFlagToGalka(arr);
     }
-    const clickShowUL = () =>{
-        if(!isDrop){
-            if(refToUL.current !=null) {
-                refToUL.current.style.transition = "max-height 0.3s ease-in"
-                refToUL.current.style.maxHeight = "347px"
+    const clickShowUL = () => {
+        if (!isDrop) {
+            if (refToUL.current != null) {
+                refToUL.current.style.transition = "max-height 0.3s ease-in, border 0.3s ease-in";
+                refToUL.current.style.maxHeight = "347px";
+                refToUL.current.style.border = "1px solid #e5e7eb"; // Добавляем бордер при открытии
             }
-            if(refToStrelochka.current!=null){
+            if (refToStrelochka.current != null) {
                 refToStrelochka.current.style.transition = "rotate 0.3s ease-in";
                 refToStrelochka.current.style.rotate = "270deg";
             }
             setIsDrop(true);
-        }
-        if(isDrop){
-            if(refToUL.current !=null) {
-                refToUL.current.style.transition = "max-height 0.3s ease-in"
-                refToUL.current.style.maxHeight = "0px"
+        } else {
+            if (refToUL.current != null) {
+                refToUL.current.style.transition = "max-height 0.3s ease-in, border 0.3s ease-in";
+                refToUL.current.style.maxHeight = "0px";
+                refToUL.current.style.border = "none"; // Убираем бордер при закрытии
             }
-            if(refToStrelochka.current!=null){
+            if (refToStrelochka.current != null) {
                 refToStrelochka.current.style.transition = "rotate 0.3s ease-in";
                 refToStrelochka.current.style.rotate = "90deg";
             }
-            setIsDrop(false)
+            setIsDrop(false);
         }
-    }
+    };
     return (
         <div className="dropdownGraph">
             <button className="ButtonToDropAn" onClick={(e)=>{clickShowUL();}}>
@@ -70,7 +71,7 @@ const GpPeriod = ({ChangePeriodFunc}:GpPeriodInterface) => {
                     </svg>
                 </div>
             </button>
-            <ul className="ULDP" ref={refToUL}>
+            <ul className="ULDP-graph" ref={refToUL}>
                 <li className="LIDP" onClick={(e)=>{setPeriod("Последний час");clickToGalki(0);}}>
                     <div>Последний час</div>
                     {
