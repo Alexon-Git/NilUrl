@@ -118,7 +118,7 @@ const HeaderLinksPage = () => {
               className="header-right-status"
               onClick={() => navigator("/price")}
             >
-              Free
+              Base
             </div>
           </div>
           <div

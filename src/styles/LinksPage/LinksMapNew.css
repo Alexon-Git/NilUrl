@@ -163,6 +163,7 @@
   border-radius: 6px;
   margin-left: 20px;
   cursor: pointer;
+  color: #374151;
 }
 
 .ShortLinkBtn {
@@ -183,6 +184,7 @@
 
   .CLicksTextANum {
     display: none;
+    color: #374151;
   }
 
   .ShortLinkBtn {
