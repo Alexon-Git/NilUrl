@@ -694,7 +694,7 @@ const RedactingLink = ({ pathS, pathL }) => {
                 inputTextError ? "link-input input-error" : "link-input"
               }
               type="text"
-              placeholder="https://app.dub.co/aleksandr-vysochenko"
+              placeholder="https://nilurl.ru/example-link"
               value={inputText}
               onChange={(e) => {
                 handleLongUrlChange(e);
@@ -1217,7 +1217,7 @@ const IOSComponent = ({ initialURL, iosUrlError }) => {
     <input
     className={iosUrlError ? "ios-input input-error" : "ios-input"}
       type="text"
-      placeholder="https://apps.apple.com/app/18362974"
+      placeholder="https://apps.apple.com/app/18365422974"
       value={inputValue_IOS}
       onChange={handleInputChange}
     />
@@ -1240,7 +1240,7 @@ const AndroidComponent = ({ initialURL, androidUrlError }) => {
     <input
     className={androidUrlError ? "android-input input-error" : "android-input"}
       type="text"
-      placeholder="https://play.google.com/store/apps/details?id=18362974"
+      placeholder="https://play.google.com/store/apps/details?id=18361232974"
       value={inputValue_android}
       onChange={handleInputChange}
     />

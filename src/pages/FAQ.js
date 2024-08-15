@@ -48,7 +48,10 @@ const FAQ = () => {
 
   const handleQuestionClick = (index) => {
     setExpandedIndex(index);
-    setIsSidebarVisible(false); // Закрываем сайдбар при выборе вопроса
+  
+    if (window.innerWidth <= 1199) {
+      setIsSidebarVisible(false); // Автозакрытие для мобильных устройств
+    }
   };
 
   const answers = [
