@@ -26,29 +26,31 @@ const SortNew: React.FC<SortNewProps> = ({ sortLinks }) => {
   };
   const clickShowUL = () => {
     if (!isDrop) {
-      if (refToUL.current) {
-        const ulElement = refToUL.current;
-        ulElement.style.transition = "max-height 0.3s ease-in";
-        ulElement.style.maxHeight = "347px";
-      }
-      if (refToStrelochka.current) {
-        const strelochkaElement = refToStrelochka.current;
-        strelochkaElement.style.transition = "rotate 0.3s ease-in";
-        strelochkaElement.style.rotate = "270deg";
-      }
-      setIsDrop(true);
+        if (refToUL.current) {
+            const ulElement = refToUL.current;
+            ulElement.style.transition = "max-height 0.3s ease-in, border 0.3s ease-in";
+            ulElement.style.maxHeight = "347px";
+            ulElement.style.border = "1px solid #e5e7eb";
+        }
+        if (refToStrelochka.current) {
+            const strelochkaElement = refToStrelochka.current;
+            strelochkaElement.style.transition = "rotate 0.3s ease-in";
+            strelochkaElement.style.rotate = "270deg";
+        }
+        setIsDrop(true);
     } else {
-      if (refToUL.current) {
-        const ulElement = refToUL.current;
-        ulElement.style.transition = "max-height 0.3s ease-in";
-        ulElement.style.maxHeight = "0px";
-      }
-      if (refToStrelochka.current) {
-        const strelochkaElement = refToStrelochka.current;
-        strelochkaElement.style.transition = "rotate 0.3s ease-in";
-        strelochkaElement.style.rotate = "90deg";
-      }
-      setIsDrop(false);
+        if (refToUL.current) {
+            const ulElement = refToUL.current;
+            ulElement.style.transition = "max-height 0.3s ease-in, border 0.3s ease-in";
+            ulElement.style.maxHeight = "0px";
+            ulElement.style.border = "none";
+        }
+        if (refToStrelochka.current) {
+            const strelochkaElement = refToStrelochka.current;
+            strelochkaElement.style.transition = "rotate 0.3s ease-in";
+            strelochkaElement.style.rotate = "90deg";
+        }
+        setIsDrop(false);
     }
   };
   return (

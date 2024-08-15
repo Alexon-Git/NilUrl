@@ -9,18 +9,34 @@ const TagsColumn = ({ updateSelectedTags, links, selectedTags }) => {
   const clickShowTags = () => {
     if (!ulShow) {
       if (refToUL.current != null) {
-        refToUL.current.style.transition = "max-height 0.3s ease-in";
+        refToUL.current.style.transition = "max-height 0.3s ease-in, border 0.3s ease-in";
         refToUL.current.style.maxHeight = "347px";
+        refToUL.current.style.border = "1px solid #e5e7eb";
+
+        setTimeout(() => {
+          const ulHeight = refToUL.current.scrollHeight; // Get the actual height
+          if (ulHeight < 10) {
+            refToUL.current.style.border = "none";
+          }
+        }, 300);
       }
       if (refToStrelochka.current != null) {
         refToStrelochka.current.style.transition = "rotate 0.3s ease-in";
         refToStrelochka.current.style.rotate = "270deg";
       }
+      
       setUlShow(true);
     } else {
       if (refToUL.current != null) {
-        refToUL.current.style.transition = "max-height 0.3s ease-in";
+        refToUL.current.style.transition = "max-height 0.3s ease-in, border 0.3s ease-in";
         refToUL.current.style.maxHeight = "0px";
+  
+        setTimeout(() => {
+          const ulHeight = refToUL.current.scrollHeight; // Get the actual height
+          if (ulHeight < 10) {
+            refToUL.current.style.border = "none";
+          }
+        }, 300);
       }
       if (refToStrelochka.current != null) {
         refToStrelochka.current.style.transition = "rotate 0.3s ease-in";
