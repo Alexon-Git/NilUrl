@@ -20,7 +20,7 @@ const LinksMap: React.FC<LinksMapInt> = ({
     <div className="LinksMapOneContainer" style={{ width: "100%" }}>
       <div className="LogoAndTextLinksMap">
         <svg
-          style={{ paddingBottom: "2px", marginTop: "10px" }}
+          style={{ marginTop: "10px" }}
           width="30"
           height="30"
           viewBox="0 0 30 35"
@@ -252,7 +252,7 @@ const LinksMap: React.FC<LinksMapInt> = ({
     <div className="LinksMapOneContainer" style={{ width: "100%" }}>
       <div className="LogoAndTextLinksMap">
         <Skeleton
-          style={{ paddingBottom: "2px", marginTop: "10px" }}
+          style={{ marginTop: "10px" }}
           circle={true}
           width={30}
           height={30}
