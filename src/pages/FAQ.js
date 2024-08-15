@@ -3,12 +3,14 @@ import "./faq.css";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
 import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree";
 import NoLoginHeader from "../components/no-login-header/NoLoginHeader";
+import HeaderLinksPageBase from "../components/Global/HeaderLinksPageBase";
 import "../styles/Global/HeaderMainPage.css";
 import useAuth from "../pages/useAuth";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+
 
 const FAQ = () => {
   const accessToken = Cookies.get("access_token");
@@ -17,7 +19,6 @@ const FAQ = () => {
   const [expandedIndex, setExpandedIndex] = useState(0);
   const [userStatus, setUserStatus] = useState(null);
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
-
   useEffect(() => {
     if (accessToken) {
       const decodedToken = jwtDecode(accessToken);
@@ -352,7 +353,20 @@ const FAQ = () => {
       <br></br>
     </>,
   ];
-
+  const renderHeader = () => {
+    switch (userStatus) {
+        case 'free':
+            return <HeaderLinksPageFree />;
+        case 'premium':
+            return <HeaderLinksPage />;
+        case 'base':
+            return <HeaderLinksPageBase />;
+        case 'no_login':
+            return <NoLoginHeader />;  
+        default:
+            return <NoLoginHeader />;
+    }
+};
   return (
     <>
       <Helmet>
@@ -362,13 +376,7 @@ const FAQ = () => {
           content="Часто задаваемые вопросы (FAQ) по NIL URL"
         />
       </Helmet>
-      {userStatus === "no_login" ? (
-        <NoLoginHeader />
-      ) : userStatus === "free" ? (
-        <HeaderLinksPageFree />
-      ) : (
-        <HeaderLinksPage />
-      )}
+      {renderHeader()}
       <div className={`faq-container ${isSidebarVisible ? "" : "collapsed"}`}>
         <div className="faq-sidebar">
           <button

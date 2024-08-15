@@ -10,12 +10,14 @@ import TopRefs from "../components/GraphPage/TopRefs";
 import { useNavigate } from "react-router-dom";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
 import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree";
+import HeaderLinksPageBase from "../components/Global/HeaderLinksPageBase";
 import transition from "../LogicComp/Transition";
 import useAuth from "../pages/useAuth";
 import { SortData } from "../LogicComp/GPFakeData";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { Helmet } from 'react-helmet';
+import { usePremium } from "../LogicComp/DataProvider"; 
 
 const GraphPage = () => {
   const location = useLocation();
@@ -30,6 +32,7 @@ const GraphPage = () => {
   const accessToken = Cookies.get("access_token");
   const [dateFake, setDateFake] = useState([]);
   const {isLoggedIn, isLoading, isRedirected, setIsRedirected} = useAuth();
+  const { isPremium } = usePremium();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,11 +66,7 @@ const GraphPage = () => {
   }, [pathS]);
 
   useEffect(() => {
-    if (accessToken) {
-      const decodedToken = jwtDecode(accessToken);
-      const user_status = decodedToken.user_status;
-      setUserStatus(user_status);
-    }
+      setUserStatus(isPremium);
     if (!isLoading && !isLoggedIn && !isRedirected) {
       setIsRedirected(true);
       navigate('/login');
@@ -193,6 +192,19 @@ const GraphPage = () => {
     setDateFake(filteredData);
   }, [period, DataFromServ]);
 
+  const renderHeader = () => {
+    switch (userStatus) {
+        case 'free':
+            return <HeaderLinksPageFree />;
+        case 'premium':
+            return <HeaderLinksPage />;
+        case 'base':
+            return <HeaderLinksPageBase />;
+        default:
+            return <HeaderLinksPageFree />;
+    }
+};
+
   if (isLoading && loading) {
     return <div>Загрузка...</div>;
   } else {
@@ -201,7 +213,7 @@ const GraphPage = () => {
           <Helmet>
             <title>Аналитика</title>
           </Helmet>
-          {userStatus === "free" ? <HeaderLinksPageFree/> : <HeaderLinksPage/>}
+          {renderHeader()}
           <div>
             <div className="gp-background">
               <div className="GPMainContainer">

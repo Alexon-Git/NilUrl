@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import LinkPageMainPart from "../components/MainPage/LinkPageMainPart";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
-import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree"; 
+import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree";
+import HeaderLinksPageBase from "../components/Global/HeaderLinksPageBase"; 
 import transition from "../LogicComp/Transition";
 import useAuth from "../pages/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -14,18 +15,15 @@ const LinksPage = () => {
     const navigate = useNavigate();
     const { isLoggedIn, isLoading, isRedirected, setIsRedirected } = useAuth();
     const { isPremium, setIsPremium } = usePremium();
-    const [userStatus, setUserStatus] = useState();
+    
+    const [userStatus, setUserStatus] = useState(''); 
 
     useEffect(() => {
         const accessToken = Cookies.get('access_token');
         if (accessToken) {
             const decodedToken = jwtDecode(accessToken);
-            const userStatus_ = decodedToken.user_status;
-            if (userStatus === "premium") {
-                setIsPremium(true);
-            } else{
-                setIsPremium(false);
-            }
+            const userStatus_ = decodedToken.user_status; 
+            setIsPremium(userStatus_);
             setUserStatus(userStatus_);
         }
 
@@ -39,12 +37,25 @@ const LinksPage = () => {
         return <div>Загрузка...</div>;
     }
 
+    const renderHeader = () => {
+        switch (userStatus) {
+            case 'free':
+                return <HeaderLinksPageFree />;
+            case 'premium':
+                return <HeaderLinksPage />;
+            case 'base':
+                return <HeaderLinksPageBase />;
+            default:
+                return <HeaderLinksPageFree />;
+        }
+    };
+
     return (
         <div>
             <Helmet>
-            <title>Ссылки</title>
+                <title>Ссылки</title>
             </Helmet>
-            {userStatus === 'free' ? <HeaderLinksPageFree /> : <HeaderLinksPage />}
+            {renderHeader()}
             <LinkPageMainPart />
         </div>
     );
