@@ -5,7 +5,7 @@ const DataContext = createContext();
 
 // Компонент-провайдер для оборачивания приложения
 export const DataProvider = ({ children }) => {
-  const [isPremium, setIsPremium] = useState(false);
+  const [isPremium, setIsPremium] = useState("");
 
   return (
     <DataContext.Provider value={{ isPremium, setIsPremium }}>

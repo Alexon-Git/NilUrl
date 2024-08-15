@@ -1,7 +1,8 @@
 import React, { useState,useEffect } from "react";
 import { NoLoginHeader, PricesBlock, FooterMP } from "../components";
 import HeaderLinksPage from "../components/Global/HeaderLinksPage";
-import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree"; 
+import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree";
+import HeaderLinksPageBase from "../components/Global/HeaderLinksPageBase";
 import { Helmet } from 'react-helmet';
 import useAuth from "../pages/useAuth";
 import Cookies from 'js-cookie';
@@ -29,6 +30,20 @@ const PricesPage = () => {
     }
   }, [isLoading, isLoggedIn, navigate, isRedirected, setIsRedirected, accessToken]);
 
+  const renderHeader = () => {
+    switch (userStatus) {
+        case 'free':
+            return <HeaderLinksPageFree />;
+        case 'premium':
+            return <HeaderLinksPage />;
+        case 'base':
+            return <HeaderLinksPageBase />;
+        case 'no_login':
+            return <NoLoginHeader />;  
+        default:
+            return <NoLoginHeader />;
+    }
+};
 
   return (
     <>
@@ -36,9 +51,7 @@ const PricesPage = () => {
      <Helmet>
     <title>Цены</title>
   </Helmet>
-      {userStatus === 'no_login' && <NoLoginHeader />}
-      {userStatus === 'free' && <HeaderLinksPageFree />}
-      {userStatus === 'premium' && <HeaderLinksPage />}
+  {renderHeader()}
       <PricesBlock />
       <FooterMP />
     </>
