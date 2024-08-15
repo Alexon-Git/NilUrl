@@ -115,7 +115,7 @@ const HeaderLinksPage = () => {
           </div>
           <div className="leftUserLogo">
             <div
-              className="header-right-status"
+              className="header-right-status base-status"
               onClick={() => navigator("/price")}
             >
               Base
