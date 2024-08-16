@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "../../styles/LinksPage/LinksMapNew.css";
 import TwoIcons from "./TwoIcons";
 import ThreeIcons from "./ThreeIcons";
@@ -63,10 +63,32 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
   const [flagTimer, setFlagTimer] = useState(timer_flag);
   const [flagTag, setFlagTag] = useState(tag_flag);
   const [isCommentPopupVisible, setIsCommentPopupVisible] = useState(false);
+  const [gradient, setGradient] = useState('');
   const [copied, setCopied] = useState(false);
   function delayedFunc() {
     setCopied(false);
   }
+
+  const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
+  const applyRandomGradient = () => {
+    const color1 = getRandomColor();
+    const color2 = getRandomColor();
+    const randomGradient = `linear-gradient(45deg, ${color1}, ${color2})`;
+    setGradient(randomGradient);
+  };
+
+  useEffect(() => {
+    applyRandomGradient();
+  }, []);
+
   const onCopyClick = () => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard
@@ -161,7 +183,10 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
               onError={handleImageError}
             />
           ) : (
-            <img className="SVGLinksLP" src="/NilLogo.svg" />
+            <div className="gradient-circle"
+            style={{
+              background: gradient,
+            }}></div>
           )}
         </div>
       </div>

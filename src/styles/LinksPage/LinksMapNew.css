@@ -52,16 +52,25 @@
   width: 40px;
   height: 40px;
 }
+
+.gradient-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
 .SVGCOntLP {
   overflow: hidden;
   margin-left: 10px;
+  padding: 10px;
+  transition: padding 0.3s;
   justify-content: center;
   align-items: center;
   display: flex;
   width: 40px;
   height: 40px;
-  background-color: #ededed;
   border-radius: 100px;
+  outline: 1px solid #e5e7eb;
 }
 .LinksDateCopy {
   width: calc(100% - 250px - 70px);
