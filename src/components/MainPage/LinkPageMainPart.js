@@ -87,13 +87,11 @@ const LinkPageMainPart = () => {
         const response = await axios.get(proxyUrl + baseUrl + "/favicon.ico");
         if (response.status === 200) {
           favicon = baseUrl + "/favicon.ico";
-        } else {
         }
       }
 
       if (favicon && !favicon.startsWith("http")) {
         favicon = baseUrl + favicon;
-      } else {
       }
 
       return favicon;
@@ -102,8 +100,6 @@ const LinkPageMainPart = () => {
       return "/NilLogo.svg";
     }
   };
-
-  useEffect(() => {}, [reloadKey]);
 
   const convertDateFormat = (dateString) => {
     const parts = dateString.split(".");
@@ -277,25 +273,30 @@ const LinkPageMainPart = () => {
             </div>
           )}
         </div>
-        <div className="pagination-controls">
-          <button
-            className="pagination-button"
-            onClick={() => handlePageChange("prev")}
-            disabled={currentPage === 1}
-          >
-            Предыдущая
-          </button>
-          <span>
-            Страница {currentPage} из {totalPages}
-          </span>
-          <button
-            className="pagination-button"
-            onClick={() => handlePageChange("next")}
-            disabled={currentPage === totalPages}
-          >
-            Следующая
-          </button>
-        </div>
+
+        {totalPages > 1 && (
+          <div className="pagination-controls">
+            <span>
+              Страница {currentPage} из {totalPages}
+            </span>
+            <div className="pagination-btns">
+              <button
+                className="pagination-button"
+                onClick={() => handlePageChange("prev")}
+                disabled={currentPage === 1}
+              >
+                Предыдущая
+              </button>
+              <button
+                className="pagination-button"
+                onClick={() => handlePageChange("next")}
+                disabled={currentPage === totalPages}
+              >
+                Следующая
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
