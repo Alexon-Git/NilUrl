@@ -164,17 +164,21 @@
 }
 
 .stats-button {
-  width: 91px;
-  height: 26px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: rgb(243, 244, 246);
+  background-color: #f3f4f6;
   border-radius: 6px;
-  margin-left: 20px;
-  cursor: pointer;
   color: #374151;
+  cursor: pointer;
+  display: flex;
   font-size: 14px;
+  height: 26px;
+  justify-content: center;
+  margin-left: 20px;
+  max-width: 91px;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 0 5px;
+  box-sizing: border-box;
 }
 
 .ShortLinkBtn {
