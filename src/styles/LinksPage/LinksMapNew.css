@@ -49,28 +49,29 @@
   top: 0;
 }
 .SVGLinksLP {
-  width: 40px;
-  height: 40px;
+  height: 100%;
+  width: 100%;
 }
 
 .gradient-circle {
-  width: 20px;
-  height: 20px;
   border-radius: 50%;
+  height: 100%;
+  width: 100%;
 }
 
 .SVGCOntLP {
-  overflow: hidden;
-  margin-left: 10px;
-  padding: 10px;
-  transition: padding 0.3s;
-  justify-content: center;
   align-items: center;
-  display: flex;
-  width: 40px;
-  height: 40px;
   border-radius: 100px;
+  display: flex;
+  height: 36px;
+  justify-content: center;
+  margin-left: 10px;
   outline: 1px solid #e5e7eb;
+  overflow: hidden;
+  padding: 8px;
+  transition: padding 0.3s;
+  width: 36px;
+  box-sizing: border-box;
 }
 .LinksDateCopy {
   width: calc(100% - 250px - 70px);
