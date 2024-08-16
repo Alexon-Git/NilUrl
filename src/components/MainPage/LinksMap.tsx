@@ -183,32 +183,7 @@ const LinksMap: React.FC<LinksMapInt> = ({
             }}
           >
             <a style={{ float: "left", paddingTop: "5px" }}>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8 13.3334V6.66669"
-                  stroke="#374151"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M12 13.3334V2.66669"
-                  stroke="#374151"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M4 13.3334V10.6667"
-                  stroke="#374151"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+            <svg height="18" width="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" className="text-gray-6000 h-4 w-4 shrink-0"><g fill="currentColor"><path d="M8.095,7.778l7.314,2.51c.222,.076,.226,.388,.007,.47l-3.279,1.233c-.067,.025-.121,.079-.146,.146l-1.233,3.279c-.083,.219-.394,.215-.47-.007l-2.51-7.314c-.068-.197,.121-.385,.318-.318Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="12.031" x2="16.243" y1="12.031" y2="16.243"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="7.75" x2="7.75" y1="1.75" y2="3.75"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="11.993" x2="10.578" y1="3.507" y2="4.922"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="3.507" x2="4.922" y1="11.993" y2="10.578"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="1.75" x2="3.75" y1="7.75" y2="7.75"/><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="3.507" x2="4.922" y1="3.507" y2="4.922"/></g></svg>
             </a>
             <div className="CLicksTextANumMain">{clicks} clicks</div>
           </div>
