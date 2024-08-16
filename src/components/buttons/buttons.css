@@ -12,15 +12,8 @@
   overflow: hidden;
   transition: padding-right 0.5s;
   cursor: pointer;
-  padding: 0.5rem 10px;
-  padding-left: 30px;
+  padding: 0.5rem 1rem;
   text-align: end;
-}
-
-.loader:hover {
-  padding-left: 10px;
-  padding-right: 25px;
-  text-align: left;
 }
 
 #free:hover:after {
@@ -30,10 +23,6 @@
 .loader:after {
   content: "";
   position: absolute;
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  border-radius: 50%;
   transition: all 0.5s;
 }
 
@@ -58,11 +47,6 @@
 .loader span {
   position: relative;
   z-index: 2;
-  transition: margin-right 0.5s;
-}
-
-.loader:hover span {
-  margin-right: 10px;
 }
 
 .loader svg {

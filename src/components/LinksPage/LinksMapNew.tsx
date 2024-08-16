@@ -136,6 +136,7 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
             viewBox="0 0 17 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            style={{ paddingTop: '2px' }}
           >
             <path
               d="M4.8453 8C5.11869 5.80761 6.98891 4.11111 9.25535 4.11111C11.71 4.11111 13.6998 6.10096 13.6998 8.55556C13.6998 11.0102 11.71 13 9.25535 13H6.47779M9.25557 8.55556V6.33333M8.14446 3H10.3667M3.70001 9.66667H6.47779M4.81112 11.3333H7.5889"
@@ -155,14 +156,16 @@ const LinksMapNew: React.FC<LinksMapInt> = ({
             viewBox="0 0 17 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            style={{ paddingTop: '2px' }}
           >
             <path
               d="M4.8453 8C5.11869 5.80761 6.98891 4.11111 9.25535 4.11111C11.71 4.11111 13.6998 6.10096 13.6998 8.55556C13.6998 11.0102 11.71 13 9.25535 13H6.47779M9.25557 8.55556V6.33333M8.14446 3H10.3667M3.70001 9.66667H6.47779M4.81112 11.3333H7.5889"
-              stroke="black"
+              stroke="white"
               stroke-width="1.06667"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
+            <line x1="0" y1="0" x2="17" y2="16" stroke="white" strokeWidth="1.06667" strokeLinecap="round" />
           </svg>
         </div>
       )}

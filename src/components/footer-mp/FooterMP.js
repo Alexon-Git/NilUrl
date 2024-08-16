@@ -125,7 +125,7 @@ const FooterMp = () => {
         </div>
       </div>
       <div className="NewCopyright">
-        <p className="NewDefaultTextFooter" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>© 2024 NilURL</p>
+        <p className="NewDefaultTextFooter" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>© 2024 NilUrl</p>
       </div>
     </div>
   );
