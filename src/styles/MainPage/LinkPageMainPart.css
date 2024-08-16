@@ -48,7 +48,7 @@
   float: right;
   overflow-x: hidden;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 65px;
 }
 
 .links-not-found {
@@ -165,12 +165,11 @@
   border: 1px solid #e5e7eb;
   background-color: white;
   padding: 14px 16px;
-  margin-top: 30px;
   font-size: 0.875rem;
   line-height: 1.5;
   color: #4b5563;
   filter: drop-shadow(0 5px 8px rgba(34, 42, 53, 0.12));
-  z-index: 2000;
+  z-index: 998;
   box-sizing: border-box;
 }
 
