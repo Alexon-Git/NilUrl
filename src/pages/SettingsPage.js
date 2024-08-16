@@ -4,8 +4,6 @@ import HeaderLinksPageFree from "../components/Global/HeaderLinksPageFree";
 import HeaderLinksPageBase from "../components/Global/HeaderLinksPageBase";
 import useAuth from "../pages/useAuth";
 import { useNavigate } from "react-router-dom";
-import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode';
 import { Helmet } from 'react-helmet';
 import { usePremium } from "../LogicComp/DataProvider"; 
 
