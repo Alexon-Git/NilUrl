@@ -15,12 +15,36 @@ const ITEMS_PER_PAGE = 25;
 
 const LinkPageMainPart = () => {
   const [links, setLinks] = useState([]);
-  const [userStatus, setUserStatus] = useState(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedTags, setSelectedTags] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [availableLinks, setAvailableLinks] = useState(null);
+
+  useEffect(() => {
+    const fetchAvailableLinks = async () => {
+      try {
+        const response = await fetch('https://nilurl.ru:8000/get_available_links.php', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        });
+        const data = await response.json();
+        if (data.status === 'success') {
+          setAvailableLinks(data.available_links);
+        } else {
+          console.error('Error fetching available links:', data.message);
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
+    };
+
+    fetchAvailableLinks();
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -63,7 +87,7 @@ const LinkPageMainPart = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
+  
   const fetchFavicon = async (url) => {
     try {
       const proxyUrl = "https://nilurl.ru:81/?";
@@ -138,7 +162,6 @@ const LinkPageMainPart = () => {
 
   const highestKey =
     links.length > 0 ? Math.max(...links.map((link) => link.key)) : 0;
-
   const updateSelectedTags = (tag) => {
     setSelectedTags((prevTags) => {
       if (
@@ -236,7 +259,8 @@ const LinkPageMainPart = () => {
                 links={links}
                 selectedTags={selectedTags}
               />
-              <CreateLinkNew userStatus={userStatus} highestKey={highestKey} />
+              <CreateLinkNew availableLinks ={availableLinks} highestKey={highestKey} />
+              
             </div>
           </div>
         </div>
