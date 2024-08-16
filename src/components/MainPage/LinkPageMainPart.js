@@ -11,13 +11,16 @@ import { jwtDecode } from "jwt-decode";
 import TagsColumn from "../LinksPage/TagsColumn";
 import { LinksNotFound } from "..";
 
+const ITEMS_PER_PAGE = 25;
+
 const LinkPageMainPart = () => {
   const [links, setLinks] = useState([]);
   const [userStatus, setUserStatus] = useState(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedTags, setSelectedTags] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(""); // Добавленное состояние для поиска
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -186,6 +189,19 @@ const LinkPageMainPart = () => {
     return matchesSearchQuery && matchesTags;
   });
 
+  const totalPages = Math.ceil(filteredLinks.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const linksToDisplay = filteredLinks.slice(startIndex, endIndex);
+
+  const handlePageChange = (direction) => {
+    if (direction === "prev" && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    } else if (direction === "next" && currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     <div className="lp-background">
       <div className="LinkPageMainPart wrapper">
@@ -193,44 +209,44 @@ const LinkPageMainPart = () => {
           <div className="buttons-container">
             <div className="page-links__title">Ссылки</div>
             <div className="RightTopCont">
-            <div className="search-container">
-              <svg
-                width="20px"
-                height="20px"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="search-icon"
-              >
-                <path
-                  d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
-                  stroke="#000000"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-              <input
-                type="text"
-                placeholder="Поиск..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="search-input"
+              <div className="search-container">
+                <svg
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="search-icon"
+                >
+                  <path
+                    d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                    stroke="#000000"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Поиск..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="search-input"
+                />
+              </div>
+              <SortNew sortLinks={sortLinks} />
+              <TagsColumn
+                updateSelectedTags={updateSelectedTags}
+                links={links}
+                selectedTags={selectedTags}
               />
-            </div>
-            <SortNew sortLinks={sortLinks} />
-            <TagsColumn
-              updateSelectedTags={updateSelectedTags}
-              links={links}
-              selectedTags={selectedTags}
-            />
-            <CreateLinkNew userStatus={userStatus} highestKey={highestKey} />
+              <CreateLinkNew userStatus={userStatus} highestKey={highestKey} />
             </div>
           </div>
         </div>
         <div className="LinksContainer">
-          {filteredLinks.length > 0 ? (
-            filteredLinks.map((link, index) => (
+          {linksToDisplay.length > 0 ? (
+            linksToDisplay.map((link, index) => (
               <LinksMapNew
                 key={link.key}
                 Data={link.Data}
@@ -257,9 +273,28 @@ const LinkPageMainPart = () => {
           ) : (
             <div className="links-not-found">
               <p> Ссылок не найдено</p>
-              <img src={LinksNotFound} alt=""></img>
+              <img src={LinksNotFound} alt="" />
             </div>
           )}
+        </div>
+        <div className="pagination-controls">
+          <button
+            className="pagination-button"
+            onClick={() => handlePageChange("prev")}
+            disabled={currentPage === 1}
+          >
+            Предыдущая
+          </button>
+          <span>
+            Страница {currentPage} из {totalPages}
+          </span>
+          <button
+            className="pagination-button"
+            onClick={() => handlePageChange("next")}
+            disabled={currentPage === totalPages}
+          >
+            Следующая
+          </button>
         </div>
       </div>
     </div>

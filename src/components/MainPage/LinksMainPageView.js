@@ -10,7 +10,7 @@ const initialLinks = [
     { imageURL: "/NILLogo.png", path: "", clicksCount: -1, text: "" }
 ];
 
-const text = ["Вход в NilUrl", "Регистрация в NilUrl", "Информация о действующих подписках","Часто задаваемые вопросы"];
+const text = ["Вход в NilUrl", "Регистрация в NilUrl", "Информация о подписках","Часто задаваемые вопросы"];
     const values = [ "","https://nilurl.ru/n-registration", "https://nilurl.ru/n-price", "https://nilurl.ru/n-faq","Зарегистрируйтесь и создавайте свои ссылки"];
 
 const LinksMainPageView = () => {

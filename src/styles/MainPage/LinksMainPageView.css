@@ -64,7 +64,7 @@
     cursor: pointer;
 }
 .ButtonsContainerLinksMap{
-    margin-left: 55px;
+    margin-left: auto;
     display: flex;
     vertical-align: top;
 }
