@@ -30,7 +30,7 @@ const CreateLinkNew = ({ highestKey, availableLinks }) => {
     }
     console.log(availableLinks);
     console.log(highestKey);
-    if (highestKey > limit && availableLinks <= 0) {
+    if (highestKey >= limit && availableLinks <= 0) {
       setPopupMessage(
         `Ваше количество ссылок достигло максимума для ${isPremium === "free" ? "Бесплатной подписки" : isPremium === "base" ? "Базовой подписки" : "Премиум подписки"}, для большего количества ссылок приобретите более высокий план.`
       );
